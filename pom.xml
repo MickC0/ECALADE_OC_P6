@@ -127,7 +127,15 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>42.2.6</version>
+				<scope>runtime</scope>
             </dependency>
+
+			<!-- Pool de Connexion Commons DBCP -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-dbcp2</artifactId>
+				<version>2.1.1</version>
+			</dependency>
 
             <!-- == other == -->
 

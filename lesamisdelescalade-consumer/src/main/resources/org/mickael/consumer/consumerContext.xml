@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <!-- DataSource statement -->
+    <bean id="abstractDataSourceImpl" abstract="true">
+        <property name="dataSource" ref="dataSourceProject"/>
+    </bean>
+
+    <!-- DAO statement -->
+    <bean id="climbingAreaDao" class="org.mickael.consumer.impl.dao.ClimbingAreaDaoImpl" parent="abstractDataSourceImpl"/>
+    <bean id="commentDao" class="org.mickael.consumer.impl.dao.CommentDaoImpl" parent="abstractDataSourceImpl"/>
+    <bean id="guidebookDao" class="org.mickael.consumer.impl.dao.GuidebookDaoImpl" parent="abstractDataSourceImpl"/>
+    <bean id="parkingDao" class="org.mickael.consumer.impl.dao.ParkingDaoImpl" parent="abstractDataSourceImpl"/>
+    <bean id="photoDao" class="org.mickael.consumer.impl.dao.PhotoDaoImpl" parent="abstractDataSourceImpl"/>
+    <bean id="reservationRequestDao" class="org.mickael.consumer.impl.dao.ReservationRequestDaoImpl" parent="abstractDataSourceImpl"/>
+    <bean id="routeDao" class="org.mickael.consumer.impl.dao.RouteDaoImpl" parent="abstractDataSourceImpl"/>
+    <bean id="sectorDao" class="org.mickael.consumer.impl.dao.SectorDaoImpl" parent="abstractDataSourceImpl"/>
+    <bean id="startingPointDao" class="org.mickael.consumer.impl.dao.StartingPointDaoImpl" parent="abstractDataSourceImpl"/>
+    <bean id="memberDao" class="org.mickael.consumer.impl.dao.MemberDaoImpl" parent="abstractDataSourceImpl"/>
+
+
+    <!-- DAO Factory -->
+    <bean id="daoFactory" class="org.mickael.consumer.impl.DaoFactoryImpl">
+        <property name="ClimbingAreaDao" ref="climbingAreaDao"/>
+        <property name="CommentDao" ref="commentDao"/>
+        <property name="GuidebookDao" ref="guidebookDao"/>
+        <property name="ParkingDao" ref="parkingDao"/>
+        <property name="PhotoDao" ref="photoDao"/>
+        <property name="ReservationRequestDao" ref="reservationRequestDao"/>
+        <property name="RouteDao" ref="routeDao"/>
+        <property name="SectorDao" ref="sectorDao"/>
+        <property name="StartingPointDao" ref="startingPointDao"/>
+        <property name="MemberDao" ref="memberDao"/>
+    </bean>
+
+</beans>
