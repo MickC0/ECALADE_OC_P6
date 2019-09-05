@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" 
+		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<!-- =============================================================== -->
+	<!-- Project informations -->
+	<!-- =============================================================== -->
+
+	<!-- ===== Maven informations ===== -->
+	<groupId>org.mickael</groupId>
+	<artifactId>Escalade_OC_P6</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<!-- ===== General informations ===== -->
+	<name>Escalade_OC_P6</name>
+	<url>http://maven.apache.org</url>
+
+    <!-- =============================================================== -->
+    <!-- Distribution management -->
+    <!-- =============================================================== -->
+    <!--<distributionManagement>
+        <site>
+            <id>site-projet</id>
+            <url>scp://localhost/tmp/</url>
+        </site>
+    </distributionManagement>-->
+
+    <!-- =============================================================== -->
+    <!-- Properties -->
+    <!-- =============================================================== -->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<org.springframework.version>5.1.8.RELEASE</org.springframework.version>
+	</properties>
+
+    <!-- =============================================================== -->
+    <!-- Modules -->
+    <!-- =============================================================== -->
+	<modules>  
+		<module>lesamisdelescalade-batch</module>
+		<module>lesamisdelescalade-business</module>
+		<module>lesamisdelescalade-consumer</module>
+		<module>lesamisdelescalade-model</module>
+		<module>lesamisdelescalade-webapp</module>
+	</modules>
+	
+	
+	<!-- =============================================================== -->
+    <!-- Dependencies management -->
+    <!-- =============================================================== -->
+	<dependencyManagement>
+		<dependencies>
+			<!-- ===== Modules ===== -->
+			<dependency>
+				<groupId>org.mickael</groupId>
+				<artifactId>lesamisdelescalade-batch</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mickael</groupId>
+				<artifactId>lesamisdelescalade-business</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mickael</groupId>
+				<artifactId>lesamisdelescalade-consumer</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mickael</groupId>
+				<artifactId>lesamisdelescalade-model</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mickael</groupId>
+				<artifactId>lesamisdelescalade-webapp</artifactId>
+				<version>1.0-SNAPSHOT</version>
+			</dependency>
+			
+			            <!-- ===== Third party libraries ===== -->
+
+            <!-- == Spring dependencies == -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${org.springframework.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <!-- == Java Servlet API == -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <!-- == JSTL dependencies == -->
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>jstl</artifactId>
+                <version>1.2</version>
+            </dependency>
+
+            <!-- == Logs dependencies == -->
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-core</artifactId>
+                <version>2.12.0</version>
+                <scope>runtime</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-jcl</artifactId>
+                <version>2.12.0</version>
+                <scope>runtime</scope>
+            </dependency>
+
+            <!-- == POSTEGRESQL dependencies == -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>42.2.6</version>
+            </dependency>
+
+            <!-- == other == -->
+
+
+            <!-- == Test == -->
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.12</version>
+                <scope>test</scope>
+            </dependency>
+			
+			
+			
+	    </dependencies>
+    </dependencyManagement>
+	
+	
+</project>
