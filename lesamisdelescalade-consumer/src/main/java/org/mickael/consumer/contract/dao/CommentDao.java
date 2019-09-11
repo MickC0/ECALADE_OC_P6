@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CommentDao {
 
-    Comment createComment(Comment comment);
+    void createComment(Comment comment);
     Comment findComment(Integer id);
     void updateComment(Comment comment);
     void deleteComment(Integer id);

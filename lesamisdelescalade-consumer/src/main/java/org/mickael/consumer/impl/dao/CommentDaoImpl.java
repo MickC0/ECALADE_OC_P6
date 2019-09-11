@@ -9,8 +9,8 @@ import java.util.List;
 public class CommentDaoImpl extends AbstractDataSourceImpl implements CommentDao {
 
     @Override
-    public Comment createComment(Comment comment) {
-        return null;
+    public void createComment(Comment comment) {
+
     }
 
     @Override

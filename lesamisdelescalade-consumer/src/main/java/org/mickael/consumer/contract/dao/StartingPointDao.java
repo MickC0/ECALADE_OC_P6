@@ -7,7 +7,7 @@ import java.util.List;
 public interface StartingPointDao {
 
 
-    StartingPoint createStartingPoint(StartingPoint startingPoint);
+    void createStartingPoint(StartingPoint startingPoint);
     StartingPoint findStartingPoint(Integer id);
     void updateStartingPoint(StartingPoint startingPoint);
     void deleteStartingPoint(Integer id);

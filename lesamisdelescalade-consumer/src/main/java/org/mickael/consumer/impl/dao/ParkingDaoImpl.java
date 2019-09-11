@@ -9,8 +9,8 @@ import java.util.List;
 public class ParkingDaoImpl extends AbstractDataSourceImpl implements ParkingDao {
 
     @Override
-    public Parking createParking(Parking parking) {
-        return null;
+    public void createParking(Parking parking) {
+
     }
 
     @Override

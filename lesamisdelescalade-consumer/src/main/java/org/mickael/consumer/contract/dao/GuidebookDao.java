@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface GuidebookDao {
 
-    Guidebook createGuidebook(Guidebook guidebook);
+    void createGuidebook(Guidebook guidebook);
     Guidebook findGuidebook(Integer id);
     void updateGuidebook(Guidebook guidebook);
     void deleteGuidebook(Integer id);

@@ -21,8 +21,8 @@ public class ClimbingAreaDaoImpl extends AbstractDataSourceImpl implements Climb
      */
     @Override
     public void createClimbingArea(ClimbingArea climbingArea) {
-        String sql = "INSERT INTO pubic.climbingArea (member_id, name, region, description, profil, rockType, holdType, maximumHeight, isApprouved, member_id)"
-                             + "VALUES (:member_id, :name, :region, :description, :profil, :rockType, :holdType, :maximumHeight, :isApprouved)";
+        String sql = "INSERT INTO public.climbingArea (member_id, name, region, description, profil, rock_type, hold_type, maximum_height, is_approuved)"
+                             + "VALUES (:memberId, :name, :region, :description, :profil, :rockType, :holdType, :maximumHeight, :isApprouved)";
 
         NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -34,7 +34,7 @@ public class ClimbingAreaDaoImpl extends AbstractDataSourceImpl implements Climb
         parameterSource.addValue("holdType", climbingArea.getHoldType(), Types.VARCHAR);
         parameterSource.addValue("maximumHeight", climbingArea.getMaximumHeight(), Types.FLOAT);
         parameterSource.addValue("isApprouved", climbingArea.isApprouved(), Types.BOOLEAN);
-        parameterSource.addValue("member_id", climbingArea.getMember().getId(), Types.INTEGER);
+        parameterSource.addValue("memberId", climbingArea.getMember().getId(), Types.INTEGER);
 
         jdbcTemplate.update(sql, parameterSource);
     }
@@ -42,7 +42,7 @@ public class ClimbingAreaDaoImpl extends AbstractDataSourceImpl implements Climb
     @Override
     public ClimbingArea findClimbingArea(Integer id) {
         String sql = "SELECT * FROM public.climbingArea"
-                             + "WHERE id = " + id;
+                             + " WHERE id = " + id;
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         ClimbingAreaRowMapper climbingAreaRowMapper = new ClimbingAreaRowMapper();
         ClimbingArea climbingArea = (ClimbingArea)jdbcTemplate.queryForObject(sql, climbingAreaRowMapper);

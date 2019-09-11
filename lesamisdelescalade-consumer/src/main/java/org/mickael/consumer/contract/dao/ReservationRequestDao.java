@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ReservationRequestDao {
 
-    ReservationRequest createReservationRequest(ReservationRequest reservationRequest);
+    void createReservationRequest(ReservationRequest reservationRequest);
     ReservationRequest findReservationRequest(Integer id);
     void updateReservationRequest(ReservationRequest reservationRequest);
     void deleteReservationRequest(Integer id);

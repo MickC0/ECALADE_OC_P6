@@ -9,8 +9,8 @@ import java.util.List;
 public class MemberDaoImpl extends AbstractDataSourceImpl implements MemberDao {
 
     @Override
-    public Member createMember(Member member) {
-        return null;
+    public void createMember(Member member) {
+
     }
 
     @Override

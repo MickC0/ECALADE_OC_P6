@@ -9,8 +9,8 @@ import java.util.List;
 public class SectorDaoImpl extends AbstractDataSourceImpl implements SectorDao {
 
     @Override
-    public Sector createSector(Sector sector) {
-        return null;
+    public void createSector(Sector sector) {
+
     }
 
     @Override

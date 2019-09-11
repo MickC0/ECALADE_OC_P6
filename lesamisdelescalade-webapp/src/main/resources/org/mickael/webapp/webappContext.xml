@@ -9,12 +9,10 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 
 
+
     <!-- dataSource project Config -->
-    <bean id="dataSourceProject" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="org.postgresql.Driver"/>
-        <property name="url" value="jdbc:postgresql://localhost:5432/db_oc_lesamisdelescalade"/>
-        <property name="username" value="admin_lesamisdelescalade"/>
-        <property name="password" value="lesamisdelescalade"/>
+    <bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+        <property name="jndiName" value="java:comp/env/jdbc/db_oc_lesamisdelescalade"/>
     </bean>
 
 

@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ParkingDao {
 
-    Parking createParking(Parking parking);
+    void createParking(Parking parking);
     Parking findParking(Integer id);
     void updateParking(Parking parking);
     void deleteParking(Integer id);

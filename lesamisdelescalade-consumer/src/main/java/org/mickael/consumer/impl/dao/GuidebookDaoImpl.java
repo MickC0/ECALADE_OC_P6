@@ -9,8 +9,8 @@ import java.util.List;
 public class GuidebookDaoImpl extends AbstractDataSourceImpl implements GuidebookDao {
 
     @Override
-    public Guidebook createGuidebook(Guidebook guidebook) {
-        return null;
+    public void createGuidebook(Guidebook guidebook) {
+
     }
 
     @Override

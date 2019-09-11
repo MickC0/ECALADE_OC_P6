@@ -9,8 +9,8 @@ import java.util.List;
 public class ReservationRequestDaoImpl extends AbstractDataSourceImpl implements ReservationRequestDao {
 
     @Override
-    public ReservationRequest createReservationRequest(ReservationRequest reservationRequest) {
-        return null;
+    public void createReservationRequest(ReservationRequest reservationRequest) {
+
     }
 
     @Override

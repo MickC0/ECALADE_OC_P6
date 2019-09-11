@@ -9,8 +9,8 @@ import java.util.List;
 public class RouteDaoImpl  extends AbstractDataSourceImpl implements RouteDao {
 
     @Override
-    public Route createRoute(Route route) {
-        return null;
+    public void createRoute(Route route) {
+
     }
 
     @Override

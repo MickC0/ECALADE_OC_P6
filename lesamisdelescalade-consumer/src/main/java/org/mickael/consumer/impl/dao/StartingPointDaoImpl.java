@@ -9,8 +9,8 @@ import java.util.List;
 public class StartingPointDaoImpl extends AbstractDataSourceImpl implements StartingPointDao {
 
     @Override
-    public StartingPoint createStartingPoint(StartingPoint startingPoint) {
-        return null;
+    public void createStartingPoint(StartingPoint startingPoint) {
+
     }
 
     @Override

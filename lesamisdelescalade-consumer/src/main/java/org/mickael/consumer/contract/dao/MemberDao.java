@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface MemberDao {
 
-    Member createMember(Member member);
+    void createMember(Member member);
     Member findMember(Integer id);
     void updateMember(Member member);
     void deleteMember(Integer id);

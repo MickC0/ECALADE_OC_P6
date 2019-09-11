@@ -9,8 +9,8 @@ import java.util.List;
 public class PhotoDaoImpl extends AbstractDataSourceImpl implements PhotoDao {
 
     @Override
-    public Photo createPhoto(Photo photo) {
-        return null;
+    public void createPhoto(Photo photo) {
+
     }
 
     @Override
