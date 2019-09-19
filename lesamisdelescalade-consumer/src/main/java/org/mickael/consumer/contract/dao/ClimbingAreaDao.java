@@ -10,4 +10,6 @@ public interface ClimbingAreaDao {
     void updateClimbingArea(ClimbingArea climbingArea);
     void deleteClimbingArea(Integer id);
     List<ClimbingArea> findAllClimbingArea ();
+    void deleteTag(Integer id);
+    void addTag(Integer id);
 }

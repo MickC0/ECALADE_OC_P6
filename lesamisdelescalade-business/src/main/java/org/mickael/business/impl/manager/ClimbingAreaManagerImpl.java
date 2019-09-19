@@ -13,7 +13,7 @@ public class ClimbingAreaManagerImpl extends AbstractManager implements Climbing
     @Override
     public void createClimbingArea(ClimbingArea climbingArea) {
 
-        TransactionTemplate transactionTemplate = new TransactionTemplate(getPlatformTransactionManager());
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
             @Override
             protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {

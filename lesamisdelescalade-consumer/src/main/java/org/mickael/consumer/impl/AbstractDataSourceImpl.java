@@ -4,7 +4,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import javax.sql.DataSource;
 
-public class AbstractDataSourceImpl {
+public abstract class AbstractDataSourceImpl {
 
 
     private DataSource dataSource;

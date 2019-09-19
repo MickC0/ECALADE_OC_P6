@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.sql.Types;
 import java.util.List;
+import java.util.Map;
 
 public class ClimbingAreaDaoImpl extends AbstractDataSourceImpl implements ClimbingAreaDao {
 
@@ -45,18 +46,50 @@ public class ClimbingAreaDaoImpl extends AbstractDataSourceImpl implements Climb
                              + " WHERE id = " + id;
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         ClimbingAreaRowMapper climbingAreaRowMapper = new ClimbingAreaRowMapper();
-        ClimbingArea climbingArea = (ClimbingArea)jdbcTemplate.queryForObject(sql, climbingAreaRowMapper);
+        ClimbingArea climbingArea = jdbcTemplate.queryForObject(sql, climbingAreaRowMapper);
 
         return climbingArea;
     }
 
     @Override
     public void updateClimbingArea(ClimbingArea climbingArea) {
+        String sql = "UPDATE public.climbingArea SET "
+                + "member_id = :memberId, "
+                + "name = :name, "
+                + "region = :region, "
+                + "description = :description, "
+                + "profil = :profil, "
+                + "rock_type = :rockType, "
+                + "hold_type = :holdType, "
+                + "maximum_height = :maximumHeight, "
+                + "is_approuved = :isApprouved "
+                + "WHERE id = :id";
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("name", climbingArea.getName(), Types.VARCHAR);
+        parameterSource.addValue("region", climbingArea.getRegion(), Types.VARCHAR);
+        parameterSource.addValue("description", climbingArea.getDescription(), Types.VARCHAR);
+        parameterSource.addValue("profil", climbingArea.getProfil(), Types.VARCHAR);
+        parameterSource.addValue("rockType", climbingArea.getRockType(), Types.VARCHAR);
+        parameterSource.addValue("holdType", climbingArea.getHoldType(), Types.VARCHAR);
+        parameterSource.addValue("maximumHeight", climbingArea.getMaximumHeight(), Types.FLOAT);
+        parameterSource.addValue("isApprouved", climbingArea.isApprouved(), Types.BOOLEAN);
+        parameterSource.addValue("memberId", climbingArea.getMember().getId(), Types.INTEGER);
+
+        jdbcTemplate.update(sql, parameterSource);
 
     }
 
     @Override
     public void deleteClimbingArea(Integer id) {
+        String sql = "DELETE FROM public.climbingArea WHERE id = :id";
+
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+
+        parameterSource.addValue("id", id);
+        jdbcTemplate.update(sql, parameterSource);
 
     }
 
@@ -69,4 +102,28 @@ public class ClimbingAreaDaoImpl extends AbstractDataSourceImpl implements Climb
 
         return climbingAreaList;
     }
+
+    @Override
+    public void deleteTag(Integer id) {
+        String sql = "UPDATE public.climbingArea "
+                + "SET is_approuved = false "
+                + "WHERE id =:id";
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id, Types.INTEGER);
+        jdbcTemplate.update(sql, parameterSource);
+    }
+
+    @Override
+    public void addTag(Integer id) {
+        String sql = "UPDATE public.climbingArea "
+                             + "SET is_approuved = true "
+                             + "WHERE id =:id";
+        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id, Types.INTEGER);
+        jdbcTemplate.update(sql, parameterSource);
+    }
+
+
 }

@@ -7,15 +7,14 @@ import javax.inject.Named;
 
 public abstract class AbstractManager {
 
-    @Named("txManager")
-    private PlatformTransactionManager platformTransactionManager;
+    private PlatformTransactionManager transactionManager;
 
-    public PlatformTransactionManager getPlatformTransactionManager() {
-        return platformTransactionManager;
+    public PlatformTransactionManager getTransactionManager() {
+        return transactionManager;
     }
 
-    public void setPlatformTransactionManager(PlatformTransactionManager platformTransactionManager) {
-        this.platformTransactionManager = platformTransactionManager;
+    public void setTransactionManager(PlatformTransactionManager transactionManager) {
+        this.transactionManager = transactionManager;
     }
 
     private DaoFactory daoFactory;
