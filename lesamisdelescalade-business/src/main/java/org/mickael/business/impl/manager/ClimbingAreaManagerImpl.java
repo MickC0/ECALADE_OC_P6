@@ -7,6 +7,7 @@ import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.TransactionCallbackWithoutResult;
 import org.springframework.transaction.support.TransactionTemplate;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClimbingAreaManagerImpl extends AbstractManager implements ClimbingAreaManager {
@@ -24,21 +25,72 @@ public class ClimbingAreaManagerImpl extends AbstractManager implements Climbing
 
     @Override
     public ClimbingArea findClimbingArea(Integer id) {
-        return null;
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        ClimbingArea climbingArea = transactionTemplate.execute(transactionStatus -> {
+            ClimbingArea climbingAreaTransaction;
+            climbingAreaTransaction = getDaoFactory().getClimbingAreaDao().findClimbingArea(id);
+            return climbingAreaTransaction;
+        });
+
+        return climbingArea;
+
     }
 
     @Override
     public void updateClimbingArea(ClimbingArea climbingArea) {
-
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                getDaoFactory().getClimbingAreaDao().updateClimbingArea(climbingArea);
+            }
+        });
     }
 
     @Override
     public void deleteClimbingArea(Integer id) {
-
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                getDaoFactory().getClimbingAreaDao().deleteClimbingArea(id);
+            }
+        });
     }
 
     @Override
     public List<ClimbingArea> findAllClimbingArea() {
-        return null;
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+
+        List<ClimbingArea> climbingAreaList = transactionTemplate.execute(transactionStatus -> {
+            List<ClimbingArea> climbingAreaListTransaction = new ArrayList<>();
+            climbingAreaListTransaction = getDaoFactory().getClimbingAreaDao().findAllClimbingArea();
+            return  climbingAreaListTransaction;
+        });
+
+        return climbingAreaList;
+
+    }
+
+    @Override
+    public void deleteTag(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                getDaoFactory().getClimbingAreaDao().deleteTag(id);
+            }
+        });
+    }
+
+    @Override
+    public void addTag(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        transactionTemplate.execute(new TransactionCallbackWithoutResult() {
+            @Override
+            protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
+                getDaoFactory().getClimbingAreaDao().addTag(id);
+            }
+        });
     }
 }
