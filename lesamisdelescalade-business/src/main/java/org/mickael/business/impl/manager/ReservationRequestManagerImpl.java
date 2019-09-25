@@ -23,11 +23,23 @@ public class ReservationRequestManagerImpl extends AbstractManager implements Re
     }
 
     @Override
-    public ReservationRequest findReservationRequest(Integer id) {
+    public ReservationRequest findReservationRequestByGuidebookId(Integer id) {
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         ReservationRequest reservationRequest = transactionTemplate.execute(transactionStatus -> {
             ReservationRequest reservationRequestTransaction;
-            reservationRequestTransaction = getDaoFactory().getReservationRequestDao().findReservationRequest(id);
+            reservationRequestTransaction = getDaoFactory().getReservationRequestDao().findReservationRequestByGuidebookId(id);
+            return reservationRequestTransaction;
+        });
+
+        return reservationRequest;
+    }
+
+    @Override
+    public ReservationRequest findReservationRequestByMemberId(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        ReservationRequest reservationRequest = transactionTemplate.execute(transactionStatus -> {
+            ReservationRequest reservationRequestTransaction;
+            reservationRequestTransaction = getDaoFactory().getReservationRequestDao().findReservationRequestByMemberId(id);
             return reservationRequestTransaction;
         });
 

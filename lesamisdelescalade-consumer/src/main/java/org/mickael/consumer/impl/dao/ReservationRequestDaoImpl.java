@@ -16,8 +16,8 @@ public class ReservationRequestDaoImpl extends AbstractDataSourceImpl implements
 
     @Override
     public void createReservationRequest(ReservationRequest reservationRequest) {
-        String sql = "INSERT INTO public.reservation_request (member_id, guidebook_id)"
-                             + "VALUES (:memberId, :guidebookId)";
+        String sql = "INSERT INTO public.reservation_request (id, member_id, guidebook_id, transaction_status)"
+                             + "VALUES (:id, :memberId, :guidebookId, :transactionStatus)";
 
         NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -30,9 +30,20 @@ public class ReservationRequestDaoImpl extends AbstractDataSourceImpl implements
     }
 
     @Override
-    public ReservationRequest findReservationRequest(Integer id) {
+    public ReservationRequest findReservationRequestByGuidebookId (Integer id) {
         String sql = "SELECT * FROM public.reservation_request"
-                             + " WHERE id = " + id;
+                             + " WHERE guidebook_id = " + id;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
+        ReservationRequest reservationRequest = jdbcTemplate.queryForObject(sql, reservationRequestRowMapper);
+
+        return reservationRequest;
+    }
+
+    @Override
+    public ReservationRequest findReservationRequestByMemberId (Integer id) {
+        String sql = "SELECT * FROM public.reservation_request"
+                             + " WHERE member_id = " + id;
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
         ReservationRequest reservationRequest = jdbcTemplate.queryForObject(sql, reservationRequestRowMapper);

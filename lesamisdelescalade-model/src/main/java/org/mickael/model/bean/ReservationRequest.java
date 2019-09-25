@@ -4,20 +4,32 @@ public class ReservationRequest {
 
     //====  ATTRIBUTES  ====
 
+    private Integer id;
     private Guidebook guidebook;
     private Member member;
+    private boolean transactionStatus;
 
     //====  COONSTRUCTOR  ====
 
     public ReservationRequest() {}
 
-    public ReservationRequest(Guidebook guidebook, Member member) {
+    public ReservationRequest(Integer id, Guidebook guidebook, Member member, boolean transactionStatus) {
+        this.id = id;
         this.guidebook = guidebook;
         this.member = member;
+        this.transactionStatus = transactionStatus;
     }
 
-    //====  GETTERS AND SETTERS  ====
+//====  GETTERS AND SETTERS  ====
 
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public Guidebook getGuidebook() {
         return guidebook;
@@ -33,5 +45,13 @@ public class ReservationRequest {
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+    public boolean isTransactionStatus() {
+        return transactionStatus;
+    }
+
+    public void setTransactionStatus(boolean transactionStatus) {
+        this.transactionStatus = transactionStatus;
     }
 }
