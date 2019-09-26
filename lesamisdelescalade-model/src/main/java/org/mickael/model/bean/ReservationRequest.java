@@ -1,5 +1,7 @@
 package org.mickael.model.bean;
 
+import org.mickael.model.enumeration.ReservationSate;
+
 public class ReservationRequest {
 
     //====  ATTRIBUTES  ====
@@ -7,17 +9,17 @@ public class ReservationRequest {
     private Integer id;
     private Guidebook guidebook;
     private Member member;
-    private boolean transactionStatus;
+    private ReservationSate reservationState;
 
-    //====  COONSTRUCTOR  ====
+    //====  CONSTRUCTOR  ====
 
     public ReservationRequest() {}
 
-    public ReservationRequest(Integer id, Guidebook guidebook, Member member, boolean transactionStatus) {
+    public ReservationRequest(Integer id, Guidebook guidebook, Member member, ReservationSate reservationState) {
         this.id = id;
         this.guidebook = guidebook;
         this.member = member;
-        this.transactionStatus = transactionStatus;
+        this.reservationState = reservationState;
     }
 
 //====  GETTERS AND SETTERS  ====
@@ -47,11 +49,11 @@ public class ReservationRequest {
         this.member = member;
     }
 
-    public boolean isTransactionStatus() {
-        return transactionStatus;
+    public ReservationSate getReservationState() {
+        return reservationState;
     }
 
-    public void setTransactionStatus(boolean transactionStatus) {
-        this.transactionStatus = transactionStatus;
+    public void setReservationState(ReservationSate reservationState) {
+        this.reservationState = reservationState;
     }
 }

@@ -11,7 +11,6 @@ public class Guidebook {
     private String description;
     private Timestamp addedDate;
     private boolean isLoaned;
-    private String reservationStatus;
 
     private Member member;
 
@@ -19,13 +18,12 @@ public class Guidebook {
 
     public Guidebook() {}
 
-    public Guidebook(Integer id, String name, String description, Timestamp addedDate, boolean isLoaned, String reservationStatus, Member member) {
+    public Guidebook(Integer id, String name, String description, Timestamp addedDate, boolean isLoaned, Member member) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.addedDate = addedDate;
         this.isLoaned = isLoaned;
-        this.reservationStatus = reservationStatus;
         this.member = member;
     }
 
@@ -70,14 +68,6 @@ public class Guidebook {
 
     public void setLoaned(boolean loaned) {
         isLoaned = loaned;
-    }
-
-    public String getReservationStatus() {
-        return reservationStatus;
-    }
-
-    public void setReservationStatus(String reservationStatus) {
-        this.reservationStatus = reservationStatus;
     }
 
     public Member getMember() {
