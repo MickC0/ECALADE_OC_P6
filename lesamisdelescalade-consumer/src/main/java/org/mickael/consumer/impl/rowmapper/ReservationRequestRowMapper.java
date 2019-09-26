@@ -13,11 +13,15 @@ public class ReservationRequestRowMapper implements RowMapper<ReservationRequest
     public ReservationRequest mapRow(ResultSet resultSet, int rowNum) throws SQLException {
 
         ReservationRequest reservationRequest = new ReservationRequest();
+        reservationRequest.setId(resultSet.getInt("id"));
 
         MemberDaoImpl memberDao = new MemberDaoImpl();
         reservationRequest.setMember(memberDao.findMember(resultSet.getInt("member_id")));
+
         GuidebookDaoImpl guidebookDao = new GuidebookDaoImpl();
         reservationRequest.setGuidebook(guidebookDao.findGuidebook(resultSet.getInt("guidebook_id")));
+
+        //reservationRequest.setReservationState(resultSet.getString("reservation_state"));
 
         return reservationRequest;
     }
