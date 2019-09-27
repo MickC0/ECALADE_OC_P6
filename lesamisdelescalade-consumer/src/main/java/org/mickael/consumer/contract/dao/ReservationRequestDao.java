@@ -12,6 +12,5 @@ public interface ReservationRequestDao {
     void updateReservationRequest(ReservationRequest reservationRequest);
     void deleteReservationRequest(Integer id);
     List<ReservationRequest> findAllReservationRequest ();
-    //TODO Reservation par membre
-    //TODO Reservation par guidebook
+
 }

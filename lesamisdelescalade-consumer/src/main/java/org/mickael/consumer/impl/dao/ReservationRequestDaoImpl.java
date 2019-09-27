@@ -16,8 +16,8 @@ public class ReservationRequestDaoImpl extends AbstractDataSourceImpl implements
 
     @Override
     public void createReservationRequest(ReservationRequest reservationRequest) {
-        String sql = "INSERT INTO public.reservation_request (id, member_id, guidebook_id, transaction_status)"
-                             + "VALUES (:id, :memberId, :guidebookId, :transactionStatus)";
+        String sql = "INSERT INTO public.reservation_request (id, member_id, guidebook_id, reservation_state)"
+                             + "VALUES (:id, :memberId, :guidebookId, :reservationState)";
 
         NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
