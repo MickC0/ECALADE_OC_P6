@@ -1,14 +1,14 @@
 package org.mickael.model.enumeration;
 
-public enum ReservationSate {
+public enum ReservationState {
 
-    INITIATE ("INITIATE"), NEW ("NEW"), WAITING ("WAITING"), VALIDATE ("VALIDATE"), CLOSED ("CLOSED");
+    WAITING ("WAITING"), REFUSED("REFUSED"), CANCELLED("CANCELLED"), VALIDATE ("VALIDATE"), RETURNED ("RETURNED");
 
     protected String stateValue;
 
     //====  CONSTRUCTOR  ====
 
-    ReservationSate(String stateValue){
+    ReservationState(String stateValue){
         this.stateValue = stateValue;
     }
 

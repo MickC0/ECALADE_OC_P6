@@ -24,11 +24,23 @@ public class CommentManagerImpl extends AbstractManager implements CommentManage
     }
 
     @Override
-    public Comment findComment(Integer id) {
+    public Comment findCommentByMember(Integer id) {
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         Comment comment = transactionTemplate.execute(transactionStatus -> {
             Comment commentTransaction;
-            commentTransaction = getDaoFactory().getCommentDao().findComment(id);
+            commentTransaction = getDaoFactory().getCommentDao().findCommentByMember(id);
+            return commentTransaction;
+        });
+
+        return comment;
+    }
+
+    @Override
+    public Comment findCommentByClimbingArea(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        Comment comment = transactionTemplate.execute(transactionStatus -> {
+            Comment commentTransaction;
+            commentTransaction = getDaoFactory().getCommentDao().findCommentByClimbingArea(id);
             return commentTransaction;
         });
 
@@ -70,5 +82,31 @@ public class CommentManagerImpl extends AbstractManager implements CommentManage
         });
 
         return commentList;
+    }
+
+    @Override
+    public List<Comment> findAllCommentByMember(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+
+        List<Comment> commentListMember = transactionTemplate.execute(transactionStatus -> {
+            List<Comment> commentListTransaction = new ArrayList<>();
+            commentListTransaction = getDaoFactory().getCommentDao().findAllCommentByMember(id);
+            return  commentListTransaction;
+        });
+
+        return commentListMember;
+    }
+
+    @Override
+    public List<Comment> findAllCommentByClimbingArea(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+
+        List<Comment> commentListClimbingArea = transactionTemplate.execute(transactionStatus -> {
+            List<Comment> commentListTransaction = new ArrayList<>();
+            commentListTransaction = getDaoFactory().getCommentDao().findAllCommentByClimbingArea(id);
+            return  commentListTransaction;
+        });
+
+        return commentListClimbingArea;
     }
 }

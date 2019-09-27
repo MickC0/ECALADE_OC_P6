@@ -1,6 +1,6 @@
 package org.mickael.model.bean;
 
-import org.mickael.model.enumeration.ReservationSate;
+import org.mickael.model.enumeration.ReservationState;
 
 public class ReservationRequest {
 
@@ -9,13 +9,13 @@ public class ReservationRequest {
     private Integer id;
     private Guidebook guidebook;
     private Member member;
-    private ReservationSate reservationState;
+    private ReservationState reservationState;
 
     //====  CONSTRUCTOR  ====
 
     public ReservationRequest() {}
 
-    public ReservationRequest(Integer id, Guidebook guidebook, Member member, ReservationSate reservationState) {
+    public ReservationRequest(Integer id, Guidebook guidebook, Member member, ReservationState reservationState) {
         this.id = id;
         this.guidebook = guidebook;
         this.member = member;
@@ -49,11 +49,11 @@ public class ReservationRequest {
         this.member = member;
     }
 
-    public ReservationSate getReservationState() {
+    public ReservationState getReservationState() {
         return reservationState;
     }
 
-    public void setReservationState(ReservationSate reservationState) {
+    public void setReservationState(ReservationState reservationState) {
         this.reservationState = reservationState;
     }
 }

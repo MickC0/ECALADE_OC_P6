@@ -7,8 +7,11 @@ import java.util.List;
 public interface CommentManager {
 
     void createComment(Comment comment);
-    Comment findComment(Integer id);
+    Comment findCommentByMember(Integer id);
+    Comment findCommentByClimbingArea(Integer id);
     void updateComment(Comment comment);
     void deleteComment(Integer id);
     List<Comment> findAllComment ();
+    List<Comment> findAllCommentByMember(Integer id);
+    List<Comment> findAllCommentByClimbingArea(Integer id);
 }

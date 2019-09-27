@@ -12,6 +12,6 @@ public interface CommentDao {
     void updateComment(Comment comment);
     void deleteComment(Integer id);
     List<Comment> findAllComment ();
-    List<Comment> findAllCommentByMember();
-    List<Comment> findAllCommentByClimbingArea();
+    List<Comment> findAllCommentByMember(Integer id);
+    List<Comment> findAllCommentByClimbingArea(Integer id);
 }

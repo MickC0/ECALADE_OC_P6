@@ -42,7 +42,7 @@ public class CommentDaoImpl extends AbstractDataSourceImpl implements CommentDao
     }
     
     @Override
-    Comment findCommentByClimbingArea(Integer id){
+    public Comment findCommentByClimbingArea(Integer id){
         
         String sql = "SELECT * FROM public.comment"
                              + " WHERE climbingArea_id = " + id;
@@ -98,7 +98,7 @@ public class CommentDaoImpl extends AbstractDataSourceImpl implements CommentDao
     }
     
     @Override
-    List<Comment> findAllCommentByMember(){
+    public List<Comment> findAllCommentByMember(Integer id){
         String sql = "SELECT * FROM public.comment"
                              + " WHERE member_id = " + id;        
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
@@ -109,7 +109,7 @@ public class CommentDaoImpl extends AbstractDataSourceImpl implements CommentDao
     }
     
     @Override
-    List<Comment> findAllCommentByClimbingArea(){
+    public List<Comment> findAllCommentByClimbingArea(Integer id){
         String sql = "SELECT * FROM public.comment"
                      + " WHERE climbingArea_id = " + id;
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());

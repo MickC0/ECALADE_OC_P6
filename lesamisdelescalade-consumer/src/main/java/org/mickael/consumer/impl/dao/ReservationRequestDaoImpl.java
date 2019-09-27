@@ -4,7 +4,6 @@ import org.mickael.consumer.contract.dao.ReservationRequestDao;
 import org.mickael.consumer.impl.AbstractDataSourceImpl;
 import org.mickael.consumer.impl.rowmapper.ReservationRequestRowMapper;
 import org.mickael.model.bean.ReservationRequest;
-import org.mickael.model.bean.ReservationRequest;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -21,8 +20,10 @@ public class ReservationRequestDaoImpl extends AbstractDataSourceImpl implements
 
         NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", reservationRequest.getId(), Types.INTEGER);
         parameterSource.addValue("memberId", reservationRequest.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("guidebookId", reservationRequest.getGuidebook().getId(), Types.INTEGER);
+        parameterSource.addValue("reservationState", reservationRequest.getReservationState().getStateValue(), Types.VARCHAR);
 
 
         jdbcTemplate.update(sql, parameterSource);
