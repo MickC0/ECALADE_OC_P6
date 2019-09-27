@@ -30,10 +30,22 @@ public class CommentDaoImpl extends AbstractDataSourceImpl implements CommentDao
     }
 
     @Override
-    public Comment findComment(Integer id) {
+    public Comment findCommentByMember(Integer id) {
 
         String sql = "SELECT * FROM public.comment"
-                             + " WHERE id = " + id;
+                             + " WHERE member_id = " + id;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        CommentRowMapper commentRowMapper = new CommentRowMapper();
+        Comment comment = jdbcTemplate.queryForObject(sql, commentRowMapper);
+
+        return comment;
+    }
+    
+    @Override
+    Comment findCommentByClimbingArea(Integer id){
+        
+        String sql = "SELECT * FROM public.comment"
+                             + " WHERE climbingArea_id = " + id;
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         CommentRowMapper commentRowMapper = new CommentRowMapper();
         Comment comment = jdbcTemplate.queryForObject(sql, commentRowMapper);
@@ -54,7 +66,7 @@ public class CommentDaoImpl extends AbstractDataSourceImpl implements CommentDao
         NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("memberId", comment.getMember().getId(), Types.INTEGER);
-        parameterSource.addValue("climbingAreaIdId", comment.getClimbingArea().getId(), Types.INTEGER);
+        parameterSource.addValue("climbingAreaId", comment.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("description", comment.getDescription(), Types.VARCHAR);
         parameterSource.addValue("creationDate", comment.getCreationDate(), Types.TIMESTAMP);
         parameterSource.addValue("updateDate", comment.getUpdateDate(), Types.TIMESTAMP);;
@@ -83,5 +95,27 @@ public class CommentDaoImpl extends AbstractDataSourceImpl implements CommentDao
         List<Comment> commentList = jdbcTemplate.query(sql, commentRowMapper);
 
         return commentList;
+    }
+    
+    @Override
+    List<Comment> findAllCommentByMember(){
+        String sql = "SELECT * FROM public.comment"
+                             + " WHERE member_id = " + id;        
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        CommentRowMapper commentRowMapper = new CommentRowMapper();
+        List<Comment> commentListByMember = jdbcTemplate.query(sql, commentRowMapper);
+
+        return commentListByMember;
+    }
+    
+    @Override
+    List<Comment> findAllCommentByClimbingArea(){
+        String sql = "SELECT * FROM public.comment"
+                     + " WHERE climbingArea_id = " + id;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        CommentRowMapper commentRowMapper = new CommentRowMapper();
+        List<Comment> commentListByClimbingArea = jdbcTemplate.query(sql, commentRowMapper);
+
+        return commentListByClimbingArea;
     }
 }
