@@ -2,18 +2,18 @@ package org.mickael.model.enumeration;
 
 public enum ReservationSate {
 
-    INITIATE (0), WAITING (1), VALIDATE (2), CLOSED (3);
+    INITIATE ("INITIATE"), NEW ("NEW"), WAITING ("WAITING"), VALIDATE ("VALIDATE"), CLOSED ("CLOSED");
 
-    protected Integer code;
+    protected String stateValue;
 
     //====  CONSTRUCTOR  ====
 
-    ReservationSate(Integer code){
-        this.code = code;
+    ReservationSate(String stateValue){
+        this.stateValue = stateValue;
     }
 
-    public Integer getCode(){
-        return this.code;
+    public String getStateValue(){
+        return this.stateValue;
     }
 
 
