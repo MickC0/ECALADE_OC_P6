@@ -13,5 +13,5 @@ public interface CommentDao {
     void deleteComment(Integer id);
     List<Comment> findAllComment ();
     List<Comment> findAllCommentByMember();
-    List<Comment> findAllCommentByClimbingAre();
+    List<Comment> findAllCommentByClimbingArea();
 }
