@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" 
-		 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<!-- =============================================================== -->
-	<!-- Project informations -->
-	<!-- =============================================================== -->
+    <!-- =============================================================== -->
+    <!-- Project informations -->
+    <!-- =============================================================== -->
 
-	<!-- ===== Maven informations ===== -->
-	<groupId>org.mickael</groupId>
-	<artifactId>Escalade_OC_P6</artifactId>
-	<version>1.0-SNAPSHOT</version>
-	<packaging>pom</packaging>
+    <!-- ===== Maven informations ===== -->
+    <groupId>org.mickael</groupId>
+    <artifactId>Escalade_OC_P6</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-	<!-- ===== General informations ===== -->
-	<name>Escalade_OC_P6</name>
-	<url>http://maven.apache.org</url>
+    <!-- ===== General informations ===== -->
+    <name>Escalade_OC_P6</name>
+    <url>http://maven.apache.org</url>
 
     <!-- =============================================================== -->
     <!-- Distribution management -->
@@ -31,58 +31,58 @@
     <!-- =============================================================== -->
     <!-- Properties -->
     <!-- =============================================================== -->
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-		<org.springframework.version>5.1.9.RELEASE</org.springframework.version>
-	</properties>
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <org.springframework.version>5.1.9.RELEASE</org.springframework.version>
+    </properties>
 
     <!-- =============================================================== -->
     <!-- Modules -->
     <!-- =============================================================== -->
-	<modules>  
-		<module>lesamisdelescalade-batch</module>
-		<module>lesamisdelescalade-business</module>
-		<module>lesamisdelescalade-consumer</module>
-		<module>lesamisdelescalade-model</module>
-		<module>lesamisdelescalade-webapp</module>
-	</modules>
-	
-	
-	<!-- =============================================================== -->
+    <modules>
+        <module>lesamisdelescalade-batch</module>
+        <module>lesamisdelescalade-business</module>
+        <module>lesamisdelescalade-consumer</module>
+        <module>lesamisdelescalade-model</module>
+        <module>lesamisdelescalade-webapp</module>
+    </modules>
+
+
+    <!-- =============================================================== -->
     <!-- Dependencies management -->
     <!-- =============================================================== -->
-	<dependencyManagement>
-		<dependencies>
-			<!-- ===== Modules ===== -->
-			<dependency>
-				<groupId>org.mickael</groupId>
-				<artifactId>lesamisdelescalade-batch</artifactId>
-				<version>1.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mickael</groupId>
-				<artifactId>lesamisdelescalade-business</artifactId>
-				<version>1.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mickael</groupId>
-				<artifactId>lesamisdelescalade-consumer</artifactId>
-				<version>1.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mickael</groupId>
-				<artifactId>lesamisdelescalade-model</artifactId>
-				<version>1.0-SNAPSHOT</version>
-			</dependency>
-			<dependency>
-				<groupId>org.mickael</groupId>
-				<artifactId>lesamisdelescalade-webapp</artifactId>
-				<version>1.0-SNAPSHOT</version>
-			</dependency>
-			
-			            <!-- ===== Third party libraries ===== -->
+    <dependencyManagement>
+        <dependencies>
+            <!-- ===== Modules ===== -->
+            <dependency>
+                <groupId>org.mickael</groupId>
+                <artifactId>lesamisdelescalade-batch</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mickael</groupId>
+                <artifactId>lesamisdelescalade-business</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mickael</groupId>
+                <artifactId>lesamisdelescalade-consumer</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mickael</groupId>
+                <artifactId>lesamisdelescalade-model</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mickael</groupId>
+                <artifactId>lesamisdelescalade-webapp</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <!-- ===== Third party libraries ===== -->
 
             <!-- == Spring dependencies == -->
             <dependency>
@@ -93,19 +93,19 @@
                 <scope>import</scope>
             </dependency>
 
-			<!-- == JSR 250 == -->
-			<dependency>
-				<groupId>javax.annotation</groupId>
-				<artifactId>javax.annotation-api</artifactId>
-				<version>1.3.2</version>
-			</dependency>
+            <!-- == JSR 250 == -->
+            <dependency>
+                <groupId>javax.annotation</groupId>
+                <artifactId>javax.annotation-api</artifactId>
+                <version>1.3.2</version>
+            </dependency>
 
-			<!-- == JSR 330 == -->
-			<dependency>
-				<groupId>javax.inject</groupId>
-				<artifactId>javax.inject</artifactId>
-				<version>1</version>
-			</dependency>
+            <!-- == JSR 330 == -->
+            <dependency>
+                <groupId>javax.inject</groupId>
+                <artifactId>javax.inject</artifactId>
+                <version>1</version>
+            </dependency>
 
             <!-- == Java Servlet API == -->
             <dependency>
@@ -141,15 +141,15 @@
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
                 <version>42.2.6</version>
-				<scope>runtime</scope>
+                <scope>runtime</scope>
             </dependency>
 
-			<!-- Pool de Connexion Commons DBCP -->
-			<dependency>
-				<groupId>org.apache.commons</groupId>
-				<artifactId>commons-dbcp2</artifactId>
-				<version>2.1.1</version>
-			</dependency>
+            <!-- Pool de Connexion Commons DBCP -->
+            <dependency>
+                <groupId>org.apache.commons</groupId>
+                <artifactId>commons-dbcp2</artifactId>
+                <version>2.1.1</version>
+            </dependency>
 
             <!-- == other == -->
 
@@ -161,11 +161,53 @@
                 <version>4.12</version>
                 <scope>test</scope>
             </dependency>
-			
-			
-			
-	    </dependencies>
+
+
+
+        </dependencies>
     </dependencyManagement>
-	
-	
+
+    <!-- =============================================================== -->
+    <!-- Build -->
+    <!-- =============================================================== -->
+    <build>
+        <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <version>3.1.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-clean-plugin</artifactId>
+                    <version>3.1.0</version>
+                </plugin>
+                <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
+                <plugin>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>3.0.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.8.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.22.1</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-war-plugin</artifactId>
+                    <version>3.2.3</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>2.5.2</version>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>2.8.2</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
