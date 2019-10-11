@@ -1,6 +1,6 @@
 package org.mickael.model.bean;
 
-import java.sql.Timestamp;
+import java.sql.Date;
 import java.util.List;
 
 public class Member {
@@ -11,7 +11,7 @@ public class Member {
     private String firstName;
     private String lastName;
     private String pseudo;
-    private Timestamp birthDate;
+    private Date birthDate;
     private String gender;
     private String email;
     private String password;
@@ -26,7 +26,7 @@ public class Member {
 
     public Member() {}
 
-    public Member(Integer id, String firstName, String lastName, String pseudo, Timestamp birthDate,
+    public Member(Integer id, String firstName, String lastName, String pseudo, Date birthDate,
                   String gender, String email, String password, boolean isMember,
                   boolean isAdmin, List<Comment> commentList,
                   List<ClimbingArea> climbingAreaList, List<Guidebook> guidebookList) {
@@ -84,7 +84,7 @@ public class Member {
         return birthDate;
     }
 
-    public void setBirthDate(Timestamp birthDate) {
+    public void setBirthDate(Date birthDate) {
         this.birthDate = birthDate;
     }
 
