@@ -7,7 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import javax.inject.Named;
 
-@Named
+@Named("encoder")
 public class PasswordManagerImpl extends AbstractManager implements PasswordManager {
 
     @Override

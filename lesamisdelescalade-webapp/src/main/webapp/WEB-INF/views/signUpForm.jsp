@@ -22,7 +22,7 @@
                 <div class="panel-title">New Member<br></div>
             </div>
             <div class="panel-body">
-                <form:form action="signUpForm" cssClass="form-horizontal"
+                <form:form action="signUpTry" cssClass="form-horizontal"
                            method="post" modelAttribute="member">
                     <form:hidden path="id"/>
 

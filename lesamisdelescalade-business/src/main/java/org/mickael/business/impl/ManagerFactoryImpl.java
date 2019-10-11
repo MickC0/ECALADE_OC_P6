@@ -116,4 +116,6 @@ public class ManagerFactoryImpl implements ManagerFactory {
     public void setMemberManager(MemberManager memberManager) {
         this.memberManager = memberManager;
     }
+
+
 }

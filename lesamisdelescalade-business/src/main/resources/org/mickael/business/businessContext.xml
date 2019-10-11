@@ -11,6 +11,10 @@
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
+    <!-- Encoder -->
+    <bean id="encoder" class="org.mickael.business.impl.manager.PasswordManagerImpl">
+    </bean>
+
     <!-- Manager statement -->
     <bean id="abstractManager" abstract="true">
         <property name="daoFactory" ref="daoFactory"/>

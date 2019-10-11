@@ -1,6 +1,7 @@
 package org.mickael.controllers;
 
 import org.mickael.business.contract.manager.MemberManager;
+import org.mickael.business.contract.manager.PasswordManager;
 import org.mickael.model.bean.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +20,9 @@ public class MemberController {
     @Inject
     private MemberManager memberManager;
 
+    @Inject
+    private PasswordManager passwordManager;
+
 
     @GetMapping("/signUp")
     public String viewSignUp(Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
@@ -27,15 +31,17 @@ public class MemberController {
     }
 
 
-    @PostMapping(value = "/signUpForm")
+    @PostMapping(value = "/signUpTry")
     public String createMember(@Valid Member newMember, BindingResult result, Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
-/*        if (result.hasErrors()){
+        if (result.hasErrors()){
             model.addAttribute("member", newMember);
 
             return  "signUpForm";
 
-        } else {
-        }*/
+        }
+        //encoder
+        String hashPassword = passwordManager.hashPassword(newMember.getPassword());
+        newMember.setPassword(hashPassword);
         newMember.setAdmin(false);
         newMember.setMember(false);
         memberManager.createMember(newMember);
