@@ -8,13 +8,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
-import org.springframework.web.bind.annotation.SessionAttributes;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
 
 @Controller
-@SessionAttributes("member")
+
 public class MemberController {
 
     @Inject

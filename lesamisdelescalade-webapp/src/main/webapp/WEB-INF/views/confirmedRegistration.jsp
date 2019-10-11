@@ -17,7 +17,6 @@
     <div class="col-md-offset-2 col-md-7">
         <h1>${message}</h1>
         <hr />
-
         <table class="table table-striped table-bordered">
             <tr>
                 <td><b>Gender </b>: ${member.gender}</td>

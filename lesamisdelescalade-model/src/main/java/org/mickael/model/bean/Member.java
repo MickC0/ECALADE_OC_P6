@@ -80,7 +80,7 @@ public class Member {
         this.pseudo = pseudo;
     }
 
-    public Timestamp getBirthDate() {
+    public Date getBirthDate() {
         return birthDate;
     }
 
