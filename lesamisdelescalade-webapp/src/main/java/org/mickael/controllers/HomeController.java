@@ -1,6 +1,6 @@
 package org.mickael.controllers;
 
-import org.mickael.business.contract.manager.MemberManager;
+import org.mickael.business.contract.manager.ClimbingAreaManager;
 import org.mickael.model.bean.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,19 +13,22 @@ import javax.inject.Inject;
 public class HomeController {
 
     @Inject
-    MemberManager memberManager;
+    private ClimbingAreaManager climbingAreaManager;
 
 
     @GetMapping("/home")
-    public String displayHomePage(Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
+    public String displayHomePage(Model model, @SessionAttribute(value = "member", required = false) Member member){
+        //Display all the climbing Area on the homepage
+        model.addAttribute("climbingArea", climbingAreaManager.findAllClimbingArea());
+
+        //Test if the member is log
+        if(member != null){
+            model.addAttribute("logMember", member.getEmail());
+        }
         return "home";
     }
 
-    /**@GetMapping("/signUp")
-    public String viewSignUp(Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
-        model.addAttribute("member", new Member());
-        return "signUpForm";
-    }*/
+
 
 
 

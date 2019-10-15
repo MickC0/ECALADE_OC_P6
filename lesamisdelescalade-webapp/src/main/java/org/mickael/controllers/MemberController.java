@@ -32,7 +32,15 @@ public class MemberController {
 
 
     @PostMapping(value = "/signUpTry")
-    public String createMember(@Valid Member newMember, BindingResult result, Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
+    public String createMember(@Valid Member newMember, BindingResult result, Model model,
+                               @SessionAttribute(value = "member", required = false) Member memberSession) {
+
+        Member existingMember = memberManager.findMemberByMail(newMember.getEmail());
+        if (existingMember != null){
+
+            return "errorAlreadyExist";
+        }
+
         if (result.hasErrors()){
             model.addAttribute("member", newMember);
 
@@ -50,6 +58,20 @@ public class MemberController {
         model.addAttribute("member", newMember);
 
         return "confirmedRegistration";
+    }
+
+
+    @GetMapping(value = "/logIn")
+    public String viewLogin(Model model){
+
+        return "loginForm";
+    }
+
+
+    @PostMapping(value = "/logInTry")
+    public String loginMember(@Valid Member member, BindingResult result, Model model){
+
+        return "memberLog";
     }
 
 
