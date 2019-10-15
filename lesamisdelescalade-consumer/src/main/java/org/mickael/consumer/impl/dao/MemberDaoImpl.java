@@ -23,7 +23,7 @@ public class MemberDaoImpl extends AbstractDataSourceImpl implements MemberDao {
         parameterSource.addValue("firstName", member.getFirstName(), Types.VARCHAR);
         parameterSource.addValue("lastName", member.getLastName(), Types.VARCHAR);
         parameterSource.addValue("pseudo", member.getPseudo(), Types.VARCHAR);
-        parameterSource.addValue("birthdate", member.getBirthDate(), Types.TIMESTAMP);
+        parameterSource.addValue("birthdate", member.getBirthDate(), Types.DATE);
         parameterSource.addValue("gender", member.getGender(), Types.VARCHAR);
         parameterSource.addValue("email", member.getEmail(), Types.VARCHAR);
         parameterSource.addValue("password", member.getPassword(), Types.VARCHAR);
