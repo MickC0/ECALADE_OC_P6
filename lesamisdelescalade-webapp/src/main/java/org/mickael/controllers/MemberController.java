@@ -35,11 +35,11 @@ public class MemberController {
     public String createMember(@Valid Member newMember, BindingResult result, Model model,
                                @SessionAttribute(value = "member", required = false) Member memberSession) {
 
-        Member existingMember = memberManager.findMemberByMail(newMember.getEmail());
-        if (existingMember != null){
+        //Member existingMember = memberManager.findMemberByMail(newMember.getEmail());
+        /**if (existingMember != null){
 
             return "errorAlreadyExist";
-        }
+        }*/
 
         if (result.hasErrors()){
             model.addAttribute("member", newMember);
