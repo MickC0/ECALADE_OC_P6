@@ -1,24 +1,21 @@
 package org.mickael.consumer.impl.dao;
 
 import org.mickael.consumer.contract.dao.ParkingDao;
-import org.mickael.consumer.impl.AbstractDataSourceImpl;
+import org.mickael.consumer.impl.AbstractDao;
 import org.mickael.consumer.impl.rowmapper.ParkingRowMapper;
 import org.mickael.model.bean.Parking;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.sql.Types;
 import java.util.List;
 
-public class ParkingDaoImpl extends AbstractDataSourceImpl implements ParkingDao {
+public class ParkingDaoImpl extends AbstractDao implements ParkingDao {
 
     @Override
     public void createParking(Parking parking) {
         String sql = "INSERT INTO public.parking (climbingarea_id, name, latitude, longitude)"
                              + "VALUES (:climbingareaId, :name, :latitude, :longitude)";
 
-        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("climbingareaId", parking.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("name", parking.getName(), Types.VARCHAR);
@@ -26,17 +23,17 @@ public class ParkingDaoImpl extends AbstractDataSourceImpl implements ParkingDao
         parameterSource.addValue("longitude", parking.getLongitude(), Types.VARCHAR);
 
 
-        jdbcTemplate.update(sql, parameterSource);
+        getNamedParameterJdbcTemplate().update(sql, parameterSource);
 
     }
 
     @Override
     public Parking findParking(Integer id) {
-        String sql = "SELECT * FROM public.parking"
-                             + " WHERE id = " + id;
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        String sql = "SELECT * FROM public.parking WHERE id = :id";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id, Types.INTEGER);
         ParkingRowMapper parkingRowMapper = new ParkingRowMapper();
-        Parking parking = jdbcTemplate.queryForObject(sql, parkingRowMapper);
+        Parking parking = getNamedParameterJdbcTemplate().queryForObject(sql, parameterSource, parkingRowMapper);
 
         return parking;
     }
@@ -50,7 +47,6 @@ public class ParkingDaoImpl extends AbstractDataSourceImpl implements ParkingDao
                              + "longitude = :longitude "
                              + "WHERE id = :id";
 
-        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("climbingareaId", parking.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("name", parking.getName(), Types.VARCHAR);
@@ -58,7 +54,7 @@ public class ParkingDaoImpl extends AbstractDataSourceImpl implements ParkingDao
         parameterSource.addValue("longitude", parking.getLongitude(), Types.VARCHAR);
 
 
-        jdbcTemplate.update(sql, parameterSource);
+        getNamedParameterJdbcTemplate().update(sql, parameterSource);
 
     }
 
@@ -66,20 +62,18 @@ public class ParkingDaoImpl extends AbstractDataSourceImpl implements ParkingDao
     public void deleteParking(Integer id) {
         String sql = "DELETE FROM public.parking WHERE id = :id";
 
-        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
         parameterSource.addValue("id", id);
-        jdbcTemplate.update(sql, parameterSource);
+        getNamedParameterJdbcTemplate().update(sql, parameterSource);
 
     }
 
     @Override
     public List<Parking> findAllParking() {
         String sql = "SELECT * FROM public.parking";
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         ParkingRowMapper parkingRowMapper = new ParkingRowMapper();
-        List<Parking> parkingList = jdbcTemplate.query(sql, parkingRowMapper);
+        List<Parking> parkingList = getJdbcTemplate().query(sql, parkingRowMapper);
 
         return parkingList;
     }

@@ -1,24 +1,21 @@
 package org.mickael.consumer.impl.dao;
 
 import org.mickael.consumer.contract.dao.StartingPointDao;
-import org.mickael.consumer.impl.AbstractDataSourceImpl;
+import org.mickael.consumer.impl.AbstractDao;
 import org.mickael.consumer.impl.rowmapper.StartingPointRowMapper;
 import org.mickael.model.bean.StartingPoint;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.sql.Types;
 import java.util.List;
 
-public class StartingPointDaoImpl extends AbstractDataSourceImpl implements StartingPointDao {
+public class StartingPointDaoImpl extends AbstractDao implements StartingPointDao {
 
     @Override
     public void createStartingPoint(StartingPoint startingPoint) {
         String sql = "INSERT INTO public.startingPoint (climbingarea_id, name, latitude, longitude)"
                              + "VALUES (:climbingareaId, :name, :latitude, :longitude)";
 
-        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("climbingareaId", startingPoint.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("name", startingPoint.getName(), Types.VARCHAR);
@@ -26,17 +23,17 @@ public class StartingPointDaoImpl extends AbstractDataSourceImpl implements Star
         parameterSource.addValue("longitude", startingPoint.getLongitude(), Types.VARCHAR);
 
 
-        jdbcTemplate.update(sql, parameterSource);
+        getJdbcTemplate().update(sql, parameterSource);
 
     }
 
     @Override
     public StartingPoint findStartingPoint(Integer id) {
-        String sql = "SELECT * FROM public.startingPoint"
-                             + " WHERE id = " + id;
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        String sql = "SELECT * FROM public.startingPoint WHERE id = :id";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id, Types.INTEGER);
         StartingPointRowMapper startingPointRowMapper = new StartingPointRowMapper();
-        StartingPoint startingPoint = jdbcTemplate.queryForObject(sql, startingPointRowMapper);
+        StartingPoint startingPoint = getNamedParameterJdbcTemplate().queryForObject(sql, parameterSource, startingPointRowMapper);
 
         return startingPoint;
     }
@@ -50,7 +47,6 @@ public class StartingPointDaoImpl extends AbstractDataSourceImpl implements Star
                              + "longitude = :longitude "
                              + "WHERE id = :id";
 
-        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("climbingareaId", startingPoint.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("name", startingPoint.getName(), Types.VARCHAR);
@@ -58,7 +54,7 @@ public class StartingPointDaoImpl extends AbstractDataSourceImpl implements Star
         parameterSource.addValue("longitude", startingPoint.getLongitude(), Types.VARCHAR);
 
 
-        jdbcTemplate.update(sql, parameterSource);
+        getNamedParameterJdbcTemplate().update(sql, parameterSource);
 
     }
 
@@ -66,20 +62,18 @@ public class StartingPointDaoImpl extends AbstractDataSourceImpl implements Star
     public void deleteStartingPoint(Integer id) {
         String sql = "DELETE FROM public.startingPoint WHERE id = :id";
 
-        NamedParameterJdbcTemplate jdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
         parameterSource.addValue("id", id);
-        jdbcTemplate.update(sql, parameterSource);
+        getNamedParameterJdbcTemplate().update(sql, parameterSource);
 
     }
 
     @Override
     public List<StartingPoint> findAllStartingPoint() {
         String sql = "SELECT * FROM public.startingPoint";
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         StartingPointRowMapper startingPointRowMapper = new StartingPointRowMapper();
-        List<StartingPoint> startingPointList = jdbcTemplate.query(sql, startingPointRowMapper);
+        List<StartingPoint> startingPointList = getJdbcTemplate().query(sql, startingPointRowMapper);
 
         return startingPointList;
     }
