@@ -54,7 +54,7 @@
 
     </div>
 </nav>
-<!--<h1>Les Amis de l'Escalade</h1>
+<h1>Les Amis de l'Escalade</h1>
 <div class="container">
     <div class="col-md-offset-2 col-md-7">
         <div class="panel panel-info">
@@ -70,7 +70,7 @@
         </div>
         </div>
     </div>
-</div>-->
+</div>
 
 
 </body>
