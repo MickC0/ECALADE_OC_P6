@@ -11,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MemberManagerImpl extends AbstractManager implements MemberManager {
+
+
+
     @Override
     public void createMember(Member member) {
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
@@ -82,4 +85,5 @@ public class MemberManagerImpl extends AbstractManager implements MemberManager 
 
         return memberList;
     }
+
 }

@@ -4,12 +4,15 @@ import org.mickael.consumer.contract.dao.MemberDao;
 import org.mickael.consumer.impl.AbstractDao;
 import org.mickael.consumer.impl.rowmapper.MemberRowMapper;
 import org.mickael.model.bean.Member;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 
 import java.sql.Types;
 import java.util.List;
+import java.util.Optional;
 
 public class MemberDaoImpl extends AbstractDao implements MemberDao {
+
 
     @Override
     public void createMember(Member member) {
@@ -49,9 +52,13 @@ public class MemberDaoImpl extends AbstractDao implements MemberDao {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("email", email, Types.VARCHAR);
         MemberRowMapper memberRowMapper = new MemberRowMapper();
-        Member member = getNamedParameterJdbcTemplate().queryForObject(sql, parameterSource, memberRowMapper);
+        try{
+            Member member = getNamedParameterJdbcTemplate().queryForObject(sql, parameterSource, memberRowMapper);
+            return member;
 
-        return member;
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
     }
 
     @Override
@@ -102,4 +109,5 @@ public class MemberDaoImpl extends AbstractDao implements MemberDao {
 
         return memberList;
     }
+
 }

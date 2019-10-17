@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.Optional;
 
 @Controller
 
@@ -35,29 +36,30 @@ public class MemberController {
     public String createMember(@Valid Member newMember, BindingResult result, Model model,
                                @SessionAttribute(value = "member", required = false) Member memberSession) {
 
-        //Member existingMember = memberManager.findMemberByMail(newMember.getEmail());
-        /**if (existingMember != null){
+        Optional<Member> existingMember = memberManager.testOptional(newMember.getEmail());
+        //model.addAttribute("member", existingMember);
+        if (existingMember.isPresent()){
+        //if (existingMember != null){
 
             return "errorAlreadyExist";
-        }*/
+        } else {
+            if (result.hasErrors()){
+                model.addAttribute("member", newMember);
 
-        if (result.hasErrors()){
+                return  "signUpForm";
+            }
+            //encoder
+            String hashPassword = passwordManager.hashPassword(newMember.getPassword());
+            newMember.setPassword(hashPassword);
+            newMember.setAdmin(false);
+            newMember.setMember(false);
+            memberManager.createMember(newMember);
+
+            model.addAttribute("message", "Member sign up successfully.");
             model.addAttribute("member", newMember);
 
-            return  "signUpForm";
-
+            return "confirmedRegistration";
         }
-        //encoder
-        String hashPassword = passwordManager.hashPassword(newMember.getPassword());
-        newMember.setPassword(hashPassword);
-        newMember.setAdmin(false);
-        newMember.setMember(false);
-        memberManager.createMember(newMember);
-
-        model.addAttribute("message", "Member sign up successfully.");
-        model.addAttribute("member", newMember);
-
-        return "confirmedRegistration";
     }
 
 
