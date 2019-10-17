@@ -30,7 +30,7 @@ public class MemberController {
 
 
     @GetMapping("/signUp")
-    public String viewSignUp(Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
+    public String doSignUp(Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
         model.addAttribute("member", new Member());
         return "signUpForm";
     }
@@ -66,7 +66,7 @@ public class MemberController {
 
 
     @GetMapping(value = "/logIn")
-    public String viewLogin(Model model){
+    public String doLogIn(Model model){
         model.addAttribute("member", new Member());
         return "loginForm";
     }
@@ -97,6 +97,15 @@ public class MemberController {
         }
         return "home";
     }
+
+
+    @GetMapping("/logOut")
+    public String doLogOut(@ModelAttribute("member")Member memberSession, WebRequest webRequest, SessionStatus sessionStatus, Model model){
+        sessionStatus.setComplete();
+        webRequest.removeAttribute("member", WebRequest.SCOPE_SESSION);
+        return "home";
+    }
+
 
 
     @GetMapping("/memberList")

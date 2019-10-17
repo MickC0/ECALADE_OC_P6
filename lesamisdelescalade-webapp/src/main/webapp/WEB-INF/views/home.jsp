@@ -34,7 +34,7 @@
                 <!-- if user is logged -->
                 <c:if test="${!empty logged}"><p style="color:white;"><c:out value="${logged} "/>
                     <br><a href="${pageContext.request.contextPath}/personalSpace">Mon espace personnel</a><br>
-                    <a href="${pageContext.request.contextPath}/dologout">Se deconnecter </a></p>
+                    <a href="${pageContext.request.contextPath}/logOut">Se deconnecter </a></p>
                 </c:if>
 
                 <!-- if user not logged -->
