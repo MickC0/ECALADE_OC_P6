@@ -6,16 +6,15 @@ import org.mickael.model.bean.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttribute;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.util.Optional;
 
 @Controller
-
+@SessionAttributes("member")
 public class MemberController {
 
     @Inject
@@ -23,6 +22,11 @@ public class MemberController {
 
     @Inject
     private PasswordManager passwordManager;
+
+    @ModelAttribute("member")
+    public Member setUpMember(){
+        return new Member();
+    }
 
 
     @GetMapping("/signUp")
@@ -36,10 +40,8 @@ public class MemberController {
     public String createMember(@Valid Member newMember, BindingResult result, Model model,
                                @SessionAttribute(value = "member", required = false) Member memberSession) {
 
-        Optional<Member> existingMember = memberManager.testOptional(newMember.getEmail());
-        //model.addAttribute("member", existingMember);
-        if (existingMember.isPresent()){
-        //if (existingMember != null){
+        Member existingMember = memberManager.findMemberByMail(newMember.getEmail());
+        if (existingMember != null){
 
             return "errorAlreadyExist";
         } else {
@@ -65,19 +67,36 @@ public class MemberController {
 
     @GetMapping(value = "/logIn")
     public String viewLogin(Model model){
-
+        model.addAttribute("member", new Member());
         return "loginForm";
     }
 
 
     @PostMapping(value = "/logInTry")
-    public String loginMember(@Valid Member member, BindingResult result, Model model){
+    public String loginMember(@ModelAttribute("member") Member memberSession,  WebRequest webRequest, SessionStatus sessionStatus, Model model){
+        boolean checkPassword = false;
+        Member memberInBdd = new Member();
 
-        return "memberLog";
+        if (memberSession != null){
+            memberInBdd = memberManager.findMemberByMail(memberSession.getEmail());
+            if (memberInBdd == null){
+                sessionStatus.setComplete();
+                webRequest.removeAttribute("member", WebRequest.SCOPE_SESSION);
+                return "errorAlreadyExist";
+            }
+
+            checkPassword = passwordManager.matches(memberSession.getPassword(), memberInBdd.getPassword());
+
+            if (checkPassword){
+                model.addAttribute("logged", memberSession.getEmail());
+            } else {
+                sessionStatus.setComplete();
+                webRequest.removeAttribute("member", WebRequest.SCOPE_SESSION);
+                return "errorAlreadyExist";
+            }
+        }
+        return "home";
     }
-
-
-
 
 
     @GetMapping("/memberList")

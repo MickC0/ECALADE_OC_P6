@@ -8,5 +8,6 @@
 </head>
 <body>
 <h1>This email already exist. Do you lost your password ?</h1>
+<h1>test login error</h1>
 </body>
 </html>
