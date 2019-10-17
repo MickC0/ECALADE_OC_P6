@@ -1,7 +1,9 @@
 package org.mickael.controllers;
 
+import org.mickael.business.contract.manager.GuidebookManager;
 import org.mickael.business.contract.manager.MemberManager;
 import org.mickael.business.contract.manager.PasswordManager;
+import org.mickael.business.contract.manager.ReservationRequestManager;
 import org.mickael.model.bean.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,11 +25,18 @@ public class MemberController {
     @Inject
     private PasswordManager passwordManager;
 
+    @Inject
+    private GuidebookManager guidebookManager;
+
+    @Inject
+    private ReservationRequestManager reservationRequestManager;
+
     @ModelAttribute("member")
     public Member setUpMember(){
         return new Member();
     }
 
+    //======== MEMBER SIGN / LOG PARTS ========
 
     @GetMapping("/signUp")
     public String doSignUp(Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
@@ -106,6 +115,25 @@ public class MemberController {
         return "home";
     }
 
+    //======== MEMBER PERSONAL SPACE PARTS ========
+
+    @GetMapping("/memberSpace")
+    public String displayMemberSpace(Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
+        Member memberInBdd = new Member();
+        if (memberSession != null){
+            model.addAttribute("logged", memberSession.getEmail());
+            memberInBdd = memberManager.findMemberByMail(memberSession.getEmail());
+            model.addAttribute("member", memberInBdd);
+
+            //TODO Implémentation de DAO et manager guidebookByMemberId
+            model.addAttribute("guidebook", guidebookManager.guidebookByMemberId(memberInBdd.getId()));
+
+            return "memberPersonalSpace";
+        } else {
+            return "errorAlreadyExist";
+        }
+    }
+
 
 
     @GetMapping("/memberList")
@@ -113,4 +141,6 @@ public class MemberController {
         model.addAttribute("members", memberManager.findAllMember());
         return "memberList";
     }
+
+    //======== ADMIN PARTS ========
 }
