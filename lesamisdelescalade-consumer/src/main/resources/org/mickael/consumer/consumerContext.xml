@@ -7,32 +7,22 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
-    <!-- DAO and Datasource statement -->
-    <bean id="abstractDao" abstract="true" class="org.mickael.consumer.impl.AbstractDao">
+    <!-- Datasource statement -->
+    <bean id="abstractDataSource" abstract="true" class="org.mickael.consumer.impl.AbstractDataSource">
         <property name="dataSource" ref="dataSource"/>
-        <property name="namedParameterJdbcTemplate" ref="namedParameterJdbcTemplate"/>
-        <property name="jdbcTemplate" ref="jdbcTemplate"/>
-    </bean>
-
-    <bean id="namedParameterJdbcTemplate" class="org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate">
-        <constructor-arg name="dataSource" ref="dataSource"/>
-    </bean>
-
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <constructor-arg name="dataSource" ref="dataSource"/>
     </bean>
 
     <!-- DAO statement -->
-    <bean id="climbingAreaDao" class="org.mickael.consumer.impl.dao.ClimbingAreaDaoImpl" parent="abstractDao"/>
-    <bean id="commentDao" class="org.mickael.consumer.impl.dao.CommentDaoImpl" parent="abstractDao"/>
-    <bean id="guidebookDao" class="org.mickael.consumer.impl.dao.GuidebookDaoImpl" parent="abstractDao"/>
-    <bean id="parkingDao" class="org.mickael.consumer.impl.dao.ParkingDaoImpl" parent="abstractDao"/>
-    <bean id="photoDao" class="org.mickael.consumer.impl.dao.PhotoDaoImpl" parent="abstractDao"/>
-    <bean id="reservationRequestDao" class="org.mickael.consumer.impl.dao.ReservationRequestDaoImpl" parent="abstractDao"/>
-    <bean id="routeDao" class="org.mickael.consumer.impl.dao.RouteDaoImpl" parent="abstractDao"/>
-    <bean id="sectorDao" class="org.mickael.consumer.impl.dao.SectorDaoImpl" parent="abstractDao"/>
-    <bean id="startingPointDao" class="org.mickael.consumer.impl.dao.StartingPointDaoImpl" parent="abstractDao"/>
-    <bean id="memberDao" class="org.mickael.consumer.impl.dao.MemberDaoImpl" parent="abstractDao"/>
+    <bean id="climbingAreaDao" class="org.mickael.consumer.impl.dao.ClimbingAreaDaoImpl" parent="abstractDataSource"/>
+    <bean id="commentDao" class="org.mickael.consumer.impl.dao.CommentDaoImpl" parent="abstractDataSource"/>
+    <bean id="guidebookDao" class="org.mickael.consumer.impl.dao.GuidebookDaoImpl" parent="abstractDataSource"/>
+    <bean id="parkingDao" class="org.mickael.consumer.impl.dao.ParkingDaoImpl" parent="abstractDataSource"/>
+    <bean id="photoDao" class="org.mickael.consumer.impl.dao.PhotoDaoImpl" parent="abstractDataSource"/>
+    <bean id="reservationRequestDao" class="org.mickael.consumer.impl.dao.ReservationRequestDaoImpl" parent="abstractDataSource"/>
+    <bean id="routeDao" class="org.mickael.consumer.impl.dao.RouteDaoImpl" parent="abstractDataSource"/>
+    <bean id="sectorDao" class="org.mickael.consumer.impl.dao.SectorDaoImpl" parent="abstractDataSource"/>
+    <bean id="startingPointDao" class="org.mickael.consumer.impl.dao.StartingPointDaoImpl" parent="abstractDataSource"/>
+    <bean id="memberDao" class="org.mickael.consumer.impl.dao.MemberDaoImpl" parent="abstractDataSource"/>
 
 
     <!-- DAO Factory -->

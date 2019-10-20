@@ -70,4 +70,17 @@ public class GuidebookManagerImpl extends AbstractManager implements GuidebookMa
 
         return guidebookList;
     }
+
+    @Override
+    public List<Guidebook> findAllGuidebookByMemberId(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+
+        List<Guidebook> guidebookListByMemberId = transactionTemplate.execute(transactionStatus -> {
+            List<Guidebook> guidebookListTransaction = new ArrayList<>();
+            guidebookListTransaction = getDaoFactory().getGuidebookDao().findAllGuidebookByMemberId(id);
+            return  guidebookListTransaction;
+        });
+
+        return guidebookListByMemberId;
+    }
 }

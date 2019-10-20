@@ -1,24 +1,25 @@
 package org.mickael.consumer.impl.dao;
 
 import org.mickael.consumer.contract.dao.MemberDao;
-import org.mickael.consumer.impl.AbstractDao;
+import org.mickael.consumer.impl.AbstractDataSource;
 import org.mickael.consumer.impl.rowmapper.MemberRowMapper;
 import org.mickael.model.bean.Member;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.sql.Types;
 import java.util.List;
-import java.util.Optional;
 
-public class MemberDaoImpl extends AbstractDao implements MemberDao {
+public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
 
 
     @Override
     public void createMember(Member member) {
         String sql = "INSERT INTO public.member (first_name, last_name, pseudo, birthdate, gender, email, password, is_member, is_admin)"
                              + "VALUES (:firstName, :lastName, :pseudo, :birthdate, :gender, :email, :password, :isMember, :isAdmin)";
-
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("firstName", member.getFirstName(), Types.VARCHAR);
         parameterSource.addValue("lastName", member.getLastName(), Types.VARCHAR);
@@ -31,17 +32,18 @@ public class MemberDaoImpl extends AbstractDao implements MemberDao {
         parameterSource.addValue("isAdmin", member.isAdmin(), Types.BOOLEAN);
 
 
-        getNamedParameterJdbcTemplate().update(sql, parameterSource);
+        namedParameterJdbcTemplate.update(sql, parameterSource);
 
     }
 
     @Override
     public Member findMember(Integer id) {
         String sql = "SELECT * FROM public.member WHERE id = :id";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", id, Types.INTEGER);
         MemberRowMapper memberRowMapper = new MemberRowMapper();
-        Member member = getNamedParameterJdbcTemplate().queryForObject(sql, parameterSource, memberRowMapper);
+        Member member = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, memberRowMapper);
 
         return member;
     }
@@ -49,11 +51,12 @@ public class MemberDaoImpl extends AbstractDao implements MemberDao {
     @Override
     public Member findMemberByMail(String email){
         String sql = "SELECT * FROM public.member WHERE email = :email";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("email", email, Types.VARCHAR);
         MemberRowMapper memberRowMapper = new MemberRowMapper();
         try{
-            Member member = getNamedParameterJdbcTemplate().queryForObject(sql, parameterSource, memberRowMapper);
+            Member member = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, memberRowMapper);
             return member;
 
         } catch (EmptyResultDataAccessException e){
@@ -74,7 +77,7 @@ public class MemberDaoImpl extends AbstractDao implements MemberDao {
                              + "is_member = :isMember, "
                              + "is_admin = :isAdmin "
                              + "WHERE id = :id";
-
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("firstName", member.getFirstName(), Types.VARCHAR);
         parameterSource.addValue("lastName", member.getLastName(), Types.VARCHAR);
@@ -87,25 +90,26 @@ public class MemberDaoImpl extends AbstractDao implements MemberDao {
         parameterSource.addValue("isAdmin", member.isAdmin(), Types.BOOLEAN);
 
 
-        getNamedParameterJdbcTemplate().update(sql, parameterSource);
+        namedParameterJdbcTemplate.update(sql, parameterSource);
 
     }
 
     @Override
     public void deleteMember(Integer id) {
         String sql = "DELETE FROM public.member WHERE id = :id";
-
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", id);
-        getNamedParameterJdbcTemplate().update(sql, parameterSource);
+        namedParameterJdbcTemplate.update(sql, parameterSource);
 
     }
 
     @Override
     public List<Member> findAllMember() {
         String sql = "SELECT * FROM public.member";
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         MemberRowMapper memberRowMapper = new MemberRowMapper();
-        List<Member> memberList = getJdbcTemplate().query(sql, memberRowMapper);
+        List<Member> memberList = jdbcTemplate.query(sql, memberRowMapper);
 
         return memberList;
     }

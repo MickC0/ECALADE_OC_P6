@@ -151,4 +151,13 @@ public class Member {
     public void setGuidebookList(List<Guidebook> guidebookList) {
         this.guidebookList = guidebookList;
     }
+
+    //======= toString =======
+
+
+    @Override
+    public String toString() {
+        return "Member id= " + id + " firstName= " + firstName + " lastName= " + lastName + " pseudo= " + pseudo + " birthdate= " + birthDate + " gender= " + gender + " email= " + email;
+
+    }
 }

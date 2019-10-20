@@ -32,8 +32,9 @@
             <li class="dropdown">
 
                 <!-- if user is logged -->
-                <c:if test="${!empty logged}"><p style="color:white;"><c:out value="${logged} "/>
-                    <br><a href="${pageContext.request.contextPath}/personalSpace">Mon espace personnel</a><br>
+                <c:if test="${!empty logged}"><p style="color:black;"><c:out value="${logged}"/>
+
+                    <br><a href="${pageContext.request.contextPath}/memberSpace">Mon espace personnel</a><br>
                     <a href="${pageContext.request.contextPath}/logOut">Se deconnecter </a></p>
                 </c:if>
 

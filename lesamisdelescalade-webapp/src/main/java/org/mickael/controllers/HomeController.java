@@ -23,7 +23,7 @@ public class HomeController {
 
         //Test if the member is log
         if(member != null){
-            model.addAttribute("logMember", member.getEmail());
+            model.addAttribute("logMember", member.getId());
         }
         return "home";
     }

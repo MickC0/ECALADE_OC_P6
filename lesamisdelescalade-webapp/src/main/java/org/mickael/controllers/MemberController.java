@@ -97,7 +97,7 @@ public class MemberController {
             checkPassword = passwordManager.matches(memberSession.getPassword(), memberInBdd.getPassword());
 
             if (checkPassword){
-                model.addAttribute("logged", memberSession.getEmail());
+                model.addAttribute("logged", memberSession.toString());
             } else {
                 sessionStatus.setComplete();
                 webRequest.removeAttribute("member", WebRequest.SCOPE_SESSION);
@@ -125,8 +125,7 @@ public class MemberController {
             memberInBdd = memberManager.findMemberByMail(memberSession.getEmail());
             model.addAttribute("member", memberInBdd);
 
-            //TODO Implémentation de DAO et manager guidebookByMemberId
-            model.addAttribute("guidebook", guidebookManager.guidebookByMemberId(memberInBdd.getId()));
+            model.addAttribute("memberGuidebooks", guidebookManager.findAllGuidebookByMemberId(memberInBdd.getId()));
 
             return "memberPersonalSpace";
         } else {

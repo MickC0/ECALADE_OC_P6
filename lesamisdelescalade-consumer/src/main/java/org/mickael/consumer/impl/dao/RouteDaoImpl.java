@@ -1,21 +1,23 @@
 package org.mickael.consumer.impl.dao;
 
 import org.mickael.consumer.contract.dao.RouteDao;
-import org.mickael.consumer.impl.AbstractDao;
+import org.mickael.consumer.impl.AbstractDataSource;
 import org.mickael.consumer.impl.rowmapper.RouteRowMapper;
 import org.mickael.model.bean.Route;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
 import java.sql.Types;
 import java.util.List;
 
-public class RouteDaoImpl  extends AbstractDao implements RouteDao {
+public class RouteDaoImpl  extends AbstractDataSource implements RouteDao {
 
     @Override
     public void createRoute(Route route) {
         String sql = "INSERT INTO public.route (sector_id, name, description, cotation, height, pitch_number)"
                              + "VALUES (:sectorId, :name, :description, :cotation, :height, :pitchNumber)";
-
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("sectorId", route.getSector().getId(), Types.INTEGER);
         parameterSource.addValue("name", route.getName(), Types.VARCHAR);
@@ -24,17 +26,18 @@ public class RouteDaoImpl  extends AbstractDao implements RouteDao {
         parameterSource.addValue("height", route.getHeight(), Types.FLOAT);
         parameterSource.addValue("pitchNumber", route.getPitchNumber(), Types.INTEGER);
 
-        getNamedParameterJdbcTemplate().update(sql, parameterSource);
+        namedParameterJdbcTemplate.update(sql, parameterSource);
 
     }
 
     @Override
     public Route findRoute(Integer id) {
         String sql = "SELECT * FROM public.route WHERE id = :id";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", id, Types.INTEGER);
         RouteRowMapper routeRowMapper = new RouteRowMapper();
-        Route route = getNamedParameterJdbcTemplate().queryForObject(sql, parameterSource, routeRowMapper);
+        Route route = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, routeRowMapper);
 
         return route;
     }
@@ -49,7 +52,7 @@ public class RouteDaoImpl  extends AbstractDao implements RouteDao {
                              + "height = :height, "
                              + "pitch_number = :pitchNumber "
                              + "WHERE id = :id";
-
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("sectorId", route.getSector().getId(), Types.INTEGER);
         parameterSource.addValue("name", route.getName(), Types.VARCHAR);
@@ -58,26 +61,27 @@ public class RouteDaoImpl  extends AbstractDao implements RouteDao {
         parameterSource.addValue("height", route.getHeight(), Types.FLOAT);
         parameterSource.addValue("pitchNumber", route.getPitchNumber(), Types.INTEGER);
 
-        getNamedParameterJdbcTemplate().update(sql, parameterSource);
+        namedParameterJdbcTemplate.update(sql, parameterSource);
 
     }
 
     @Override
     public void deleteRoute(Integer id) {
         String sql = "DELETE FROM public.route WHERE id = :id";
-
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
         parameterSource.addValue("id", id);
-        getNamedParameterJdbcTemplate().update(sql, parameterSource);
+        namedParameterJdbcTemplate.update(sql, parameterSource);
 
     }
 
     @Override
     public List<Route> findAllRoute() {
         String sql = "SELECT * FROM public.route";
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         RouteRowMapper routeRowMapper = new RouteRowMapper();
-        List<Route> routeList = getJdbcTemplate().query(sql, routeRowMapper);
+        List<Route> routeList = jdbcTemplate.query(sql, routeRowMapper);
 
         return routeList;
     }
