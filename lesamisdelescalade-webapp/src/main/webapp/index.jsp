@@ -21,7 +21,7 @@
 
 
 </head>
-<c:redirect url="/home"/>
+<c:redirect url="/testlist"/>
 
 
 <!-- jQuery -->

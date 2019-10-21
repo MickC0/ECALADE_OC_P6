@@ -2,6 +2,7 @@ package org.mickael.controllers;
 
 import org.mickael.business.contract.manager.*;
 import org.mickael.model.bean.ClimbingArea;
+import org.mickael.model.bean.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -63,7 +64,7 @@ public class TestController {
 
     //Modifier l'objet à créer.
     @PostMapping(value="/save")
-    public String save(@ModelAttribute("emp") /**à changer*/ClimbingArea emp){
+    public String save(@RequestParam("param") Member member, @ModelAttribute("emp") /**à changer*/ClimbingArea emp){
         //Pour les membres
         /**String hashPassword = passwordManager.hashPassword(emp.getPassword());
          emp.setPassword(hashPassword);

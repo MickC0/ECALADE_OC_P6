@@ -11,7 +11,7 @@
 <form:form method="post" action="/editsave">
     <table >
         <!--climbingArea-->
-        <!--
+
 			<tr>
 				<td>Id : </td>
 				<td><form:input path="id"  /></td>
@@ -45,17 +45,14 @@
 				<td><form:input path="maximumHeight"  /></td>
 			</tr>
 			<tr>
-				<td>isApprouved : </td>
-				<td><form:input path="isApprouved"  /></td>
+				<td>Approuved : </td>
+				<td><form:checkbox path="approuved"  /></td>
 			</tr>
-			<tr>
-				<td>member_id : </td>
-				<td><form:input path="member_id"  /></td>
-			</tr>
-			-->
+
+
 
         <!--comment-->
-        <!--
+        <%--
 			<tr>
 				<td>id : </td>
 				<td><form:input path="id"  /></td>
@@ -80,10 +77,10 @@
 				<td>climbingArea_id : </td>
 				<td><form:input path="climbingArea_id"  /></td>
 			</tr>
-			-->
+			--%>
 
         <!--guidebook-->
-        <!--
+        <%--
 			<tr>
 				<td>id : </td>
 				<td><form:input path="id"  /></td>
@@ -108,10 +105,10 @@
 				<td>member_id : </td>
 				<td><form:input path="member_id"  /></td>
 			</tr>
-			-->
+			--%>
 
         <!--member-->
-        <!--
+        <%--
 			<tr>
 				<td>id : </td>
 				<td><form:input path="id"  /></td>
@@ -152,10 +149,10 @@
 				<td>isAdmin : </td>
 				<td><form:input path="isAdmin"  /></td>
 			</tr>
-			-->
+			--%>
 
         <!--parking-->
-        <!--
+        <%--
 			<tr>
 				<td>id : </td>
 				<td><form:input path="id"  /></td>
@@ -176,10 +173,10 @@
 				<td>climbingArea_id : </td>
 				<td><form:input path="climbingArea_id"  /></td>
 			</tr>
-			-->
+			--%>
 
         <!--photo-->
-        <!--
+        <%--
 			<tr>
 				<td>id : </td>
 				<td><form:input path="id"  /></td>
@@ -196,10 +193,10 @@
 				<td>climbingArea_id : </td>
 				<td><form:input path="climbingArea_id"  /></td>
 			</tr>
-			-->
+			--%>
 
         <!--reservationRequest-->
-        <!--
+        <%--
 			<tr>
 				<td>id : </td>
 				<td><form:input path="id"  /></td>
@@ -216,10 +213,10 @@
 				<td>reservationState : </td>
 				<td><form:input path="reservationState"  /></td>
 			</tr>
-			-->
+			--%>
 
         <!--route-->
-        <!--
+        <%--
 			<tr>
 				<td>id : </td>
 				<td><form:input path="id"  /></td>
@@ -248,10 +245,10 @@
 				<td>sector_id : </td>
 				<td><form:input path="sector_id"  /></td>
 			</tr>
-			-->
+			--%>
 
         <!--sector-->
-        <!--
+        <%--
 			<tr>
 				<td>id : </td>
 				<td><form:input path="id"  /></td>
@@ -268,10 +265,10 @@
 				<td>climbingArea_id : </td>
 				<td><form:input path="climbingArea_id"  /></td>
 			</tr>
-			-->
+			--%>
 
         <!--startingPoint-->
-        <!--
+        <%--
 			<tr>
 				<td>id : </td>
 				<td><form:input path="id"  /></td>
@@ -292,7 +289,7 @@
 				<td>climbingArea_id : </td>
 				<td><form:input path="climbingArea_id"  /></td>
 			</tr>
-			-->
+			--%>
 
         <tr>
             <td> </td>

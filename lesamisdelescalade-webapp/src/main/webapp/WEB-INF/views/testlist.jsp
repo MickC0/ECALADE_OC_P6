@@ -12,7 +12,7 @@
     <tr>
 
         <!--climbingArea-->
-        <!--
+
         <th>id</th>
         <th>name</th>
         <th>region</th>
@@ -23,7 +23,7 @@
         <th>maximumHeight</th>
         <th>isApprouved</th>
         <th>member_id</th>
-        -->
+
 
         <!--comment-->
         <!--
@@ -120,7 +120,7 @@
     <c:forEach var="emp" items="${list}">
         <tr>
             <!--climbingArea-->
-            <!--
+
 				<td>${emp.id}</td>
 				<td>${emp.name}</td>
 				<td>${emp.region}</td>
@@ -129,32 +129,32 @@
 				<td>${emp.rockType}</td>
 				<td>${emp.holdType}</td>
 				<td>${emp.maximumHeight}</td>
-				<td>${emp.isApprouved}</td>
-				<td>${emp.member_id}</td>
-				-->
+				<td>${emp.approuved}</td>
+				<td>${emp.member.id}</td>
+
 
             <!--comment-->
-            <!--
+            <%--
 				<td>${emp.id}</td>
 				<td>${emp.description}</td>
 				<td>${emp.creationDate}</td>
 				<td>${emp.updateDate}</td>
 				<td>${emp.member_id}</td>
 				<td>${emp.climbingArea_id}</td>
-				-->
+				--%>
 
             <!--guidebook-->
-            <!--
+            <%--
 				<td>${emp.id}</td>
 				<td>${emp.name}</td>
 				<td>${emp.description}</td>
 				<td>${emp.addedDate}</td>
 				<td>${emp.isLoaned}</td>
 				<td>${emp.member_id}</td>
-				-->
+				--%>
 
             <!--member-->
-            <!--
+            <%--
 				<td>${emp.id}</td>
 				<td>${emp.firstName}</td>
 				<td>${emp.lastName}</td>
@@ -165,35 +165,35 @@
 				<td>${emp.password}</td>
 				<td>${emp.isMember}</td>
 				<td>${emp.isAdmin}</td>
-				-->
+				--%>
 
             <!--parking-->
-            <!--
+            <%--
 				<td>${emp.id}</td>
 				<td>${emp.name}</td>
 				<td>${emp.latitude}</td>
 				<td>${emp.longitude}</td>
 				<td>${emp.climbingArea_id}</td>
-				-->
+				--%>
 
             <!--photo-->
-            <!--
+            <%--
 				<td>${emp.id}</td>
 				<td>${emp.name}</td>
 				<td>${emp.url}</td>
 				<td>${emp.climbingArea_id}</td>
-				-->
+				--%>
 
             <!--reservationRequest-->
-            <!--
+            <%--
 				<td>${emp.id}</td>
 				<td>${emp.guidebook_id}</td>
 				<td>${emp.member_id}</td>
 				<td>${emp.reservationState}</td>
-				-->
+				--%>
 
             <!--route-->
-            <!--
+            <%--
 				<td>${emp.id}</td>
 				<td>${emp.name}</td>
 				<td>${emp.description}</td>
@@ -201,24 +201,24 @@
 				<td>${emp.height}</td>
 				<td>${emp.pitchNumber}</td>
 				<td>${emp.sector_id}</td>
-				-->
+				--%>
 
             <!--sector-->
-            <!--
+            <%--
 				<td>${emp.id}</td>
 				<td>${emp.name}</td>
 				<td>${emp.description}</td>
 				<td>${emp.climbingArea_id}</td>
-				-->
+				--%>
 
             <!--startingPoint-->
-            <!--
+            <%--
 				<td>${emp.id}</td>
 				<td>${emp.name}</td>
 				<td>${emp.latitude}</td>
 				<td>${emp.longitude}</td>
 				<td>${emp.climbingArea_id}</td>
-				-->
+				--%>
             <td><a href="testedit/${emp.id}">Edit</a></td>
             <td><a href="testdelete/${emp.id}">Delete</a></td>
         </tr>

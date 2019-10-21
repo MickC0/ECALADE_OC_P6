@@ -15,7 +15,7 @@ public class ClimbingArea {
     private String rockType;
     private String holdType;
     private float maximumHeight;
-    private boolean isApprouved;
+    private boolean approuved;
 
     private Member member;
     private List<Sector> sectorList;
@@ -32,7 +32,7 @@ public class ClimbingArea {
 
     public ClimbingArea(Integer id, String name, String region, String description, String profil,
                         String rockType, String holdType, float maximumHeight,
-                        boolean isApprouved, Member member, List<Sector> sectorList, List<Photo> photoList,
+                        boolean approuved, Member member, List<Sector> sectorList, List<Photo> photoList,
                         List<Comment> commentList, List<StartingPoint> startingPointList, List<Parking> parkingList) {
         this.id = id;
         this.name = name;
@@ -42,7 +42,7 @@ public class ClimbingArea {
         this.rockType = rockType;
         this.holdType = holdType;
         this.maximumHeight = maximumHeight;
-        this.isApprouved = isApprouved;
+        this.approuved = approuved;
         this.member = member;
         this.sectorList = sectorList;
         this.photoList = photoList;
@@ -119,11 +119,11 @@ public class ClimbingArea {
     }
 
     public boolean isApprouved() {
-        return isApprouved;
+        return this.approuved;
     }
 
     public void setApprouved(boolean approuved) {
-        isApprouved = approuved;
+        this.approuved = approuved;
     }
 
     public Member getMember() {
