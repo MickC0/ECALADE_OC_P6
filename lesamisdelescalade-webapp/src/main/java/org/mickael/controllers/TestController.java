@@ -73,6 +73,8 @@ public class TestController {
          memberManager.createMember(emp);*/
 
         //pour le reste
+        member = memberManager.findMember(1);
+        emp.setMember(member);
         climbingAreaManager.createClimbingArea(emp);
         //commentManager.createComment(emp);
         //guidebookManager.createGuidebook(emp);
