@@ -32,14 +32,14 @@
             <li class="dropdown">
 
                 <!-- if user is logged -->
-                <c:if test="${!empty logged}"><p style="color:black;"><c:out value="${logged}"/>
+                <c:if test="${!empty memberInBdd}"><p style="color:black;"><c:out value="${memberInBdd}"/>
 
                     <br><a href="${pageContext.request.contextPath}/memberSpace">Mon espace personnel</a><br>
                     <a href="${pageContext.request.contextPath}/logOut">Se deconnecter </a></p>
                 </c:if>
 
                 <!-- if user not logged -->
-                <c:if test="${empty logged}">
+                <c:if test="${empty memberInBdd}">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">S'identifier <b class="caret"></b></a>
                 <ul class="dropdown-menu">
                     <li class="dropdown-header">Vous n'êtes pas identifié.</li>

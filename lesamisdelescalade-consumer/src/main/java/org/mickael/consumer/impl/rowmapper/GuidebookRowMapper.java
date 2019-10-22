@@ -1,5 +1,6 @@
 package org.mickael.consumer.impl.rowmapper;
 
+import org.mickael.consumer.impl.dao.MemberDaoImpl;
 import org.mickael.model.bean.Guidebook;
 import org.springframework.jdbc.core.RowMapper;
 
@@ -16,8 +17,8 @@ public class GuidebookRowMapper implements RowMapper<Guidebook> {
         guidebook.setDescription(resultSet.getString("description"));
         guidebook.setAddedDate(resultSet.getTimestamp("added_date"));
         guidebook.setLoaned(resultSet.getBoolean("is_loaned"));
-        //MemberDaoImpl memberDao = new MemberDaoImpl();
-        //guidebook.setMember(memberDao.findMember(resultSet.getInt("member_id")));
+        MemberDaoImpl memberDao = new MemberDaoImpl();
+        guidebook.setMember(memberDao.findMember(resultSet.getInt("member_id")));
 
 
         return guidebook;
