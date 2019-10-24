@@ -11,7 +11,7 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import java.sql.Types;
 import java.util.List;
 
-public class RouteDaoImpl  extends AbstractDataSource implements RouteDao {
+public class RouteDaoImpl extends AbstractDataSource implements RouteDao {
 
     @Override
     public void createRoute(Route route) {
