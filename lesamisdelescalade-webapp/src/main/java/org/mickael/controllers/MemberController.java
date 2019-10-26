@@ -20,7 +20,7 @@ import javax.validation.Valid;
 
 @Controller
 
-public class NewMemberController {
+public class MemberController {
 
     @Inject
     private MemberManager memberManager;

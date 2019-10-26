@@ -27,9 +27,9 @@
   <!-- Properties -->
   <!-- =============================================================== -->
   <properties>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <maven.compiler.source>1.8</maven.compiler.source>
-    <maven.compiler.target>1.8</maven.compiler.target>
+    <application.name>P6 OC</application.name>
+    <maven.build.timestamp.format>dd/MM/yyyy</maven.build.timestamp.format>
+    <build.timestamp>${maven.build.timestamp}</build.timestamp>
   </properties>
 
 
