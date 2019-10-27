@@ -1,0 +1,84 @@
+
+.navbar {
+    margin: 0px;
+    line-height: 15px;
+}
+
+/*.nav-justified li a {*/
+/*display:inline-block;*/
+/*vertical-align:middle;*/
+/*line-height:normal !* et hop on rétablit le line-height *!*/
+/*}*/
+
+.errors{
+    color: red;
+}
+
+body {
+    background-color: #DDD
+}
+
+a.thumbnail:link{
+    /*text-decoration: none;*/
+}
+
+.thumbnail{
+    margin-top: 10px;
+    margin-bottom: -25px;
+}
+span.label{
+    position:relative;
+    top: -40px;
+    left: 20px;
+}
+
+.flotte {
+    float: right;
+}
+
+h3{
+    /*color: red;*/
+    font-weight: bold;
+}
+
+.table th {
+    padding: 10px;
+    margin: 10px;
+    border: 1px dotted gray;
+    background: grey;
+    text-align: center;
+}
+
+.table td{
+    padding: 10px;
+    margin: 10px;
+    border: 1px dotted gray;
+    background: white;
+    text-align: center;
+}
+
+.lignesEspacees {
+    border-collapse: separate;
+    border-spacing: 10px;
+    font-size: small;
+    font-weight: bold;
+}
+
+table {
+    font-size: 80%;
+}
+
+.navbar-right{
+
+    margin-left: 0px;
+    margin-right: 5px;
+    margin-top: 5px;
+}
+
+footer {
+    text-align: center;
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+

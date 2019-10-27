@@ -35,32 +35,32 @@ public class MemberController {
     private ReservationRequestManager reservationRequestManager;
 
     @ModelAttribute("member")
-    public Member setUpMember(){
+    public Member setNewMember(){
         return new Member();
     }
 
     //======== MEMBER SIGN / LOG PARTS ========
 
     @GetMapping("/signUp")
-    public String doSignUp(Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
+    public String doSignUp(Model model, @SessionAttribute(value = "memberSession", required = false) Member memberSession){
         model.addAttribute("member", new Member());
-        return "signUpForm";
+        return "tesss";
     }
 
 
     @PostMapping(value = "/signUpTry")
     public String createMember(@Valid Member newMember, BindingResult result, Model model,
-                               @SessionAttribute(value = "member", required = false) Member memberSession) {
+                               @SessionAttribute(value = "memberSession", required = false) Member memberSession) {
 
         Member existingMember = memberManager.findMemberByMail(newMember.getEmail());
         if (existingMember != null){
 
-            return "errorAlreadyExist";
+            return "error-already-exist";
         } else {
             if (result.hasErrors()){
                 model.addAttribute("member", newMember);
 
-                return  "signUpForm";
+                return  "tesss";
             }
             //encoder
             String hashPassword = passwordManager.hashPassword(newMember.getPassword());
@@ -95,7 +95,7 @@ public class MemberController {
             if (memberInBdd == null){
                 sessionStatus.setComplete();
                 webRequest.removeAttribute("member", WebRequest.SCOPE_SESSION);
-                return "errorAlreadyExist";
+                return "error-already-exist";
             }
 
             checkPassword = passwordManager.matches(memberSession.getPassword(), memberInBdd.getPassword());
@@ -105,7 +105,7 @@ public class MemberController {
             } else {
                 sessionStatus.setComplete();
                 webRequest.removeAttribute("member", WebRequest.SCOPE_SESSION);
-                return "errorAlreadyExist";
+                return "error-already-exist";
             }
         }
         return "home";
@@ -133,7 +133,7 @@ public class MemberController {
 
             return "memberPersonalSpace";
         } else {
-            return "errorAlreadyExist";
+            return "error-already-exist";
         }
     }
 
