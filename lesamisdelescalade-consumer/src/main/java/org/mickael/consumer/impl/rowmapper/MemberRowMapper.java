@@ -21,7 +21,12 @@ public class MemberRowMapper implements RowMapper<Member> {
         member.setPassword(resultSet.getString("password"));
         member.setMember(resultSet.getBoolean("is_member"));
         member.setAdmin(resultSet.getBoolean("is_admin"));
-
+        //TODO SET guidebooklist
+        /** new guidebookList
+         * new commentList
+         * new climbingAreaList
+         */
+        //member.setGuidebookList(resultSet.get);
         return member;
     }
 }

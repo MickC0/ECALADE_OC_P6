@@ -67,7 +67,6 @@ public class GuidebookDaoImpl extends AbstractDataSource implements GuidebookDao
         String sql = "DELETE FROM public.guidebook WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-
         parameterSource.addValue("id", id);
         namedParameterJdbcTemplate.update(sql, parameterSource);
     }

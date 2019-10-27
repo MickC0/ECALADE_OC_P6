@@ -8,7 +8,10 @@ import org.mickael.model.bean.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
@@ -16,7 +19,7 @@ import javax.inject.Inject;
 import javax.validation.Valid;
 
 @Controller
-@SessionAttributes("member")
+
 public class MemberController {
 
     @Inject
@@ -88,6 +91,7 @@ public class MemberController {
 
         if (memberSession != null){
             memberInBdd = memberManager.findMemberByMail(memberSession.getEmail());
+
             if (memberInBdd == null){
                 sessionStatus.setComplete();
                 webRequest.removeAttribute("member", WebRequest.SCOPE_SESSION);
@@ -97,7 +101,7 @@ public class MemberController {
             checkPassword = passwordManager.matches(memberSession.getPassword(), memberInBdd.getPassword());
 
             if (checkPassword){
-                model.addAttribute("logged", memberSession.toString());
+                model.addAttribute("memberInBdd", memberInBdd.toString());
             } else {
                 sessionStatus.setComplete();
                 webRequest.removeAttribute("member", WebRequest.SCOPE_SESSION);
