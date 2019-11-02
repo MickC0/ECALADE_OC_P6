@@ -41,7 +41,7 @@
                     <!-- if user is login -->
                     <c:if test="${!empty memberLogged}">
                         <p style="color:black;">
-                            <c:out value="${memberLogged} "/>
+                            <c:out value="${logMember} "/>
                             <br><a href="${context}/personalSpace">Mon espace personnel</a><br>
                             <a href="${context}/doLogout">Se deconnecter </a>
                         </p>

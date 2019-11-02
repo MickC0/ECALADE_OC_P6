@@ -18,7 +18,7 @@
 <body>
 <div class="container">
     <div class="col-md-offset-2 col-md-7">
-        <h2 class="text-center">Les Amis de l'Escalade - Sign Up Form</h2>
+        <h2 class="text-center">Les Amis de l'Escalade - Registration</h2>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">Register</div>

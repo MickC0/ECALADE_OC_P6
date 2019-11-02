@@ -17,13 +17,13 @@ public class HomeController {
 
 
     @GetMapping("/home")
-    public String displayHomePage(Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
+    public String displayHomePage(Model model, @SessionAttribute(value = "memberInSession", required = false) Member memberInSession){
         //Display all the climbing Area on the homepage
         model.addAttribute("climbingArea", climbingAreaManager.findAllClimbingArea());
 
         //Test if the member is log
-        if(memberSession != null){
-            model.addAttribute("logMember", memberSession.getId());
+        if(memberInSession != null){
+            model.addAttribute("logMember", memberInSession.getId());
         }
         return "home";
     }
