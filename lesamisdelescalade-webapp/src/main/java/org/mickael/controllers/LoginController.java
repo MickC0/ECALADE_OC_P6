@@ -6,10 +6,7 @@ import org.mickael.business.contract.manager.PasswordManager;
 import org.mickael.model.bean.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
@@ -33,7 +30,13 @@ public class LoginController {
         return new Member();
     }
 
-    @PostMapping("/doLogin")
+    @GetMapping("/doLogin")
+    public String showLoginForm(@SessionAttribute(value = "memberInSession", required = false) Member memberInSession){
+
+        return "login";
+    }
+
+    @PostMapping("/loginProcess")
     public String doLogin(@ModelAttribute("memberInSession")Member memberInSession, WebRequest webRequest, SessionStatus sessionStatus, Model model){
         //variable
         boolean checkPassword = false;
