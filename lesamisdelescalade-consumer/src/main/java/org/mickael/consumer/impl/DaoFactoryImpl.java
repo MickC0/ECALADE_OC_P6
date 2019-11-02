@@ -115,4 +115,5 @@ public class DaoFactoryImpl implements DaoFactory {
     public void setMemberDao(MemberDao memberDao) {
         this.memberDao = memberDao;
     }
+
 }

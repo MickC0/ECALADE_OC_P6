@@ -19,8 +19,8 @@ public class MemberRowMapper implements RowMapper<Member> {
         member.setGender(resultSet.getString("gender"));
         member.setEmail(resultSet.getString("email"));
         member.setPassword(resultSet.getString("password"));
-        member.setMember(resultSet.getBoolean("is_member"));
-        member.setAdmin(resultSet.getBoolean("is_admin"));
+        member.setRole(resultSet.getString("role"));
+        member.setEnabled(resultSet.getBoolean("enabled"));
         //TODO SET guidebooklist
         /** new guidebookList
          * new commentList

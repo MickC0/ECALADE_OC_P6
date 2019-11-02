@@ -8,6 +8,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Types;
 import java.util.List;
@@ -15,10 +16,13 @@ import java.util.List;
 public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
 
 
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
     @Override
     public void createMember(Member member) {
-        String sql = "INSERT INTO public.member (first_name, last_name, pseudo, birthdate, gender, email, password, is_member, is_admin)"
-                             + "VALUES (:firstName, :lastName, :pseudo, :birthdate, :gender, :email, :password, :isMember, :isAdmin)";
+        String sql = "INSERT INTO public.member (first_name, last_name, pseudo, birthdate, gender, email, password, role, enabled)"
+                             + "VALUES (:firstName, :lastName, :pseudo, :birthdate, :gender, :email, :password, :role, :enabled)";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("firstName", member.getFirstName(), Types.VARCHAR);
@@ -28,8 +32,8 @@ public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
         parameterSource.addValue("gender", member.getGender(), Types.VARCHAR);
         parameterSource.addValue("email", member.getEmail(), Types.VARCHAR);
         parameterSource.addValue("password", member.getPassword(), Types.VARCHAR);
-        parameterSource.addValue("isMember", member.isMember(), Types.BOOLEAN);
-        parameterSource.addValue("isAdmin", member.isAdmin(), Types.BOOLEAN);
+        parameterSource.addValue("role", member.getRole(), Types.VARCHAR);
+        parameterSource.addValue("enabled", member.isEnabled(), Types.BOOLEAN);
 
 
         namedParameterJdbcTemplate.update(sql, parameterSource);
@@ -74,8 +78,7 @@ public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
                              + "gender = :gender, "
                              + "email = :email, "
                              + "password = :password, "
-                             + "is_member = :isMember, "
-                             + "is_admin = :isAdmin "
+                             + "enabled = :enabled "
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -86,8 +89,7 @@ public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
         parameterSource.addValue("gender", member.getGender(), Types.VARCHAR);
         parameterSource.addValue("email", member.getEmail(), Types.VARCHAR);
         parameterSource.addValue("password", member.getPassword(), Types.VARCHAR);
-        parameterSource.addValue("isMember", member.isMember(), Types.BOOLEAN);
-        parameterSource.addValue("isAdmin", member.isAdmin(), Types.BOOLEAN);
+        parameterSource.addValue("enabled", member.isEnabled(), Types.BOOLEAN);
 
 
         namedParameterJdbcTemplate.update(sql, parameterSource);

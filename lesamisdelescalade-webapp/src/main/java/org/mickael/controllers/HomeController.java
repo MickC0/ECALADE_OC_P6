@@ -17,7 +17,7 @@ public class HomeController {
 
 
     @GetMapping("/home")
-    public String displayHomePage(Model model, @SessionAttribute(value = "memberSession", required = false) Member memberSession){
+    public String displayHomePage(Model model, @SessionAttribute(value = "member", required = false) Member memberSession){
         //Display all the climbing Area on the homepage
         model.addAttribute("climbingArea", climbingAreaManager.findAllClimbingArea());
 

@@ -4,10 +4,13 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
 <html>
 <head>
-    <title>Existing Member</title>
+    <title>Error Login</title>
 </head>
 <body>
-<h1>This email already exist. Do you lost your password ?</h1>
-<h1>test login error</h1>
+<div class="container">
+
+    <p><b>Email ou mot de passe inconnu, veuillez re-essayer ou vous enregistrer.</b></p>
+
+</div>
 </body>
 </html>

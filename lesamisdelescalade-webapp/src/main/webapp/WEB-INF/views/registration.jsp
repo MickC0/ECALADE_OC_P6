@@ -8,13 +8,12 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign UP new Member</title>
+    <title>Registration</title>
     <meta name="description" content="Association de fans d'escalade">
 
     <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/resources/css/styles.css" type="text/css" rel="stylesheet" />
-
+    <link href="${context}/resources/css/styles.css" type="text/css" rel="stylesheet" />
 </head>
 <body>
 <div class="container">
@@ -22,11 +21,10 @@
         <h2 class="text-center">Les Amis de l'Escalade - Sign Up Form</h2>
         <div class="panel panel-info">
             <div class="panel-heading">
-                <div class="panel-title">Sign Up</div>
+                <div class="panel-title">Register</div>
             </div>
             <div class="panel-body">
-                <form:form action="saveSignUpForm" cssClass="form-horizontal"
-                           method="post" modelAttribute="member">
+                <form:form action="${context}/registrationProcess" cssClass="form-horizontal" method="post" modelAttribute="member">
                     <form:hidden path="id"/>
 
                     <div class="form-group">
@@ -82,22 +80,6 @@
                     </div>
 
                     <div class="form-group">
-                        </label>
-                        <div class="col-md-9">
-                            <form:radiobutton path="admin" value="true" label="Oui"/>
-                            <form:radiobutton path="admin" value="false" label="Non"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        </label>
-                        <div class="col-md-9">
-                            <form:radiobutton path="member" value="true" label="Oui"/>
-                            <form:radiobutton path="member" value="false" label="Non"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <!-- Button -->
                         <div class="col-md-offset-3 col-md-9">
                             <form:button cssClass="btn btn-primary">Submit</form:button>
@@ -108,15 +90,5 @@
         </div>
     </div>
 </div>
-        </div>
-    </div>
-</div>
-
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Popper.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.15.0/popper.min.js"></script>
-<!-- Javascript de Bootstrap -->
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -15,20 +15,21 @@ public class Member {
     private String gender;
     private String email;
     private String password;
-    private boolean isMember;
-    private boolean isAdmin;
+    private String role;
+    private boolean enabled;
 
     private List<Comment> commentList;
     private List<ClimbingArea> climbingAreaList;
     private List<Guidebook> guidebookList;
+
+
 
     //====  CONSTRUCTOR  ====
 
     public Member() {}
 
     public Member(Integer id, String firstName, String lastName, String pseudo, Date birthDate,
-                  String gender, String email, String password, boolean isMember,
-                  boolean isAdmin, List<Comment> commentList,
+                  String gender, String email, String password, String role, boolean enabled, List<Comment> commentList,
                   List<ClimbingArea> climbingAreaList, List<Guidebook> guidebookList) {
         this.id = id;
         this.firstName = firstName;
@@ -38,8 +39,8 @@ public class Member {
         this.gender = gender;
         this.email = email;
         this.password = password;
-        this.isMember = isMember;
-        this.isAdmin = isAdmin;
+        this.role = role;
+        this.enabled = enabled;
         this.commentList = commentList;
         this.climbingAreaList = climbingAreaList;
         this.guidebookList = guidebookList;
@@ -112,20 +113,20 @@ public class Member {
         this.password = password;
     }
 
-    public boolean isMember() {
-        return isMember;
+    public String getRole() {
+        return role;
     }
 
-    public void setMember(boolean member) {
-        isMember = member;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    public boolean isAdmin() {
-        return isAdmin;
+    public boolean isEnabled() {
+        return enabled;
     }
 
-    public void setAdmin(boolean admin) {
-        isAdmin = admin;
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public List<Comment> getCommentList() {
@@ -152,12 +153,13 @@ public class Member {
         this.guidebookList = guidebookList;
     }
 
-    //======= toString =======
+//======= toString =======
 
 
     @Override
     public String toString() {
-        return "Member id= " + id + " firstName= " + firstName + " lastName= " + lastName + " pseudo= " + pseudo + " birthdate= " + birthDate + " gender= " + gender + " email= " + email;
+        return "Member id= " + id + " firstName= " + firstName + " lastName= " + lastName + " pseudo= " + pseudo + " birthdate= "
+                       + birthDate + " gender= " + gender + " email= " + email + " password= " + password;
 
     }
 }
