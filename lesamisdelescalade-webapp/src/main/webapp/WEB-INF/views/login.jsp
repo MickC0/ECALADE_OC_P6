@@ -5,26 +5,20 @@
 <c:set var="context" value="${pageContext.request.contextPath}" />
 <html>
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Login</title>
-    <meta name="description" content="Association de fans d'escalade">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <%@include file="_include/head.jsp"%>
+    <link href="${context}/resources/css/login.css" type="text/css" rel="stylesheet" />
 
-    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css" rel="stylesheet">-->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    <link href="${context}/resources/css/styles.css" type="text/css" rel="stylesheet" />
-
-    <script src="https://kit.fontawesome.com/c822637fde.js" crossorigin="anonymous"></script>
 </head>
-<body>
-    <form:form  method="post" action="${context}/loginProcess" modelAttribute="memberInSession">
-
-        <form:label path="email">Enter your user-name</form:label>
-        <form:input id="email" name="email" path="email" /><br>
-        <form:label path="email">Please enter your password</form:label>
-        <form:password id="password" name="password" path="password" /><br>
-        <input type="submit" value="Submit" />
+<body class="text-center">
+    <form:form cssClass="form-signin" method="post" action="${context}/loginProcess" modelAttribute="memberInSession">
+        <a href="${context}/home"><img class="mb-4" src="${context}/resources/img/15562870935067_icon-above-font.png" alt="" width="300" height="168"></a>
+        <h1 class="h3 mb-3 font-weight-normal">Enter your log in information</h1>
+        <form:input path="email" type="email" class="form-control" placeholder="Email address" required="true" autofocus=""/>
+        <form:password path="password" class="form-control" placeholder="Password" required="true"/>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+        <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
     </form:form>
 </body>
 </html>

@@ -65,7 +65,10 @@ public class LoginController {
             System.out.println(checkPassword);
 
             if (checkPassword) {
-                model.addAttribute("memberLogged", memberBdd.getEmail());
+                memberInSession.setId(memberBdd.getId());
+                memberInSession.setPseudo(memberBdd.getPseudo());
+                model.addAttribute("memberLogged", memberInSession);
+                System.out.println(memberInSession.toString());
             } else {
                 sessionStatus.setComplete();
                 webRequest.removeAttribute("memberInSession", WebRequest.SCOPE_SESSION);

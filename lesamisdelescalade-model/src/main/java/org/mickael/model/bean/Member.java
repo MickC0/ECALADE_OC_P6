@@ -11,7 +11,7 @@ public class Member {
     private String firstName;
     private String lastName;
     private String pseudo;
-    private Date birthDate;
+    private Date birthdate;
     private String gender;
     private String email;
     private String password;
@@ -28,14 +28,14 @@ public class Member {
 
     public Member() {}
 
-    public Member(Integer id, String firstName, String lastName, String pseudo, Date birthDate,
+    public Member(Integer id, String firstName, String lastName, String pseudo, Date birthdate,
                   String gender, String email, String password, String role, boolean enabled, List<Comment> commentList,
                   List<ClimbingArea> climbingAreaList, List<Guidebook> guidebookList) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.pseudo = pseudo;
-        this.birthDate = birthDate;
+        this.birthdate = birthdate;
         this.gender = gender;
         this.email = email;
         this.password = password;
@@ -81,12 +81,12 @@ public class Member {
         this.pseudo = pseudo;
     }
 
-    public Date getBirthDate() {
-        return birthDate;
+    public Date getBirthdate() {
+        return birthdate;
     }
 
-    public void setBirthDate(Date birthDate) {
-        this.birthDate = birthDate;
+    public void setBirthdate(Date birthdate) {
+        this.birthdate = birthdate;
     }
 
     public String getGender() {
@@ -159,7 +159,7 @@ public class Member {
     @Override
     public String toString() {
         return "Member id= " + id + " firstName= " + firstName + " lastName= " + lastName + " pseudo= " + pseudo + " birthdate= "
-                       + birthDate + " gender= " + gender + " email= " + email + " password= " + password;
+                       + birthdate + " gender= " + gender + " email= " + email + " password= " + password;
 
     }
 }

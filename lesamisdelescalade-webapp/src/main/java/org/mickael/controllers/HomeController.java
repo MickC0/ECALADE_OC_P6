@@ -19,11 +19,11 @@ public class HomeController {
     @GetMapping("/home")
     public String displayHomePage(Model model, @SessionAttribute(value = "memberInSession", required = false) Member memberInSession){
         //Display all the climbing Area on the homepage
-        model.addAttribute("climbingArea", climbingAreaManager.findAllClimbingArea());
+        model.addAttribute("climbingAreaList", climbingAreaManager.findAllClimbingArea());
 
         //Test if the member is log
         if(memberInSession != null){
-            model.addAttribute("logMember", memberInSession.getId());
+            model.addAttribute("memberInSession", memberInSession);
         }
         return "home";
     }
