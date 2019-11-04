@@ -38,7 +38,7 @@ public class PersonalSpaceController {
         List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSession.getId());
         model.addAttribute("climbingAreaList", climbingAreaList);
         model.addAttribute("guidebookList", guidebookList);
-        model.addAttribute("memberLogged", memberInSession);
+        model.addAttribute("memberInSession", memberInSession);
         return "personalSpace";
     }
 
