@@ -65,9 +65,10 @@ public class LoginController {
             System.out.println(checkPassword);
 
             if (checkPassword) {
+                //populate memberInSession attributes
                 memberInSession.setId(memberBdd.getId());
                 memberInSession.setPseudo(memberBdd.getPseudo());
-                model.addAttribute("memberLogged", memberInSession);
+                model.addAttribute("memberInSession", memberInSession);
                 System.out.println(memberInSession.toString());
             } else {
                 sessionStatus.setComplete();
@@ -77,7 +78,8 @@ public class LoginController {
 
         }
         //for display climbing site
-        model.addAttribute("climbingArea", climbingAreaManager.findAllClimbingArea());
+        List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
+        model.addAttribute("climbingAreaList", climbingAreaList);
         return "home";
     }
 
