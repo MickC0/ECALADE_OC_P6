@@ -22,10 +22,10 @@
             </li>
         </ul>
         <c:choose>
-            <c:when test="${!empty memberLogged}">
+            <c:when test="${!empty memberInSession}">
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="${context}/personalSpace"> ${memberLogged.pseudo} </a>
+                        <a class="nav-link" href="${context}/personalSpace"> ${memberInSession.pseudo} </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${context}/doLogout"> Logout</a>
