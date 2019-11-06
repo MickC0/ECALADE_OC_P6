@@ -13,7 +13,6 @@ public class ClimbingArea {
     private String description;
     private String profil;
     private String rockType;
-    private String holdType;
     private float maximumHeight;
     private boolean approuved;
 
@@ -31,7 +30,7 @@ public class ClimbingArea {
     public ClimbingArea() {}
 
     public ClimbingArea(Integer id, String name, String region, String description, String profil,
-                        String rockType, String holdType, float maximumHeight,
+                        String rockType, float maximumHeight,
                         boolean approuved, Member member, List<Sector> sectorList, List<Photo> photoList,
                         List<Comment> commentList, List<StartingPoint> startingPointList, List<Parking> parkingList) {
         this.id = id;
@@ -40,7 +39,6 @@ public class ClimbingArea {
         this.description = description;
         this.profil = profil;
         this.rockType = rockType;
-        this.holdType = holdType;
         this.maximumHeight = maximumHeight;
         this.approuved = approuved;
         this.member = member;
@@ -100,14 +98,6 @@ public class ClimbingArea {
 
     public void setRockType(String rockType) {
         this.rockType = rockType;
-    }
-
-    public String getHoldType() {
-        return holdType;
-    }
-
-    public void setHoldType(String holdType) {
-        this.holdType = holdType;
     }
 
     public float getMaximumHeight() {

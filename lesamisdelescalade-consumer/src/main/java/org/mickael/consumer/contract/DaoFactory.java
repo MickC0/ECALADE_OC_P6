@@ -32,5 +32,5 @@ public interface DaoFactory {
     void setStartingPointDao(StartingPointDao startingPointDao);
 
     MemberDao getMemberDao();
-    void setMemberDao(MemberDao MemberDao);
+    void setMemberDao(MemberDao memberDao);
 }

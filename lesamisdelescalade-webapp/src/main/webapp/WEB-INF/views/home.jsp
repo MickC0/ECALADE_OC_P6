@@ -26,7 +26,7 @@
     <ul>
         <c:forEach var="c" items="${climbingAreaList}">
             <c:out value="c">
-                <li>${c}</li>
+                <li>${c.name}</li>
             </c:out>
         </c:forEach>
     </ul>

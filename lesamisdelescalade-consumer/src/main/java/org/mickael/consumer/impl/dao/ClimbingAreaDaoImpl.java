@@ -21,8 +21,8 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
      */
     @Override
     public void createClimbingArea(ClimbingArea climbingArea) {
-        String sql = "INSERT INTO public.climbingArea (member_id, name, region, description, profil, rock_type, hold_type, maximum_height, is_approuved)"
-                             + "VALUES (:memberId, :name, :region, :description, :profil, :rockType, :holdType, :maximumHeight, :isApprouved)";
+        String sql = "INSERT INTO public.climbingArea (member_id, name, region, description, profil, rock_type, maximum_height, is_approuved)"
+                             + "VALUES (:memberId, :name, :region, :description, :profil, :rockType, :maximumHeight, :isApprouved)";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
@@ -31,7 +31,6 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
         parameterSource.addValue("description", climbingArea.getDescription(), Types.VARCHAR);
         parameterSource.addValue("profil", climbingArea.getProfil(), Types.VARCHAR);
         parameterSource.addValue("rockType", climbingArea.getRockType(), Types.VARCHAR);
-        parameterSource.addValue("holdType", climbingArea.getHoldType(), Types.VARCHAR);
         parameterSource.addValue("maximumHeight", climbingArea.getMaximumHeight(), Types.FLOAT);
         parameterSource.addValue("isApprouved", climbingArea.isApprouved(), Types.BOOLEAN);
         parameterSource.addValue("memberId", climbingArea.getMember().getId(), Types.INTEGER);
@@ -52,6 +51,18 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
     }
 
     @Override
+    public List<ClimbingArea> findClimbingAreaByMemberId(Integer id) {
+        String sql = "SELECT * FROM public.climbingArea WHERE member_id = :id";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id, Types.INTEGER);
+        ClimbingAreaRowMapper climbingAreaRowMapper = new ClimbingAreaRowMapper();
+        List<ClimbingArea> climbingAreaList = namedParameterJdbcTemplate.query(sql, parameterSource, climbingAreaRowMapper);
+
+        return climbingAreaList;
+    }
+
+    @Override
     public void updateClimbingArea(ClimbingArea climbingArea) {
         String sql = "UPDATE public.climbingArea SET "
                 + "member_id = :memberId, "
@@ -60,7 +71,6 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
                 + "description = :description, "
                 + "profil = :profil, "
                 + "rock_type = :rockType, "
-                + "hold_type = :holdType, "
                 + "maximum_height = :maximumHeight, "
                 + "is_approuved = :isApprouved "
                 + "WHERE id = :id";
@@ -72,7 +82,6 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
         parameterSource.addValue("description", climbingArea.getDescription(), Types.VARCHAR);
         parameterSource.addValue("profil", climbingArea.getProfil(), Types.VARCHAR);
         parameterSource.addValue("rockType", climbingArea.getRockType(), Types.VARCHAR);
-        parameterSource.addValue("holdType", climbingArea.getHoldType(), Types.VARCHAR);
         parameterSource.addValue("maximumHeight", climbingArea.getMaximumHeight(), Types.FLOAT);
         parameterSource.addValue("isApprouved", climbingArea.isApprouved(), Types.BOOLEAN);
         parameterSource.addValue("memberId", climbingArea.getMember().getId(), Types.INTEGER);

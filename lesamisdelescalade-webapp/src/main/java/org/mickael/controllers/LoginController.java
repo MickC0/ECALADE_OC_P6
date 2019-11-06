@@ -3,6 +3,7 @@ package org.mickael.controllers;
 import org.mickael.business.contract.manager.ClimbingAreaManager;
 import org.mickael.business.contract.manager.MemberManager;
 import org.mickael.business.contract.manager.PasswordManager;
+import org.mickael.model.bean.ClimbingArea;
 import org.mickael.model.bean.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.context.request.WebRequest;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @Controller
 @SessionAttributes("memberInSession")
@@ -32,7 +34,6 @@ public class LoginController {
 
     @GetMapping("/doLogin")
     public String showLoginForm(@SessionAttribute(value = "memberInSession", required = false) Member memberInSession){
-
         return "login";
     }
 

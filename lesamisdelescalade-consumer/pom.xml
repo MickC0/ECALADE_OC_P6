@@ -69,6 +69,12 @@
       <artifactId>javax.inject</artifactId>
     </dependency>
 
+    <!-- == postgresql == -->
+    <dependency>
+      <groupId>org.postgresql</groupId>
+      <artifactId>postgresql</artifactId>
+    </dependency>
+
     <!-- == Test dependencies == -->
     <dependency>
       <groupId>junit</groupId>

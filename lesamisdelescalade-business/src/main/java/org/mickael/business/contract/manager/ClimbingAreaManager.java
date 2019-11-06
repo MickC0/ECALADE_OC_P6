@@ -10,6 +10,7 @@ public interface ClimbingAreaManager {
     void updateClimbingArea(ClimbingArea climbingArea);
     void deleteClimbingArea(Integer id);
     List<ClimbingArea> findAllClimbingArea ();
+    List<ClimbingArea> findClimbingAreaByMemberId(Integer id);
     void deleteTag(Integer id);
     void addTag(Integer id);
 }

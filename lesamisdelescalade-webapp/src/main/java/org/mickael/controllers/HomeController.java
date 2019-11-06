@@ -1,6 +1,7 @@
 package org.mickael.controllers;
 
 import org.mickael.business.contract.manager.ClimbingAreaManager;
+import org.mickael.model.bean.ClimbingArea;
 import org.mickael.model.bean.Member;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.inject.Inject;
+import java.util.List;
 
 @Controller
 public class HomeController {

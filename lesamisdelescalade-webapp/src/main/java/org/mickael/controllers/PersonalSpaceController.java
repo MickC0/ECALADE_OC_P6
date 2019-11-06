@@ -34,7 +34,7 @@ public class PersonalSpaceController {
 
     @GetMapping("/personalSpace")
     public String getPersonalSpace(@SessionAttribute(value = "memberInSession", required = true)Member memberInSession, Model model){
-        List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
+        List<ClimbingArea> climbingAreaList = climbingAreaManager.findClimbingAreaByMemberId(memberInSession.getId());
         List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSession.getId());
         model.addAttribute("climbingAreaList", climbingAreaList);
         model.addAttribute("guidebookList", guidebookList);

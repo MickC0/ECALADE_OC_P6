@@ -49,11 +49,6 @@ public class RegistrationController {
             newMember.setEnabled(true);
             memberManager.createMember(newMember);
 
-            System.out.println("FirstName : " + newMember.getFirstName());
-            System.out.println("LastName : " + newMember.getLastName());
-            System.out.println("Username : " + newMember.getPseudo());
-            System.out.println("Email : " + newMember.getEmail());
-
             model.addAttribute("message", "Member register successfully.");
             model.addAttribute("member", newMember);
 
