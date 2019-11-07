@@ -24,9 +24,10 @@
         Site d'escalade
     </h1>
     <ul>
-        <c:forEach var="c" items="${climbingAreaList}">
-            <c:out value="c">
+        <c:forEach items="${climbingAreaList}" var="c" >
+            <c:out value="Nom du site">
                 <li>${c.name}</li>
+                <li>${c.region}</li>
             </c:out>
         </c:forEach>
     </ul>
