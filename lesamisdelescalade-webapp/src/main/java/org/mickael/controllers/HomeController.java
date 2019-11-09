@@ -23,9 +23,10 @@ public class HomeController {
         //Display all the climbing Area on the homepage
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
         model.addAttribute("climbingAreaList", climbingAreaList);
-
-        //Test if the member is log
+        System.out.println("member not log");
+        //Test if the member is logged
         if(memberInSession != null){
+            System.out.println("member log");
             model.addAttribute("memberInSession", memberInSession);
         }
         return "home";

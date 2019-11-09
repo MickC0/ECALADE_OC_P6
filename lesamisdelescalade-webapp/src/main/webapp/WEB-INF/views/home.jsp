@@ -25,10 +25,10 @@
     </h1>
     <ul>
         <c:forEach items="${climbingAreaList}" var="c" >
-            <c:out value="Nom du site">
-                <li>${c.name}</li>
-                <li>${c.region}</li>
-            </c:out>
+            <li>
+                <c:out value="${c.name}"/>
+                <c:out value="${c.region}"/>
+            </li>
         </c:forEach>
     </ul>
 

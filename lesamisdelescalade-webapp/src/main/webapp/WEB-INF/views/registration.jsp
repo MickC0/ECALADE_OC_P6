@@ -23,8 +23,8 @@
                 <td>
                     <form:select path="gender" name="gender" id="gender">
                         <form:option value="" label="Civilité"/>
-                        <form:option value="1" label="Monsieur"/>
-                        <form:option value="2" label="Madame"/>
+                        <form:option value="M" label="Monsieur"/>
+                        <form:option value="F" label="Madame"/>
                     </form:select>
                 </td>
             </tr>

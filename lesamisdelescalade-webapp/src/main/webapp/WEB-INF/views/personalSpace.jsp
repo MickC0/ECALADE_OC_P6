@@ -20,10 +20,8 @@
         Site d'escalade
     </h1>
     <ul>
-        <c:forEach var="c" items="${climbingAreaList}">
-            <c:out value="Site">
-                <li>${c.name}</li>
-            </c:out>
+        <c:forEach items="${climbingAreaList}" var="c" >
+            <c:out value="${c.name}"/>
         </c:forEach>
     </ul>
     <h1>
@@ -31,9 +29,7 @@
     </h1>
     <ul>
         <c:forEach var="gb" items="${guidebookList}">
-            <c:out value="Topo">
-                <li>${gb.name}</li>
-            </c:out>
+            <c:out value="${gb.name}"/>
         </c:forEach>
     </ul>
 </div>

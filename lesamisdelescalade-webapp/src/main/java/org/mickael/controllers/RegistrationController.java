@@ -32,7 +32,7 @@ public class RegistrationController {
 
     @PostMapping("/registrationProcess")
     public String saveNewMember(@Valid Member newMember, BindingResult bindingResult, Model model, @SessionAttribute(value = "memberInSession", required = false) Member memberInSession){
-        Member existingMember = memberManager.findMemberByMail(newMember.getEmail());
+        Member existingMember = memberManager.findMemberByPseudo(newMember.getEmail());
 
         if (existingMember != null){
 

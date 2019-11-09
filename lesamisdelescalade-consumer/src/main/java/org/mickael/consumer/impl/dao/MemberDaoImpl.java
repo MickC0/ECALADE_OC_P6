@@ -4,11 +4,11 @@ import org.mickael.consumer.contract.dao.MemberDao;
 import org.mickael.consumer.impl.AbstractDataSource;
 import org.mickael.consumer.impl.rowmapper.MemberRowMapper;
 import org.mickael.model.bean.Member;
+import org.mickael.model.exceptions.MemberBlockedException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.sql.Types;
 import java.util.List;
@@ -16,7 +16,7 @@ import java.util.List;
 public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
 
 
-    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
 
 
     @Override
@@ -53,11 +53,27 @@ public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
     }
 
     @Override
-    public Member findMemberByMail(String email){
+    public Member findMemberByEmail(String email){
         String sql = "SELECT * FROM public.member WHERE email = :email";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("email", email, Types.VARCHAR);
+        MemberRowMapper memberRowMapper = new MemberRowMapper();
+        try{
+            Member member = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, memberRowMapper);
+            return member;
+
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
+    }
+
+    @Override
+    public Member findMemberByPseudo(String pseudo){
+        String sql = "SELECT * FROM public.member WHERE pseudo = :pseudo";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("pseudo", pseudo, Types.VARCHAR);
         MemberRowMapper memberRowMapper = new MemberRowMapper();
         try{
             Member member = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, memberRowMapper);
@@ -115,5 +131,55 @@ public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
 
         return memberList;
     }
+
+    @Override
+    public Member loginByPseudoOrEmail(String propertyName, Object propertyValue) throws MemberBlockedException {
+        String sql = "SELECT * FROM public.member WHERE "+propertyName+" = :"+propertyName+"";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue(propertyName, propertyValue);
+        try {
+            Member member = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, new MemberRowMapper());
+            if (member.isEnabled() == false) {
+                throw new MemberBlockedException("Your account has been blocked. Contact to admin.");
+            } else {
+                return member;
+            }
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
+    }
+
+    @Override
+    public void changeAccountStatus(Integer id, boolean enabled) {
+        String sql = "UPDATE public.member SET enabled = :enabled WHERE id = :id";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        parameterSource.addValue("enabled", enabled);
+        namedParameterJdbcTemplate.update(sql, parameterSource);
+    }
+
+    @Override
+    public Boolean isPseudoExist(String pseudo) {
+        String sql = "SELECT count(pseudo) FROM public.member WHERE pseudo = ?";
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        Integer count = jdbcTemplate.queryForObject(sql, new String[]{pseudo}, Integer.class);
+        if (count == 1){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public List<Member> findAllMemberByProperty(String propertyName, Object propertyValue) {
+        String sql = "SELECT id, first_name, last_name, pseudo, email, role, enabled" +
+                             " FROM public.member WHERE "+propertyName+" = ?";
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        List<Member> memberList = jdbcTemplate.query(sql, new MemberRowMapper(), propertyValue);
+        return memberList;
+    }
+
 
 }

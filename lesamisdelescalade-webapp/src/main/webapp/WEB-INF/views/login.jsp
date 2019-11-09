@@ -12,7 +12,7 @@
 
 </head>
 <body class="text-center">
-    <form:form cssClass="form-signin" method="post" action="${context}/loginProcess" modelAttribute="memberInSession">
+    <form:form cssClass="form-signin" method="post" action="${context}/loginProcess" modelAttribute="loginCommand">
         <a href="${context}/home"><img class="mb-4" src="${context}/resources/img/15562870935067_icon-above-font.png" alt="" width="300" height="168"></a>
         <h1 class="h3 mb-3 font-weight-normal">Enter your log in information</h1>
         <form:input path="email" type="email" class="form-control" placeholder="Email address" required="true" autofocus=""/>
