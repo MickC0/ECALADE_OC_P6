@@ -21,14 +21,16 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
-    <!--<mvc:interceptors>
-        <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
-            <property name="cacheSeconds" value="0"/>
-            <property name="useExpiresHeader" value="true"/>
-            <property name="useCacheControlHeader" value="true"/>
-            <property name="useCacheControlNoStore" value="true"/>
-        </bean>
-    </mvc:interceptors>-->
+    <mvc:interceptors>
+        <!--Intercept all jsp-->
+        <!--<bean id="loginInterceptor" class="org.mickael.LoginInterceptor"/>-->
+
+        <!--Intercept /log/xxx.jsp-->
+        <mvc:interceptor>
+            <mvc:mapping path="/log"/>
+            <bean class="org.mickael.LoginInterceptor"/>
+        </mvc:interceptor>
+    </mvc:interceptors>
 
 
     <!-- Resolves views selected for rendering by @Controllers to

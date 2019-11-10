@@ -29,7 +29,7 @@
                         <a class="nav-link" href="${context}/personalSpace"> ${sessionScope.memberPseudo} </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${context}/doLogout"> Logout</a>
+                        <a class="nav-link" href="${context}/log/doLogout"> Logout</a>
                     </li>
                 </ul>
 
@@ -39,10 +39,10 @@
                 <c:out value="${memberInSession}"/>
                 <ul class="nav navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="${context}/doRegister"><span class="fas fa-user"></span> Sign Up</a>
+                        <a class="nav-link" href="${context}/log/doRegister"><span class="fas fa-user"></span> Sign Up</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${context}/doLogin"><span class="fas fa-sign-in-alt"></span> Login</a>
+                        <a class="nav-link" href="${context}/log/doLogin"><span class="fas fa-sign-in-alt"></span> Login</a>
                     </li>
                 </ul>
 
