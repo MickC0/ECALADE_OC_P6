@@ -15,6 +15,9 @@
     <form:form cssClass="form-signin" method="post" action="${context}/loginProcess" modelAttribute="loginCommand">
         <a href="${context}/home"><img class="mb-4" src="${context}/resources/img/15562870935067_icon-above-font.png" alt="" width="300" height="168"></a>
         <h1 class="h3 mb-3 font-weight-normal">Enter your log in information</h1>
+        <c:if test="${errorMessage != null}">
+            <p>${errorMessage}</p>
+        </c:if>
         <form:input path="email" type="email" class="form-control" placeholder="Email address" required="true" autofocus=""/>
         <form:password path="password" class="form-control" placeholder="Password" required="true"/>
         <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>

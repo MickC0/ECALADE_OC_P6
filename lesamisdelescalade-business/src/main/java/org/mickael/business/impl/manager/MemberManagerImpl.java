@@ -39,30 +39,6 @@ public class MemberManagerImpl extends AbstractManager implements MemberManager 
     }
 
     @Override
-    public Member findMemberByEmail(String email) {
-        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
-        Member member = transactionTemplate.execute(transactionStatus -> {
-            Member memberTransaction;
-            memberTransaction = getDaoFactory().getMemberDao().findMemberByEmail(email);
-            return  memberTransaction;
-        });
-
-        return member;
-    }
-
-    @Override
-    public Member findMemberByPseudo(String pseudo){
-        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
-        Member member = transactionTemplate.execute(transactionStatus -> {
-            Member memberTransaction;
-            memberTransaction = getDaoFactory().getMemberDao().findMemberByPseudo(pseudo);
-            return  memberTransaction;
-        });
-
-        return member;
-    }
-
-    @Override
     public void updateMember(Member member) {
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
@@ -99,12 +75,12 @@ public class MemberManagerImpl extends AbstractManager implements MemberManager 
     }
 
     @Override
-    public Member loginByPseudoOrEmail(String propertyName, Object propertyValue) throws MemberBlockedException {
+    public Member findMemberByProperty(String propertyName, Object propertyValue) throws MemberBlockedException {
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         Member member = transactionTemplate.execute(transactionStatus -> {
             Member memberTransaction = new Member();
             try {
-                memberTransaction = getDaoFactory().getMemberDao().loginByPseudoOrEmail(propertyName, propertyValue);
+                memberTransaction = getDaoFactory().getMemberDao().findMemberByProperty(propertyName, propertyValue);
             } catch (MemberBlockedException e) {
                 e.printStackTrace();
             }

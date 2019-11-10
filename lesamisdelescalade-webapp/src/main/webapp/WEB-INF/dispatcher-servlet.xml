@@ -21,6 +21,15 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
+    <!--<mvc:interceptors>
+        <bean id="webContentInterceptor" class="org.springframework.web.servlet.mvc.WebContentInterceptor">
+            <property name="cacheSeconds" value="0"/>
+            <property name="useExpiresHeader" value="true"/>
+            <property name="useCacheControlHeader" value="true"/>
+            <property name="useCacheControlNoStore" value="true"/>
+        </bean>
+    </mvc:interceptors>-->
+
 
     <!-- Resolves views selected for rendering by @Controllers to
     .jsp resources in the /WEB-INF/views directory -->

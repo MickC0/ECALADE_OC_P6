@@ -3,6 +3,7 @@ package org.mickael.controllers;
 import org.mickael.business.contract.manager.MemberManager;
 import org.mickael.business.contract.manager.PasswordManager;
 import org.mickael.model.bean.Member;
+import org.mickael.model.exceptions.MemberBlockedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -31,8 +32,8 @@ public class RegistrationController {
     }
 
     @PostMapping("/registrationProcess")
-    public String saveNewMember(@Valid Member newMember, BindingResult bindingResult, Model model, @SessionAttribute(value = "memberInSession", required = false) Member memberInSession){
-        Member existingMember = memberManager.findMemberByPseudo(newMember.getEmail());
+    public String saveNewMember(@Valid Member newMember, BindingResult bindingResult, Model model, @SessionAttribute(value = "memberInSession", required = false) Member memberInSession) throws MemberBlockedException {
+        Member existingMember = memberManager.findMemberByProperty("email", newMember.getEmail());
 
         if (existingMember != null){
 

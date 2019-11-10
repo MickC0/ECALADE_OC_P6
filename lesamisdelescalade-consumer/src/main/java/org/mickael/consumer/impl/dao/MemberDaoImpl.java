@@ -52,37 +52,6 @@ public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
         return member;
     }
 
-    @Override
-    public Member findMemberByEmail(String email){
-        String sql = "SELECT * FROM public.member WHERE email = :email";
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
-        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("email", email, Types.VARCHAR);
-        MemberRowMapper memberRowMapper = new MemberRowMapper();
-        try{
-            Member member = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, memberRowMapper);
-            return member;
-
-        } catch (EmptyResultDataAccessException e){
-            return null;
-        }
-    }
-
-    @Override
-    public Member findMemberByPseudo(String pseudo){
-        String sql = "SELECT * FROM public.member WHERE pseudo = :pseudo";
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
-        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("pseudo", pseudo, Types.VARCHAR);
-        MemberRowMapper memberRowMapper = new MemberRowMapper();
-        try{
-            Member member = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, memberRowMapper);
-            return member;
-
-        } catch (EmptyResultDataAccessException e){
-            return null;
-        }
-    }
 
     @Override
     public void updateMember(Member member) {
@@ -133,7 +102,7 @@ public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
     }
 
     @Override
-    public Member loginByPseudoOrEmail(String propertyName, Object propertyValue) throws MemberBlockedException {
+    public Member findMemberByProperty(String propertyName, Object propertyValue) throws MemberBlockedException {
         String sql = "SELECT * FROM public.member WHERE "+propertyName+" = :"+propertyName+"";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();

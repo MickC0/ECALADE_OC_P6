@@ -33,12 +33,15 @@ public class PersonalSpaceController {
     private ReservationRequestManager reservationRequestManager;
 
     @GetMapping("/personalSpace")
-    public String getPersonalSpace(@SessionAttribute(value = "memberInSession", required = true)Member memberInSession, Model model){
+    public String getPersonalSpace(@SessionAttribute(value = "memberInSession", required = false)Member memberInSession, Model model){
+        if (memberInSession == null){
+            return "redirect:/home";
+        }
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findClimbingAreaByMemberId(memberInSession.getId());
         List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSession.getId());
         model.addAttribute("climbingAreaList", climbingAreaList);
         model.addAttribute("guidebookList", guidebookList);
-        model.addAttribute("memberInSession", memberInSession);
+        //model.addAttribute("memberInSession", memberInSession);
         return "personalSpace";
     }
 
