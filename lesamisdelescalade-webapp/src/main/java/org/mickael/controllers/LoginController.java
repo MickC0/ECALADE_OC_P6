@@ -68,12 +68,12 @@ public class LoginController {
                 } else {
                     MemberBlockedException memberBlockedException = new MemberBlockedException("Invalid Member Role");
                     model.addAttribute("errorMessage", memberBlockedException);
-                    return "login";
+                    return "redirect:/login";
                 }
             } else {
                 httpSession.invalidate();
                 model.addAttribute("errorMessage", "Enter valid credentials");
-                return "redirect:login";
+                return "redirect:/login";
             }
         }
         //for display climbing site
@@ -84,10 +84,10 @@ public class LoginController {
 
     @GetMapping("/doLogout")
     public String doLogout(HttpServletResponse response, HttpSession httpSession){
-        httpSession.invalidate();
         response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
         response.setHeader("Progma","no-cache");
         response.setDateHeader("Expires",0);
+        httpSession.invalidate();
 
         return "redirect:/home";
     }

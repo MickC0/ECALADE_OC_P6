@@ -26,6 +26,9 @@ public class RegistrationController {
 
     @GetMapping("/doRegister")
     public String viewRegistration(@SessionAttribute(value = "memberInSession", required = false) Member memberInSession, Model model){
+        if (memberInSession != null){
+            return "home";
+        }
         model.addAttribute("member", new Member());
 
         return "registration";
