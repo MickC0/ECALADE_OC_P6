@@ -41,6 +41,13 @@
         <servlet-name>dispatcher</servlet-name>
         <url-pattern>/</url-pattern>
     </servlet-mapping>
-
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>org.mickael.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <url-pattern>/login.jsp</url-pattern>
+    </filter-mapping>
 
 </web-app>
