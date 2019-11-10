@@ -68,25 +68,25 @@ public class LoginController {
                 } else {
                     MemberBlockedException memberBlockedException = new MemberBlockedException("Invalid Member Role");
                     model.addAttribute("errorMessage", memberBlockedException);
-                    return "redirect:/login";
+                    return "redirect:doLogin";
                 }
             } else {
                 httpSession.invalidate();
                 model.addAttribute("errorMessage", "Enter valid credentials");
-                return "redirect:/login";
+                return "redirect:doLogin";
             }
         }
         //for display climbing site
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
         model.addAttribute("climbingAreaList", climbingAreaList);
-        return "home";
+        return "redirect:home";
     }
 
     @GetMapping("/doLogout")
-    public String doLogout(HttpServletResponse response, HttpSession httpSession){
-        response.setHeader("Cache-Control","no-cache,no-store,must-revalidate");
-        response.setHeader("Progma","no-cache");
-        response.setDateHeader("Expires",0);
+    public String doLogout(HttpServletResponse httpServletResponse, HttpSession httpSession){
+        httpServletResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+        httpServletResponse.setHeader("Pragma","no-cache");
+        httpServletResponse.setHeader("Expires","0");
         httpSession.invalidate();
 
         return "redirect:/home";
