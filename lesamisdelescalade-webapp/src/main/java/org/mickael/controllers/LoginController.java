@@ -33,10 +33,10 @@ public class LoginController {
 
     private void addMemberInSession(Member member, HttpSession httpSession) {
         httpSession.setAttribute("memberInSession", member);
-        httpSession.setAttribute("memberId", member.getId());
-        httpSession.setAttribute("memberPseudo", member.getPseudo());
-        httpSession.setAttribute("memberEmail", member.getEmail());
-        httpSession.setAttribute("role", member.getRole());
+        httpSession.setAttribute("memberInSessionId", member.getId());
+        httpSession.setAttribute("memberInSessionPseudo", member.getPseudo());
+        httpSession.setAttribute("memberInSessionEmail", member.getEmail());
+        httpSession.setAttribute("memberInSessionRole", member.getRole());
     }
 
     @GetMapping("/doLogin")
@@ -89,7 +89,7 @@ public class LoginController {
         httpServletResponse.setHeader("Expires","0");
         httpSession.invalidate();
 
-        return "redirect:/home";
+        return "redirect:home";
     }
 
 

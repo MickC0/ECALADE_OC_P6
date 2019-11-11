@@ -2,19 +2,18 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<c:set var="context" value="${pageContext.request.contextPath}" />
 <html>
 <head>
     <title>Registration</title>
     <%@include file="_include/head.jsp"%>
-    <link href="${context}/resources/css/registration.css" type="text/css" rel="stylesheet" />
+    <link href="<c:url value="/resources/css/registration.css"/>" type="text/css" rel="stylesheet" />
 
 
 
 
 </head>
 <body>
-    <form:form id="regForm"  action="${context}/registrationProcess" method="post" modelAttribute="member">
+    <form:form id="regForm"  action="/registrationProcess" method="post" modelAttribute="member">
         <table align="center">
             <tr>
                 <td>
@@ -86,133 +85,11 @@
             <tr></tr>
             <tr>
                 <td></td>
-                <td><a href="${context}/home">Home</a>
+                <td><a href="<c:url value="/home"/>">Home</a>
                 </td>
             </tr>
         </table>
     </form:form>
-
-
-
-
-
-
-    <!-- EXEMPLE -->
-    <%--<div class="login-dark">
-        <form>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-        </form>
-    </div>--%>
-
-    <%--<div class="form-box center-box">
-        <form:form action="${context}/registrationProcess" cssClass="form-horizontal" method="post" modelAttribute="member">
-            <div class="form-row align-items-center">
-                <div class="col-auto my-1">
-                    <form:select path="gender" cssClass="custom-select mr-sm-2">
-                        <form:option value="N/C" label="Civilité"/>
-                        <form:option value="1" label="Monsieur"/>
-                        <form:option value="2" label="Madame"/>
-                    </form:select>
-                </div>
-
-                <div class="col-auto my-1">
-                    <form:input path="firstName" type="text" placeholder="First name" required="true"/>
-                </div>
-                <div class="col-auto my-1">
-                    <form:input path="lastName" type="text" placeholder="Last name" required="true"/>
-                </div>
-
-                <div class="form-group col-md-3">
-
-                    <label for="inputEmail4">Email</label>
-                    <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                </div>
-                <div class="form-group col-md-6">
-                    <label for="inputPassword4">Password</label>
-                    <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress">Address</label>
-                <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-            </div>
-            <div class="form-group">
-                <label for="inputAddress2">Address 2</label>
-                <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">City</label>
-                    <input type="text" class="form-control" id="inputCity">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State</label>
-                    <select id="inputState" class="form-control">
-                        <option selected>Choose...</option>
-                        <option>...</option>
-                    </select>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip</label>
-                    <input type="text" class="form-control" id="inputZip">
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck">
-                    <label class="form-check-label" for="gridCheck">
-                        Check me out
-                    </label>
-                </div>
-            </div>
-            <button type="submit" class="btn btn-primary">Sign in</button>
-        </form:form>
-    </div>--%>
-
-
 
 </body>
 </html>

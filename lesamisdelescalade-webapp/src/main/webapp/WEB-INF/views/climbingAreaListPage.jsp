@@ -6,21 +6,10 @@
 <html>
 <head>
     <%@include file="_include/head.jsp"%>
-    <title>ADMINISTRATION DASHBOARD</title>
+    <title>Climbing Aera List</title>
+
 </head>
 <body>
-    <%@include file="_include/navbar.jsp"%>
 
-    <table border="1" width="80%" align="center">
-
-        <tr>
-            <td height="350px" valign="top">
-                <%-- Page Content Area--%>
-                <h1>Admin Dashboard</h1>
-                TODO : Admin Options in this page
-            </td>
-        </tr>
-
-    </table>
 </body>
 </html>
