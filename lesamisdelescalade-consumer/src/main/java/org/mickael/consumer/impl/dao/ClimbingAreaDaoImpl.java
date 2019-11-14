@@ -51,7 +51,17 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
     }
 
     @Override
-    public List<ClimbingArea> findClimbingAreaByMemberId(Integer id) {
+    public ClimbingArea findClimbingAreaByProperty(String propertyName, Object propertyValue) {
+        String sql = "SELECT * FROM public.climbingArea WHERE "+propertyName+" = :"+propertyName+"";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue(propertyName, propertyValue);
+        ClimbingArea climbingArea = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, new ClimbingAreaRowMapper());
+        return climbingArea;
+    }
+
+    @Override
+    public List<ClimbingArea> findAllClimbingAreaByMemberId(Integer id) {
         String sql = "SELECT * FROM public.climbingArea WHERE member_id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();

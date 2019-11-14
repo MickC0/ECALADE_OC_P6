@@ -3,7 +3,7 @@ package org.mickael.controllers;
 import org.mickael.business.contract.manager.*;
 import org.mickael.model.bean.ClimbingArea;
 import org.mickael.model.bean.Guidebook;
-import org.mickael.model.bean.Member;
+import org.mickael.model.bean.ReservationRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Controller
-@SessionAttributes("memberInSession")
+@SessionAttributes("memberInSessionId")
 public class PersonalSpaceController {
 
     @Inject
@@ -33,14 +33,16 @@ public class PersonalSpaceController {
     private ReservationRequestManager reservationRequestManager;
 
     @GetMapping("/personalSpace")
-    public String getPersonalSpace(@SessionAttribute(value = "memberInSession", required = false)Member memberInSession, Model model){
-        if (memberInSession == null){
+    public String getPersonalSpace(@SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId, Model model){
+        if (memberInSessionId == null){
             return "redirect:/home";
         }
-        List<ClimbingArea> climbingAreaList = climbingAreaManager.findClimbingAreaByMemberId(memberInSession.getId());
-        List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSession.getId());
+        List<ClimbingArea> climbingAreaList = climbingAreaManager.findClimbingAreaByMemberId(memberInSessionId);
+        List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSessionId);
+        List<ReservationRequest> reservationRequestList = reservationRequestManager.findAllReservationRequestByMemberId(memberInSessionId);
         model.addAttribute("climbingAreaList", climbingAreaList);
         model.addAttribute("guidebookList", guidebookList);
+        model.addAttribute("reservationRequestList", reservationRequestList);
         //model.addAttribute("memberInSession", memberInSession);
         return "personalSpace";
     }

@@ -25,8 +25,8 @@ public class RegistrationController {
 
 
     @GetMapping("/doRegister")
-    public String viewRegistration(@SessionAttribute(value = "memberInSession", required = false) Member memberInSession, Model model){
-        if (memberInSession != null){
+    public String viewRegistration(@SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
+        if (memberInSessionId != null){
             return "home";
         }
         model.addAttribute("member", new Member());
@@ -35,7 +35,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/registrationProcess")
-    public String saveNewMember(@Valid Member newMember, BindingResult bindingResult, Model model, @SessionAttribute(value = "memberInSession", required = false) Member memberInSession) throws MemberBlockedException {
+    public String saveNewMember(@Valid Member newMember, BindingResult bindingResult, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId) throws MemberBlockedException {
         Member existingMember = memberManager.findMemberByProperty("email", newMember.getEmail());
 
         if (existingMember != null){
@@ -43,8 +43,7 @@ public class RegistrationController {
             return "_error/errorLogin";
         } else {
             if (bindingResult.hasErrors()) {
-                model.addAttribute("member", newMember);
-                return "registration";
+                return "redirect:doRegister";
             }
             //encoder
             String hashPassword = passwordManager.hashPassword(newMember.getPassword());

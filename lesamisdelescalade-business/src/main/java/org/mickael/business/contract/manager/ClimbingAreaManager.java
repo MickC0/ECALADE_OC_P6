@@ -7,6 +7,7 @@ import java.util.List;
 public interface ClimbingAreaManager {
     void createClimbingArea(ClimbingArea climbingArea);
     ClimbingArea findClimbingArea(Integer id);
+    ClimbingArea findClimbingAreaByProperty(String propertyName, Object propertyValue);
     void updateClimbingArea(ClimbingArea climbingArea);
     void deleteClimbingArea(Integer id);
     List<ClimbingArea> findAllClimbingArea ();

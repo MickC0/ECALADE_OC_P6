@@ -25,7 +25,7 @@
 
         </ul>
         <c:choose>
-            <c:when test="${!empty memberInSession}">
+            <c:when test="${!empty memberInSessionId}">
                 <ul class="nav navbar-nav ml-auto">
                     <c:if test="${sessionScope.memberInSessionRole == 'Administrator'}">
                         <li class="nav-item">
@@ -33,7 +33,7 @@
                         </li>
                     </c:if>
                     <li class="nav-item">
-                        <a class="nav-link" href="${context}/personalSpace"> ${sessionScope.memberPseudo} </a>
+                        <a class="nav-link" href="${context}/personalSpace"> ${sessionScope.memberInSessionPseudo} </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${context}/doLogout"> Logout</a>

@@ -13,7 +13,7 @@
 
 </head>
 <body>
-    <form:form id="regForm"  action="/registrationProcess" method="post" modelAttribute="member">
+    <form:form id="regForm"  action="registrationProcess" method="post" modelAttribute="member">
         <table align="center">
             <tr>
                 <td>

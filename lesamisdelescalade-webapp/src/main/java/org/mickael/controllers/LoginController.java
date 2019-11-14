@@ -32,7 +32,7 @@ public class LoginController {
     private ClimbingAreaManager climbingAreaManager;
 
     private void addMemberInSession(Member member, HttpSession httpSession) {
-        httpSession.setAttribute("memberInSession", member);
+        //httpSession.setAttribute("memberInSession", member);
         httpSession.setAttribute("memberInSessionId", member.getId());
         httpSession.setAttribute("memberInSessionPseudo", member.getPseudo());
         httpSession.setAttribute("memberInSessionEmail", member.getEmail());

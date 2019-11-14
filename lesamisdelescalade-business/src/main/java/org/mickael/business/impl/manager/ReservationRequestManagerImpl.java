@@ -82,4 +82,30 @@ public class ReservationRequestManagerImpl extends AbstractManager implements Re
 
         return reservationRequestList;
     }
+
+    @Override
+    public List<ReservationRequest> findAllReservationRequestByMemberId(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+
+        List<ReservationRequest> reservationRequestList = transactionTemplate.execute(transactionStatus -> {
+            List<ReservationRequest> reservationRequestListTransaction = new ArrayList<>();
+            reservationRequestListTransaction = getDaoFactory().getReservationRequestDao().findAllReservationRequestByMemberId(id);
+            return  reservationRequestListTransaction;
+        });
+
+        return reservationRequestList;
+    }
+
+    @Override
+    public List<ReservationRequest> findAllReservationRequestByGuidebookId(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+
+        List<ReservationRequest> reservationRequestList = transactionTemplate.execute(transactionStatus -> {
+            List<ReservationRequest> reservationRequestListTransaction = new ArrayList<>();
+            reservationRequestListTransaction = getDaoFactory().getReservationRequestDao().findAllReservationRequestByGuidebookId(id);
+            return  reservationRequestListTransaction;
+        });
+
+        return reservationRequestList;
+    }
 }

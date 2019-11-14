@@ -31,6 +31,7 @@
             </li>
         </c:forEach>
     </ul>
+    <c:out value="${sessionScope.memberInSessionId}"/>
 
 
 

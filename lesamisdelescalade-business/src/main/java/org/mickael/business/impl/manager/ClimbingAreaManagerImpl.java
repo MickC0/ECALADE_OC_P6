@@ -37,6 +37,18 @@ public class ClimbingAreaManagerImpl extends AbstractManager implements Climbing
     }
 
     @Override
+    public ClimbingArea findClimbingAreaByProperty(String propertyName, Object propertyValue) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        ClimbingArea climbingArea = transactionTemplate.execute(transactionStatus -> {
+            ClimbingArea climbingAreaTransaction = new ClimbingArea();
+            climbingAreaTransaction = getDaoFactory().getClimbingAreaDao().findClimbingAreaByProperty(propertyName, propertyValue);
+            return  climbingAreaTransaction;
+        });
+
+        return climbingArea;
+    }
+
+    @Override
     public void updateClimbingArea(ClimbingArea climbingArea) {
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
@@ -77,7 +89,7 @@ public class ClimbingAreaManagerImpl extends AbstractManager implements Climbing
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         List<ClimbingArea> climbingAreaList = transactionTemplate.execute(transactionStatus -> {
             List<ClimbingArea> climbingAreaListTransaction = new ArrayList<>();
-            climbingAreaListTransaction = getDaoFactory().getClimbingAreaDao().findClimbingAreaByMemberId(id);
+            climbingAreaListTransaction = getDaoFactory().getClimbingAreaDao().findAllClimbingAreaByMemberId(id);
             return  climbingAreaListTransaction;
         });
 

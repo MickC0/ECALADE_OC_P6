@@ -16,20 +16,45 @@
 </header>
 
 <div class="container-fluid" style="margin-top:80px">
-    <h1>
+    <table>
+        <tr>
+            <th>SITE</th>
+            <th>Modifier</th>
+            <th>Supprimer</th>
+            <th>Ajouter</th>
+        </tr>
+        <tr>
+            <c:forEach items="${climbingAreaList}" var="c" >
+                <td><c:out value="${c.name}"/></td>
+                <td><a href="<c:url value="climbingArea/${c.id}"/>"> </a> </td>
+            </c:forEach>
+        </tr>
+    </table>
+    <h2>
         Site d'escalade
-    </h1>
+    </h2>
     <ul>
-        <c:forEach items="${climbingAreaList}" var="c" >
-            <c:out value="${c.name}"/>
-        </c:forEach>
+
     </ul>
-    <h1>
+</div>
+<div class="container-fluid">
+    <h2>
         Guidebook
-    </h1>
+    </h2>
     <ul>
         <c:forEach var="gb" items="${guidebookList}">
             <c:out value="${gb.name}"/>
+        </c:forEach>
+    </ul>
+</div>
+<div class="container-fluid">
+    <h2>
+        MES RESERVATIONS
+    </h2>
+    <ul>
+        <c:forEach var="res" items="${reservationRequestList}">
+            <c:out value="${res.guidebook.name}"/>
+            <c:out value="${res.reservationState}"/>
         </c:forEach>
     </ul>
 </div>

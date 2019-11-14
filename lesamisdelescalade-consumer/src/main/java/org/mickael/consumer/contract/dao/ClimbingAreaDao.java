@@ -7,7 +7,8 @@ import java.util.List;
 public interface ClimbingAreaDao {
     void createClimbingArea(ClimbingArea climbingArea);
     ClimbingArea findClimbingArea(Integer id);
-    List<ClimbingArea> findClimbingAreaByMemberId(Integer id);
+    ClimbingArea findClimbingAreaByProperty(String propertyName, Object propertyValue);
+    List<ClimbingArea> findAllClimbingAreaByMemberId(Integer id);
     void updateClimbingArea(ClimbingArea climbingArea);
     void deleteClimbingArea(Integer id);
     List<ClimbingArea> findAllClimbingArea ();
