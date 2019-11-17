@@ -10,4 +10,5 @@ public interface StartingPointManager {
     void updateStartingPoint(StartingPoint startingPoint);
     void deleteStartingPoint(Integer id);
     List<StartingPoint> findAllStartingPoint ();
+    List<StartingPoint> findAllStartingPointByClimbingAreaId (Integer id);
 }

@@ -78,4 +78,14 @@ public class SectorDaoImpl extends AbstractDataSource implements SectorDao {
 
         return sectorList;
     }
+
+    @Override
+    public List<Sector> findAllSectorByClimbingAreaId(Integer id) {
+        String sql = "SELECT * FROM public.sector WHERE climbingarea_id = " + id;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        SectorRowMapper sectorRowMapper = new SectorRowMapper();
+        List<Sector> sectorList = jdbcTemplate.query(sql, sectorRowMapper);
+
+        return sectorList;
+    }
 }

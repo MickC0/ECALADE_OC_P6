@@ -6,11 +6,6 @@
 <head>
     <title>Registration</title>
     <%@include file="_include/head.jsp"%>
-    <link href="<c:url value="/resources/css/registration.css"/>" type="text/css" rel="stylesheet" />
-
-
-
-
 </head>
 <body>
     <form:form id="regForm"  action="registrationProcess" method="post" modelAttribute="member">

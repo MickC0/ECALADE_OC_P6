@@ -70,4 +70,17 @@ public class RouteManagerImpl extends AbstractManager implements RouteManager {
 
         return routeList;
     }
+
+    @Override
+    public List<Route> findAllRouteBySectorId(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+
+        List<Route> routeList = transactionTemplate.execute(transactionStatus -> {
+            List<Route> routeListTransaction = new ArrayList<>();
+            routeListTransaction = getDaoFactory().getRouteDao().findAllRouteBySectorId(id);
+            return  routeListTransaction;
+        });
+
+        return routeList;
+    }
 }

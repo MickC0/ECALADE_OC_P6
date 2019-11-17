@@ -80,4 +80,16 @@ public class ParkingDaoImpl extends AbstractDataSource implements ParkingDao {
 
         return parkingList;
     }
+
+    @Override
+    public List<Parking> findAllParkingByClimbingAreaId(Integer id) {
+        String sql = "SELECT FROM public.parking WHERE climbingarea_id = :id";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        ParkingRowMapper parkingRowMapper = new ParkingRowMapper();
+        List<Parking> parkingList = namedParameterJdbcTemplate.query(sql, parameterSource, parkingRowMapper);
+
+        return parkingList;
+    }
 }

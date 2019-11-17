@@ -70,4 +70,17 @@ public class SectorManagerImpl extends AbstractManager implements SectorManager 
 
         return sectorList;
     }
+
+    @Override
+    public List<Sector> findAllSectorByClimbingAreaId(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+
+        List<Sector> sectorList = transactionTemplate.execute(transactionStatus -> {
+            List<Sector> sectorListTransaction = new ArrayList<>();
+            sectorListTransaction = getDaoFactory().getSectorDao().findAllSectorByClimbingAreaId(id);
+            return  sectorListTransaction;
+        });
+
+        return sectorList;
+    }
 }

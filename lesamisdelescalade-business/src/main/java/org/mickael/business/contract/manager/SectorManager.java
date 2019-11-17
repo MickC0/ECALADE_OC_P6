@@ -10,4 +10,5 @@ public interface SectorManager {
     void updateSector(Sector sector);
     void deleteSector(Integer id);
     List<Sector> findAllSector ();
+    List<Sector> findAllSectorByClimbingAreaId (Integer id);
 }

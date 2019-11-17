@@ -15,6 +15,7 @@
 --%>
 
 <!-- Locales resources -->
-<link href="<c:url value="/resources/css/bootstrap.min.css"/>" rel=stylesheet>
+<link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+<link rel="stylesheet" href="<c:url value="/resources/css/styles.css"/>">
 
 <script src="https://kit.fontawesome.com/c822637fde.js" crossorigin="anonymous"></script>

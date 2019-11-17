@@ -70,4 +70,17 @@ public class ParkingManagerImpl extends AbstractManager implements ParkingManage
 
         return parkingList;
     }
+
+    @Override
+    public List<Parking> findAllParkingByClimbingAreaId(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+
+        List<Parking> parkingList = transactionTemplate.execute(transactionStatus -> {
+            List<Parking> parkingListTransaction = new ArrayList<>();
+            parkingListTransaction = getDaoFactory().getParkingDao().findAllParkingByClimbingAreaId(id);
+            return  parkingListTransaction;
+        });
+
+        return parkingList;
+    }
 }

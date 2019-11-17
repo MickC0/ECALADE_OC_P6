@@ -81,4 +81,14 @@ public class StartingPointDaoImpl extends AbstractDataSource implements Starting
 
         return startingPointList;
     }
+
+    @Override
+    public List<StartingPoint> findAllStartingPointByClimbingAreaId(Integer id) {
+        String sql = "SELECT FROM public.startingPoint WHERE climbingarea_id = " +id;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        StartingPointRowMapper startingPointRowMapper = new StartingPointRowMapper();
+        List<StartingPoint> startingPointList = jdbcTemplate.query(sql, startingPointRowMapper);
+
+        return startingPointList;
+    }
 }

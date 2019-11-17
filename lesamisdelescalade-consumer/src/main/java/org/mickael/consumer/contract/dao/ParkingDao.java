@@ -11,4 +11,5 @@ public interface ParkingDao {
     void updateParking(Parking parking);
     void deleteParking(Integer id);
     List<Parking> findAllParking ();
+    List<Parking> findAllParkingByClimbingAreaId (Integer id);
 }

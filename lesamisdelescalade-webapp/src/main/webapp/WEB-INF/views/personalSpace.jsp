@@ -15,7 +15,7 @@
     <%@include file="_include/navbar.jsp"%>
 </header>
 
-<div class="container-fluid" style="margin-top:80px">
+<div class="container-fluid" style="margin-top:100px">
     <table>
         <tr>
             <th>SITE</th>
@@ -25,8 +25,7 @@
         </tr>
         <tr>
             <c:forEach items="${climbingAreaList}" var="c" >
-                <td><c:out value="${c.name}"/></td>
-                <td><a href="<c:url value="climbingArea/${c.id}"/>"> </a> </td>
+                <td><a href="<c:url value="climbingArea/${c.id}"/>"> <c:out value="${c.name}"/> </a> </td>
             </c:forEach>
         </tr>
     </table>

@@ -11,4 +11,5 @@ public interface PhotoDao {
     void updatePhoto(Photo photo);
     void deletePhoto(Integer id);
     List<Photo> findAllPhoto ();
+    List<Photo> findAllPhotoByClimbingAreaId(Integer id);
 }

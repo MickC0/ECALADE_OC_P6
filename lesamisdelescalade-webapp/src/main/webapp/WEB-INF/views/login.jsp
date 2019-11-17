@@ -2,26 +2,44 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<c:set var="context" value="${pageContext.request.contextPath}" />
 <html>
 <head>
     <title>Login</title>
-    <meta name="generator" content="Jekyll v3.8.5">
+    <%--<meta name="generator" content="Jekyll v3.8.5">--%>
     <%@include file="_include/head.jsp"%>
-    <link href="${context}/resources/css/login.css" type="text/css" rel="stylesheet" />
 
 </head>
-<body class="text-center">
-    <form:form cssClass="form-signin" method="post" action="${context}/loginProcess" modelAttribute="loginCommand">
-        <a href="${context}/home"><img class="mb-4" src="${context}/resources/img/15562870935067_icon-above-font.png" alt="" width="300" height="168"></a>
-        <h1 class="h3 mb-3 font-weight-normal">Enter your log in information</h1>
-        <c:if test="${errorMessage != null}">
-            <p>${errorMessage}</p>
-        </c:if>
-        <form:input path="email" type="email" class="form-control" placeholder="Email address" required="true" autofocus=""/>
-        <form:password path="password" class="form-control" placeholder="Password" required="true"/>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
-        <p class="mt-5 mb-3 text-muted">© 2017-2019</p>
-    </form:form>
+<body>
+    <div class="wrapper">
+        <div class="col col-sm-3">
+            <form:form cssClass="form-group" method="post" action="loginProcess" modelAttribute="loginCommand">
+                <div class="block-heading">
+                    <h2 class="text-info">Log In</h2>
+                    <p>
+                        <c:if test="${errorMessage != null}">
+                            ${errorMessage}
+                        </c:if>
+                    </p>
+                </div>
+
+                <div class="form-group">
+                    <form:label path="email">Email</form:label>
+                    <form:input path="email" type="email" cssClass="form-control" placeholder="Email address" required="true" autofocus=""/>
+                </div>
+                <div class="form-group">
+                    <form:label path="password">Password</form:label>
+                    <form:password path="password" cssClass="form-control" placeholder="Password" required="true"/>
+                </div>
+                <div class="form-group">
+                    <form:button type="submit" cssClass="btn btn-primary btn-block">Log In</form:button>
+                </div>
+
+                <div class="text-center">
+                    <p>Nouveau sur le site ? <a href="<c:url value="/doRegister"/>"> Créer un compte.</a></p>
+                </div>
+            </form:form>
+        </div>
+
+    </div>
 </body>
 </html>

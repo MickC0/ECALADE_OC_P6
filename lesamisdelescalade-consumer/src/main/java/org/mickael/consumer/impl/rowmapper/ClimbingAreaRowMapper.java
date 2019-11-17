@@ -28,6 +28,22 @@ public class ClimbingAreaRowMapper implements RowMapper<ClimbingArea> {
         MemberDaoImpl memberDao = new MemberDaoImpl();
         climbingArea.setMember(memberDao.findMember(resultSet.getInt("member_id")));
 
+        /**SectorDaoImpl sectorDao = new SectorDaoImpl();
+        climbingArea.setSectorList(sectorDao.findAllSectorByClimbingAreaId(resultSet.getInt("id")));
+
+        PhotoDaoImpl photoDao = new PhotoDaoImpl();
+        climbingArea.setPhotoList(photoDao.findAllPhotoByClimbingAreaId(resultSet.getInt("id")));
+
+        CommentDaoImpl commentDao = new CommentDaoImpl();
+        climbingArea.setCommentList(commentDao.findAllCommentByClimbingArea(resultSet.getInt("id")));
+
+        StartingPointDaoImpl startingPointDao = new StartingPointDaoImpl();
+        climbingArea.setStartingPointList(startingPointDao.findAllStartingPointByClimbingAreaId(resultSet.getInt("id")));
+
+
+        ParkingDaoImpl parkingDao = new ParkingDaoImpl();
+        climbingArea.setParkingList(parkingDao.findAllParkingByClimbingAreaId(resultSet.getInt("id")));*/
+
 
         return climbingArea;
     }

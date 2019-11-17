@@ -2,6 +2,8 @@ package org.mickael.controllers;
 
 import org.mickael.business.contract.manager.*;
 import org.mickael.model.bean.ClimbingArea;
+import org.mickael.model.bean.Route;
+import org.mickael.model.bean.Sector;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -69,7 +72,19 @@ public class ClimbingAreaController {
     @GetMapping("/climbingArea/{id}")
     public String showClimbingArea(@PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
         ClimbingArea climbingArea = climbingAreaManager.findClimbingArea(id);
-        model.addAttribute("climbingArea", climbingArea);
+        List<Sector> sectorList = sectorManager.findAllSectorByClimbingAreaId(id);
+        List<Route> routeList = new ArrayList<>();
+        for (Sector sector : sectorList){
+            for (Route route : routeManager.findAllRouteBySectorId(sector.getId())){
+                routeList.add(route);
+            }
+        }
+
+
+
+        model.addAttribute("climbArea", climbingArea);
+        model.addAttribute("sectorArea", sectorList);
+        model.addAttribute("routeArea", routeList);
         return "climbingArea";
     }
 

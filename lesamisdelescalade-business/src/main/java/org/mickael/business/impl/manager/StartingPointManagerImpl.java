@@ -70,4 +70,17 @@ public class StartingPointManagerImpl extends AbstractManager implements Startin
 
         return startingPointList;
     }
+
+    @Override
+    public List<StartingPoint> findAllStartingPointByClimbingAreaId(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+
+        List<StartingPoint> startingPointList = transactionTemplate.execute(transactionStatus -> {
+            List<StartingPoint> startingPointListTransaction = new ArrayList<>();
+            startingPointListTransaction = getDaoFactory().getStartingPointDao().findAllStartingPointByClimbingAreaId(id);
+            return  startingPointListTransaction;
+        });
+
+        return startingPointList;
+    }
 }

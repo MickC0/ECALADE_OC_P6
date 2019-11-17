@@ -85,4 +85,14 @@ public class RouteDaoImpl extends AbstractDataSource implements RouteDao {
 
         return routeList;
     }
+
+    @Override
+    public List<Route> findAllRouteBySectorId(Integer id) {
+        String sql = "SELECT * FROM public.route WHERE sector_id = " + id;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        RouteRowMapper routeRowMapper = new RouteRowMapper();
+        List<Route> routeList = jdbcTemplate.query(sql, routeRowMapper);
+
+        return routeList;
+    }
 }

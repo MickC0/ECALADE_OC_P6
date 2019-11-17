@@ -11,4 +11,6 @@ public interface RouteDao {
     void updateRoute(Route route);
     void deleteRoute(Integer id);
     List<Route> findAllRoute ();
+    List<Route> findAllRouteBySectorId (Integer id);
+
 }
