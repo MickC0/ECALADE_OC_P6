@@ -39,7 +39,7 @@
                 </div>
             </form:form>
         </div>
-
     </div>
+    <%@include file="_include/footer.jsp"%>
 </body>
 </html>

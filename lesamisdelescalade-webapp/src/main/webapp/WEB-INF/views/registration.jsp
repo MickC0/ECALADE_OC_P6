@@ -85,6 +85,6 @@
             </tr>
         </table>
     </form:form>
-
+    <%@include file="_include/footer.jsp"%>
 </body>
 </html>

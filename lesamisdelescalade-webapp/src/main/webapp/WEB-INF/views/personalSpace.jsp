@@ -11,9 +11,8 @@
 
 </head>
 <body>
-<header>
-    <%@include file="_include/navbar.jsp"%>
-</header>
+<%@include file="_include/navbar.jsp"%>
+
 
 <div class="container-fluid" style="margin-top:100px">
     <table>
@@ -58,6 +57,8 @@
     </ul>
 </div>
 
+
+<%@include file="_include/footer.jsp"%>
 </body>
 
 </html>

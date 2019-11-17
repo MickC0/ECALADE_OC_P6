@@ -10,6 +10,7 @@
 
 </head>
 <body>
-
+<%@include file="_include/navbar.jsp"%>
+<%@include file="_include/footer.jsp"%>
 </body>
 </html>

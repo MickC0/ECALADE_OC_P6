@@ -8,9 +8,8 @@
     <%@include file="_include/head.jsp"%>
 </head>
 <body>
-<header>
     <%@include file="_include/navbar.jsp"%>
-</header>
+
 
 
 

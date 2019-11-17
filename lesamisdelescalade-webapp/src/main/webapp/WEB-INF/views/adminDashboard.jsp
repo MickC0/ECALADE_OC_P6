@@ -22,5 +22,6 @@
         </tr>
 
     </table>
+    <%@include file="_include/footer.jsp"%>
 </body>
 </html>

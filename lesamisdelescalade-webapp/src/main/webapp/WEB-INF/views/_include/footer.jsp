@@ -1,6 +1,3 @@
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-
 <!-- CDN resources -->
 <%--
 <!-- jQuery -->
@@ -19,4 +16,6 @@
 <script src="<c:url value="/resources/js/popper.min.js"/>"></script>
 <!-- Javascript de Bootstrap -->
 <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+
+
 
