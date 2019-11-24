@@ -24,7 +24,7 @@
 <div class="container">
 
     <!-- form for update site -->
-    <div id="updateSite">
+    <div>
         <h3>Modification du Site d'escalade:</h3>
         <c:if test="${!empty errorMessage}">
             <c:out value="${errorMessage}"/>
