@@ -54,7 +54,11 @@ public class ClimbingAreaManagerImpl extends AbstractManager implements Climbing
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
             @Override
             protected void doInTransactionWithoutResult(TransactionStatus transactionStatus) {
-                getDaoFactory().getClimbingAreaDao().updateClimbingArea(climbingArea);
+                try{
+                    getDaoFactory().getClimbingAreaDao().updateClimbingArea(climbingArea);
+                } catch (Exception e){
+                    e.printStackTrace();
+                }
             }
         });
     }

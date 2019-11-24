@@ -4,6 +4,7 @@ import org.mickael.consumer.contract.dao.ClimbingAreaDao;
 import org.mickael.consumer.impl.AbstractDataSource;
 import org.mickael.consumer.impl.rowmapper.ClimbingAreaRowMapper;
 import org.mickael.model.bean.ClimbingArea;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -52,12 +53,15 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
 
     @Override
     public ClimbingArea findClimbingAreaByProperty(String propertyName, Object propertyValue) {
-        String sql = "SELECT * FROM public.climbingArea WHERE "+propertyName+" = :"+propertyName+"";
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
-        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue(propertyName, propertyValue);
-        ClimbingArea climbingArea = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, new ClimbingAreaRowMapper());
-        return climbingArea;
+        String sql = "SELECT * FROM public.climbingArea WHERE "+propertyName+" = ?";
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
+        try{
+            ClimbingArea climbingArea = jdbcTemplate.queryForObject(sql, new ClimbingAreaRowMapper(), propertyValue);
+            return climbingArea;
+        } catch (EmptyResultDataAccessException ex) {
+            return null;
+        }
+
     }
 
     @Override
@@ -87,6 +91,7 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
 
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", climbingArea.getId(), Types.INTEGER);
         parameterSource.addValue("name", climbingArea.getName(), Types.VARCHAR);
         parameterSource.addValue("region", climbingArea.getRegion(), Types.VARCHAR);
         parameterSource.addValue("description", climbingArea.getDescription(), Types.VARCHAR);
@@ -113,7 +118,7 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
 
     @Override
     public List<ClimbingArea> findAllClimbingArea() {
-        String sql = "SELECT * FROM public.climbingArea";
+        String sql = "SELECT * FROM public.climbingArea SORT order by id";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         ClimbingAreaRowMapper climbingAreaRowMapper = new ClimbingAreaRowMapper();
         List<ClimbingArea> climbingAreaList = jdbcTemplate.query(sql, climbingAreaRowMapper);

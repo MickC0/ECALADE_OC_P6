@@ -27,7 +27,7 @@ public class RegistrationController {
     @GetMapping("/doRegister")
     public String viewRegistration(@SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
         if (memberInSessionId != null){
-            return "home";
+            return "redirect:/home";
         }
         model.addAttribute("member", new Member());
 
@@ -39,11 +39,12 @@ public class RegistrationController {
         Member existingMember = memberManager.findMemberByProperty("email", newMember.getEmail());
 
         if (existingMember != null){
-
-            return "_error/errorLogin";
+            String str = "Erreur, veuillez recommencer.";
+            model.addAttribute("errorMessage", str);
+            return "redirect:/doRegister";
         } else {
             if (bindingResult.hasErrors()) {
-                return "redirect:doRegister";
+                return "redirect:/doRegister";
             }
             //encoder
             String hashPassword = passwordManager.hashPassword(newMember.getPassword());

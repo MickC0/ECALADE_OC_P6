@@ -49,6 +49,7 @@ public class SectorDaoImpl extends AbstractDataSource implements SectorDao {
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", sector.getId(), Types.INTEGER);
         parameterSource.addValue("climbingareaId", sector.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("name", sector.getName(), Types.VARCHAR);
         parameterSource.addValue("url", sector.getDescription(), Types.VARCHAR);

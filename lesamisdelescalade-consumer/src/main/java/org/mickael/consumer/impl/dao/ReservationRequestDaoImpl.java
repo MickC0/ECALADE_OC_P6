@@ -61,6 +61,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", reservationRequest.getId(), Types.INTEGER);
         parameterSource.addValue("memberId", reservationRequest.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("guidebookId", reservationRequest.getGuidebook().getId(), Types.INTEGER);
 

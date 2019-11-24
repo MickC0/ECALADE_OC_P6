@@ -65,6 +65,7 @@ public class CommentDaoImpl extends AbstractDataSource implements CommentDao {
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", comment.getId(), Types.INTEGER);
         parameterSource.addValue("memberId", comment.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("climbingAreaId", comment.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("description", comment.getDescription(), Types.VARCHAR);

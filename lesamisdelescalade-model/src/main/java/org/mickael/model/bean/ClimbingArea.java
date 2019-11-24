@@ -163,4 +163,14 @@ public class ClimbingArea {
     public void setParkingList(List<Parking> parkingList) {
         this.parkingList = parkingList;
     }
+
+    //======= toString =======
+
+
+    @Override
+    public String toString() {
+        return "Member id = " + member.getId() + " climb id= " + id + " name = " + name + " region = " + region + " des= " + description + " prof= "
+                       + profil + " rock= " + rockType + " max height= " + maximumHeight + " approuved = " + approuved;
+
+    }
 }

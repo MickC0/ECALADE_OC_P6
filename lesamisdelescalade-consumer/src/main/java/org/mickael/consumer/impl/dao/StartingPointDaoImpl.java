@@ -51,6 +51,7 @@ public class StartingPointDaoImpl extends AbstractDataSource implements Starting
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", startingPoint.getId(), Types.INTEGER);
         parameterSource.addValue("climbingareaId", startingPoint.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("name", startingPoint.getName(), Types.VARCHAR);
         parameterSource.addValue("latitude", startingPoint.getLatitude(), Types.VARCHAR);

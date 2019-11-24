@@ -1,6 +1,5 @@
 package org.mickael.model.bean;
 
-import java.sql.Date;
 import java.util.List;
 
 public class Member {
@@ -11,7 +10,6 @@ public class Member {
     private String firstName;
     private String lastName;
     private String pseudo;
-    private Date birthdate;
     private String gender;
     private String email;
     private String password;
@@ -28,14 +26,13 @@ public class Member {
 
     public Member() {}
 
-    public Member(Integer id, String firstName, String lastName, String pseudo, Date birthdate,
+    public Member(Integer id, String firstName, String lastName, String pseudo,
                   String gender, String email, String password, String role, boolean enabled, List<Comment> commentList,
                   List<ClimbingArea> climbingAreaList, List<Guidebook> guidebookList) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.pseudo = pseudo;
-        this.birthdate = birthdate;
         this.gender = gender;
         this.email = email;
         this.password = password;
@@ -79,14 +76,6 @@ public class Member {
 
     public void setPseudo(String pseudo) {
         this.pseudo = pseudo;
-    }
-
-    public Date getBirthdate() {
-        return birthdate;
-    }
-
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
     }
 
     public String getGender() {
@@ -158,8 +147,8 @@ public class Member {
 
     @Override
     public String toString() {
-        return "Member id= " + id + " firstName= " + firstName + " lastName= " + lastName + " pseudo= " + pseudo + " birthdate= "
-                       + birthdate + " gender= " + gender + " email= " + email + " password= " + password;
+        return "Member id= " + id + " firstName= " + firstName + " lastName= " + lastName + " pseudo= " + pseudo
+                       + " gender= " + gender + " email= " + email + " password= " + password;
 
     }
 }

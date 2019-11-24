@@ -13,10 +13,13 @@
 
 
 
-<div class="container-fluid" style="margin-top:100px">
+<div class="container-fluid">
     <div>
         <h1><c:out value="${climbArea.name}"/> </h1>
         <p>gvfhvgeqahuveahinmvanjmavnm</p>
+        <c:if test="${!empty memberInSessionId}">
+            <td><a href="<c:url value="/updateClimbingArea/${climbArea.id}"/>"> Update </a> </td>
+        </c:if>
     </div>
     <div>
         <h2>description</h2>

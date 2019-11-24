@@ -21,13 +21,13 @@
 
     <mvc:resources mapping="/resources/**" location="/resources/" />
 
-    <mvc:interceptors>
-        <!--Intercept /log/xxx.jsp-->
+<!--    <mvc:interceptors>
+        &lt;!&ndash;Intercept /log/xxx.jsp&ndash;&gt;
         <mvc:interceptor>
             <mvc:mapping path="/doLogin"/>
             <bean class="org.mickael.LoginInterceptor"/>
         </mvc:interceptor>
-    </mvc:interceptors>
+    </mvc:interceptors>-->
 
 
     <!-- Resolves views selected for rendering by @Controllers to

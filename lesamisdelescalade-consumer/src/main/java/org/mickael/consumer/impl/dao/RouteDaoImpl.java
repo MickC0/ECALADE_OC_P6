@@ -54,6 +54,7 @@ public class RouteDaoImpl extends AbstractDataSource implements RouteDao {
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", route.getId(), Types.INTEGER);
         parameterSource.addValue("sectorId", route.getSector().getId(), Types.INTEGER);
         parameterSource.addValue("name", route.getName(), Types.VARCHAR);
         parameterSource.addValue("description", route.getDescription(), Types.VARCHAR);

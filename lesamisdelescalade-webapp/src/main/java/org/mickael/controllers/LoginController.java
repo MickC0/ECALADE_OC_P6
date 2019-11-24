@@ -64,22 +64,22 @@ public class LoginController {
                 Member loggedInMember = memberInBdd;
                 if (loggedInMember.getRole().equals(Role.ADMIN.getParam()) || loggedInMember.getRole().equals(Role.MEMBER.getParam()) || loggedInMember.getRole().equals(Role.USER.getParam())){
                     addMemberInSession(loggedInMember, httpSession);
-                    return "redirect:home";
+                    return "redirect:/home";
                 } else {
                     MemberBlockedException memberBlockedException = new MemberBlockedException("Invalid Member Role");
                     model.addAttribute("errorMessage", memberBlockedException);
-                    return "redirect:doLogin";
+                    return "redirect:/doLogin";
                 }
             } else {
                 httpSession.invalidate();
                 model.addAttribute("errorMessage", "Enter valid credentials");
-                return "redirect:doLogin";
+                return "redirect:/doLogin";
             }
         }
         //for display climbing site
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
         model.addAttribute("climbingAreaList", climbingAreaList);
-        return "redirect:home";
+        return "redirect:/home";
     }
 
     @GetMapping("/doLogout")
@@ -89,7 +89,7 @@ public class LoginController {
         httpServletResponse.setHeader("Expires","0");
         httpSession.invalidate();
 
-        return "redirect:home";
+        return "redirect:/home";
     }
 
 

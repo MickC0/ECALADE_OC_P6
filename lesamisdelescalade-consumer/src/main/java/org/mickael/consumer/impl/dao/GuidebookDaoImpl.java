@@ -52,6 +52,7 @@ public class GuidebookDaoImpl extends AbstractDataSource implements GuidebookDao
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", guidebook.getId(), Types.INTEGER);
         parameterSource.addValue("memberId", guidebook.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("name", guidebook.getName(), Types.VARCHAR);
         parameterSource.addValue("description", guidebook.getDescription(), Types.VARCHAR);

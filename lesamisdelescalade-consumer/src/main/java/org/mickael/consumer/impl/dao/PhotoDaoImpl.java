@@ -49,6 +49,7 @@ public class PhotoDaoImpl extends AbstractDataSource implements PhotoDao {
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", photo.getId(), Types.INTEGER);
         parameterSource.addValue("climbingareaId", photo.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("name", photo.getName(), Types.VARCHAR);
         parameterSource.addValue("url", photo.getUrl(), Types.VARCHAR);

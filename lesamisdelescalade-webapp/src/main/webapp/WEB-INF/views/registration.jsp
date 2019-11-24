@@ -5,86 +5,60 @@
 <html>
 <head>
     <title>Registration</title>
-    <%@include file="_include/head.jsp"%>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Association de fans d'escalade">
+    <!-- CDN resources -->
+    <%--
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+    --%>
+
+    <!-- Locales resources -->
+    <script src="https://kit.fontawesome.com/c822637fde.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
+    <link rel="stylesheet" href="<c:url value="/resources/css/styles.css"/>">
 </head>
 <body>
-    <form:form id="regForm"  action="registrationProcess" method="post" modelAttribute="member">
-        <table align="center">
-            <tr>
-                <td>
-                    <form:label path="gender">Gender</form:label>
-                </td>
-                <td>
-                    <form:select path="gender" name="gender" id="gender">
-                        <form:option value="" label="Civilité"/>
-                        <form:option value="M" label="Monsieur"/>
-                        <form:option value="F" label="Madame"/>
-                    </form:select>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="firstName">First Name</form:label>
-                </td>
-                <td>
-                    <form:input path="firstName" name="firstName" id="firstName" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="lastName">Last Name</form:label>
-                </td>
-                <td>
-                    <form:input path="lastName" name="lastName" id="lastName" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="birthdate">Birthdate</form:label>
-                </td>
-                <td>
-                    <form:input type="date" path="birthdate" name="birthdate" id="birthdate" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="pseudo">Username</form:label>
-                </td>
-                <td>
-                    <form:input path="pseudo" name="pseudo" id="pseudo" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="email">Email</form:label>
-                </td>
-                <td>
-                    <form:input path="email" name="email" id="email" />
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <form:label path="password">Password</form:label>
-                </td>
-                <td>
-                    <form:password path="password" name="password" id="password" />
-                </td>
-            </tr>
+<div class="wrapper">
+    <div class="col col-sm-3">
+        <form:form cssClass="form-group" method="post" action="registrationProcess" modelAttribute="member">
+            <div class="form-group">
+                <form:label path="gender">Civilité</form:label>
+                <form:select path="gender" type="text" cssClass="form-control" placeholder="Prénom" required="true" autofocus="">
+                    <form:option value="" label="Choisir"/>
+                    <form:option value="M" label="Monsieur"/>
+                    <form:option value="F" label="Madame"/>
+                </form:select>
+            </div>
+            <div class="form-group">
+                <form:label path="firstName">Prénom</form:label>
+                <form:input path="firstName" type="text" cssClass="form-control" placeholder="Prénom" required="true" autofocus=""/>
+            </div>
+            <div class="form-group">
+                <form:label path="lastName">Nom</form:label>
+                <form:input path="lastName" type="text" cssClass="form-control" placeholder="Nom" required="true" autofocus=""/>
+            </div>
+            <div class="form-group">
+                <form:label path="email">Email</form:label>
+                <form:input path="email" type="email" cssClass="form-control" placeholder="Email address" required="true" autofocus=""/>
+            </div>
+            <div class="form-group">
+                <form:label path="password">Password</form:label>
+                <form:password path="password" cssClass="form-control" placeholder="Password" required="true"/>
+            </div>
+            <div class="form-group">
+                <form:button type="submit" cssClass="btn btn-primary btn-block">Register</form:button>
+            </div>
+        </form:form>
+    </div>
+</div>
+    <!-- jQuery -->
+    <script src="<c:url value="/resources/js/jquery-3.4.1.min.js"/>"></script>
+    <!-- Popper.js -->
+    <script src="<c:url value="/resources/js/popper.min.js"/>"></script>
+    <!-- Javascript de Bootstrap -->
+    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
 
-            <tr>
-                <td></td>
-                <td>
-                    <form:button id="register" name="register">Register</form:button>
-                </td>
-            </tr>
-            <tr></tr>
-            <tr>
-                <td></td>
-                <td><a href="<c:url value="/home"/>">Home</a>
-                </td>
-            </tr>
-        </table>
-    </form:form>
-    <%@include file="_include/footer.jsp"%>
 </body>
 </html>

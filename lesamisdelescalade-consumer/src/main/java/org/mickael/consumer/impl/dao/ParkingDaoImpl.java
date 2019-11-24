@@ -51,6 +51,7 @@ public class ParkingDaoImpl extends AbstractDataSource implements ParkingDao {
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", parking.getId(), Types.INTEGER);
         parameterSource.addValue("climbingareaId", parking.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("name", parking.getName(), Types.VARCHAR);
         parameterSource.addValue("latitude", parking.getLatitude(), Types.VARCHAR);
