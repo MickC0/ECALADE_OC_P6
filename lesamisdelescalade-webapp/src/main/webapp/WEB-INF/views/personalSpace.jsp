@@ -15,6 +15,8 @@
 
 
 <div class="container-fluid" style="margin-top:100px">
+    <p> id de session membre : <c:out value="${memberInSessionId}"/></p>
+    <p> <a href="<c:url value="/editMember/${memberInSessionId}"/>"> Profil</a> </p>
     <table>
         <tr>
             <th>SITE</th>

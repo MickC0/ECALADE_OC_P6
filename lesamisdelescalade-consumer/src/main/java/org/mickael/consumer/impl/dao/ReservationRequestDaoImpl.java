@@ -15,11 +15,10 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
 
     @Override
     public void createReservationRequest(ReservationRequest reservationRequest) {
-        String sql = "INSERT INTO public.reservation_request (id, member_id, guidebook_id, reservation_state)"
-                             + "VALUES (:id, :memberId, :guidebookId, :reservationState)";
+        String sql = "INSERT INTO public.reservation_request (member_id, guidebook_id, reservation_state)"
+                             + "VALUES (:memberId, :guidebookId, :reservationState)";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id", reservationRequest.getId(), Types.INTEGER);
         parameterSource.addValue("memberId", reservationRequest.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("guidebookId", reservationRequest.getGuidebook().getId(), Types.INTEGER);
         parameterSource.addValue("reservationState", reservationRequest.getReservationState().getStateValue(), Types.VARCHAR);

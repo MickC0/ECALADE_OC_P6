@@ -22,7 +22,14 @@
 <body>
 <div class="wrapper">
     <div class="col col-sm-3">
-        <form:form cssClass="form-group" method="post" action="registrationProcess" modelAttribute="member">
+        <form:form cssClass="form-group" method="post" action="updateMember/${memberEdit.id}" modelAttribute="memberEdit">
+            <div class="form-group">
+                <form:hidden path="id" value="${memberEdit.id}"/>
+            </div>
+            <div class="form-group">
+                <form:hidden path="enabled" value="true"/>
+            </div>
+
             <div class="form-group">
                 <form:label path="gender">Civilité</form:label>
                 <form:select path="gender" type="text" cssClass="form-control" placeholder="Civilité" required="true" autofocus="">

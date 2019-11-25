@@ -25,7 +25,6 @@ public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
                              + "VALUES (:firstName, :lastName, :pseudo, :gender, :email, :password, :role, :enabled)";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("id", member.getId(), Types.INTEGER);
         parameterSource.addValue("firstName", member.getFirstName(), Types.VARCHAR);
         parameterSource.addValue("lastName", member.getLastName(), Types.VARCHAR);
         parameterSource.addValue("pseudo", member.getPseudo(), Types.VARCHAR);
@@ -66,6 +65,7 @@ public class MemberDaoImpl extends AbstractDataSource implements MemberDao {
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", member.getId(), Types.INTEGER);
         parameterSource.addValue("firstName", member.getFirstName(), Types.VARCHAR);
         parameterSource.addValue("lastName", member.getLastName(), Types.VARCHAR);
         parameterSource.addValue("pseudo", member.getPseudo(), Types.VARCHAR);
