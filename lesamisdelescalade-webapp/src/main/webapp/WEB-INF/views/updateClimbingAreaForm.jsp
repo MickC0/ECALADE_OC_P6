@@ -37,51 +37,42 @@
                     <td><form:errors path="id" cssClass="errors"/></td>
                 </tr>
                 <tr>
-                    <!-- display for "nomSite" -->
-                    <td> Nom du site:* </td>
+                    <td> Nom du site: </td>
                     <td><form:input path="name" type="text" value="${climbingAreaToUpdate.name}" id="name" size="20" placeholder="obligatoire"  cssStyle=""/></td>
                     <td><form:errors path="name" cssClass="errors"/></td>
                 </tr>
                 <tr>
-                    <!-- display for "localisationDepartement" -->
-                    <td>Region:*</td>
+                    <td>Region:</td>
                     <td><form:input path="region" type="text" value="${climbingAreaToUpdate.region}" id="region" placeholder="obligatoire" size="20"  cssStyle="" /></td>
                     <td><form:errors path="region" cssClass="errors" /></td>
                 </tr>
                 <tr>
-                    <!-- display for "descriptionSite" -->
                     <td>Description:</td>
                     <td><form:input path="description" type="text"  value="${climbingAreaToUpdate.description}" id="description" size="40" placeholder=""  cssStyle=""/></td>
                     <td><form:errors path="description" cssClass="errors"/></td>
                 </tr>
                 <tr>
-                    <!-- display for "localisationPays" -->
-                    <td>Profil :* </td>
+                    <td>Profil : </td>
                     <td><form:input path="profil" type="text" value="${climbingAreaToUpdate.profil}" id="profil" size="20" placeholder="obligatoire" cssStyle=""/></td>
                     <td><form:errors path="profil" cssClass="errors"/></td>
                 </tr>
                 <tr>
-                    <!-- display for "urlPhotoSite" -->
                     <td>Type de roche: </td>
                     <td><form:input path="rockType" type="text" value="${climbingAreaToUpdate.rockType}" id="rockType" placeholder="" cssStyle=""/></td>
                     <td><form:errors path="rockType" cssClass="errors"/></td>
                 </tr>
                 <tr>
-                    <!-- display for "nombre de secteur" -->
-                    <td> Hauteur max:* </td>
+                    <td> Hauteur max: </td>
                     <td><form:input path="maximumHeight" type="number" value="${climbingAreaToUpdate.maximumHeight}" id="maximumHeight" size="15" placeholder="" cssStyle=""/></td>
                     <td><form:errors path="maximumHeight" cssClass="errors"/></td>
                 </tr>
                 <tr>
-                    <td> Approuved:* </td>
+                    <td> Approuved: </td>
                     <td><form:checkbox path="approuved" value="${climbingAreaToUpdate.approuved}"/></td>
                     <td><form:errors path="approuved" cssClass="errors"/></td>
                 </tr>
 
             </table>
-            <p></p>
-            <p>(*) obligatoire</p>
-            <p></p>
             <form:button type="submit" cssClass="btn btn-primary btn-block">Envoyer</form:button>
         </form:form>
     </div>
