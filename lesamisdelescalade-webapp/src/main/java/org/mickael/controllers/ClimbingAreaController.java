@@ -98,7 +98,7 @@ public class ClimbingAreaController {
 
 
     @GetMapping("/editClimbingArea/{id}")
-    public String showUpdateClimbingAreaForm(Model model, @PathVariable("id") Integer id,
+    public String showUpdateClimbingAreaForm(Model model, @PathVariable Integer id,
                                              @SessionAttribute("memberInSessionId") Integer memberInSessionId){
         if (memberInSessionId != null){
             ClimbingArea climbingAreaToUpdate = climbingAreaManager.findClimbingArea(id);
@@ -113,7 +113,7 @@ public class ClimbingAreaController {
 
     @PostMapping("/editClimbingArea/updateClimbingArea/{id}")
     public String updateClimbingArea(@Valid ClimbingArea climbingArea, BindingResult bindingResult, Model model,
-                                         @PathVariable("id") Integer id, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+                                         @PathVariable Integer id, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
         if (memberInSessionId != null){
             System.out.println("etape 2");
             ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingArea(id);
@@ -141,7 +141,7 @@ public class ClimbingAreaController {
     }
 
     @GetMapping("/deleteClimbingArea/{id}")
-    public String deleteClimbingArea(@PathVariable("id")Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+    public String deleteClimbingArea(@PathVariable Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
         if (memberInSessionId != null){
             ClimbingArea climbingAreaToDelete = climbingAreaManager.findClimbingArea(id);
             climbingAreaManager.deleteClimbingArea(climbingAreaToDelete.getId());
