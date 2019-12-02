@@ -20,8 +20,6 @@ public class ClimbingArea {
     private List<Sector> sectorList;
     private List<Photo> photoList;
     private List<Comment> commentList;
-    private List<StartingPoint> startingPointList;
-    private List<Parking> parkingList;
 
 
 
@@ -32,7 +30,7 @@ public class ClimbingArea {
     public ClimbingArea(Integer id, String name, String region, String description, String profil,
                         String rockType, float maximumHeight,
                         boolean approuved, Member member, List<Sector> sectorList, List<Photo> photoList,
-                        List<Comment> commentList, List<StartingPoint> startingPointList, List<Parking> parkingList) {
+                        List<Comment> commentList) {
         this.id = id;
         this.name = name;
         this.region = region;
@@ -45,8 +43,6 @@ public class ClimbingArea {
         this.sectorList = sectorList;
         this.photoList = photoList;
         this.commentList = commentList;
-        this.startingPointList = startingPointList;
-        this.parkingList = parkingList;
     }
 
     //====  GETTERS AND SETTERS  ====
@@ -148,21 +144,6 @@ public class ClimbingArea {
         this.commentList = commentList;
     }
 
-    public List<StartingPoint> getStartingPointList() {
-        return startingPointList;
-    }
-
-    public void setStartingPointList(List<StartingPoint> startingPointList) {
-        this.startingPointList = startingPointList;
-    }
-
-    public List<Parking> getParkingList() {
-        return parkingList;
-    }
-
-    public void setParkingList(List<Parking> parkingList) {
-        this.parkingList = parkingList;
-    }
 
     //======= toString =======
 

@@ -8,12 +8,10 @@ public class ManagerFactoryImpl implements ManagerFactory {
     private ClimbingAreaManager climbingAreaManager;
     private CommentManager commentManager;
     private GuidebookManager guidebookManager;
-    private ParkingManager parkingManager;
     private PhotoManager photoManager;
     private ReservationRequestManager reservationRequestManager;
     private RouteManager routeManager;
     private SectorManager sectorManager;
-    private StartingPointManager startingPointManager;
     private MemberManager memberManager;
 
 
@@ -45,16 +43,6 @@ public class ManagerFactoryImpl implements ManagerFactory {
     @Override
     public void setGuidebookManager(GuidebookManager guidebookManager) {
         this.guidebookManager = guidebookManager;
-    }
-
-    @Override
-    public ParkingManager getParkingManager() {
-        return parkingManager;
-    }
-
-    @Override
-    public void setParkingManager(ParkingManager parkingManager) {
-        this.parkingManager = parkingManager;
     }
 
     @Override
@@ -95,16 +83,6 @@ public class ManagerFactoryImpl implements ManagerFactory {
     @Override
     public void setSectorManager(SectorManager sectorManager) {
         this.sectorManager = sectorManager;
-    }
-
-    @Override
-    public StartingPointManager getStartingPointManager() {
-        return startingPointManager;
-    }
-
-    @Override
-    public void setStartingPointManager(StartingPointManager startingPointManager) {
-        this.startingPointManager = startingPointManager;
     }
 
     @Override

@@ -23,12 +23,10 @@
     <bean id="climbingAreaManager" class="org.mickael.business.impl.manager.ClimbingAreaManagerImpl" parent="abstractManager"/>
     <bean id="commentManager" class="org.mickael.business.impl.manager.CommentManagerImpl" parent="abstractManager"/>
     <bean id="guidebookManager" class="org.mickael.business.impl.manager.GuidebookManagerImpl" parent="abstractManager"/>
-    <bean id="parkingManager" class="org.mickael.business.impl.manager.ParkingManagerImpl" parent="abstractManager"/>
     <bean id="photoManager" class="org.mickael.business.impl.manager.PhotoManagerImpl" parent="abstractManager"/>
     <bean id="reservationRequestManager" class="org.mickael.business.impl.manager.ReservationRequestManagerImpl" parent="abstractManager"/>
     <bean id="routeManager" class="org.mickael.business.impl.manager.RouteManagerImpl" parent="abstractManager"/>
     <bean id="sectorManager" class="org.mickael.business.impl.manager.SectorManagerImpl" parent="abstractManager"/>
-    <bean id="startingPointManager" class="org.mickael.business.impl.manager.StartingPointManagerImpl" parent="abstractManager"/>
     <bean id="memberManager" class="org.mickael.business.impl.manager.MemberManagerImpl" parent="abstractManager"/>
 
     <!-- Manager Factory -->
@@ -36,12 +34,10 @@
         <property name="ClimbingAreaManager" ref="climbingAreaManager"/>
         <property name="CommentManager" ref="commentManager"/>
         <property name="GuidebookManager" ref="guidebookManager"/>
-        <property name="ParkingManager" ref="parkingManager"/>
         <property name="PhotoManager" ref="photoManager"/>
         <property name="ReservationRequestManager" ref="reservationRequestManager"/>
         <property name="RouteManager" ref="routeManager"/>
         <property name="SectorManager" ref="sectorManager"/>
-        <property name="StartingPointManager" ref="startingPointManager"/>
         <property name="MemberManager" ref="memberManager"/>
     </bean>
 

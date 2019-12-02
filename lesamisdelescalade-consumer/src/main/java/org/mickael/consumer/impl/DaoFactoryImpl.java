@@ -8,12 +8,10 @@ public class DaoFactoryImpl implements DaoFactory {
     private ClimbingAreaDao climbingAreaDao;
     private CommentDao commentDao;
     private GuidebookDao guidebookDao;
-    private ParkingDao parkingDao;
     private PhotoDao photoDao;
     private ReservationRequestDao reservationRequestDao;
     private RouteDao routeDao;
     private SectorDao sectorDao;
-    private StartingPointDao startingPointDao;
     private MemberDao memberDao;
 
     @Override
@@ -44,16 +42,6 @@ public class DaoFactoryImpl implements DaoFactory {
     @Override
     public void setGuidebookDao(GuidebookDao guidebookDao) {
         this.guidebookDao = guidebookDao;
-    }
-
-    @Override
-    public ParkingDao getParkingDao() {
-        return parkingDao;
-    }
-
-    @Override
-    public void setParkingDao(ParkingDao parkingDao) {
-        this.parkingDao = parkingDao;
     }
 
     @Override
@@ -94,16 +82,6 @@ public class DaoFactoryImpl implements DaoFactory {
     @Override
     public void setSectorDao(SectorDao sectorDao) {
         this.sectorDao = sectorDao;
-    }
-
-    @Override
-    public StartingPointDao getStartingPointDao() {
-        return startingPointDao;
-    }
-
-    @Override
-    public void setStartingPointDao(StartingPointDao startingPointDao) {
-        this.startingPointDao = startingPointDao;
     }
 
     @Override

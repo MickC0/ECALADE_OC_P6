@@ -58,13 +58,13 @@
         <filter-name>CharacterEncodingFilter</filter-name>
         <servlet-name>dispatcher</servlet-name>
     </filter-mapping>
-<!--    <filter>
+    <filter>
         <filter-name>LoginFilter</filter-name>
         <filter-class>org.mickael.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
         <url-pattern>/login.jsp</url-pattern>
-    </filter-mapping>-->
+    </filter-mapping>
 
 </web-app>

@@ -17,7 +17,6 @@ public class RouteRowMapper implements RowMapper<Route> {
         route.setDescription(resultSet.getString("description"));
         route.setCotation(resultSet.getString("cotation"));
         route.setHeight(resultSet.getFloat("height"));
-        route.setPitchNumber(resultSet.getInt("pitch_number"));
 
         SectorDaoImpl sectorDao = new SectorDaoImpl();
         route.setSector(sectorDao.findSector(resultSet.getInt("sector_id")));

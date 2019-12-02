@@ -9,7 +9,6 @@ public class Route {
     private String description;
     private String cotation;
     private float height;
-    private int pitchNumber;
 
     private Sector sector;
 
@@ -18,13 +17,12 @@ public class Route {
     public Route() {}
 
     public Route(Integer id, String name, String description,
-                 String cotation, float height, int pitchNumber, Sector sector) {
+                 String cotation, float height, Sector sector) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.cotation = cotation;
         this.height = height;
-        this.pitchNumber = pitchNumber;
         this.sector = sector;
     }
 
@@ -69,14 +67,6 @@ public class Route {
 
     public void setHeight(float height) {
         this.height = height;
-    }
-
-    public int getPitchNumber() {
-        return pitchNumber;
-    }
-
-    public void setPitchNumber(int pitchNumber) {
-        this.pitchNumber = pitchNumber;
     }
 
     public Sector getSector() {

@@ -16,12 +16,10 @@
     <bean id="climbingAreaDao" class="org.mickael.consumer.impl.dao.ClimbingAreaDaoImpl" parent="abstractDataSource"/>
     <bean id="commentDao" class="org.mickael.consumer.impl.dao.CommentDaoImpl" parent="abstractDataSource"/>
     <bean id="guidebookDao" class="org.mickael.consumer.impl.dao.GuidebookDaoImpl" parent="abstractDataSource"/>
-    <bean id="parkingDao" class="org.mickael.consumer.impl.dao.ParkingDaoImpl" parent="abstractDataSource"/>
     <bean id="photoDao" class="org.mickael.consumer.impl.dao.PhotoDaoImpl" parent="abstractDataSource"/>
     <bean id="reservationRequestDao" class="org.mickael.consumer.impl.dao.ReservationRequestDaoImpl" parent="abstractDataSource"/>
     <bean id="routeDao" class="org.mickael.consumer.impl.dao.RouteDaoImpl" parent="abstractDataSource"/>
     <bean id="sectorDao" class="org.mickael.consumer.impl.dao.SectorDaoImpl" parent="abstractDataSource"/>
-    <bean id="startingPointDao" class="org.mickael.consumer.impl.dao.StartingPointDaoImpl" parent="abstractDataSource"/>
     <bean id="memberDao" class="org.mickael.consumer.impl.dao.MemberDaoImpl" parent="abstractDataSource"/>
 
 
@@ -30,12 +28,10 @@
         <property name="ClimbingAreaDao" ref="climbingAreaDao"/>
         <property name="CommentDao" ref="commentDao"/>
         <property name="GuidebookDao" ref="guidebookDao"/>
-        <property name="ParkingDao" ref="parkingDao"/>
         <property name="PhotoDao" ref="photoDao"/>
         <property name="ReservationRequestDao" ref="reservationRequestDao"/>
         <property name="RouteDao" ref="routeDao"/>
         <property name="SectorDao" ref="sectorDao"/>
-        <property name="StartingPointDao" ref="startingPointDao"/>
         <property name="MemberDao" ref="memberDao"/>
     </bean>
 

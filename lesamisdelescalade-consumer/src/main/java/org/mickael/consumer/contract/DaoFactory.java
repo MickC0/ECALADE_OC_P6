@@ -13,9 +13,6 @@ public interface DaoFactory {
     GuidebookDao getGuidebookDao();
     void setGuidebookDao(GuidebookDao guidebookDao);
 
-    ParkingDao getParkingDao();
-    void setParkingDao(ParkingDao parkingDao);
-
     PhotoDao getPhotoDao();
     void setPhotoDao(PhotoDao photoDao);
 
@@ -27,9 +24,6 @@ public interface DaoFactory {
 
     SectorDao getSectorDao();
     void setSectorDao(SectorDao sectorDao);
-
-    StartingPointDao getStartingPointDao();
-    void setStartingPointDao(StartingPointDao startingPointDao);
 
     MemberDao getMemberDao();
     void setMemberDao(MemberDao memberDao);

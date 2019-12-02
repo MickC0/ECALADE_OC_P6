@@ -13,9 +13,6 @@ public interface ManagerFactory {
     GuidebookManager getGuidebookManager();
     void setGuidebookManager(GuidebookManager guidebookManager);
 
-    ParkingManager getParkingManager();
-    void setParkingManager(ParkingManager parkingManager);
-
     PhotoManager getPhotoManager();
     void setPhotoManager(PhotoManager photoManager);
 
@@ -27,9 +24,6 @@ public interface ManagerFactory {
 
     SectorManager getSectorManager();
     void setSectorManager(SectorManager sectorManager);
-
-    StartingPointManager getStartingPointManager();
-    void setStartingPointManager(StartingPointManager startingPointManager);
 
     MemberManager getMemberManager();
     void setMemberManager(MemberManager memberManager);

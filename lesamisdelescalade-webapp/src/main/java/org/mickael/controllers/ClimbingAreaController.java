@@ -26,12 +26,6 @@ public class ClimbingAreaController {
     private SectorManager sectorManager;
 
     @Inject
-    private ParkingManager parkingManager;
-
-    @Inject
-    private StartingPointManager startingPointManager;
-
-    @Inject
     private MemberManager memberManager;
 
     @Inject
@@ -44,9 +38,14 @@ public class ClimbingAreaController {
     private RouteManager routeManager;
 
     @GetMapping("/showClimbingAreaForm")
-    public String showClimbingAreaForm(Model model){
-        model.addAttribute("climbingArea", new ClimbingArea());
-        return "climbingAreaForm";
+    public String showClimbingAreaForm(Model model, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
+        if (memberInSessionId != null){
+            model.addAttribute("climbingArea", new ClimbingArea());
+            return "climbingAreaForm";
+        } else {
+            return "redirect:/doLogin";
+        }
+
     }
 
     @PostMapping("/saveClimbingAreaProcess")
@@ -102,8 +101,6 @@ public class ClimbingAreaController {
                                              @SessionAttribute("memberInSessionId") Integer memberInSessionId){
         if (memberInSessionId != null){
             ClimbingArea climbingAreaToUpdate = climbingAreaManager.findClimbingArea(id);
-            System.out.println("etape 1");
-            System.out.println(climbingAreaToUpdate.toString());
             model.addAttribute("climbingAreaToUpdate", climbingAreaToUpdate);
             return "updateClimbingAreaForm";
         } else {
@@ -115,13 +112,10 @@ public class ClimbingAreaController {
     public String updateClimbingArea(@Valid ClimbingArea climbingArea, BindingResult bindingResult, Model model,
                                          @PathVariable Integer id, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
         if (memberInSessionId != null){
-            System.out.println("etape 2");
             ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingArea(id);
             climbingArea.setMember(climbingAreaInBdd.getMember());
-            System.out.println("info etape 2 " + climbingArea);
 
             if (bindingResult.hasErrors()){
-                System.out.println("erreur binding");
                 List<FieldError> errors = bindingResult.getFieldErrors();
                 for (FieldError error : errors ) {
                     System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
@@ -132,7 +126,6 @@ public class ClimbingAreaController {
                 return "updateClimbingAreaForm";
             } else {
                 climbingAreaManager.updateClimbingArea(climbingArea);
-                System.out.println("etape 3 " + climbingArea);
                 return "redirect:/climbingAreaList";
             }
         } else {
@@ -140,12 +133,81 @@ public class ClimbingAreaController {
         }
     }
 
+
     @GetMapping("/deleteClimbingArea/{id}")
     public String deleteClimbingArea(@PathVariable Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
         if (memberInSessionId != null){
             ClimbingArea climbingAreaToDelete = climbingAreaManager.findClimbingArea(id);
             climbingAreaManager.deleteClimbingArea(climbingAreaToDelete.getId());
             return "redirect:/climbingAreaList";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @GetMapping("/createNewSector/{climbId}")
+    public String createNewSector(@PathVariable Integer climbId, Model model, @SessionAttribute(value = "memberInSessionId") Integer memberInSessionId){
+        if (memberInSessionId != null){
+            Sector sector = new Sector();
+            sector.setClimbingArea(climbingAreaManager.findClimbingArea(climbId));
+            model.addAttribute("sector", sector);
+            model.addAttribute("climbId", climbId);
+            return "sectorForm";
+
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @PostMapping("/createNewSector/saveSector/{climbId}")
+    public String saveSector(@PathVariable Integer climbId, Model model,@Valid Sector sector, BindingResult bindingResult,
+                             @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+
+        if (memberInSessionId != null){
+            if (bindingResult.hasErrors()){
+                    model.addAttribute("errorMessage", "Une erreur est survenue. Vérifiez les champs.");
+
+                    return "sectorForm";
+            } else {
+                sectorManager.createSector(sector);
+
+                return "redirect:/climbingArea/{climbId}";
+            }
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @GetMapping("/createNewRoute/{sectorId}")
+    public String createNewRoute(@PathVariable Integer sectorId, Model model, @SessionAttribute(value = "memberInSessionId") Integer memberInSessionId){
+        if (memberInSessionId != null){
+            Route route = new Route();
+            route.setSector(sectorManager.findSector(sectorId));
+            model.addAttribute("route", route);
+            model.addAttribute("sectorId", sectorId);
+            return "routeForm";
+
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @PostMapping("/createNewRoute/saveRoute/{sectorId}")
+    public String saveRoute(@PathVariable Integer sectorId, Model model, @Valid Route route, BindingResult bindingResult,
+                             @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+
+        if (memberInSessionId != null){
+            if (bindingResult.hasErrors()){
+                    model.addAttribute("errorMessage", "Une erreur est survenue. Vérifiez les champs.");
+
+                    return "routeForm";
+            } else {
+                routeManager.createRoute(route);
+                Integer climbId = sectorManager.findSector(sectorId).getClimbingArea().getId();
+                model.addAttribute("climbId", climbId);
+
+                return "redirect:/climbingArea/{climbId}";
+            }
         } else {
             return "redirect:/doLogin";
         }

@@ -29,8 +29,10 @@
         <tr>
             <c:forEach items="${sectorArea}" var="sector" >
                 <td><a href="<c:url value="sectorArea/${sector.id}"/>"> <c:out value="${sector.name}"/> </a> </td>
+                <p><a href="<c:url value="/createNewRoute/${sector.id}"/> "> add new route</a> </p>
             </c:forEach>
         </tr>
+        <p><a href="<c:url value="/createNewSector/${climbArea.id}"/> "> add new sector</a> </p>
     </div>
     <div>
         <tr>
