@@ -13,7 +13,7 @@
 
 
 
-<div class="container-fluid">
+<div class="container">
     <div>
         <h1><c:out value="${climbArea.name}"/> </h1>
         <p>gvfhvgeqahuveahinmvanjmavnm</p>
@@ -26,22 +26,56 @@
         <p><c:out value="${climbArea.description}"/> </p>
     </div>
     <div>
-        <tr>
+        <p class="my-5">
+            <a href="<c:url value="/createNewSector/${climbArea.id}"/>" class="btn btn-primary">
+                <i class="fas fa-plus-square ml-2"> Add a new sector </i>
+            </a>
+        </p>
+        <table class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Secteur</th>
+                <th>Edit</th>
+                <th>Add Route</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
             <c:forEach items="${sectorArea}" var="sector" >
-                <td><a href="<c:url value="sectorArea/${sector.id}"/>"> <c:out value="${sector.name}"/> </a> </td>
-                <p><a href="<c:url value="/createNewRoute/${sector.id}"/> "> add new route</a> </p>
+                <tr>
+                    <td>${sector.name}</td>
+                    <td><a href="<c:url value="/updateSector/${sector.id}"/>" class="btn btn-primary"><i class="fas fa-edit ml-2"></i></a></td>
+                    <td><a href="<c:url value="/createNewRoute/${sector.id}"/>" class="btn btn-primary">
+                        <i class="fas fa-plus-square ml-2"> Add a new route </i></a></td>
+                    <td><a href="#" class="btn btn-primary"><i class="fas fa-trash ml-2"></i></a></td>
+                </tr>
             </c:forEach>
-        </tr>
-        <p><a href="<c:url value="/createNewSector/${climbArea.id}"/> "> add new sector</a> </p>
+            </tbody>
+        </table>
     </div>
     <div>
-        <tr>
+        <table class="table table-striped table-responsive-md">
+            <thead>
+            <tr>
+                <th>Route</th>
+                <th>Secteur</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+            </thead>
+            <tbody>
             <c:forEach items="${routeArea}" var="r" >
-                <td><a href="<c:url value="routeArea/${r.id}"/>"> <c:out value="${r.name}"/> </a> </td>
+                <tr>
+                    <td>${r.name}</td>
+                    <td>${r.sector.name}</td>
+                    <td><a href="#" class="btn btn-primary"><i class="fas fa-edit ml-2"></i></a></td>
+                    <td><a href="#" class="btn btn-primary"><i class="fas fa-trash ml-2"></i></a></td>
+                </tr>
             </c:forEach>
-        </tr>
+            </tbody>
+        </table>
     </div>
-</div>
+   </div>
 
 <%@include file="_include/footer.jsp"%>
 </body>

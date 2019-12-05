@@ -50,9 +50,9 @@ public class SectorDaoImpl extends AbstractDataSource implements SectorDao {
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", sector.getId(), Types.INTEGER);
-        parameterSource.addValue("climbingareaId", sector.getClimbingArea().getId(), Types.INTEGER);
+        parameterSource.addValue("climbingAreaId", sector.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("name", sector.getName(), Types.VARCHAR);
-        parameterSource.addValue("url", sector.getDescription(), Types.VARCHAR);
+        parameterSource.addValue("description", sector.getDescription(), Types.VARCHAR);
 
 
         namedParameterJdbcTemplate.update(sql, parameterSource);
@@ -72,7 +72,7 @@ public class SectorDaoImpl extends AbstractDataSource implements SectorDao {
 
     @Override
     public List<Sector> findAllSector() {
-        String sql = "SELECT * FROM public.sector";
+        String sql = "SELECT * FROM public.sector order by id";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         SectorRowMapper sectorRowMapper = new SectorRowMapper();
         List<Sector> sectorList = jdbcTemplate.query(sql, sectorRowMapper);
@@ -82,7 +82,7 @@ public class SectorDaoImpl extends AbstractDataSource implements SectorDao {
 
     @Override
     public List<Sector> findAllSectorByClimbingAreaId(Integer id) {
-        String sql = "SELECT * FROM public.sector WHERE climbingarea_id = " + id;
+        String sql = "SELECT * FROM public.sector WHERE climbingarea_id = " + id + " order by id";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         SectorRowMapper sectorRowMapper = new SectorRowMapper();
         List<Sector> sectorList = jdbcTemplate.query(sql, sectorRowMapper);

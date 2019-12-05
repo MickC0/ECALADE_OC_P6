@@ -49,7 +49,7 @@ public class ClimbingAreaController {
     }
 
     @PostMapping("/saveClimbingAreaProcess")
-    public String saveClimbingArea(@Valid @ModelAttribute("climbingArea") ClimbingArea newClimbingArea, BindingResult bindingResult, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+    public String saveClimbingArea(@Valid @ModelAttribute("climbingArea") ClimbingArea newClimbingArea, BindingResult bindingResult, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             System.out.println(newClimbingArea.getName());
             ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingAreaByProperty("name", newClimbingArea.getName());
@@ -98,7 +98,7 @@ public class ClimbingAreaController {
 
     @GetMapping("/editClimbingArea/{id}")
     public String showUpdateClimbingAreaForm(Model model, @PathVariable Integer id,
-                                             @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+                                             @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ClimbingArea climbingAreaToUpdate = climbingAreaManager.findClimbingArea(id);
             model.addAttribute("climbingAreaToUpdate", climbingAreaToUpdate);
@@ -110,7 +110,7 @@ public class ClimbingAreaController {
 
     @PostMapping("/editClimbingArea/updateClimbingArea/{id}")
     public String updateClimbingArea(@Valid ClimbingArea climbingArea, BindingResult bindingResult, Model model,
-                                         @PathVariable Integer id, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+                                         @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingArea(id);
             climbingArea.setMember(climbingAreaInBdd.getMember());
@@ -135,7 +135,7 @@ public class ClimbingAreaController {
 
 
     @GetMapping("/deleteClimbingArea/{id}")
-    public String deleteClimbingArea(@PathVariable Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+    public String deleteClimbingArea(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ClimbingArea climbingAreaToDelete = climbingAreaManager.findClimbingArea(id);
             climbingAreaManager.deleteClimbingArea(climbingAreaToDelete.getId());
@@ -146,7 +146,7 @@ public class ClimbingAreaController {
     }
 
     @GetMapping("/createNewSector/{climbId}")
-    public String createNewSector(@PathVariable Integer climbId, Model model, @SessionAttribute(value = "memberInSessionId") Integer memberInSessionId){
+    public String createNewSector(@PathVariable Integer climbId, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             Sector sector = new Sector();
             sector.setClimbingArea(climbingAreaManager.findClimbingArea(climbId));
@@ -161,7 +161,7 @@ public class ClimbingAreaController {
 
     @PostMapping("/createNewSector/saveSector/{climbId}")
     public String saveSector(@PathVariable Integer climbId, Model model,@Valid Sector sector, BindingResult bindingResult,
-                             @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+                             @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
 
         if (memberInSessionId != null){
             if (bindingResult.hasErrors()){
@@ -178,8 +178,39 @@ public class ClimbingAreaController {
         }
     }
 
+    @GetMapping("/updateSector/{id}")
+    public String updateSector(Model model, @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
+        if (memberInSessionId != null){
+
+            Sector sectorToUpdate = sectorManager.findSector(id);
+            model.addAttribute("memberInSessionId", memberInSessionId);
+            model.addAttribute("sectorToUpdate", sectorToUpdate);
+            return "updateSectorForm";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @PostMapping("/updateSector/updatingSectorProcess/{id}")
+    public String updatingSector(@Valid Sector sector, @PathVariable Integer id, Model model, BindingResult bindingResult, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
+        if (memberInSessionId != null){
+            if (bindingResult.hasErrors()){
+                model.addAttribute("memberInSessionId", memberInSessionId);
+                model.addAttribute("sectorToUpdate", sectorManager.findSector(id));
+                return  "updateSectorForm";
+            } else {
+                sectorManager.updateSector(sector);
+                model.addAttribute("climbId", sector.getClimbingArea().getId());
+                model.addAttribute("memberInSessionId", memberInSessionId);
+                return "redirect:/climbingArea/{climbId}";
+            }
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
     @GetMapping("/createNewRoute/{sectorId}")
-    public String createNewRoute(@PathVariable Integer sectorId, Model model, @SessionAttribute(value = "memberInSessionId") Integer memberInSessionId){
+    public String createNewRoute(@PathVariable Integer sectorId, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             Route route = new Route();
             route.setSector(sectorManager.findSector(sectorId));
@@ -194,7 +225,7 @@ public class ClimbingAreaController {
 
     @PostMapping("/createNewRoute/saveRoute/{sectorId}")
     public String saveRoute(@PathVariable Integer sectorId, Model model, @Valid Route route, BindingResult bindingResult,
-                             @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+                             @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
 
         if (memberInSessionId != null){
             if (bindingResult.hasErrors()){

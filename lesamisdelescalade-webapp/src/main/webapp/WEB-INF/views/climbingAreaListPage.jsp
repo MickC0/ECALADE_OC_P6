@@ -81,8 +81,9 @@
             <div  class="container my-5">
 
                 <p class="my-5">
-                    <a href="<c:url value="/showClimbingAreaForm"/>" class="btn btn-primary"><i
-                            class="fas fa-user-plus ml-2"> Add </i></a>
+                    <a href="<c:url value="/showClimbingAreaForm"/>" class="btn btn-primary">
+                        <i class="fas fa-plus-square ml-2"> Add </i>
+                    </a>
                 </p>
                 <div class="col-md-10">
                     <c:if test="${empty climbingAreaList}">
