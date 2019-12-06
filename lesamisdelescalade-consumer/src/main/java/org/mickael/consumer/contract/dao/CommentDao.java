@@ -7,6 +7,7 @@ import java.util.List;
 public interface CommentDao {
 
     void createComment(Comment comment);
+    Comment findCommentById(Integer id);
     Comment findCommentByMember(Integer id);
     Comment findCommentByClimbingArea(Integer id);
     void updateComment(Comment comment);

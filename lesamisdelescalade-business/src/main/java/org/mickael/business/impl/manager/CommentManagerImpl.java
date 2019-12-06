@@ -24,6 +24,18 @@ public class CommentManagerImpl extends AbstractManager implements CommentManage
     }
 
     @Override
+    public Comment findCommentById(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        Comment comment = transactionTemplate.execute(transactionStatus -> {
+            Comment commentTransaction;
+            commentTransaction = getDaoFactory().getCommentDao().findCommentById(id);
+            return commentTransaction;
+        });
+
+        return comment;
+    }
+
+    @Override
     public Comment findCommentByMember(Integer id) {
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         Comment comment = transactionTemplate.execute(transactionStatus -> {

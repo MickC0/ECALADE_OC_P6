@@ -2,6 +2,7 @@ package org.mickael.controllers;
 
 import org.mickael.business.contract.manager.*;
 import org.mickael.model.bean.ClimbingArea;
+import org.mickael.model.bean.Comment;
 import org.mickael.model.bean.Route;
 import org.mickael.model.bean.Sector;
 import org.springframework.stereotype.Controller;
@@ -32,10 +33,18 @@ public class ClimbingAreaController {
     private PhotoManager photoManager;
 
     @Inject
-    private GuidebookManager guidebookManager;
+    private CommentManager commentManager;
 
     @Inject
     private RouteManager routeManager;
+
+
+
+
+    /** ======== Climbing Area ======== */
+
+
+
 
     @GetMapping("/showClimbingAreaForm")
     public String showClimbingAreaForm(Model model, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
@@ -137,13 +146,27 @@ public class ClimbingAreaController {
     @GetMapping("/deleteClimbingArea/{id}")
     public String deleteClimbingArea(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
-            ClimbingArea climbingAreaToDelete = climbingAreaManager.findClimbingArea(id);
-            climbingAreaManager.deleteClimbingArea(climbingAreaToDelete.getId());
+
+            List<Sector> sectorList = sectorManager.findAllSectorByClimbingAreaId(id);
+            for (Sector sector : sectorList){
+                List<Route> routeList = routeManager.findAllRouteBySectorId(sector.getId());
+                for (Route route : routeList){
+                    routeManager.deleteRoute(route.getId());
+                }
+                sectorManager.deleteSector(sector.getId());
+            }
+            climbingAreaManager.deleteClimbingArea(id);
             return "redirect:/climbingAreaList";
         } else {
             return "redirect:/doLogin";
         }
     }
+
+
+
+    /** ======== Sector ======== */
+
+
 
     @GetMapping("/createNewSector/{climbId}")
     public String createNewSector(@PathVariable Integer climbId, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
@@ -209,6 +232,23 @@ public class ClimbingAreaController {
         }
     }
 
+    @GetMapping("/deleteSector/{id}")
+    public String deleteSector(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+        if (memberInSessionId != null){
+            model.addAttribute("climbId", sectorManager.findSector(id).getClimbingArea().getId());
+            List<Route> routeList = routeManager.findAllRouteBySectorId(id);
+            for (Route route : routeList){
+                routeManager.deleteRoute(route.getId());
+            }
+            sectorManager.deleteSector(id);
+            return "redirect:/climbingArea/{climbId}";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    /** ======== Route ======== */
+
     @GetMapping("/createNewRoute/{sectorId}")
     public String createNewRoute(@PathVariable Integer sectorId, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
@@ -243,4 +283,133 @@ public class ClimbingAreaController {
             return "redirect:/doLogin";
         }
     }
+
+    @GetMapping("/updateRoute/{id}")
+    public String updateRoute(Model model, @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
+        if (memberInSessionId != null){
+
+            Route routeToUpdate = routeManager.findRoute(id);
+            model.addAttribute("memberInSessionId", memberInSessionId);
+            model.addAttribute("routeToUpdate", routeToUpdate);
+            return "updateRouteForm";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @PostMapping("/updateRoute/updatingRouteProcess/{id}")
+    public String updatingRoute(@Valid Route route, @PathVariable Integer id, Model model, BindingResult bindingResult, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
+        if (memberInSessionId != null){
+            if (bindingResult.hasErrors()){
+                model.addAttribute("memberInSessionId", memberInSessionId);
+                model.addAttribute("routeToUpdate", routeManager.findRoute(id));
+                return  "updateRouteForm";
+            } else {
+                Integer climbId = sectorManager.findSector(routeManager.findRoute(id).getSector().getId()).getClimbingArea().getId();
+
+                routeManager.updateRoute(route);
+                model.addAttribute("climbId", climbId);
+                model.addAttribute("memberInSessionId", memberInSessionId);
+                return "redirect:/climbingArea/{climbId}";
+            }
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @GetMapping("/deleteRoute/{id}")
+    public String deleteRoute(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+        if (memberInSessionId != null){
+            Integer climbId = routeManager.findRoute(id).getSector().getClimbingArea().getId();
+            routeManager.deleteRoute(id);
+            model.addAttribute("climbId", climbId);
+            return "redirect:/climbingArea/{climbId}";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    /** ======== Comments ======== */
+
+
+    @GetMapping("/createNewComment/{climbId}")
+    public String createNewComment(@PathVariable Integer climbId, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+        if (memberInSessionId != null){
+            Comment comment = new Comment();
+
+            comment.setClimbingArea(climbingAreaManager.findClimbingArea(climbId));
+            comment.setMember(memberManager.findMember(memberInSessionId));
+            model.addAttribute("comment", comment);
+            model.addAttribute("climbId", climbId);
+            return "commentForm";
+
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @PostMapping("/createNewComment/saveComment/{climbId}")
+    public String saveComment(@PathVariable Integer climbId, Model model,@Valid Comment comment, BindingResult bindingResult,
+                             @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+
+        if (memberInSessionId != null){
+            if (bindingResult.hasErrors()){
+                model.addAttribute("errorMessage", "Une erreur est survenue. Vérifiez les champs.");
+
+                return "commentForm";
+            } else {
+                commentManager.createComment(comment);
+
+                return "redirect:/climbingArea/{climbId}";
+            }
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @GetMapping("/updateComment/{id}")
+    public String updateComment(Model model, @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
+        if (memberInSessionId != null){
+
+            Comment commentToUpdate = commentManager.findCommentById(id);
+            model.addAttribute("memberInSessionId", memberInSessionId);
+            model.addAttribute("commentToUpdate", commentToUpdate);
+            return "updateCommentForm";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @PostMapping("/updateComment/updatingCommentProcess/{id}")
+    public String updatingComment(@Valid Comment comment, @PathVariable Integer id, Model model, BindingResult bindingResult, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
+        if (memberInSessionId != null){
+            if (bindingResult.hasErrors()){
+                model.addAttribute("memberInSessionId", memberInSessionId);
+                model.addAttribute("commentToUpdate", commentManager.findCommentById(id));
+                return  "updateCommentForm";
+            } else {
+                model.addAttribute("climbId", commentManager.findCommentById(id).getClimbingArea().getId());
+                model.addAttribute("memberInSessionId", memberInSessionId);
+                commentManager.updateComment(comment);
+                return "redirect:/climbingArea/{climbId}";
+            }
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @GetMapping("/deleteComment/{id}")
+    public String deleteComment(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+        if (memberInSessionId != null){
+            model.addAttribute("climbId", commentManager.findCommentById(id).getClimbingArea().getId());
+            model.addAttribute("memberInSessionId", memberInSessionId);
+            commentManager.deleteComment(id);
+            return "redirect:/climbingArea/{climbId}";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+
+
 }

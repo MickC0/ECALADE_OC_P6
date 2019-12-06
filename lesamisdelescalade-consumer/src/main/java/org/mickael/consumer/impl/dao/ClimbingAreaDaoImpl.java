@@ -118,7 +118,7 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
 
     @Override
     public List<ClimbingArea> findAllClimbingArea() {
-        String sql = "SELECT * FROM public.climbingArea SORT order by id";
+        String sql = "SELECT * FROM public.climbingArea ORDER BY id";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         ClimbingAreaRowMapper climbingAreaRowMapper = new ClimbingAreaRowMapper();
         List<ClimbingArea> climbingAreaList = jdbcTemplate.query(sql, climbingAreaRowMapper);

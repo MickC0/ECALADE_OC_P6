@@ -29,6 +29,18 @@ public class CommentDaoImpl extends AbstractDataSource implements CommentDao {
     }
 
     @Override
+    public Comment findCommentById(Integer id) {
+        String sql = "SELECT * FROM public.comment WHERE id = :id";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id, Types.INTEGER);
+        CommentRowMapper commentRowMapper = new CommentRowMapper();
+        Comment comment = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, commentRowMapper);
+
+        return comment;
+    }
+
+    @Override
     public Comment findCommentByMember(Integer id) {
 
         String sql = "SELECT * FROM public.comment WHERE member_id = :id";

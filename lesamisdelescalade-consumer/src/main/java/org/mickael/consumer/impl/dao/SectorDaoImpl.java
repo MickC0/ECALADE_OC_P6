@@ -72,7 +72,7 @@ public class SectorDaoImpl extends AbstractDataSource implements SectorDao {
 
     @Override
     public List<Sector> findAllSector() {
-        String sql = "SELECT * FROM public.sector order by id";
+        String sql = "SELECT * FROM public.sector ORDER BY id";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         SectorRowMapper sectorRowMapper = new SectorRowMapper();
         List<Sector> sectorList = jdbcTemplate.query(sql, sectorRowMapper);
@@ -82,7 +82,7 @@ public class SectorDaoImpl extends AbstractDataSource implements SectorDao {
 
     @Override
     public List<Sector> findAllSectorByClimbingAreaId(Integer id) {
-        String sql = "SELECT * FROM public.sector WHERE climbingarea_id = " + id + " order by id";
+        String sql = "SELECT * FROM public.sector WHERE climbingarea_id = " + id + " ORDER BY id";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         SectorRowMapper sectorRowMapper = new SectorRowMapper();
         List<Sector> sectorList = jdbcTemplate.query(sql, sectorRowMapper);

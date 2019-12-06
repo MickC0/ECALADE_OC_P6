@@ -47,7 +47,7 @@
                     <td><a href="<c:url value="/updateSector/${sector.id}"/>" class="btn btn-primary"><i class="fas fa-edit ml-2"></i></a></td>
                     <td><a href="<c:url value="/createNewRoute/${sector.id}"/>" class="btn btn-primary">
                         <i class="fas fa-plus-square ml-2"> Add a new route </i></a></td>
-                    <td><a href="#" class="btn btn-primary"><i class="fas fa-trash ml-2"></i></a></td>
+                    <td><a href="<c:url value="/deleteSector/${sector.id}"/> " class="btn btn-primary"><i class="fas fa-trash ml-2"> Delete</i></a></td>
                 </tr>
             </c:forEach>
             </tbody>
@@ -68,8 +68,8 @@
                 <tr>
                     <td>${r.name}</td>
                     <td>${r.sector.name}</td>
-                    <td><a href="#" class="btn btn-primary"><i class="fas fa-edit ml-2"></i></a></td>
-                    <td><a href="#" class="btn btn-primary"><i class="fas fa-trash ml-2"></i></a></td>
+                    <td><a href="<c:url value="/updateRoute/${r.id}"/> " class="btn btn-primary"><i class="fas fa-edit ml-2">Update route</i></a></td>
+                    <td><a href="<c:url value="/deleteRoute/${r.id}"/> " class="btn btn-primary"><i class="fas fa-trash ml-2">Delete</i></a></td>
                 </tr>
             </c:forEach>
             </tbody>
