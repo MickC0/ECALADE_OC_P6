@@ -39,13 +39,20 @@ public class PersonalSpaceController {
         if (memberInSessionId == null){
             return "redirect:/home";
         }
+
+        //show all the climbing area's owner
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findClimbingAreaByMemberId(memberInSessionId);
+        //show all the guidebook's owner
         List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSessionId);
+        //show all the reservation request's owner
         List<ReservationRequest> reservationRequestList = reservationRequestManager.findAllReservationRequestByMemberId(memberInSessionId);
+
+
+
         model.addAttribute("climbingAreaList", climbingAreaList);
         model.addAttribute("guidebookList", guidebookList);
         model.addAttribute("reservationRequestList", reservationRequestList);
-        //model.addAttribute("memberInSession", memberInSession);
+        model.addAttribute("memberInSessionId", memberInSessionId);
         return "personalSpace";
     }
 
