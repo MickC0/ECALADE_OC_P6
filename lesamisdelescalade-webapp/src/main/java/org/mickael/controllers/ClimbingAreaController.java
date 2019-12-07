@@ -1,10 +1,7 @@
 package org.mickael.controllers;
 
 import org.mickael.business.contract.manager.*;
-import org.mickael.model.bean.ClimbingArea;
-import org.mickael.model.bean.Comment;
-import org.mickael.model.bean.Route;
-import org.mickael.model.bean.Sector;
+import org.mickael.model.bean.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -146,15 +143,28 @@ public class ClimbingAreaController {
     @GetMapping("/deleteClimbingArea/{id}")
     public String deleteClimbingArea(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
-
+            //delete sector
             List<Sector> sectorList = sectorManager.findAllSectorByClimbingAreaId(id);
             for (Sector sector : sectorList){
+                //delete route
                 List<Route> routeList = routeManager.findAllRouteBySectorId(sector.getId());
                 for (Route route : routeList){
                     routeManager.deleteRoute(route.getId());
                 }
                 sectorManager.deleteSector(sector.getId());
             }
+            //delete comment
+            List<Comment> commentList = commentManager.findAllCommentByClimbingArea(id);
+            for (Comment comment : commentList){
+                commentManager.deleteComment(comment.getId());
+            }
+            //delete photo
+            List<Photo> photoList = photoManager.findAllPhotoByClimbingAreaId(id);
+            for (Photo photo : photoList){
+                photoManager.deletePhoto(photo.getId());
+            }
+
+            //delete climbing area
             climbingAreaManager.deleteClimbingArea(id);
             return "redirect:/climbingAreaList";
         } else {
@@ -359,7 +369,7 @@ public class ClimbingAreaController {
                 return "commentForm";
             } else {
                 commentManager.createComment(comment);
-
+                model.addAttribute("climbId", climbId);
                 return "redirect:/climbingArea/{climbId}";
             }
         } else {
