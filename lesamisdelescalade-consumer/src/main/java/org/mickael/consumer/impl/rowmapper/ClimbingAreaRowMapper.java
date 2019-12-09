@@ -14,7 +14,6 @@ public class ClimbingAreaRowMapper implements RowMapper<ClimbingArea> {
 
 
         ClimbingArea climbingArea = new ClimbingArea();
-
         climbingArea.setId(resultSet.getInt("id"));
         climbingArea.setName(resultSet.getString("name"));
         climbingArea.setRegion(resultSet.getString("region"));

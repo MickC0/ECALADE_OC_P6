@@ -174,7 +174,7 @@ public class ClimbingAreaController {
 
 
 
-    /** ======== Sector ======== */
+    /** ======== Sector ========
 
 
 
@@ -257,7 +257,7 @@ public class ClimbingAreaController {
         }
     }
 
-    /** ======== Route ======== */
+    /** ======== Route ========
 
     @GetMapping("/createNewRoute/{sectorId}")
     public String createNewRoute(@PathVariable Integer sectorId, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
@@ -339,7 +339,7 @@ public class ClimbingAreaController {
         }
     }
 
-    /** ======== Comments ======== */
+    /** ======== Comments ========
 
 
     @GetMapping("/createNewComment/{climbId}")
@@ -418,8 +418,7 @@ public class ClimbingAreaController {
         } else {
             return "redirect:/doLogin";
         }
-    }
-
+    }*/
 
 
 }

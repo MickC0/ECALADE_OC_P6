@@ -42,6 +42,16 @@ public class GuidebookDaoImpl extends AbstractDataSource implements GuidebookDao
     }
 
     @Override
+    public Guidebook findGuidebookByProperty(String propertyName, Object propertyValue) {
+        String sql = "SELECT * FROM public.guidebook WHERE "+propertyName+" = :"+propertyName+"";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue(propertyName, propertyValue);
+        Guidebook guidebook = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, new GuidebookRowMapper());
+        return guidebook;
+    }
+
+    @Override
     public void updateGuidebook(Guidebook guidebook) {
         String sql = "UPDATE public.guidebook SET "
                              + "member_id = :memberId, "
