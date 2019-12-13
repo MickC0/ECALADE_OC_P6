@@ -12,6 +12,7 @@ import javax.validation.Valid;
 import java.sql.Timestamp;
 import java.util.List;
 
+@Controller
 public class GuidebookController {
 
     @Inject
@@ -32,7 +33,8 @@ public class GuidebookController {
 
 
     @PostMapping("/saveGuidebookProcess")
-    public String saveGuidebook(@Valid @ModelAttribute("guidebook") Guidebook newGuidebook, BindingResult bindingResult, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+    public String saveGuidebook(@Valid @ModelAttribute("guidebook") Guidebook newGuidebook, BindingResult bindingResult, Model model,
+                                @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
 
             Guidebook guidebookInBdd = guidebookManager.findGuidebookByProperty("name", newGuidebook.getName());
@@ -49,7 +51,8 @@ public class GuidebookController {
                     newGuidebook.setLoaned(false);
                     newGuidebook.setAddedDate(new Timestamp(System.currentTimeMillis()));
                     guidebookManager.createGuidebook(newGuidebook);
-                    return "redirect:/personalSpace"; //voir la redirection avec {id} ?
+                    model.addAttribute("id", memberInSessionId);
+                    return "redirect:/personalSpace/{id}"; //voir la redirection avec {id} ?
                 }
             }
         } else {
@@ -65,6 +68,38 @@ public class GuidebookController {
         model.addAttribute("memberInSessionId", memberInSessionId);
         return "guidebook";
     }
+    
+    
+    @GetMapping("/editGuidebook/{id}")
+    public String showUpdateGuidebookForm(@PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
+        if (memberInSessionId != null){
+            Guidebook guidebook = guidebookManager.findGuidebook(id);
+            model.addAttribute("guidebook", guidebook);
+            model.addAttribute("memberInSessionId", memberInSessionId);
+            return "updateGuidebookForm";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+    
+    @PostMapping("/editGuidebook/updateGuidebook/{id}")
+    public String updateGuidebook(@PathVariable Integer id, @Valid Guidebook guidebook, BindingResult bindingResult,
+                                  @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
+        if (memberInSessionId != null){
+            Guidebook guidebookInBdd = guidebookManager.findGuidebook(id);
+            guidebook.setMember(guidebookInBdd.getMember());
+            
+            if (bindingResult.hasErrors()){
+                model.addAttribute("guidebook", guidebook);
+                model.addAttribute("memberInSessionId", memberInSessionId);
+                return "updateGuidebookForm";
+            } else {
+                guidebookManager.updateGuidebook(guidebook);
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+    
 
 
     @GetMapping("/guidebookList")
