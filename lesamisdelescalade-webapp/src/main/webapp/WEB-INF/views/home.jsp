@@ -25,7 +25,7 @@
 <%@include file="_include/navbar.jsp"%>
 --%>
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-    <a class="navbar-brand" href="<c:url value="/home"/>">
+    <a class="navbar-brand" href="<c:url value="/showHome"/>">
         <img src="<c:url value="/resources/img/icon1.svg"/>" style="width: 50px; height:auto">
         Les amis de l'escalade
     </a>
@@ -83,6 +83,7 @@
                 <table>
                     <c:forEach items="${climbingAreaList}" var="c" >
                         <tr>
+                            <td><img src="" alt="pas de photo" style="width:100px;height:100px;border:0;"></td>>
                             <td>${c.name}</td>
                             <td>${c.region}</td>
                             <c:if test="${!empty memberInSessionId}">

@@ -10,7 +10,7 @@
     <%@include file="WEB-INF/views/_include/head.jsp"%>
 </head>
 <body>
-<c:redirect url="/home"/>
+<c:redirect url="/showHome"/>
 <%@include file="WEB-INF/views/_include/footer.jsp"%>
 </body>
 </html>

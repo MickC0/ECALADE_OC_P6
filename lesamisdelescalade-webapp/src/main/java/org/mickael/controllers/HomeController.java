@@ -1,6 +1,7 @@
 package org.mickael.controllers;
 
 import org.mickael.business.contract.manager.ClimbingAreaManager;
+import org.mickael.business.contract.manager.PhotoManager;
 import org.mickael.model.bean.ClimbingArea;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,12 +16,15 @@ public class HomeController {
     @Inject
     private ClimbingAreaManager climbingAreaManager;
 
+    @Inject
+    private PhotoManager photoManager;
 
-    @GetMapping("/home")
+
+    @GetMapping("/showHome")
     public String displayHomePage(Model model /**, @SessionAttribute(value = "memberInSession", required = false) Member memberInSession*/){
         //Display all the climbing Area on the homepage
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
-        model.addAttribute("climbingAreaList", climbingAreaList);
+        //model.addAttribute("climbingAreaList", climbingAreaList);
         //Test if the member is logged
         /**if(memberInSession != null){
             model.addAttribute("memberInSession", memberInSession);

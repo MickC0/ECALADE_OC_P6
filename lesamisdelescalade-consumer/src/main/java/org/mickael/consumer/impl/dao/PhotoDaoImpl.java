@@ -82,12 +82,11 @@ public class PhotoDaoImpl extends AbstractDataSource implements PhotoDao {
 
     @Override
     public List<Photo> findAllPhotoByClimbingAreaId(Integer id) {
-        String sql = "SELECT FROM public.photo WHERE climbingarea_id = :id ORDER BY id";
+        String sql = "SELECT FROM public.photo WHERE climbingarea_id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
 
-        parameterSource.addValue("id", id);
-        namedParameterJdbcTemplate.update(sql, parameterSource);
+        parameterSource.addValue("id", id, Types.INTEGER);
         PhotoRowMapper photoRowMapper = new PhotoRowMapper();
         List<Photo> photoList = namedParameterJdbcTemplate.query(sql, parameterSource, photoRowMapper);
 

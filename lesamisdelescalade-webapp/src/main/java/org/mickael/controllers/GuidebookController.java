@@ -3,6 +3,7 @@ package org.mickael.controllers;
 import org.mickael.business.contract.manager.GuidebookManager;
 import org.mickael.business.contract.manager.MemberManager;
 import org.mickael.model.bean.Guidebook;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
@@ -95,6 +96,8 @@ public class GuidebookController {
                 return "updateGuidebookForm";
             } else {
                 guidebookManager.updateGuidebook(guidebook);
+                return "redirect:/guidebookList";
+            }
         } else {
             return "redirect:/doLogin";
         }
