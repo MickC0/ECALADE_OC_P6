@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.sql.Timestamp;
 import java.util.List;
 
 @Controller
@@ -50,10 +49,9 @@ public class GuidebookController {
 
                     newGuidebook.setMember(memberManager.findMember(memberInSessionId));
                     newGuidebook.setLoaned(false);
-                    newGuidebook.setAddedDate(new Timestamp(System.currentTimeMillis()));
                     guidebookManager.createGuidebook(newGuidebook);
-                    model.addAttribute("id", memberInSessionId);
-                    return "redirect:/personalSpace/{id}"; //voir la redirection avec {id} ?
+                    model.addAttribute("memberInSessionId", memberInSessionId);
+                    return "redirect:/personalSpace/{memberInSessionId}"; //voir la redirection avec {id} ?
                 }
             }
         } else {
@@ -73,9 +71,10 @@ public class GuidebookController {
     
     @GetMapping("/editGuidebook/{id}")
     public String showUpdateGuidebookForm(@PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
-        if (memberInSessionId != null){
-            Guidebook guidebook = guidebookManager.findGuidebook(id);
-            model.addAttribute("guidebook", guidebook);
+        Guidebook guidebookInBdd = guidebookManager.findGuidebook(id);
+
+        if (memberInSessionId != null && memberInSessionId == guidebookInBdd.getMember().getId()){
+            model.addAttribute("guidebookToUpdate", guidebookInBdd);
             model.addAttribute("memberInSessionId", memberInSessionId);
             return "updateGuidebookForm";
         } else {
@@ -83,11 +82,11 @@ public class GuidebookController {
         }
     }
     
-    @PostMapping("/editGuidebook/updateGuidebook/{id}")
+    @PostMapping("/editGuidebook/updatingGuidebookProcess/{id}")
     public String updateGuidebook(@PathVariable Integer id, @Valid Guidebook guidebook, BindingResult bindingResult,
                                   @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
-        if (memberInSessionId != null){
-            Guidebook guidebookInBdd = guidebookManager.findGuidebook(id);
+        Guidebook guidebookInBdd = guidebookManager.findGuidebook(id);
+        if (memberInSessionId != null  && memberInSessionId == guidebookInBdd.getMember().getId()){
             guidebook.setMember(guidebookInBdd.getMember());
             
             if (bindingResult.hasErrors()){
@@ -102,7 +101,38 @@ public class GuidebookController {
             return "redirect:/doLogin";
         }
     }
-    
+
+    @GetMapping("/editLoanedStatusGuidebook/{id}")
+    public String editLoanedStatusGuidebook(@PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
+        Guidebook guidebookInBdd = guidebookManager.findGuidebook(id);
+        if (memberInSessionId != null && memberInSessionId == guidebookInBdd.getMember().getId()){
+            boolean loaned = guidebookInBdd.isLoaned();
+            if (loaned){
+                guidebookInBdd.setLoaned(false);
+            } else {
+                guidebookInBdd.setLoaned(true);
+            }
+            guidebookManager.updateGuidebook(guidebookInBdd);
+
+            model.addAttribute("id", id);
+            model.addAttribute("memberInSessionId", memberInSessionId);
+            return "redirect:/guidebook/{id}";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+
+    @GetMapping("/deleteGuidebook/{id}")
+    public String deleteGuidebook(@PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
+        if (memberInSessionId != null){
+            guidebookManager.deleteGuidebook(id);
+            model.addAttribute("memberInSessionId", memberInSessionId);
+            return "redirect:/guidebookList";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
 
 
     @GetMapping("/guidebookList")

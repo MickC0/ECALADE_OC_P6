@@ -1,6 +1,6 @@
 package org.mickael.model.bean;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class Guidebook {
 
@@ -9,7 +9,7 @@ public class Guidebook {
     private Integer id;
     private String name;
     private String description;
-    private Timestamp addedDate;
+    private Date addedDate;
     private boolean isLoaned;
 
     private Member member;
@@ -18,7 +18,7 @@ public class Guidebook {
 
     public Guidebook() {}
 
-    public Guidebook(Integer id, String name, String description, Timestamp addedDate, boolean isLoaned, Member member) {
+    public Guidebook(Integer id, String name, String description, Date addedDate, boolean isLoaned, Member member) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -54,11 +54,11 @@ public class Guidebook {
         this.description = description;
     }
 
-    public Timestamp getAddedDate() {
+    public Date getAddedDate() {
         return addedDate;
     }
 
-    public void setAddedDate(Timestamp addedDate) {
+    public void setAddedDate(Date addedDate) {
         this.addedDate = addedDate;
     }
 

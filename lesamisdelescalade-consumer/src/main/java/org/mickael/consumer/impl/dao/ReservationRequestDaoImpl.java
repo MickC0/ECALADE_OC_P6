@@ -29,6 +29,18 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
     }
 
     @Override
+    public ReservationRequest findReservationRequestById(Integer id) {
+        String sql = "SELECT * FROM public.reservation_request WHERE id = :guidebook_id";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id, Types.INTEGER);
+        ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
+        ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
+
+        return reservationRequest;
+    }
+
+    @Override
     public ReservationRequest findReservationRequestByGuidebookId (Integer id) {
         String sql = "SELECT * FROM public.reservation_request WHERE guidebook_id = :guidebook_id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
@@ -42,7 +54,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
 
     @Override
     public ReservationRequest findReservationRequestByMemberId (Integer id) {
-        String sql = "SELECT * FROM public.reservation_request WHERE member_id = :member_id";
+        String sql = "SELECT * FROM public.reservation_request WHERE member_id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("member_id", id, Types.INTEGER);
@@ -53,16 +65,45 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
     }
 
     @Override
+    public ReservationRequest findReservationRequestByMemberAndGuidebookId(Integer memberId, Integer guidebookId) {
+        String sql = "SELECT * FROM public.reservation_request WHERE member_id = :memberId AND guidebook_id = :guidebookId";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("member_id", memberId, Types.INTEGER);
+        parameterSource.addValue("guidebook_id", guidebookId, Types.INTEGER);
+        ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
+        ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
+
+        return reservationRequest;
+    }
+
+    @Override
+    public ReservationRequest findReservationRequestByState(String reservationState) {
+        String sql = "SELECT * FROM public.reservation_request WHERE reservation_state = :reservationState";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("reservation_state", reservationState, Types.VARCHAR);
+        ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
+        ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
+
+        return reservationRequest;
+    }
+
+    @Override
     public void updateReservationRequest(ReservationRequest reservationRequest) {
         String sql = "UPDATE public.reservation_request SET "
+
                              + "member_id = :memberId, "
-                             + "guidebook_id = :guidebookId "
+                             + "guidebook_id = :guidebookId, "
+
+                             + "reservation_state = :reservationState "
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", reservationRequest.getId(), Types.INTEGER);
         parameterSource.addValue("memberId", reservationRequest.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("guidebookId", reservationRequest.getGuidebook().getId(), Types.INTEGER);
+        parameterSource.addValue("memberState", reservationRequest.getReservationState().getStateValue(), Types.VARCHAR);
 
 
         namedParameterJdbcTemplate.update(sql, parameterSource);

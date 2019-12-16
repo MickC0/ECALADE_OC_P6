@@ -23,6 +23,18 @@ public class ReservationRequestManagerImpl extends AbstractManager implements Re
     }
 
     @Override
+    public ReservationRequest findReservationRequestById(Integer id) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        ReservationRequest reservationRequest = transactionTemplate.execute(transactionStatus -> {
+            ReservationRequest reservationRequestTransaction;
+            reservationRequestTransaction = getDaoFactory().getReservationRequestDao().findReservationRequestById(id);
+            return reservationRequestTransaction;
+        });
+
+        return reservationRequest;
+    }
+
+    @Override
     public ReservationRequest findReservationRequestByGuidebookId(Integer id) {
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         ReservationRequest reservationRequest = transactionTemplate.execute(transactionStatus -> {
@@ -40,6 +52,30 @@ public class ReservationRequestManagerImpl extends AbstractManager implements Re
         ReservationRequest reservationRequest = transactionTemplate.execute(transactionStatus -> {
             ReservationRequest reservationRequestTransaction;
             reservationRequestTransaction = getDaoFactory().getReservationRequestDao().findReservationRequestByMemberId(id);
+            return reservationRequestTransaction;
+        });
+
+        return reservationRequest;
+    }
+
+    @Override
+    public ReservationRequest findReservationRequestByMemberAndGuidebookId(Integer memberId, Integer guidebookId) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        ReservationRequest reservationRequest = transactionTemplate.execute(transactionStatus -> {
+            ReservationRequest reservationRequestTransaction;
+            reservationRequestTransaction = getDaoFactory().getReservationRequestDao().findReservationRequestByMemberAndGuidebookId(memberId, guidebookId);
+            return reservationRequestTransaction;
+        });
+
+        return reservationRequest;
+    }
+
+    @Override
+    public ReservationRequest findReservationRequestByState(String reservationState) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        ReservationRequest reservationRequest = transactionTemplate.execute(transactionStatus -> {
+            ReservationRequest reservationRequestTransaction;
+            reservationRequestTransaction = getDaoFactory().getReservationRequestDao().findReservationRequestByState(reservationState);
             return reservationRequestTransaction;
         });
 

@@ -2,7 +2,7 @@ package org.mickael.model.enumeration;
 
 public enum ReservationState {
 
-    WAITING ("WAITING"), REFUSED("REFUSED"), CANCELLED("CANCELLED"), VALIDATE ("VALIDATE"), RETURNED ("RETURNED");
+    WAITING ("WAITING"), REFUSED("REFUSED"), CANCELLED("CANCELLED"), VALIDATED ("VALIDATED"), ENDED ("ENDED");
 
     protected String stateValue;
 

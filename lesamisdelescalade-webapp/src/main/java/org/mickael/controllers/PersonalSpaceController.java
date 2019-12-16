@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -34,8 +35,8 @@ public class PersonalSpaceController {
     @Inject
     private ReservationRequestManager reservationRequestManager;
 
-    @GetMapping("/personalSpace")
-    public String getPersonalSpace(@SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId, Model model){
+    @GetMapping("/personalSpace/{memberInSessionId}")
+    public String getPersonalSpace(@PathVariable@SessionAttribute("memberInSessionId")Integer memberInSessionId, Model model){
         if (memberInSessionId == null){
             return "redirect:/home";
         }
@@ -44,14 +45,19 @@ public class PersonalSpaceController {
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findClimbingAreaByMemberId(memberInSessionId);
         //show all the guidebook's owner
         List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSessionId);
+
+        List<ReservationRequest> guideReservationRequestList = new ArrayList<>();
+        for (Guidebook guidebook : guidebookList){
+
+        }
         //show all the reservation request's owner
-        List<ReservationRequest> reservationRequestList = reservationRequestManager.findAllReservationRequestByMemberId(memberInSessionId);
+        List<ReservationRequest> memberReservationRequestList = reservationRequestManager.findAllReservationRequestByMemberId(memberInSessionId);
 
 
 
         model.addAttribute("climbingAreaList", climbingAreaList);
         model.addAttribute("guidebookList", guidebookList);
-        model.addAttribute("reservationRequestList", reservationRequestList);
+        model.addAttribute("memberReservationRequestList", memberReservationRequestList);
         model.addAttribute("memberInSessionId", memberInSessionId);
         return "personalSpace";
     }

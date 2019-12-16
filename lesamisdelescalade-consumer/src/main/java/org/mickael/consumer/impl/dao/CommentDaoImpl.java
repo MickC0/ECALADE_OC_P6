@@ -71,8 +71,7 @@ public class CommentDaoImpl extends AbstractDataSource implements CommentDao {
         String sql = "UPDATE public.comment SET "
                              + "member_id = :memberId, "
                              + "climbingArea_id = :climbingAreaId, "
-                             + "description = :description, "
-                             + "creation_date = :creationDate, "
+                             //+ "description = :description, "
                              + "update_date = :updateDate "
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
@@ -81,7 +80,9 @@ public class CommentDaoImpl extends AbstractDataSource implements CommentDao {
         parameterSource.addValue("memberId", comment.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("climbingAreaId", comment.getClimbingArea().getId(), Types.INTEGER);
         parameterSource.addValue("description", comment.getDescription(), Types.VARCHAR);
-        parameterSource.addValue("creationDate", comment.getCreationDate(), Types.TIMESTAMP);
+        //Test maj comment
+        //parameterSource.addValue("creationDate", comment.getCreationDate(), Types.TIMESTAMP);
+
         parameterSource.addValue("updateDate", comment.getUpdateDate(), Types.TIMESTAMP);;
 
         namedParameterJdbcTemplate.update(sql, parameterSource);

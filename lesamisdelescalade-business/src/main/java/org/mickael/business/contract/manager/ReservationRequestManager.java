@@ -6,8 +6,11 @@ import java.util.List;
 
 public interface ReservationRequestManager {
     void createReservationRequest(ReservationRequest reservationRequest);
+    ReservationRequest findReservationRequestById(Integer id);
     ReservationRequest findReservationRequestByGuidebookId(Integer id);
     ReservationRequest findReservationRequestByMemberId(Integer id);
+    ReservationRequest findReservationRequestByMemberAndGuidebookId(Integer memberId, Integer guidebookId);
+    ReservationRequest findReservationRequestByState(String reservationState);
     void updateReservationRequest(ReservationRequest reservationRequest);
     void deleteReservationRequest(Integer id);
     List<ReservationRequest> findAllReservationRequest ();
