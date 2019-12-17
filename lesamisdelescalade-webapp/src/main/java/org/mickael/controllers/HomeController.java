@@ -24,7 +24,7 @@ public class HomeController {
     public String displayHomePage(Model model /**, @SessionAttribute(value = "memberInSession", required = false) Member memberInSession*/){
         //Display all the climbing Area on the homepage
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
-        //model.addAttribute("climbingAreaList", climbingAreaList);
+        model.addAttribute("climbingAreaList", climbingAreaList);
         //Test if the member is logged
         /**if(memberInSession != null){
             model.addAttribute("memberInSession", memberInSession);

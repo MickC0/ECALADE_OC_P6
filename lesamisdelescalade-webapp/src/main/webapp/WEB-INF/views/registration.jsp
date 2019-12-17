@@ -1,68 +1,56 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<html>
-<head>
-    <title>Registration</title>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Association de fans d'escalade">
-    <!-- CDN resources -->
-    <%--
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    --%>
+<%@include file="_include/head.jsp"%>
 
-    <!-- Locales resources -->
-    <script src="https://kit.fontawesome.com/c822637fde.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/styles.css"/>">
-</head>
-<body>
-<div class="wrapper">
-    <div class="col col-sm-3">
-        <form:form cssClass="form-group" method="post" action="registrationProcess" modelAttribute="member">
-            <div class="form-group">
-                <form:label path="gender">Civilité</form:label>
-                <form:select path="gender" type="text" cssClass="form-control" placeholder="Civilité" required="true" autofocus="">
-                    <form:option value="" label="Choisir"/>
-                    <form:option value="M" label="Monsieur"/>
-                    <form:option value="F" label="Madame"/>
-                </form:select>
+<main class="page registration-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-info">Enregistrement</h2>
+                <p>
+                    <c:if test="${!empty errorMessage}">
+                        <c:out value="${errorMessage}"/>
+                    </c:if>
+                </p>
             </div>
-            <div class="form-group">
-                <form:label path="firstName">Prénom</form:label>
-                <form:input path="firstName" type="text" cssClass="form-control" placeholder="Prénom" required="true" autofocus=""/>
-            </div>
-            <div class="form-group">
-                <form:label path="lastName">Nom</form:label>
-                <form:input path="lastName" type="text" cssClass="form-control" placeholder="Nom" required="true" autofocus=""/>
-            </div>
-            <div class="form-group">
-                <form:label path="pseudo">Nom</form:label>
-                <form:input path="pseudo" type="text" cssClass="form-control" placeholder="Pseudo" required="true" autofocus=""/>
-            </div>
-            <div class="form-group">
-                <form:label path="email">Email</form:label>
-                <form:input path="email" type="email" cssClass="form-control" placeholder="Email address" required="true" autofocus=""/>
-            </div>
-            <div class="form-group">
-                <form:label path="password">Password</form:label>
-                <form:password path="password" cssClass="form-control" placeholder="Password" required="true"/>
-            </div>
-            <div class="form-group">
-                <form:button type="submit" cssClass="btn btn-primary btn-block">Register</form:button>
-            </div>
-        </form:form>
-    </div>
-</div>
-    <!-- jQuery -->
-    <script src="<c:url value="/resources/js/jquery-3.4.1.min.js"/>"></script>
-    <!-- Popper.js -->
-    <script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-    <!-- Javascript de Bootstrap -->
-    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+            <div>
+                <form:form cssClass="form-group" method="post" action="registrationProcess" modelAttribute="member">
+                    <div class="form-group">
+                        <form:select path="gender" type="text" cssClass="form-control" placeholder="Civilité" required="true" autofocus="">
+                            <form:option value="" label="Civilité"/>
+                            <form:option value="M" label="Monsieur"/>
+                            <form:option value="F" label="Madame"/>
+                        </form:select>
+                    </div>
+                    <div class="form-group">
+                        <form:input path="firstName" type="text" cssClass="form-control item" placeholder="Prénom" required="true" autofocus=""/>
+                        <form:errors  path="firstName" cssClass="error"/>
+                    </div>
+                    <div class="form-group">
+                        <form:input path="lastName" type="text" cssClass="form-control item" placeholder="Nom" required="true" autofocus=""/>
+                        <form:errors  path="lastName" cssClass="error"/>
+                    </div>
+                    <div class="form-group">
+                        <form:input path="pseudo" type="text" cssClass="form-control item" placeholder="Pseudo" required="true" autofocus=""/>
+                        <form:errors  path="pseudo" cssClass="error"/>
+                    </div>
+                    <div class="form-group">
+                        <form:input path="email" type="email" cssClass="form-control item" placeholder="Adresse mail" required="true" autofocus=""/>
+                        <form:errors  path="email" cssClass="error"/>
+                    </div>
+                    <div class="form-group">
+                        <form:password path="password" cssClass="form-control item" placeholder="Mot de passe" required="true"/>
+                        <form:errors  path="password" cssClass="error"/>
+                    </div>
+                    <div class="form-group">
+                        <form:button type="submit" class="btn btn-primary btn-block">S'enregistrer</form:button>
+                    </div>
+                    <div class="text-center">
+                        <p>Déjà enregistré ?<a class="btn btn-link btn-block" href="<c:url value="/doLogin"/>" role="button">Se connecter</a></p>
+                    </div>
 
-</body>
-</html>
+                </form:form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<%@include file="_include/footer.jsp"%>

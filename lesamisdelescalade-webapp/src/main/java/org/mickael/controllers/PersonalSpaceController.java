@@ -48,7 +48,7 @@ public class PersonalSpaceController {
 
         List<ReservationRequest> guideReservationRequestList = new ArrayList<>();
         for (Guidebook guidebook : guidebookList){
-
+            guideReservationRequestList.add(reservationRequestManager.findReservationRequestByGuidebookId(guidebook.getId()));
         }
         //show all the reservation request's owner
         List<ReservationRequest> memberReservationRequestList = reservationRequestManager.findAllReservationRequestByMemberId(memberInSessionId);
@@ -58,6 +58,7 @@ public class PersonalSpaceController {
         model.addAttribute("climbingAreaList", climbingAreaList);
         model.addAttribute("guidebookList", guidebookList);
         model.addAttribute("memberReservationRequestList", memberReservationRequestList);
+        model.addAttribute("guideReservationRequestList", guideReservationRequestList);
         model.addAttribute("memberInSessionId", memberInSessionId);
         return "personalSpace";
     }

@@ -1,54 +1,39 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<html>
-<head>
-    <title>Login</title>
-    <%--<meta name="generator" content="Jekyll v3.8.5">--%>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Association de fans d'escalade">
-    <!-- CDN resources -->
-    <%--
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    --%>
+<%@include file="_include/head.jsp"%>
 
-    <!-- Locales resources -->
-    <script src="https://kit.fontawesome.com/c822637fde.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/styles.css"/>">
-
-</head>
-<body>
-    <div class="wrapper">
-        <div class="col col-sm-3">
-            <form:form cssClass="form-group" method="post" action="loginProcess" modelAttribute="loginCommand">
+<main class="page login-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-login">Connexion</h2>
+                <p>
+                    <c:if test="${!empty errorMessage}">
+                        <c:out value="${errorMessage}"/>
+                    </c:if>
+                </p>
+            </div>
+            <form:form method="post" action="loginProcess" modelAttribute="loginCommand">
                 <div class="form-group">
                     <form:label path="email">Email</form:label>
-                    <form:input path="email" type="email" cssClass="form-control" placeholder="Email address" required="true" autofocus=""/>
+                    <form:input  path="email" cssClass="form-control" type="email" id="email" required="true"/>
+                    <form:errors  path="email" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <form:label path="password">Password</form:label>
-                    <form:password path="password" cssClass="form-control" placeholder="Password" required="true"/>
+                    <form:label path="password">Mot de passe</form:label>
+                    <form:input  path="password" cssClass="form-control" type="password" id="password" required="true"/>
+                    <form:errors  path="password" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <form:button type="submit" cssClass="btn btn-primary btn-block">Log In</form:button>
+                    <form:button class="btn btn-primary btn-block" type="submit">Se connecter</form:button>
                 </div>
-
                 <div class="text-center">
-                    <p>Nouveau sur le site ? <a href="<c:url value="/doRegister"/>"> Créer un compte.</a></p>
+                    <p>
+                        Pas encore de compte ?
+                        <a class="btn btn-link btn-block" href="<c:url value="/doRegister"/>" role="button">S'enregistrer</a>
+                    </p>
                 </div>
             </form:form>
         </div>
-    </div>
-    <!-- jQuery -->
-    <script src="<c:url value="/resources/js/jquery-3.4.1.min.js"/>"></script>
-    <!-- Popper.js -->
-    <script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-    <!-- Javascript de Bootstrap -->
-    <script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
+    </section>
+</main>
 
-</body>
-</html>
+<%@include file="_include/footer.jsp"%>

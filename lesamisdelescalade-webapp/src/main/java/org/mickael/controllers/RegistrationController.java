@@ -41,10 +41,10 @@ public class RegistrationController {
         if (existingMember != null){
             String str = "Erreur, veuillez recommencer.";
             model.addAttribute("errorMessage", str);
-            return "redirect:/doRegister";
+            return "registration";
         } else {
             if (bindingResult.hasErrors()) {
-                return "redirect:/doRegister";
+                return "registration";
             }
             //encoder
             String hashPassword = passwordManager.hashPassword(newMember.getPassword());
@@ -56,7 +56,7 @@ public class RegistrationController {
             model.addAttribute("message", "Member register successfully.");
             model.addAttribute("member", newMember);
 
-            return "_confirmation/registrationSuccess";
+            return "redirect:/showHome";
         }
     }
 

@@ -1,71 +1,38 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<html>
-<head>
-    <title>Update ClimbingArea Form</title>
-    <%--<%@include file="_include/head.jsp"%>--%>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Association de fans d'escalade">
-    <!-- CDN resources -->
-    <%--
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    --%>
-
-    <!-- Locales resources -->
-    <script src="https://kit.fontawesome.com/c822637fde.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/styles.css"/>">
-</head>
-<body>
-<div class="container">
-
-    <!-- Body
-    ================================================== -->
-
-    <!-- display for see site to update-->
 
 
-    <!-- form for update site -->
-    <div>
-        <h3>Modification du Site d'escalade:</h3>
+<%@include file="_include/head.jsp"%>
 
-        <p></p>
-        <form:form modelAttribute="sector" method="post" action="saveSector/${climbId}">
-            <table>
-                <tr>
-                    <td><form:hidden path="climbingArea.id" value="${climbId}"/></td>
-                    <td><form:errors path="climbingArea.id" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <!-- display for "nomSite" -->
-                    <td> Nom du Sector:* </td>
-                    <td><form:input path="name" type="text" id="name" size="20" placeholder="obligatoire"  cssStyle=""/></td>
-                    <td><form:errors path="name" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <!-- display for "descriptionSite" -->
-                    <td>Description du secteur:</td>
-                    <td><form:input path="description" type="text" id="description" size="40" placeholder=""  cssStyle=""/></td>
-                    <td><form:errors path="description" cssClass="errors"/></td>
-                </tr>
 
-            </table>
-            <p></p>
-            <p>(*) obligatoire</p>
-            <p></p>
-            <input type="submit" value="Envoyer">
-        </form:form>
-    </div>
-</div>
-<!-- jQuery -->
-<script src="<c:url value="/resources/js/jquery-3.4.1.min.js"/>"></script>
-<!-- Popper.js -->
-<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-<!-- Javascript de Bootstrap -->
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-</body>
-</html>
+<main class="page sectorForm-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-login">Création d'un secteur</h2>
+                <p>
+                    <c:if test="${!empty errorMessage}">
+                        <c:out value="${errorMessage}"/>
+                    </c:if>
+                </p>
+            </div>
+            <form:form modelAttribute="sector" method="post" action="saveSector/${climbId}">
+                <div class="form-group">
+                    <form:hidden path="climbingArea.id" value="${climbId}"/>
+                    <form:errors path="climbingArea.id" cssClass="errors"/>
+                </div>
+                <div class="form-group">
+                    <form:input path="name" type="text" cssClass="form-control item" placeholder="Nom de la voie" required="true" autofocus=""/>
+                    <form:errors  path="name" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:input path="description" type="text" cssClass="form-control item" placeholder="Description de la voie" required="true" autofocus=""/>
+                    <form:errors  path="description" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:button class="btn btn-primary btn-block" type="submit">Enregistrer</form:button>
+                </div>
+            </form:form>
+        </div>
+    </section>
+</main>
+
+<%@include file="_include/footer.jsp"%>

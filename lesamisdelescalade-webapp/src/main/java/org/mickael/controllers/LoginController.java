@@ -54,32 +54,37 @@ public class LoginController {
         if (loginCommand != null){
             Member memberInBdd = memberManager.findMemberByProperty("email", loginCommand.getEmail());
             boolean checkPassword = false;
+            System.out.println("etape 1");
 
             if (memberInBdd == null) {
                 httpSession.invalidate();
-                return "_error/errorLogin";
+                System.out.println("etape 2");
+                model.addAttribute("errorMessage", "Enter valid credentials");
+                return "login";
             }
             checkPassword = passwordManager.matches(loginCommand.getPassword(), memberInBdd.getPassword());
             if (checkPassword == true) {
                 Member loggedInMember = memberInBdd;
                 if (loggedInMember.getRole().equals(Role.ADMIN.getParam()) || loggedInMember.getRole().equals(Role.MEMBER.getParam()) || loggedInMember.getRole().equals(Role.USER.getParam())){
                     addMemberInSession(loggedInMember, httpSession);
-                    return "redirect:/home";
+                    model.addAttribute("memberInSessionId", loggedInMember.getId());
+                    return "redirect:/showHome";
                 } else {
                     MemberBlockedException memberBlockedException = new MemberBlockedException("Invalid Member Role");
                     model.addAttribute("errorMessage", memberBlockedException);
-                    return "redirect:/doLogin";
+                    System.out.println("etape 3");
+                    return "login";
                 }
             } else {
                 httpSession.invalidate();
                 model.addAttribute("errorMessage", "Enter valid credentials");
-                return "redirect:/doLogin";
+                return "login";
             }
         }
         //for display climbing site
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
         model.addAttribute("climbingAreaList", climbingAreaList);
-        return "redirect:/home";
+        return "redirect:/showHome";
     }
 
     @GetMapping("/doLogout")
@@ -89,7 +94,7 @@ public class LoginController {
         httpServletResponse.setHeader("Expires","0");
         httpSession.invalidate();
 
-        return "redirect:/home";
+        return "redirect:/showHome";
     }
 
 
