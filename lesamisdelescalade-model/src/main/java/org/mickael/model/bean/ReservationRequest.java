@@ -9,17 +9,18 @@ public class ReservationRequest {
     private Integer id;
     private Guidebook guidebook;
     private Member member;
+    private String status;
     private ReservationState reservationState;
 
     //====  CONSTRUCTOR  ====
 
     public ReservationRequest() {}
 
-    public ReservationRequest(Integer id, Guidebook guidebook, Member member, ReservationState reservationState) {
+    public ReservationRequest(Integer id, Guidebook guidebook, Member member, String status) {
         this.id = id;
         this.guidebook = guidebook;
         this.member = member;
-        this.reservationState = reservationState;
+        this.status = status;
     }
 
 //====  GETTERS AND SETTERS  ====
@@ -47,6 +48,14 @@ public class ReservationRequest {
 
     public void setMember(Member member) {
         this.member = member;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public ReservationState getReservationState() {

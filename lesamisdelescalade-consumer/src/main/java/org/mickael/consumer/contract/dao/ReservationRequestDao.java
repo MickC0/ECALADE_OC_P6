@@ -11,7 +11,7 @@ public interface ReservationRequestDao {
     ReservationRequest findReservationRequestByGuidebookId(Integer id);
     ReservationRequest findReservationRequestByMemberId(Integer id);
     ReservationRequest findReservationRequestByMemberAndGuidebookId(Integer memberId, Integer guidebookId);
-    ReservationRequest findReservationRequestByState(String reservationState);
+    ReservationRequest findReservationRequestByState(String status);
     void updateReservationRequest(ReservationRequest reservationRequest);
     void deleteReservationRequest(Integer id);
     List<ReservationRequest> findAllReservationRequest ();

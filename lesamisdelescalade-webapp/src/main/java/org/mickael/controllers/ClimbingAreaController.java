@@ -95,7 +95,7 @@ public class ClimbingAreaController {
     }
 
     @GetMapping("/climbingAreaList")
-    public String showClimbingAreaList(Model model){
+    public String showClimbingAreaList(Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
         model.addAttribute("climbingAreaList", climbingAreaList);
         return "climbingAreaListPage";

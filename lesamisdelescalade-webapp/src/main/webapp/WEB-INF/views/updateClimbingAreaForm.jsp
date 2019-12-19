@@ -1,87 +1,73 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<html>
-<head>
-    <title>Update ClimbingArea Form</title>
-    <%--<%@include file="_include/head.jsp"%>--%>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Association de fans d'escalade">
-    <!-- CDN resources -->
-    <%--
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    --%>
+<%@ page pageEncoding="UTF-8"%>
 
-    <!-- Locales resources -->
-    <script src="https://kit.fontawesome.com/c822637fde.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/styles.css"/>">
-</head>
-<body>
-<div class="container">
+<%@include file="_include/head.jsp"%>
 
-    <!-- form for update site -->
-    <div>
-        <h3>Modification du Site d'escalade:</h3>
-        <c:if test="${!empty errorMessage}">
-            <c:out value="${errorMessage}"/>
-        </c:if>
-        <p></p>
-        <form:form method="post" action="updateClimbingArea/${climbingAreaToUpdate.id}" modelAttribute="climbingAreaToUpdate" >
-            <table>
-                <tr>
-                    <td><form:hidden path="id" value="${climbingAreaToUpdate.id}"/></td>
-                    <td><form:errors path="id" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <td> Nom du site: </td>
-                    <td><form:input path="name" type="text" value="${climbingAreaToUpdate.name}" id="name" size="20" placeholder="obligatoire"  cssStyle=""/></td>
-                    <td><form:errors path="name" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <td>Region:</td>
-                    <td><form:input path="region" type="text" value="${climbingAreaToUpdate.region}" id="region" placeholder="obligatoire" size="20"  cssStyle="" /></td>
-                    <td><form:errors path="region" cssClass="errors" /></td>
-                </tr>
-                <tr>
-                    <td>Description:</td>
-                    <td><form:input path="description" type="text"  value="${climbingAreaToUpdate.description}" id="description" size="40" placeholder=""  cssStyle=""/></td>
-                    <td><form:errors path="description" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <td>Profil : </td>
-                    <td><form:input path="profil" type="text" value="${climbingAreaToUpdate.profil}" id="profil" size="20" placeholder="obligatoire" cssStyle=""/></td>
-                    <td><form:errors path="profil" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <td>Type de roche: </td>
-                    <td><form:input path="rockType" type="text" value="${climbingAreaToUpdate.rockType}" id="rockType" placeholder="" cssStyle=""/></td>
-                    <td><form:errors path="rockType" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <td> Hauteur max: </td>
-                    <td><form:input path="maximumHeight" type="number" value="${climbingAreaToUpdate.maximumHeight}" id="maximumHeight" size="15" placeholder="" cssStyle=""/></td>
-                    <td><form:errors path="maximumHeight" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <td> Approuved: </td>
-                    <td><form:checkbox path="approuved" value="${climbingAreaToUpdate.approuved}"/></td>
-                    <td><form:errors path="approuved" cssClass="errors"/></td>
-                </tr>
+<main class="page updateClimbingAreaForm-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-login">Mise à jour d'un site</h2>
+                <p>
+                    <c:if test="${!empty errorMessage}">
+                        <c:out value="${errorMessage}"/>
+                    </c:if>
+                </p>
+            </div>
+            <form:form method="post" action="updateClimbingArea/${climbingAreaToUpdate.id}" modelAttribute="climbingAreaToUpdate">
+                <div class="form-group">
+                    <form:hidden path="id" value="${climbingAreaToUpdate.id}"/>
+                    <form:errors  path="id" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:input path="name" type="text" value="${climbingAreaToUpdate.name}" cssClass="form-control item" placeholder="Nom du site" required="true" autofocus=""/>
+                    <form:errors  path="name" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:input path="region" type="text" value="${climbingAreaToUpdate.region}" cssClass="form-control item" placeholder="Région" required="true" autofocus=""/>
+                    <form:errors  path="region" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:input path="description" type="text" value="${climbingAreaToUpdate.description}" cssClass="form-control item" placeholder="Description du site" required="true" autofocus=""/>
+                    <form:errors  path="description" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:input path="profil" type="text" value="${climbingAreaToUpdate.profil}" cssClass="form-control item" placeholder="Profil des voies" required="true" autofocus=""/>
+                    <form:errors  path="profil" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:input path="rockType" type="text" value="${climbingAreaToUpdate.rockType}" cssClass="form-control item" placeholder="Type de roche" required="true" autofocus=""/>
+                    <form:errors  path="rockType" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:input path="maximumHeight" type="number" value="${climbingAreaToUpdate.maximumHeight}" cssClass="form-control item" placeholder="Hauteur maximum" required="true" autofocus=""/>
+                    <form:errors  path="maximumHeight" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <c:if test="${sessionScope.memberInSessionRole == 'Administrator' || sessionScope.memberInSessionRole == 'Member'}">
+                        <form:label path="approuved">Approuvé par l'association</form:label>
+                        <form:checkbox path="approuved" value="${climbingAreaToUpdate.approuved}" cssClass="form-check-inline"/>
+                        <form:errors  path="approuved" cssClass="error"/>
+                    </c:if>
+                </div>
+                <div class="form-group">
+                    <form:button class="btn btn-primary btn-block" type="submit">Enregistrer</form:button>
+                </div>
+                <div class="form-group">
+                    <a href="<c:out value="javascript:history.go(-1)"/>">
+                        <button type="button" class="btn btn-outline-primary btn-block">Annuler</button>
+                    </a>
+                    <%--<a href="<c:out value="/user/user-area"/>">
+                        <button type="button" class="btn btn-primary btn-block">Annuler</button>
+                    </a>--%>
 
-            </table>
-            <form:button type="submit" cssClass="btn btn-primary btn-block">Envoyer</form:button>
-        </form:form>
-    </div>
-</div>
-<!-- jQuery -->
-<script src="<c:url value="/resources/js/jquery-3.4.1.min.js"/>"></script>
-<!-- Popper.js -->
-<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-<!-- Javascript de Bootstrap -->
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-</body>
-</html>
+                    <%--<a class="btn btn-link btn-block" href="<c:url value="/doLogin"/>" role="button">Annuler</a>--%>
+                </div>
+            </form:form>
+        </div>
+    </section>
+</main>
+
+
+
+<%@include file="_include/footer.jsp"%>
+

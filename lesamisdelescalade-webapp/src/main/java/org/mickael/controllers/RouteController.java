@@ -43,6 +43,7 @@ public class RouteController {
             Route route = new Route();
             route.setSector(sectorManager.findSector(sectorId));
             model.addAttribute("route", route);
+            model.addAttribute("listCotation", route.getEnumCotation().getEnumCotationStringValues());
             model.addAttribute("sectorId", sectorId);
             return "routeForm";
 

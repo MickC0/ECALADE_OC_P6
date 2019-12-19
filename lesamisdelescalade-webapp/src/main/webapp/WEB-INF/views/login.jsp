@@ -1,3 +1,5 @@
+<%@ page pageEncoding="UTF-8"%>
+
 <%@include file="_include/head.jsp"%>
 
 <main class="page login-page">
@@ -31,6 +33,7 @@
                         <a class="btn btn-link btn-block" href="<c:url value="/doRegister"/>" role="button">S'enregistrer</a>
                     </p>
                 </div>
+
             </form:form>
         </div>
     </section>

@@ -4,6 +4,7 @@ import org.mickael.business.contract.manager.*;
 
 public interface ManagerFactory {
 
+
     ClimbingAreaManager getClimbingAreaManager();
     void setClimbingAreaManager(ClimbingAreaManager climbingAreaManager);
 

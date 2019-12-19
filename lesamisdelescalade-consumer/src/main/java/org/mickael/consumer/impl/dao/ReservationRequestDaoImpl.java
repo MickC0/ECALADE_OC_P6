@@ -15,13 +15,13 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
 
     @Override
     public void createReservationRequest(ReservationRequest reservationRequest) {
-        String sql = "INSERT INTO public.reservation_request (member_id, guidebook_id, reservation_state)"
-                             + "VALUES (:memberId, :guidebookId, :reservationState)";
+        String sql = "INSERT INTO public.reservation_request (member_id, guidebook_id, status)"
+                             + "VALUES (:memberId, :guidebookId, :status)";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("memberId", reservationRequest.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("guidebookId", reservationRequest.getGuidebook().getId(), Types.INTEGER);
-        parameterSource.addValue("reservationState", reservationRequest.getReservationState().getStateValue(), Types.VARCHAR);
+        parameterSource.addValue("reservationState", reservationRequest.getStatus(), Types.VARCHAR);
 
 
         namedParameterJdbcTemplate.update(sql, parameterSource);
@@ -78,11 +78,11 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
     }
 
     @Override
-    public ReservationRequest findReservationRequestByState(String reservationState) {
-        String sql = "SELECT * FROM public.reservation_request WHERE reservation_state = :reservationState";
+    public ReservationRequest findReservationRequestByState(String status) {
+        String sql = "SELECT * FROM public.reservation_request WHERE status = :status";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("reservation_state", reservationState, Types.VARCHAR);
+        parameterSource.addValue("status", status, Types.VARCHAR);
         ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
         ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
 
@@ -92,18 +92,16 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
     @Override
     public void updateReservationRequest(ReservationRequest reservationRequest) {
         String sql = "UPDATE public.reservation_request SET "
-
                              + "member_id = :memberId, "
                              + "guidebook_id = :guidebookId, "
-
-                             + "reservation_state = :reservationState "
+                             + "status = :status "
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", reservationRequest.getId(), Types.INTEGER);
         parameterSource.addValue("memberId", reservationRequest.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("guidebookId", reservationRequest.getGuidebook().getId(), Types.INTEGER);
-        parameterSource.addValue("memberState", reservationRequest.getReservationState().getStateValue(), Types.VARCHAR);
+        parameterSource.addValue("memberState", reservationRequest.getStatus(), Types.VARCHAR);
 
 
         namedParameterJdbcTemplate.update(sql, parameterSource);

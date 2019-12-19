@@ -14,7 +14,6 @@ public class ManagerFactoryImpl implements ManagerFactory {
     private SectorManager sectorManager;
     private MemberManager memberManager;
 
-
     @Override
     public ClimbingAreaManager getClimbingAreaManager() {
         return climbingAreaManager;

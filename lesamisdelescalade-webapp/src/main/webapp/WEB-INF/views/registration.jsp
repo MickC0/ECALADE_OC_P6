@@ -1,3 +1,5 @@
+<%@ page pageEncoding="UTF-8"%>
+
 <%@include file="_include/head.jsp"%>
 
 <main class="page registration-page">

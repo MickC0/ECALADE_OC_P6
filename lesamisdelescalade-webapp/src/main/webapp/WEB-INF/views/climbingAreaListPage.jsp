@@ -24,7 +24,7 @@
 
 
 <nav class="navbar navbar-expand-md navbar-light bg-light fixed-top">
-    <a class="navbar-brand" href="<c:url value="/home"/>">
+    <a class="navbar-brand" href="<c:url value="/showHome"/>">
         <img src="<c:url value="/resources/img/icon1.svg"/>" style="width: 50px; height:auto">
         Les amis de l'escalade
     </a>
@@ -54,7 +54,7 @@
                         </li>
                     </c:if>
                     <li class="nav-item"data-toggle="collapse" data-target=".navbar-collapse.show">
-                        <a class="nav-link" href="<c:url value="/personalSpace"/>"> ${sessionScope.memberInSessionPseudo} </a>
+                        <a class="nav-link" href="<c:url value="/personalSpace/${memberInSessionId}"/>"> Mon dashboard </a>
                     </li>
                     <li class="nav-item"data-toggle="collapse" data-target=".navbar-collapse.show">
                         <a class="nav-link" href="<c:url value="/doLogout"/>"> Logout</a>

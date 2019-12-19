@@ -4,7 +4,7 @@ public enum Role {
 
     ADMIN("Administrator"), MEMBER("Member"), USER("User");
 
-    private String param;
+    private final String param;
 
     private Role(String param){
         this.param = param;

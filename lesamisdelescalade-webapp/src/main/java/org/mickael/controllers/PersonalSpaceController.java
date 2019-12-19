@@ -68,7 +68,7 @@ public class PersonalSpaceController {
         if(memberInSessionId != null && memberInSessionId == id){
             Member memberInBdd = memberManager.findMember(id);
             model.addAttribute("memberEdit", memberInBdd);
-            return "userForm";
+            return "updateUserForm";
         } else {
             return "redirect:/doLogin";
         }
@@ -87,7 +87,7 @@ public class PersonalSpaceController {
                 String str = "Une erreur est survenue. Vérifiez les champs.";
                 model.addAttribute("memberToEdit", member);
                 model.addAttribute("errorMessage", str);
-                return "userForm";
+                return "updateUserForm";
             } else {
                 String hashPassword = passwordManager.hashPassword(member.getPassword());
                 member.setPassword(hashPassword);

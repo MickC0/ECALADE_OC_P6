@@ -1,4 +1,4 @@
-
+<%@ page pageEncoding="UTF-8"%>
 
 <%@include file="_include/head.jsp"%>
 
@@ -40,7 +40,24 @@
                     <form:errors  path="maximumHeight" cssClass="error"/>
                 </div>
                 <div class="form-group">
+                    <c:if test="${sessionScope.memberInSessionRole == 'Administrator' || sessionScope.memberInSessionRole == 'Member'}">
+                        <form:label path="approuved">Approuvé par l'association</form:label>
+                        <form:checkbox path="approuved" cssClass="form-check-inline"/>
+                        <form:errors  path="approuved" cssClass="error"/>
+                    </c:if>
+                </div>
+                <div class="form-group">
                     <form:button class="btn btn-primary btn-block" type="submit">Enregistrer</form:button>
+                </div>
+                <div class="form-group">
+                    <a href="<c:out value="javascript:history.go(-1)"/>">
+                        <button type="button" class="btn btn-outline-primary btn-block">Annuler</button>
+                    </a>
+                        <%--<a href="<c:out value="/user/user-area"/>">
+                            <button type="button" class="btn btn-primary btn-block">Annuler</button>
+                        </a>--%>
+
+                        <%--<a class="btn btn-link btn-block" href="<c:url value="/doLogin"/>" role="button">Annuler</a>--%>
                 </div>
             </form:form>
         </div>

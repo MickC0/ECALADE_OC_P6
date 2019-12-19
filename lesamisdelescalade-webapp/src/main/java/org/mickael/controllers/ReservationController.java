@@ -46,8 +46,8 @@ public class ReservationController {
 
         if (memberInSessionId != null){
             ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestByMemberAndGuidebookId(memberInSessionId, id);
-            String state = reservationRequestInBdd.getReservationState().getStateValue();
-            if (state == null || state == "ENDED" || state == "CANCELLED" || state == "REFUSED"){
+            String state = reservationRequestInBdd.getStatus();
+            if (state == null || state == ReservationState.CLOSED.getStateValue() || state == ReservationState.CANCELLED.getStateValue() || state == ReservationState.REFUSED.getStateValue()){
                 if (bindingResult.hasErrors()){
                     model.addAttribute("guidebookId", id);
                     model.addAttribute("memberInSessionId", memberInSessionId);
@@ -55,7 +55,7 @@ public class ReservationController {
                 } else {
                     newReservationRequest.setGuidebook(guidebookManager.findGuidebook(id));
                     newReservationRequest.setMember(memberManager.findMember(memberInSessionId));
-                    newReservationRequest.setReservationState(ReservationState.WAITING);
+                    newReservationRequest.setReservationState(ReservationState.PENDING);
                     reservationRequestManager.createReservationRequest(newReservationRequest);
                     return "redirect:/guidebookList";
                 }
@@ -100,10 +100,10 @@ public class ReservationController {
                 model.addAttribute("errorMessage", str);
                 return "updateReservationForm";
             } else {
-                if (reservationRequest.getReservationState().getStateValue() == "VALIDATED"){
+                if (reservationRequest.getStatus() == ReservationState.ACCEPTED.getStateValue()){
                     guidebookToLoan.setLoaned(true);
                 }
-                if (reservationRequest.getReservationState().getStateValue() == "ENDED"){
+                if (reservationRequest.getStatus() == ReservationState.CLOSED.getStateValue()){
                     guidebookToLoan.setLoaned(false);
                 }
                 guidebookManager.updateGuidebook(guidebookToLoan);

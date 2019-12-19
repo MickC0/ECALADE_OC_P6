@@ -1,5 +1,7 @@
 package org.mickael.model.bean;
 
+import org.mickael.model.enumeration.Cotation;
+
 public class Route {
 
     //====  ATTRIBUTES  ====
@@ -9,6 +11,7 @@ public class Route {
     private String description;
     private String cotation;
     private float height;
+    private Cotation enumCotation;
 
     private Sector sector;
 
@@ -75,5 +78,13 @@ public class Route {
 
     public void setSector(Sector sector) {
         this.sector = sector;
+    }
+
+    public Cotation getEnumCotation() {
+        return enumCotation;
+    }
+
+    public void setEnumCotation(Cotation enumCotation) {
+        this.enumCotation = enumCotation;
     }
 }

@@ -71,11 +71,11 @@ public class ReservationRequestManagerImpl extends AbstractManager implements Re
     }
 
     @Override
-    public ReservationRequest findReservationRequestByState(String reservationState) {
+    public ReservationRequest findReservationRequestByState(String status) {
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         ReservationRequest reservationRequest = transactionTemplate.execute(transactionStatus -> {
             ReservationRequest reservationRequestTransaction;
-            reservationRequestTransaction = getDaoFactory().getReservationRequestDao().findReservationRequestByState(reservationState);
+            reservationRequestTransaction = getDaoFactory().getReservationRequestDao().findReservationRequestByState(status);
             return reservationRequestTransaction;
         });
 

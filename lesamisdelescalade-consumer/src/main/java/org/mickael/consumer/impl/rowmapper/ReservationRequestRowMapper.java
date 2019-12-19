@@ -3,7 +3,6 @@ package org.mickael.consumer.impl.rowmapper;
 import org.mickael.consumer.impl.dao.GuidebookDaoImpl;
 import org.mickael.consumer.impl.dao.MemberDaoImpl;
 import org.mickael.model.bean.ReservationRequest;
-import org.mickael.model.enumeration.ReservationState;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
@@ -22,7 +21,7 @@ public class ReservationRequestRowMapper implements RowMapper<ReservationRequest
         GuidebookDaoImpl guidebookDao = new GuidebookDaoImpl();
         reservationRequest.setGuidebook(guidebookDao.findGuidebook(resultSet.getInt("guidebook_id")));
 
-        reservationRequest.setReservationState(ReservationState.valueOf(resultSet.getString("reservation_state")));
+        reservationRequest.setStatus(resultSet.getString("status"));
 
         return reservationRequest;
     }
