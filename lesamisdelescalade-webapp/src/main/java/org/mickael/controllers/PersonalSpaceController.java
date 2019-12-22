@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -45,21 +44,27 @@ public class PersonalSpaceController {
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findClimbingAreaByMemberId(memberInSessionId);
         //show all the guidebook's owner
         List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSessionId);
-
-        List<ReservationRequest> guideReservationRequestList = new ArrayList<>();
         for (Guidebook guidebook : guidebookList){
-            guideReservationRequestList.add(reservationRequestManager.findReservationRequestByGuidebookId(guidebook.getId()));
+            System.out.println(guidebook.toString());
         }
+        //show all renting demands for guidebooks owner
+//        List<ReservationRequest> guideReservationRequestList = new ArrayList<>();
+//        for (Guidebook guidebook : guidebookList){
+//            guideReservationRequestList.add(reservationRequestManager.findReservationRequestByGuidebookId(guidebook.getId()));
+//        }
         //show all the reservation request's owner
         List<ReservationRequest> memberReservationRequestList = reservationRequestManager.findAllReservationRequestByMemberId(memberInSessionId);
-
-
+        for (ReservationRequest guidebook : memberReservationRequestList){
+            System.out.println(guidebook.toString());
+        }
+        Member memberInSession = memberManager.findMember(memberInSessionId);
 
         model.addAttribute("climbingAreaList", climbingAreaList);
         model.addAttribute("guidebookList", guidebookList);
         model.addAttribute("memberReservationRequestList", memberReservationRequestList);
-        model.addAttribute("guideReservationRequestList", guideReservationRequestList);
+        //model.addAttribute("guideReservationRequestList", guideReservationRequestList);
         model.addAttribute("memberInSessionId", memberInSessionId);
+        model.addAttribute("memberInSession", memberInSession);
         return "personalSpace";
     }
 
@@ -68,13 +73,13 @@ public class PersonalSpaceController {
         if(memberInSessionId != null && memberInSessionId == id){
             Member memberInBdd = memberManager.findMember(id);
             model.addAttribute("memberEdit", memberInBdd);
-            return "updateUserForm";
+            return "updateMemberForm";
         } else {
             return "redirect:/doLogin";
         }
     }
 
-    @PostMapping("/editMember/updateMember/{id}")
+    @PostMapping("/editMember/updateMemberProcess/{id}")
     public String updateMember(@Valid Member member, @PathVariable("id") Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId,
                                BindingResult bindingResult){
         if(memberInSessionId != null && memberInSessionId == id){
@@ -87,13 +92,13 @@ public class PersonalSpaceController {
                 String str = "Une erreur est survenue. Vérifiez les champs.";
                 model.addAttribute("memberToEdit", member);
                 model.addAttribute("errorMessage", str);
-                return "updateUserForm";
+                return "updateMemberForm";
             } else {
                 String hashPassword = passwordManager.hashPassword(member.getPassword());
                 member.setPassword(hashPassword);
                 memberManager.updateMember(member);
-                System.out.println("etape 3 " + member);
-                return "redirect:/personalSpace";
+                model.addAttribute("memberInSessionId", memberInSessionId);
+                return "redirect:/personalSpace/{memberInSessionId}";
             }
         } else {
             return "redirect:/doLogin";

@@ -131,7 +131,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
 
     @Override
     public List<ReservationRequest> findAllReservationRequestByMemberId(Integer id) {
-        String sql = "SELECT * FROM public.reservation_request WHERE member_id = "+id;
+        String sql = "SELECT * FROM public.reservation_request WHERE member_id = "+ id;
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
         List<ReservationRequest> reservationRequestList = jdbcTemplate.query(sql, reservationRequestRowMapper);
@@ -141,7 +141,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
 
     @Override
     public List<ReservationRequest> findAllReservationRequestByGuidebookId(Integer id) {
-        String sql = "SELECT * FROM public.reservation_request WHERE guidebook_id = "+id;
+        String sql = "SELECT * FROM public.reservation_request WHERE guidebook_id = ?";
         JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
         List<ReservationRequest> reservationRequestList = jdbcTemplate.query(sql, reservationRequestRowMapper);

@@ -14,7 +14,7 @@
                     </c:if>
                 </p>
             </div>
-            <form:form method="post" action="updateMember/${memberEdit.id}" modelAttribute="memberEdit">
+            <form:form method="post" action="updateMemberProcess/${memberEdit.id}" modelAttribute="memberEdit">
                 <div class="form-group">
                     <form:hidden path="id" value="${memberEdit.id}"/>
                     <form:errors path="id" cssClass="errors"/>

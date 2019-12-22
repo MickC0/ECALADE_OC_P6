@@ -77,4 +77,16 @@ public class Guidebook {
     public void setMember(Member member) {
         this.member = member;
     }
+
+    @Override
+    public String toString() {
+        return "Guidebook{" +
+                       "id=" + id +
+                       ", name='" + name + '\'' +
+                       ", description='" + description + '\'' +
+                       ", addedDate=" + addedDate +
+                       ", isLoaned=" + isLoaned +
+                       ", member=" + member +
+                       '}';
+    }
 }

@@ -23,14 +23,7 @@
                     <form:hidden path="member.id" value="${guidebookToUpdate.member.id}"/>
                     <form:errors path="member.id" cssClass="errors"/>
                 </div>
-                <div class="form-group">
-                    <form:hidden path="loaned" value="${guidebookToUpdate.loaned}"/>
-                    <form:errors  path="loaned" cssClass="error"/>
-                </div>
-                <div class="form-group">
-                    <form:hidden path="addedDate" type="date" value="${guidebookToUpdate.addedDate}"/>
-                    <form:errors  path="addedDate" cssClass="error"/>
-                </div>
+
                 <div class="form-group">
                     <form:input path="name" type="text" value="${guidebookToUpdate.name}" cssClass="form-control item" placeholder="Nom du topo" required="true" autofocus=""/>
                     <form:errors  path="name" cssClass="error"/>

@@ -65,4 +65,15 @@ public class ReservationRequest {
     public void setReservationState(ReservationState reservationState) {
         this.reservationState = reservationState;
     }
+
+    @Override
+    public String toString() {
+        return "ReservationRequest{" +
+                       "id=" + id +
+                       ", guidebook=" + guidebook +
+                       ", member=" + member +
+                       ", status='" + status + '\'' +
+                       ", reservationState=" + reservationState +
+                       '}';
+    }
 }

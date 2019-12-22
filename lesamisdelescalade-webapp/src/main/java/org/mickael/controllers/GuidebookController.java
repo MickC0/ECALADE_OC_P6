@@ -94,6 +94,8 @@ public class GuidebookController {
                 model.addAttribute("memberInSessionId", memberInSessionId);
                 return "updateGuidebookForm";
             } else {
+                guidebook.setAddedDate(guidebookInBdd.getAddedDate());
+                guidebook.setLoaned(guidebookInBdd.isLoaned());
                 guidebookManager.updateGuidebook(guidebook);
                 return "redirect:/guidebookList";
             }
