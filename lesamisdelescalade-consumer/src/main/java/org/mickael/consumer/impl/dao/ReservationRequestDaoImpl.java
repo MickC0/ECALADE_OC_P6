@@ -21,7 +21,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("memberId", reservationRequest.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("guidebookId", reservationRequest.getGuidebook().getId(), Types.INTEGER);
-        parameterSource.addValue("reservationState", reservationRequest.getStatus(), Types.VARCHAR);
+        parameterSource.addValue("status", reservationRequest.getStatus(), Types.VARCHAR);
 
 
         namedParameterJdbcTemplate.update(sql, parameterSource);
@@ -101,7 +101,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
         parameterSource.addValue("id", reservationRequest.getId(), Types.INTEGER);
         parameterSource.addValue("memberId", reservationRequest.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("guidebookId", reservationRequest.getGuidebook().getId(), Types.INTEGER);
-        parameterSource.addValue("memberState", reservationRequest.getStatus(), Types.VARCHAR);
+        parameterSource.addValue("status", reservationRequest.getStatus(), Types.VARCHAR);
 
 
         namedParameterJdbcTemplate.update(sql, parameterSource);
