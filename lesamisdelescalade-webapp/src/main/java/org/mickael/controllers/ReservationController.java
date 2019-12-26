@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
@@ -55,7 +56,7 @@ public class ReservationController {
                 } else {
                     newReservationRequest.setGuidebook(guidebookManager.findGuidebook(id));
                     newReservationRequest.setMember(memberManager.findMember(memberInSessionId));
-                    newReservationRequest.setReservationState(ReservationState.PENDING);
+                    newReservationRequest.setStatus(ReservationState.PENDING.getStateValue());
                     reservationRequestManager.createReservationRequest(newReservationRequest);
                     return "redirect:/guidebookList";
                 }
@@ -116,5 +117,69 @@ public class ReservationController {
         }
     }
 
+    @GetMapping("/deleteReservationRequest/{id}")
+    public String deleteReservationRequest(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+        if (memberInSessionId != null){
+            model.addAttribute("memberInSessionId", memberInSessionId);
+            reservationRequestManager.deleteReservationRequest(id);
+            return "redirect:/personalSpace/{memberInSessionId}";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @GetMapping("/acceptReservationRequest/{id}")
+    public String acceptReservationRequest(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+        if (memberInSessionId != null){
+            ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestById(id);
+            reservationRequestInBdd.setStatus(ReservationState.ACCEPTED.getStateValue());
+            Guidebook guidebookToRent = reservationRequestInBdd.getGuidebook();
+            guidebookToRent.setLoaned(true);
+            reservationRequestManager.updateReservationRequest(reservationRequestInBdd);
+            guidebookManager.updateGuidebook(guidebookToRent);
+
+            model.addAttribute("memberInSessionId", memberInSessionId);
+
+            String uri = ServletUriComponentsBuilder.fromCurrentRequestUri().toUriString();
+
+            System.out.println(uri);
+            return "redirect:/personalSpace/{memberInSessionId}";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @GetMapping("/refuseReservationRequest/{id}")
+    public String refuseReservationRequest(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+        if (memberInSessionId != null){
+            ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestById(id);
+            reservationRequestInBdd.setStatus(ReservationState.REFUSED.getStateValue());
+            reservationRequestManager.updateReservationRequest(reservationRequestInBdd);
+
+            model.addAttribute("memberInSessionId", memberInSessionId);
+
+            String uri = ServletUriComponentsBuilder.fromCurrentRequestUri().toUriString();
+
+            System.out.println(uri);
+            return "redirect:/personalSpace/{memberInSessionId}";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+    @GetMapping("/closeReservationRequest/{id}")
+    public String closeReservationRequest(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+        if (memberInSessionId != null){
+            ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestById(id);
+            reservationRequestInBdd.setStatus(ReservationState.CLOSED.getStateValue());
+            Guidebook guidebookToRent = reservationRequestInBdd.getGuidebook();
+            guidebookToRent.setLoaned(false);
+            reservationRequestManager.updateReservationRequest(reservationRequestInBdd);
+            guidebookManager.updateGuidebook(guidebookToRent);
+            model.addAttribute("memberInSessionId", memberInSessionId);
+            return "redirect:/personalSpace/{memberInSessionId}";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
 
 }

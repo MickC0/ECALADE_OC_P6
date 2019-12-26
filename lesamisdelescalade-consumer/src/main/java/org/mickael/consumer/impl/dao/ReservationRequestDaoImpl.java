@@ -4,6 +4,7 @@ import org.mickael.consumer.contract.dao.ReservationRequestDao;
 import org.mickael.consumer.impl.AbstractDataSource;
 import org.mickael.consumer.impl.rowmapper.ReservationRequestRowMapper;
 import org.mickael.model.bean.ReservationRequest;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -21,7 +22,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("memberId", reservationRequest.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("guidebookId", reservationRequest.getGuidebook().getId(), Types.INTEGER);
-        parameterSource.addValue("status", reservationRequest.getStatus(), Types.VARCHAR);
+        parameterSource.addValue("status^", reservationRequest.getStatus(), Types.VARCHAR);
 
 
         namedParameterJdbcTemplate.update(sql, parameterSource);
@@ -30,7 +31,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
 
     @Override
     public ReservationRequest findReservationRequestById(Integer id) {
-        String sql = "SELECT * FROM public.reservation_request WHERE id = :guidebook_id";
+        String sql = "SELECT * FROM public.reservation_request WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", id, Types.INTEGER);
@@ -47,9 +48,13 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("guidebook_id", id, Types.INTEGER);
         ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
-        ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
+        try{
+            ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
+            return reservationRequest;
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
 
-        return reservationRequest;
     }
 
     @Override

@@ -66,7 +66,7 @@ public class GuidebookDaoImpl extends AbstractDataSource implements GuidebookDao
         parameterSource.addValue("memberId", guidebook.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("name", guidebook.getName(), Types.VARCHAR);
         parameterSource.addValue("description", guidebook.getDescription(), Types.VARCHAR);
-        parameterSource.addValue("addedDAte", guidebook.getAddedDate(), Types.TIMESTAMP);
+        parameterSource.addValue("addedDate", guidebook.getAddedDate(), Types.DATE);
         parameterSource.addValue("isLoaned", guidebook.isLoaned(), Types.BOOLEAN);
 
         namedParameterJdbcTemplate.update(sql, parameterSource);

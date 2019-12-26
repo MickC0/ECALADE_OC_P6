@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -37,32 +38,28 @@ public class PersonalSpaceController {
     @GetMapping("/personalSpace/{memberInSessionId}")
     public String getPersonalSpace(@PathVariable@SessionAttribute("memberInSessionId")Integer memberInSessionId, Model model){
         if (memberInSessionId == null){
-            return "redirect:/home";
+            return "redirect:/showHome";
         }
 
         //show all the climbing area's owner
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findClimbingAreaByMemberId(memberInSessionId);
+
         //show all the guidebook's owner
         List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSessionId);
-        for (Guidebook guidebook : guidebookList){
-            System.out.println(guidebook.toString());
-        }
+
         //show all renting demands for guidebooks owner
-//        List<ReservationRequest> guideReservationRequestList = new ArrayList<>();
-//        for (Guidebook guidebook : guidebookList){
-//            guideReservationRequestList.add(reservationRequestManager.findReservationRequestByGuidebookId(guidebook.getId()));
-//        }
+        List<ReservationRequest> guideReservationRequestList = new ArrayList<>();
+        for (Guidebook guidebook : guidebookList){
+            guideReservationRequestList.add(reservationRequestManager.findReservationRequestByGuidebookId(guidebook.getId()));
+        }
         //show all the reservation request's owner
         List<ReservationRequest> memberReservationRequestList = reservationRequestManager.findAllReservationRequestByMemberId(memberInSessionId);
-        for (ReservationRequest guidebook : memberReservationRequestList){
-            System.out.println(guidebook.toString());
-        }
         Member memberInSession = memberManager.findMember(memberInSessionId);
 
         model.addAttribute("climbingAreaList", climbingAreaList);
         model.addAttribute("guidebookList", guidebookList);
         model.addAttribute("memberReservationRequestList", memberReservationRequestList);
-        //model.addAttribute("guideReservationRequestList", guideReservationRequestList);
+        model.addAttribute("guideReservationRequestList", guideReservationRequestList);
         model.addAttribute("memberInSessionId", memberInSessionId);
         model.addAttribute("memberInSession", memberInSession);
         return "personalSpace";
