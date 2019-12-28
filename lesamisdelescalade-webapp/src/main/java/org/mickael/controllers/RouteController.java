@@ -12,10 +12,14 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.List;
 
 
 @Controller
 public class RouteController {
+
+    @Inject
+    private UtilsManager utilsManager;
 
     @Inject
     private ClimbingAreaManager climbingAreaManager;
@@ -41,10 +45,15 @@ public class RouteController {
     public String createNewRoute(@PathVariable Integer sectorId, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             Route route = new Route();
+            List<String> plop = utilsManager.getEnumCotationStringValues();
+            for (String c : plop){
+                System.out.println(c);
+            }
             route.setSector(sectorManager.findSector(sectorId));
             model.addAttribute("route", route);
-            model.addAttribute("listCotation", route.getEnumCotation().getEnumCotationStringValues());
+            model.addAttribute("listCotation", plop);
             model.addAttribute("sectorId", sectorId);
+
             return "routeForm";
 
         } else {

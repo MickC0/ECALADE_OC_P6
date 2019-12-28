@@ -41,5 +41,8 @@
         <property name="MemberManager" ref="memberManager"/>
     </bean>
 
+    <!-- Utils -->
+    <bean id="util" class="org.mickael.business.impl.manager.UtilsManagerImpl"></bean>
+
 
 </beans>

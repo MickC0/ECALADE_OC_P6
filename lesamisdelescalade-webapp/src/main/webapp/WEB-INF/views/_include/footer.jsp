@@ -1,3 +1,4 @@
+<%@ page pageEncoding="UTF-8"%>
 
 <footer class="page-footer dark">
     <div class="container">

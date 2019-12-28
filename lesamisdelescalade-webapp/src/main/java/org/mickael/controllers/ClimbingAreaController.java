@@ -82,15 +82,18 @@ public class ClimbingAreaController {
     public String showClimbingArea(@PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
         ClimbingArea climbingArea = climbingAreaManager.findClimbingArea(id);
         List<Sector> sectorList = sectorManager.findAllSectorByClimbingAreaId(id);
-        List<Route> routeList = new ArrayList<>();
+        List<Comment> commentList = commentManager.findAllCommentByClimbingArea(id);
+
         for (Sector sector : sectorList){
+            List<Route> routeList = new ArrayList<>();
             for (Route route : routeManager.findAllRouteBySectorId(sector.getId())){
                 routeList.add(route);
             }
+            sector.setRouteList(routeList);
         }
         model.addAttribute("climbArea", climbingArea);
-        model.addAttribute("sectorArea", sectorList);
-        model.addAttribute("routeArea", routeList);
+        model.addAttribute("sectorList", sectorList);
+        model.addAttribute("commentList", commentList);
         return "climbingArea";
     }
 
@@ -102,7 +105,7 @@ public class ClimbingAreaController {
     }
 
 
-    @GetMapping("/editClimbingArea/{id}")
+    @GetMapping("/updateClimbingArea/{id}")
     public String showUpdateClimbingAreaForm(Model model, @PathVariable Integer id,
                                              @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
@@ -114,7 +117,7 @@ public class ClimbingAreaController {
         }
     }
 
-    @PostMapping("/editClimbingArea/updateClimbingArea/{id}")
+    @PostMapping("/updateClimbingArea/updateClimbingAreaProcess/{id}")
     public String updateClimbingArea(@Valid ClimbingArea climbingArea, BindingResult bindingResult, Model model,
                                          @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){

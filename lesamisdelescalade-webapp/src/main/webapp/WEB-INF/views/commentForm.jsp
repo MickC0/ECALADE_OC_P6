@@ -3,28 +3,20 @@
 <%@include file="_include/head.jsp"%>
 
 
-<main class="page sectorForm-page">
+<main class="page commentForm-page">
     <section class="clean-block clean-form dark">
         <div class="container">
             <div class="block-heading">
-                <h2 class="text-login">Création d'un secteur</h2>
+                <h2 class="text-login">Création d'un commentaire</h2>
                 <p>
                     <c:if test="${!empty errorMessage}">
                         <c:out value="${errorMessage}"/>
                     </c:if>
                 </p>
             </div>
-            <form:form modelAttribute="sector" method="post" action="saveSector/${climbId}">
+            <form:form modelAttribute="comment" method="post" action="saveCommentProcess/${climbId}">
                 <div class="form-group">
-                    <form:hidden path="climbingArea.id" value="${climbId}"/>
-                    <form:errors path="climbingArea.id" cssClass="errors"/>
-                </div>
-                <div class="form-group">
-                    <form:input path="name" type="text" cssClass="form-control item" placeholder="Nom du secteur" required="true" autofocus=""/>
-                    <form:errors  path="name" cssClass="error"/>
-                </div>
-                <div class="form-group">
-                    <form:input path="description" type="text" cssClass="form-control item" placeholder="Description du secteur" required="true" autofocus=""/>
+                    <form:input path="description" type="text" cssClass="form-control item" placeholder="Commentaire" required="true" autofocus=""/>
                     <form:errors  path="description" cssClass="error"/>
                 </div>
                 <div class="form-group">

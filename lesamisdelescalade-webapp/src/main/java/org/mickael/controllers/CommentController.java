@@ -1,6 +1,8 @@
 package org.mickael.controllers;
 
-import org.mickael.business.contract.manager.*;
+import org.mickael.business.contract.manager.ClimbingAreaManager;
+import org.mickael.business.contract.manager.CommentManager;
+import org.mickael.business.contract.manager.MemberManager;
 import org.mickael.model.bean.Comment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,20 +24,14 @@ public class CommentController {
     @Inject
     private ClimbingAreaManager climbingAreaManager;
 
-    @Inject
-    private SectorManager sectorManager;
 
     @Inject
     private MemberManager memberManager;
 
-    @Inject
-    private PhotoManager photoManager;
 
     @Inject
     private CommentManager commentManager;
 
-    @Inject
-    private RouteManager routeManager;
 
 
     /** ======== Comments ======== */
@@ -45,12 +41,6 @@ public class CommentController {
     public String createNewComment(@PathVariable Integer climbId, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             Comment comment = new Comment();
-
-            comment.setClimbingArea(climbingAreaManager.findClimbingArea(climbId));
-            comment.setMember(memberManager.findMember(memberInSessionId));
-            comment.setCreationDate (new Timestamp(System.currentTimeMillis()));
-            comment.setUpdateDate (new Timestamp(System.currentTimeMillis()));
-
             model.addAttribute("comment", comment);
             model.addAttribute("climbId", climbId);
             return "commentForm";
@@ -60,7 +50,7 @@ public class CommentController {
         }
     }
 
-    @PostMapping("/createNewComment/saveComment/{climbId}")
+    @PostMapping("/createNewComment/saveCommentProcess/{climbId}")
     public String saveComment(@PathVariable Integer climbId, Model model,@Valid Comment comment, BindingResult bindingResult,
                               @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
 
@@ -70,6 +60,9 @@ public class CommentController {
 
                 return "commentForm";
             } else {
+                comment.setClimbingArea(climbingAreaManager.findClimbingArea(climbId));
+                comment.setMember(memberManager.findMember(memberInSessionId));
+                comment.setCreationDate (new Timestamp(System.currentTimeMillis()));
                 commentManager.createComment(comment);
                 model.addAttribute("climbId", climbId);
                 return "redirect:/climbingArea/{climbId}";
@@ -122,4 +115,6 @@ public class CommentController {
             return "redirect:/doLogin";
         }
     }
+
+
 }

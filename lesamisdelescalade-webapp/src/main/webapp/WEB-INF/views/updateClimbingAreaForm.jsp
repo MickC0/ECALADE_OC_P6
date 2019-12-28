@@ -13,7 +13,7 @@
                     </c:if>
                 </p>
             </div>
-            <form:form method="post" action="updateClimbingArea/${climbingAreaToUpdate.id}" modelAttribute="climbingAreaToUpdate">
+            <form:form method="post" action="updateClimbingAreaProcess/${climbingAreaToUpdate.id}" modelAttribute="climbingAreaToUpdate">
                 <div class="form-group">
                     <form:hidden path="id" value="${climbingAreaToUpdate.id}"/>
                     <form:errors  path="id" cssClass="error"/>

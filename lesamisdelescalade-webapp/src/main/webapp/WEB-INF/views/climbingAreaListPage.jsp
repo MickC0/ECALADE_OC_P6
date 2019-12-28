@@ -37,10 +37,8 @@
                                 <h4 class="card-title">${climbingArea.name}</h4>
                                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in.</p>
                             </div>
-                            <div>
-                                <button class="btn btn-outline-primary btn-sm" type="button">
-                                    <a href="<c:url value="/climbingArea/${climbingArea.id}"/>">Voir</a>
-                                </button>
+                            <div class="card-body">
+                                <a class="btn btn-outline-primary btn-sm" href="<c:url value="/climbingArea/${climbingArea.id}"/>">Voir</a>
                             </div>
                         </div>
                     </div>
