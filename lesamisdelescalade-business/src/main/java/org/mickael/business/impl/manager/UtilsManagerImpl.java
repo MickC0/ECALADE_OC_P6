@@ -3,6 +3,7 @@ package org.mickael.business.impl.manager;
 import org.mickael.business.contract.manager.UtilsManager;
 import org.mickael.business.impl.AbstractManager;
 import org.mickael.model.enumeration.Cotation;
+import org.mickael.model.enumeration.Region;
 
 import javax.inject.Named;
 import java.util.ArrayList;
@@ -68,5 +69,21 @@ public class UtilsManagerImpl extends AbstractManager implements UtilsManager {
 
         return getEnumLevelFromCotationValue(cotationValue);
 
+    }
+
+    /**
+     * This method return a list of string with all abbreviation contained in enum
+     *
+     * @return a list of string
+     */
+    public List<String> getEnumRegionStringValues (){
+        Region[] listRegion = Region.values();
+        List<String> listRegionStringValues = new ArrayList<>();
+
+        for (Region enumRegion : listRegion){
+            listRegionStringValues.add(enumRegion.getParam());
+        }
+
+        return  listRegionStringValues;
     }
 }

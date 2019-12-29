@@ -2,6 +2,7 @@ package org.mickael.controllers;
 
 import org.mickael.business.contract.manager.GuidebookManager;
 import org.mickael.business.contract.manager.MemberManager;
+import org.mickael.business.contract.manager.UtilsManager;
 import org.mickael.model.bean.Guidebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,9 +22,15 @@ public class GuidebookController {
     @Inject
     private MemberManager memberManager;
 
+    @Inject
+    private UtilsManager utilsManager;
+
+
     @GetMapping("/showGuidebookForm")
     public String showGuidebookForm(@SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
         if (memberInSessionId != null){
+            List<String> regionList = utilsManager.getEnumRegionStringValues();
+            model.addAttribute("regionList", regionList);
             model.addAttribute("guidebook", new Guidebook());
             return "guidebookForm";
         } else {
@@ -74,6 +81,8 @@ public class GuidebookController {
         Guidebook guidebookInBdd = guidebookManager.findGuidebook(id);
 
         if (memberInSessionId != null && memberInSessionId == guidebookInBdd.getMember().getId()){
+            List<String> regionList = utilsManager.getEnumRegionStringValues();
+            model.addAttribute("regionList", regionList);
             model.addAttribute("guidebookToUpdate", guidebookInBdd);
             model.addAttribute("memberInSessionId", memberInSessionId);
             return "updateGuidebookForm";
@@ -94,7 +103,6 @@ public class GuidebookController {
                 model.addAttribute("memberInSessionId", memberInSessionId);
                 return "updateGuidebookForm";
             } else {
-                guidebook.setAddedDate(guidebookInBdd.getAddedDate());
                 guidebook.setLoaned(guidebookInBdd.isLoaned());
                 guidebookManager.updateGuidebook(guidebook);
                 return "redirect:/guidebookList";

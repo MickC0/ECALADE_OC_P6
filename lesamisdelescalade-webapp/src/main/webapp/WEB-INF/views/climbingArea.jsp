@@ -41,7 +41,8 @@
                                 </c:if>
                                 <c:if test="${climbArea.approuved == true}">
                                     <div>
-                                        <p>Site approuvé par : </p><img src="<c:url value="/resources/img/icon-above-font.png"/>" style="width: 120px; height:auto">
+                                        <p>Site officiel : <img src="<c:url value="/resources/img/icon-above-font.png"/>" style="width: 120px; height:auto">
+                                        </p>
                                     </div>
                                 </c:if>
                                 <div class="summary">
@@ -60,7 +61,7 @@
                         </ul>
                         <div class="tab-content" id="myTabContent">
                             <div class="tab-pane active fade show specifications" role="tabpanel" id="description">
-                                <c:if test="${!empty memberInSessionId}">
+                                <c:if test="${(!empty memberInSessionId && sessionScope.memberInSessionId == climbArea.member.id) || sessionScope.memberInSessionRole == 'Administrator'}">
                                     <p class="my-5">
                                         <a href="<c:url value="/createNewSector/${climbArea.id}"/>" class="btn btn-outline-primary">
                                             <i class="fas fa-plus-square ml-2"> Ajouter un nouveau secteur </i>
@@ -72,7 +73,7 @@
                                     <tr>
                                         <th class="align-middle" style="text-align: center">Secteur</th>
                                         <th class="align-middle" style="text-align: center">Description</th>
-                                        <c:if test="${!empty memberInSessionId}">
+                                        <c:if test="${(!empty memberInSessionId && sessionScope.memberInSessionId == climbArea.member.id) || sessionScope.memberInSessionRole == 'Administrator'}">
                                             <th class="align-middle" style="text-align: center">Editer</th>
                                             <th class="align-middle" style="text-align: center">Ajouter une voie</th>
                                             <th class="align-middle" style="text-align: center">Supprimer</th>
@@ -85,7 +86,7 @@
                                         <tr>
                                             <td class="align-middle" style="text-align: center">${sector.name}</td>
                                             <td class="align-middle" style="text-align: center">${sector.description}</td>
-                                            <c:if test="${!empty memberInSessionId}">
+                                            <c:if test="${(!empty memberInSessionId && sessionScope.memberInSessionId == sector.climbingArea.member.id) || sessionScope.memberInSessionRole == 'Administrator'}">
                                                 <td class="align-middle" style="text-align: center">
                                                     <a href="<c:url value="/updateSector/${sector.id}"/>" class="btn btn-outline-primary">
                                                         <i class="fas fa-edit ml-2"></i>
@@ -128,7 +129,7 @@
                                                                     <th class="align-middle" style="text-align: center">Cotation</th>
                                                                     <th class="align-middle" style="text-align: center">Hauteur</th>
                                                                     <th class="align-middle" style="text-align: center">Description</th>
-                                                                    <c:if test="${!empty memberInSessionId}">
+                                                                    <c:if test="${(!empty memberInSessionId && sessionScope.memberInSessionId == sector.climbingArea.member.id) || sessionScope.memberInSessionRole == 'Administrator'}">
                                                                         <th class="align-middle" style="text-align: center">Editer</th>
                                                                         <th class="align-middle" style="text-align: center">Supprimer</th>
                                                                     </c:if>
@@ -141,7 +142,7 @@
                                                                         <td class="align-middle" style="text-align: center">${route.cotation}</td>
                                                                         <td class="align-middle" style="text-align: center">${route.height}</td>
                                                                         <td class="align-middle" style="text-align: center">${route.description}</td>
-                                                                        <c:if test="${!empty memberInSessionId}">
+                                                                        <c:if test="${(!empty memberInSessionId && sessionScope.memberInSessionId == sector.climbingArea.member.id) || sessionScope.memberInSessionRole == 'Administrator'}">
                                                                             <td class="align-middle" style="text-align: center">
                                                                                 <a href="<c:url value="/updateRoute/${r.id}"/> " class="btn btn-outline-primary">
                                                                                     <i class="fas fa-edit ml-2"></i>
@@ -181,14 +182,16 @@
                                 <c:forEach items="${commentList}" var="comment">
                                     <div class="reviews">
                                         <div class="review-item">
-                                            <div class="align-items-sm-start">
-                                                <a href="<c:url value="/updateComment/${comment.id}"/> " class="btn btn-sm btn-outline-primary">
-                                                    <i class="fas fa-edit ml-2"></i>
-                                                </a>
-                                                <a href="<c:url value="/deleteComment/${comment.id}"/> " class="btn btn-sm btn-outline-danger">
-                                                    <i class="fas fa-trash ml-2"></i>
-                                                </a>
-                                            </div>
+                                            <c:if test="${sessionScope.memberInSessionRole == 'Administrator' || sessionScope.memberInSessionRole == 'Member'}">
+                                                <div class="align-items-sm-start">
+                                                    <a href="<c:url value="/updateComment/${comment.id}"/> " class="btn btn-sm btn-outline-primary">
+                                                        <i class="fas fa-edit ml-2"></i>
+                                                    </a>
+                                                    <a href="<c:url value="/deleteComment/${comment.id}"/> " class="btn btn-sm btn-outline-danger">
+                                                        <i class="fas fa-trash ml-2"></i>
+                                                    </a>
+                                                </div>
+                                            </c:if>
                                             <h4>${comment.member.pseudo}</h4><span class="text-muted"><a href="#">${comment.member.pseudo}</a>, ${comment.creationDate}</span>
                                             <p>${comment.description}</p>
                                         </div>

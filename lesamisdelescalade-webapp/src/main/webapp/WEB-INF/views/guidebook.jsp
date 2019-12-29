@@ -15,20 +15,30 @@
                         <div class="col-md-6">
                             <div class="gallery">
                                 <div class="sp-wrap">
-                                    <a href="/resources/img/image1.jpg">
-                                        <img class="img-fluid d-block mx-auto" src="/resources/img/image4.jpg">
+                                    <a href="<c:url value="/resources/img/image1.jpg"/>">
+                                        <img class="img-fluid d-block mx-auto" src="<c:url value="/resources/img/image4.jpg"/>">
                                     </a>
-                                    <a href="/resources/img/image5.jpg">
-                                        <img class="img-fluid d-block mx-auto" src="/resources/img/image6.jpg">
+                                    <a href="<c:url value="/resources/img/image5.jpg"/>">
+                                        <img class="img-fluid d-block mx-auto" src="<c:url value="/resources/img/image6.jpg"/>">
                                     </a>
                                 </div>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="info">
-                                <h3>Lorem Ipsum</h3>
-                                <div class="rating">
-                                    <img src="/resources/img/icon1.svg">
+                                <h3>${guidebook.name.toUpperCase()}</h3>
+                                <div class="summary">
+                                    <table class="table table-striped table-responsive-sm">
+                                        <tr>
+                                            <th>Région : </th>
+                                            <td>${guidebook.region}</td>
+                                        </tr>
+                                        <tr>
+                                            <th>Date de parution : </th>
+                                            <td>${guidebook.addedDate}</td>
+                                        </tr>
+                                    </table>
+                                    <img src="<c:url value="/resources/img/icon1.svg"/>">
                                 </div>
                                 <div class="summary">
                                     <p>
@@ -37,9 +47,9 @@
 
                                     <c:if test="${guidebook.loaned == false}">
                                         <td>
-                                            <button class="btn btn-outline-info btn-block" type="button">
-                                                <a href="<c:url value="/showReservationForm/${guidebook.id}"/>">RESERVER</a>
-                                            </button>
+                                            <a href="<c:url value="/showReservationForm/${guidebook.id}"/>">
+                                                <button class="btn btn-outline-info btn-block" type="button">RESERVER</button>
+                                            </a>
                                         </td>
                                     </c:if>
                                 </div>

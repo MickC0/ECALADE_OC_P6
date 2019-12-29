@@ -15,15 +15,16 @@ public class GuidebookDaoImpl extends AbstractDataSource implements GuidebookDao
 
     @Override
     public void createGuidebook(Guidebook guidebook) {
-        String sql = "INSERT INTO public.guidebook (member_id, name, description, added_date, is_loaned)"
-                             + "VALUES (:memberId, :name, :description, :addedDAte, :isLoaned)";
+        String sql = "INSERT INTO public.guidebook (member_id, name, description, added_date, is_loaned, region)"
+                             + "VALUES (:memberId, :name, :description, :addedDAte, :isLoaned, :region)";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("memberId", guidebook.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("name", guidebook.getName(), Types.VARCHAR);
         parameterSource.addValue("description", guidebook.getDescription(), Types.VARCHAR);
-        parameterSource.addValue("addedDAte", guidebook.getAddedDate(), Types.TIMESTAMP);
+        parameterSource.addValue("addedDAte", guidebook.getAddedDate(), Types.DATE);
         parameterSource.addValue("isLoaned", guidebook.isLoaned(), Types.BOOLEAN);
+        parameterSource.addValue("region", guidebook.getRegion(), Types.VARCHAR);
 
         namedParameterJdbcTemplate.update(sql, parameterSource);
 
@@ -58,7 +59,8 @@ public class GuidebookDaoImpl extends AbstractDataSource implements GuidebookDao
                              + "name = :name, "
                              + "description = :description, "
                              + "added_date = :addedDate, "
-                             + "is_loaned = :isLoaned "
+                             + "is_loaned = :isLoaned, "
+                             + "region = :region "
                              + "WHERE id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -68,6 +70,7 @@ public class GuidebookDaoImpl extends AbstractDataSource implements GuidebookDao
         parameterSource.addValue("description", guidebook.getDescription(), Types.VARCHAR);
         parameterSource.addValue("addedDate", guidebook.getAddedDate(), Types.DATE);
         parameterSource.addValue("isLoaned", guidebook.isLoaned(), Types.BOOLEAN);
+        parameterSource.addValue("region", guidebook.getRegion(), Types.VARCHAR);
 
         namedParameterJdbcTemplate.update(sql, parameterSource);
 

@@ -45,13 +45,10 @@ public class RouteController {
     public String createNewRoute(@PathVariable Integer sectorId, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             Route route = new Route();
-            List<String> plop = utilsManager.getEnumCotationStringValues();
-            for (String c : plop){
-                System.out.println(c);
-            }
             route.setSector(sectorManager.findSector(sectorId));
-            model.addAttribute("route", route);
+            List<String> plop = utilsManager.getEnumCotationStringValues();
             model.addAttribute("listCotation", plop);
+            model.addAttribute("route", route);
             model.addAttribute("sectorId", sectorId);
 
             return "routeForm";
@@ -85,8 +82,9 @@ public class RouteController {
     @GetMapping("/updateRoute/{id}")
     public String updateRoute(Model model, @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
         if (memberInSessionId != null){
-
             Route routeToUpdate = routeManager.findRoute(id);
+            List<String> plop = utilsManager.getEnumCotationStringValues();
+            model.addAttribute("listCotation", plop);
             model.addAttribute("memberInSessionId", memberInSessionId);
             model.addAttribute("routeToUpdate", routeToUpdate);
             return "updateRouteForm";

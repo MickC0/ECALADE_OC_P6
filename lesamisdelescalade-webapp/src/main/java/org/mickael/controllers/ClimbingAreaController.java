@@ -35,6 +35,9 @@ public class ClimbingAreaController {
     @Inject
     private RouteManager routeManager;
 
+    @Inject
+    private UtilsManager utilsManager;
+
 
 
 
@@ -46,6 +49,8 @@ public class ClimbingAreaController {
     @GetMapping("/showClimbingAreaForm")
     public String showClimbingAreaForm(Model model, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
         if (memberInSessionId != null){
+            List<String> regionList = utilsManager.getEnumRegionStringValues();
+            model.addAttribute("regionList", regionList);
             model.addAttribute("climbingArea", new ClimbingArea());
             return "climbingAreaForm";
         } else {
@@ -110,6 +115,8 @@ public class ClimbingAreaController {
                                              @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ClimbingArea climbingAreaToUpdate = climbingAreaManager.findClimbingArea(id);
+            List<String> regionList = utilsManager.getEnumRegionStringValues();
+            model.addAttribute("regionList", regionList);
             model.addAttribute("climbingAreaToUpdate", climbingAreaToUpdate);
             return "updateClimbingAreaForm";
         } else {

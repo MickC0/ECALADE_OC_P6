@@ -16,16 +16,23 @@
             </div>
             <form:form modelAttribute="guidebook" method="post" action="saveGuidebookProcess">
                 <div class="form-group">
-                    <form:input path="name" type="text" cssClass="form-control item" placeholder="Nom de la voie" required="true" autofocus=""/>
+                    <form:input path="name" type="text" cssClass="form-control item" placeholder="Nom du topo" required="true" autofocus=""/>
                     <form:errors  path="name" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <form:input path="addedDate" type="date" cssClass="form-control item" placeholder="Date d'ajout" required="true" autofocus=""/>
+                    <form:input path="addedDate" type="date" cssClass="form-control item" placeholder="Date de parution" required="true" autofocus=""/>
                     <form:errors  path="addedDate" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <form:input path="description" type="text" cssClass="form-control item" placeholder="Description de la voie" required="true" autofocus=""/>
+                    <form:input path="description" type="text" cssClass="form-control item" placeholder="Description du topo" required="true" autofocus=""/>
                     <form:errors  path="description" cssClass="error"/>
+                </div>
+                <div class="form-group select-style">
+                    <form:select path="region" cssClass="form-control">
+                        <form:option value="">Région</form:option>
+                        <form:options items="${regionList}"/>
+                    </form:select>
+                    <form:errors path="region" cssClass="error"/>
                 </div>
                 <div class="form-group">
                     <form:button class="btn btn-primary btn-block" type="submit">Enregistrer</form:button>

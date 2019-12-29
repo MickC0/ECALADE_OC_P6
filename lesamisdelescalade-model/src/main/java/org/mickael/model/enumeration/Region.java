@@ -1,8 +1,5 @@
 package org.mickael.model.enumeration;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public enum Region {
 
     AUVERGNE_RHONE_ALPES("Auvergne-Rhône-Alpes"),
@@ -31,19 +28,5 @@ public enum Region {
         return  this.param ;
     }
 
-    /**
-     * This method return a list of string with all abbreviation contained in enum
-     *
-     * @return a list of string
-     */
-    public static List<String> getEnumRegionStringValues (){
-        Region[] listRegion = Region.values();
-        List<String> listRegionStringValues = new ArrayList<>();
 
-        for (Region enumRegion : listRegion){
-            listRegionStringValues.add(enumRegion.getParam());
-        }
-
-        return  listRegionStringValues;
-    }
 }

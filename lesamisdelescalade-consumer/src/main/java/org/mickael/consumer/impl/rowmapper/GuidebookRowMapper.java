@@ -17,6 +17,7 @@ public class GuidebookRowMapper implements RowMapper<Guidebook> {
         guidebook.setDescription(resultSet.getString("description"));
         guidebook.setAddedDate(resultSet.getDate("added_date"));
         guidebook.setLoaned(resultSet.getBoolean("is_loaned"));
+        guidebook.setRegion(resultSet.getString("region"));
         MemberDaoImpl memberDao = new MemberDaoImpl();
         guidebook.setMember(memberDao.findMember(resultSet.getInt("member_id")));
 

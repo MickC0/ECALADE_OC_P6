@@ -23,14 +23,24 @@
                     <form:hidden path="member.id" value="${guidebookToUpdate.member.id}"/>
                     <form:errors path="member.id" cssClass="errors"/>
                 </div>
-
                 <div class="form-group">
                     <form:input path="name" type="text" value="${guidebookToUpdate.name}" cssClass="form-control item" placeholder="Nom du topo" required="true" autofocus=""/>
                     <form:errors  path="name" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <form:input path="description" type="text" value="${guidebookToUpdate.description}" cssClass="form-control item" placeholder="Description de la voie" required="true" autofocus=""/>
+                    <form:input path="addedDate" type="date" value="${guidebookToUpdate.addedDate}" cssClass="form-control item" placeholder="Date de parution" required="true" autofocus=""/>
+                    <form:errors  path="addedDate" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:input path="description" type="text" value="${guidebookToUpdate.description}" cssClass="form-control item" placeholder="Description du topo" required="true" autofocus=""/>
                     <form:errors  path="description" cssClass="error"/>
+                </div>
+                <div class="form-group select-style">
+                    <form:select path="region" cssClass="form-control">
+                        <form:option value="">Région</form:option>
+                        <form:options items="${regionList}"/>
+                    </form:select>
+                    <form:errors path="region" cssClass="error"/>
                 </div>
                 <div class="form-group">
                     <form:button class="btn btn-primary btn-block" type="submit">Enregistrer</form:button>

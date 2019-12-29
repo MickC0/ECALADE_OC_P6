@@ -19,9 +19,12 @@
                     <form:input path="name" type="text" cssClass="form-control item" placeholder="Nom du site" required="true" autofocus=""/>
                     <form:errors  path="name" cssClass="error"/>
                 </div>
-                <div class="form-group">
-                    <form:input path="region" type="text" cssClass="form-control item" placeholder="Région" required="true" autofocus=""/>
-                    <form:errors  path="region" cssClass="error"/>
+                <div class="form-group select-style">
+                    <form:select path="region" cssClass="form-control">
+                        <form:option value="">Région</form:option>
+                        <form:options items="${regionList}"/>
+                    </form:select>
+                    <form:errors path="region" cssClass="error"/>
                 </div>
                 <div class="form-group">
                     <form:input path="description" type="text" cssClass="form-control item" placeholder="Description du site" required="true" autofocus=""/>
@@ -41,7 +44,7 @@
                 </div>
                 <div class="form-group">
                     <c:if test="${sessionScope.memberInSessionRole == 'Administrator' || sessionScope.memberInSessionRole == 'Member'}">
-                        <form:label path="approuved">Approuvé par l'association</form:label>
+                        <form:label path="approuved">Officiel Les Amis de l'Escalade</form:label>
                         <form:checkbox path="approuved" cssClass="form-check-inline"/>
                         <form:errors  path="approuved" cssClass="error"/>
                     </c:if>
