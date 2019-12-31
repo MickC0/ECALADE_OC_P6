@@ -38,22 +38,21 @@
                                             <td>${guidebook.addedDate}</td>
                                         </tr>
                                     </table>
-                                    <img src="<c:url value="/resources/img/icon1.svg"/>">
                                 </div>
                                 <div class="summary">
                                     <p>
                                         <c:out value="${guidebook.description}"/>
                                     </p>
-
-                                    <c:if test="${guidebook.loaned == false}">
-                                        <td>
-                                            <a href="<c:url value="/showReservationForm/${guidebook.id}"/>">
-                                                <button class="btn btn-outline-info btn-block" type="button">RESERVER</button>
-                                            </a>
-                                        </td>
+                                    <c:if test="${!empty memberInSessionId}">
+                                        <c:if test="${guidebook.loaned == false}">
+                                            <div>
+                                                <a href="<c:url value="/showReservationForm/${guidebook.id}"/>">
+                                                    <button type="button" class="btn btn-outline-primary btn-block">RESERVER</button>
+                                                </a>
+                                            </div>
+                                        </c:if>
                                     </c:if>
                                 </div>
-
                             </div>
                         </div>
                     </div>

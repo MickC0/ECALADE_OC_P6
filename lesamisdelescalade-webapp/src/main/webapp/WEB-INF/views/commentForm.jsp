@@ -16,7 +16,7 @@
             </div>
             <form:form modelAttribute="comment" method="post" action="saveCommentProcess/${climbId}">
                 <div class="form-group">
-                    <form:input path="description" type="text" cssClass="form-control item" placeholder="Commentaire" required="true" autofocus=""/>
+                    <form:textarea path="description" type="text" cssClass="form-control" rows="5" placeholder="Commentaire" required="true" autofocus=""/>
                     <form:errors  path="description" cssClass="error"/>
                 </div>
                 <div class="form-group">

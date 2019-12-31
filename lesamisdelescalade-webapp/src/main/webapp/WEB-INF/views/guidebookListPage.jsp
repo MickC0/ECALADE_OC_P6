@@ -38,9 +38,9 @@
                                 <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in.</p>
                             </div>
                             <div>
-                                <button class="btn btn-outline-primary btn-sm" type="button">
-                                    <a href="<c:url value="/guidebook/${guidebook.id}"/>">Voir</a>
-                                </button>
+                                <a href="<c:url value="/guidebook/${guidebook.id}"/>">
+                                    <button class="btn btn-outline-primary btn-sm">Voir</button>
+                                </a>
                             </div>
                         </div>
                     </div>

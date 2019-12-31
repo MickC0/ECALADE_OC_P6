@@ -34,41 +34,40 @@ public class ReservationController {
         if (memberInSessionId == null){
             return "redirect:/doLogin";
         }
+        ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestByMemberAndGuidebookId(memberInSessionId, id);
+        String reservationInBddStatus = new String();
+        if (reservationRequestInBdd != null){
+            reservationInBddStatus = reservationRequestInBdd.getStatus();
+
+        } else {
+            reservationInBddStatus = "null";
+        }
+
+        model.addAttribute("reservationInBddStatus", reservationInBddStatus);
         model.addAttribute("guidebookId", id);
         model.addAttribute("memberInSessionId", memberInSessionId);
         model.addAttribute("reservationRequest", new ReservationRequest());
         return "reservationRequestForm";
     }
 
-    @PostMapping("/saveReservationProcess/{id}")
+    @PostMapping("/showReservationForm/saveReservationProcess/{id}")
     public String saveReservation(@Valid @ModelAttribute("reservationRequest")ReservationRequest newReservationRequest,
                                   @PathVariable Integer id, BindingResult bindingResult, Model model,
                                   @SessionAttribute("memberInSessionId")Integer memberInSessionId){
-
-        if (memberInSessionId != null){
-            ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestByMemberAndGuidebookId(memberInSessionId, id);
-            String state = reservationRequestInBdd.getStatus();
-            if (state == null || state == ReservationState.CLOSED.getStateValue() || state == ReservationState.CANCELLED.getStateValue() || state == ReservationState.REFUSED.getStateValue()){
-                if (bindingResult.hasErrors()){
-                    model.addAttribute("guidebookId", id);
-                    model.addAttribute("memberInSessionId", memberInSessionId);
-                    return "reservationRequestForm";
-                } else {
-                    newReservationRequest.setGuidebook(guidebookManager.findGuidebook(id));
-                    newReservationRequest.setMember(memberManager.findMember(memberInSessionId));
-                    newReservationRequest.setStatus(ReservationState.PENDING.getStateValue());
-                    reservationRequestManager.createReservationRequest(newReservationRequest);
-                    return "redirect:/guidebookList";
-                }
-            } else {
-                String msg = "Il y a déjà une réservation. Merci d'essayer ultérieurement.";
-                model.addAttribute("errorMsg", msg);
+        if (memberInSessionId == null){
+            return "redirect:/doLogin";
+        } else {
+            if (bindingResult.hasErrors()){
                 model.addAttribute("guidebookId", id);
                 model.addAttribute("memberInSessionId", memberInSessionId);
+                return "reservationRequestForm";
+            } else {
+                newReservationRequest.setGuidebook(guidebookManager.findGuidebook(id));
+                newReservationRequest.setMember(memberManager.findMember(memberInSessionId));
+                newReservationRequest.setStatus(ReservationState.PENDING.getStateValue());
+                reservationRequestManager.createReservationRequest(newReservationRequest);
                 return "redirect:/guidebookList";
             }
-        } else {
-          return "redirect:/doLogin";
         }
     }
 

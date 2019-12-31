@@ -28,7 +28,7 @@
                     <form:errors  path="creationDate" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <form:input path="description" value="${commentToUpdate.description}" type="text" cssClass="form-control item" placeholder="Commentaire" required="true" autofocus=""/>
+                    <form:textarea path="description" value="${commentToUpdate.description}" type="text" rows="5" cssClass="form-control item" placeholder="Commentaire" required="true" autofocus=""/>
                     <form:errors  path="description" cssClass="error"/>
                 </div>
                 <div class="form-group">

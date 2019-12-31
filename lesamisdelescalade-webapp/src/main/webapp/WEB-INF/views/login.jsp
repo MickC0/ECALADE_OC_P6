@@ -30,8 +30,17 @@
                 <div class="text-center">
                     <p>
                         Pas encore de compte ?
-                        <a class="btn btn-link btn-block" href="<c:url value="/doRegister"/>" role="button">S'enregistrer</a>
+                        <a  href="<c:url value="/doRegister"/>">
+                            <button class="btn btn-link btn-block" type="button">
+                                S'enregistrer
+                            </button>
+                        </a>
                     </p>
+                </div>
+                <div class="form-group">
+                    <a href="<c:out value="javascript:history.go(-1)"/>">
+                        <button type="button" class="btn btn-outline-primary btn-block">Annuler</button>
+                    </a>
                 </div>
 
             </form:form>

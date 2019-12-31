@@ -73,7 +73,6 @@ public class ReservationRequest {
                        ", guidebook=" + guidebook +
                        ", member=" + member +
                        ", status='" + status + '\'' +
-                       ", reservationState=" + reservationState +
                        '}';
     }
 }

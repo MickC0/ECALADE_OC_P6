@@ -161,7 +161,6 @@
                                         <th>Nom du Topo</th>
                                         <th>Pseudo client</th>
                                         <th>Email</th>
-                                        <th>Message</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
@@ -171,7 +170,6 @@
                                             <td>${request.guidebook.name}</td>
                                             <td>${request.member.pseudo}</td>
                                             <td>${request.member.email}</td>
-                                            <td>msg</td>
                                             <td>${request.status}</td>
                                             <c:if test="${request.status == 'En attente'}">
                                                 <td>

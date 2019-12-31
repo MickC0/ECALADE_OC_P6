@@ -24,7 +24,7 @@
                     <form:errors  path="addedDate" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <form:input path="description" type="text" cssClass="form-control item" placeholder="Description du topo" required="true" autofocus=""/>
+                    <form:textarea path="description" type="text" rows="5" cssClass="form-control item" placeholder="Description du topo" required="true" autofocus=""/>
                     <form:errors  path="description" cssClass="error"/>
                 </div>
                 <div class="form-group select-style">
@@ -41,11 +41,6 @@
                     <a href="<c:out value="javascript:history.go(-1)"/>">
                         <button type="button" class="btn btn-outline-primary btn-block">Annuler</button>
                     </a>
-                        <%--<a href="<c:out value="/user/user-area"/>">
-                            <button type="button" class="btn btn-primary btn-block">Annuler</button>
-                        </a>--%>
-
-                        <%--<a class="btn btn-link btn-block" href="<c:url value="/doLogin"/>" role="button">Annuler</a>--%>
                 </div>
             </form:form>
         </div>

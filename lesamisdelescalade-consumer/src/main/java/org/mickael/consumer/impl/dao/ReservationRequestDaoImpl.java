@@ -22,7 +22,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("memberId", reservationRequest.getMember().getId(), Types.INTEGER);
         parameterSource.addValue("guidebookId", reservationRequest.getGuidebook().getId(), Types.INTEGER);
-        parameterSource.addValue("status^", reservationRequest.getStatus(), Types.VARCHAR);
+        parameterSource.addValue("status", reservationRequest.getStatus(), Types.VARCHAR);
 
 
         namedParameterJdbcTemplate.update(sql, parameterSource);
@@ -43,10 +43,10 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
 
     @Override
     public ReservationRequest findReservationRequestByGuidebookId (Integer id) {
-        String sql = "SELECT * FROM public.reservation_request WHERE guidebook_id = :guidebook_id";
+        String sql = "SELECT * FROM public.reservation_request WHERE guidebook_id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("guidebook_id", id, Types.INTEGER);
+        parameterSource.addValue("guidebookId", id, Types.INTEGER);
         ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
         try{
             ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
@@ -62,7 +62,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
         String sql = "SELECT * FROM public.reservation_request WHERE member_id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("member_id", id, Types.INTEGER);
+        parameterSource.addValue("memberId", id, Types.INTEGER);
         ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
         ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
 
@@ -74,12 +74,17 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
         String sql = "SELECT * FROM public.reservation_request WHERE member_id = :memberId AND guidebook_id = :guidebookId";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("member_id", memberId, Types.INTEGER);
-        parameterSource.addValue("guidebook_id", guidebookId, Types.INTEGER);
+        parameterSource.addValue("memberId", memberId, Types.INTEGER);
+        parameterSource.addValue("guidebookId", guidebookId, Types.INTEGER);
         ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
-        ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
+        try {
+            ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
 
-        return reservationRequest;
+            return reservationRequest;
+        } catch (EmptyResultDataAccessException e){
+            return null;
+        }
+
     }
 
     @Override

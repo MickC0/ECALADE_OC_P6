@@ -46,7 +46,18 @@
                         <form:button type="submit" class="btn btn-primary btn-block">S'enregistrer</form:button>
                     </div>
                     <div class="text-center">
-                        <p>Déjà enregistré ?<a class="btn btn-link btn-block" href="<c:url value="/doLogin"/>" role="button">Se connecter</a></p>
+                        <p>Déjà enregistré ?
+                            <a href="<c:url value="/doLogin"/>">
+                                <button class="btn btn-link btn-block">
+                                    Se connecter
+                                </button>
+                            </a>
+                        </p>
+                    </div>
+                    <div class="form-group">
+                        <a href="<c:out value="javascript:history.go(-1)"/>">
+                            <button type="button" class="btn btn-outline-primary btn-block">Annuler</button>
+                        </a>
                     </div>
 
                 </form:form>
