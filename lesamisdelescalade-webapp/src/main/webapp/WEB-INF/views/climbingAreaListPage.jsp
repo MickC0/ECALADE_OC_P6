@@ -35,10 +35,10 @@
                         <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image5.jpg"/>">
                             <div class="card-body">
                                 <h4 class="card-title">${climbingArea.name}</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in.</p>
+                                <p class="card-text">${climbingArea.region}</p>
                             </div>
                             <div class="card-body">
-                                <a class="btn btn-outline-primary btn-sm" href="<c:url value="/climbingArea/${climbingArea.id}"/>">Voir</a>
+                                <a class="btn btn-outline-secondary btn-sm" href="<c:url value="/climbingArea/${climbingArea.id}"/>">Voir</a>
                             </div>
                         </div>
                     </div>

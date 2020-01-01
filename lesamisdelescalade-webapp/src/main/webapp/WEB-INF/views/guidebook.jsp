@@ -46,8 +46,8 @@
                                     <c:if test="${!empty memberInSessionId}">
                                         <c:if test="${guidebook.loaned == false}">
                                             <div>
-                                                <a href="<c:url value="/showReservationForm/${guidebook.id}"/>">
-                                                    <button type="button" class="btn btn-outline-primary btn-block">RESERVER</button>
+                                                <a href="<c:url value="/showReservationForm/${guidebook.id}"/>" class="btn btn-outline-info btn-block">
+                                                    RESERVER
                                                 </a>
                                             </div>
                                         </c:if>

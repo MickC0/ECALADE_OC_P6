@@ -1,75 +1,44 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
-<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
-<html>
-<head>
-    <title>Update sector Form</title>
-    <%--<%@include file="_include/head.jsp"%>--%>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="Association de fans d'escalade">
-    <!-- CDN resources -->
-    <%--
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-    --%>
 
-    <!-- Locales resources -->
-    <script src="https://kit.fontawesome.com/c822637fde.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="<c:url value="/resources/css/bootstrap.min.css"/>">
-    <link rel="stylesheet" href="<c:url value="/resources/css/styles.css"/>">
-</head>
-<body>
-<div class="container">
+<%@ page pageEncoding="UTF-8"%>
 
-    <!-- Body
-    ================================================== -->
-
-    <!-- display for see site to update-->
+<%@include file="_include/head.jsp"%>
 
 
-    <!-- form for update site -->
-    <div>
-        <h3>Modification du secteur:</h3>
+<main class="page sectorForm-page">
+    <section class="clean-block clean-form dark">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-login">Modification du secteur ${sectorToUpdate.name}</h2>
+                <p>
+                    <c:if test="${!empty errorMessage}">
+                        <c:out value="${errorMessage}"/>
+                    </c:if>
+                </p>
+            </div>
+            <form:form modelAttribute="sectorToUpdate" method="post" action="updatingSectorProcess/${sectorToUpdate.id}">
+                <div class="form-group">
+                    <form:hidden path="climbingArea.id" value="${sectorToUpdate.climbingArea.id}"/>
+                    <form:errors path="climbingArea.id" cssClass="errors"/>
+                </div>
+                <div class="form-group">
+                    <form:input path="name" value="${sectorToUpdate.name}" type="text" cssClass="form-control item" placeholder="Nom du secteur" required="true" autofocus=""/>
+                    <form:errors  path="name" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:textarea path="description" value="${sectorToUpdate.description}" type="text"  rows="5" cssClass="form-control item" placeholder="Description du secteur" required="true" autofocus=""/>
+                    <form:errors  path="description" cssClass="error"/>
+                </div>
+                <div class="form-group">
+                    <form:button class="btn btn-primary btn-block" type="submit">Enregistrer</form:button>
+                </div>
+                <div class="form-group">
+                    <a href="<c:out value="javascript:history.go(-1)"/>"class="btn btn-outline-primary btn-block">
+                        Annuler
+                    </a>
+                </div>
+            </form:form>
+        </div>
+    </section>
+</main>
 
-        <p></p>
-        <form:form modelAttribute="sectorToUpdate" method="post" action="updatingSectorProcess/${sectorToUpdate.id}">
-            <table>
-                <tr>
-                    <td><form:hidden path="climbingArea.id" value="${sectorToUpdate.climbingArea.id}"/></td>
-                    <td><form:errors path="climbingArea.id" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <td><form:hidden path="id" value="${sectorToUpdate.id}"/></td>
-                    <td><form:errors path="id" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <!-- display for "nomSite" -->
-                    <td> Nom du Sector:* </td>
-                    <td><form:input path="name" value="${sectorToUpdate.name}" type="text" id="name" size="20" placeholder="obligatoire"  cssStyle=""/></td>
-                    <td><form:errors path="name" cssClass="errors"/></td>
-                </tr>
-                <tr>
-                    <!-- display for "descriptionSite" -->
-                    <td>Description du secteur:</td>
-                    <td><form:input path="description" value="${sectorToUpdate.description}" type="text" id="description" size="40" placeholder=""  cssStyle=""/></td>
-                    <td><form:errors path="description" cssClass="errors"/></td>
-                </tr>
-
-            </table>
-            <p></p>
-            <p>(*) obligatoire</p>
-            <p></p>
-            <input type="submit" value="Envoyer">
-        </form:form>
-    </div>
-</div>
-<!-- jQuery -->
-<script src="<c:url value="/resources/js/jquery-3.4.1.min.js"/>"></script>
-<!-- Popper.js -->
-<script src="<c:url value="/resources/js/popper.min.js"/>"></script>
-<!-- Javascript de Bootstrap -->
-<script src="<c:url value="/resources/js/bootstrap.min.js"/>"></script>
-</body>
-</html>
+<%@include file="_include/footer.jsp"%>

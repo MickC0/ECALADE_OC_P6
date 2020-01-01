@@ -35,11 +35,10 @@
                         <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image5.jpg"/>">
                             <div class="card-body">
                                 <h4 class="card-title">${guidebook.name}</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in.</p>
                             </div>
-                            <div>
-                                <a href="<c:url value="/guidebook/${guidebook.id}"/>">
-                                    <button class="btn btn-outline-primary btn-sm">Voir</button>
+                            <div class="card-body">
+                                <a href="<c:url value="/guidebook/${guidebook.id}"/>" class="btn btn-outline-secondary btn-sm">
+                                    Voir
                                 </a>
                             </div>
                         </div>

@@ -43,53 +43,59 @@
     </section>
     <section class="clean-block clean-services dark">
         <div class="container">
-            <div class="block-heading">
-                <h2 class="text-info">Mes sites</h2>
-                <a href="<c:url value="/showClimbingAreaForm"/>" class="btn btn-outline-primary btn-block">Ajouter un site</a>
-            </div>
-            <div class="row">
-                <c:forEach items="${climbingAreaList}" var="climbingArea" >
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image5.jpg"/>">
-                            <div class="card-body">
-                                <h4 class="card-title">${climbingArea.name}</h4>
-                                <p class="card-text">${climbingArea.description}</p>
-                            </div>
-                            <div class="card-footer">
-                                <a href="<c:url value="/climbingArea/${climbingArea.id}"/>" class="btn btn-outline-primary btn-sm">Voir</a>
-                                <a href="<c:url value="/editClimbingArea/${climbingArea.id}"/>" class="btn btn-outline-primary btn-sm"> Modifier </a>
-                                <a href="<c:url value="/deleteClimbingArea/${climbingArea.id}"/>" class="btn btn-outline-primary btn-sm"> Supprimer </a>
+            <div class="container">
+                <div class="block-heading">
+                    <h2 class="text-info">Mes sites</h2>
+                    <a href="<c:url value="/showClimbingAreaForm"/>" class="btn btn-outline-primary btn-block">Ajouter un site</a>
+                </div>
+                <div class="row">
+                    <c:forEach items="${climbingAreaList}" var="climbingArea" >
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image5.jpg"/>">
+                                <div class="card-body" style="overflow: hidden">
+                                    <h4 class="card-title">${climbingArea.name}</h4>
+                                    <div style="max-height: 200px; word-wrap: break-word; overflow: auto">
+                                        <p class="card-text">${climbingArea.description}</p>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <a href="<c:url value="/climbingArea/${climbingArea.id}"/>" class="btn btn-outline-primary btn-sm">Voir</a>
+                                    <a href="<c:url value="/editClimbingArea/${climbingArea.id}"/>" class="btn btn-outline-primary btn-sm"> Modifier </a>
+                                    <a href="<c:url value="/deleteClimbingArea/${climbingArea.id}"/>" class="btn btn-outline-primary btn-sm"> Supprimer </a>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
             </div>
         </div>
     </section>
     <section class="clean-block clean-services dark">
         <div class="container">
-            <div class="block-heading">
-                <h2 class="text-info">Mes Topos</h2>
-                <a href="<c:url value="/showGuidebookForm"/>" class="btn btn-outline-primary btn-block">Ajouter un Topo</a>
-            </div>
-            <div class="row">
-                <c:forEach items="${guidebookList}" var="guidebook" >
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image4.jpg"/>">
-                            <div class="card-body">
-                                <h4 class="card-title">${guidebook.name}</h4>
-                                <div class="dropdown-item-text">
-                                    <p class="card-text">${guidebook.description}</p>
+            <div class="container">
+                <div class="block-heading">
+                    <h2 class="text-info">Mes Topos</h2>
+                    <a href="<c:url value="/showGuidebookForm"/>" class="btn btn-outline-primary btn-block">Ajouter un Topo</a>
+                </div>
+                <div class="row">
+                    <c:forEach items="${guidebookList}" var="guidebook" >
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image4.jpg"/>">
+                                <div class="card-body" style="overflow: hidden">
+                                    <h4 class="card-title">${guidebook.name}</h4>
+                                    <div style="max-height: 200px; word-wrap: break-word; overflow: auto">
+                                        <p class="card-text">${guidebook.description}</p>
+                                    </div>
+                                </div>
+                                <div>
+                                    <a href="<c:url value="/guidebook/${guidebook.id}"/>" class="btn btn-outline-primary btn-sm">Voir</a>
+                                    <a href="<c:url value="/editGuidebook/${guidebook.id}"/>" class="btn btn-outline-primary btn-sm">Modifier</a>
+                                    <a href="<c:url value="/deleteGuidebook/${guidebook.id}"/>" class="btn btn-outline-primary btn-sm">Supprimer</a>
                                 </div>
                             </div>
-                            <div>
-                                <a href="<c:url value="/guidebook/${guidebook.id}"/>" class="btn btn-outline-primary btn-sm">Voir</a>
-                                <a href="<c:url value="/editGuidebook/${guidebook.id}"/>" class="btn btn-outline-primary btn-sm">Modifier</a>
-                                <a href="<c:url value="/deleteGuidebook/${guidebook.id}"/>" class="btn btn-outline-primary btn-sm">Supprimer</a>
-                            </div>
                         </div>
-                    </div>
-                </c:forEach>
+                    </c:forEach>
+                </div>
             </div>
         </div>
     </section>
@@ -135,25 +141,26 @@
     </section>
     <section class="clean-block clean-services dark">
         <div class="container">
-            <div class="block-heading">
-                <h2 class="text-info">Demandes de réservations</h2>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card shadow mb-3">
-                        <div class="card-header py-3">
-                        </div>
-                        <div class="card-body">
-                            <table class="table text-justify my-0">
-                                <thead>
+            <div class="container">
+                <div class="block-heading">
+                    <h2 class="text-info">Demandes de réservations</h2>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow mb-3">
+                            <div class="card-header py-3">
+                            </div>
+                            <div class="card-body">
+                                <table class="table text-justify my-0">
+                                    <thead>
                                     <tr>
                                         <th>Nom du Topo</th>
                                         <th>Pseudo client</th>
                                         <th>Email</th>
                                         <th>Status</th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                    </thead>
+                                    <tbody>
                                     <c:forEach items="${guideReservationRequestList}" var="request">
                                         <tr>
                                             <td>${request.guidebook.name}</td>
@@ -175,8 +182,9 @@
                                             </c:if>
                                         </tr>
                                     </c:forEach>
-                                </tbody>
-                            </table>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>

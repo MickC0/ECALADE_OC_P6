@@ -38,8 +38,8 @@
                     </p>
                 </div>
                 <div class="form-group">
-                    <a href="<c:out value="javascript:history.go(-1)"/>">
-                        <button type="button" class="btn btn-outline-primary btn-block">Annuler</button>
+                    <a href="<c:out value="javascript:history.go(-1)"/>" class="btn btn-outline-primary btn-block">
+                        Annuler
                     </a>
                 </div>
 

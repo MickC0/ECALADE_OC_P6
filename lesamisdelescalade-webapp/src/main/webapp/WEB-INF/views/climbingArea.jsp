@@ -35,7 +35,7 @@
                         <div class="col-md-6">
                             <div class="info">
                                 <h3>Description</h3>
-                                <c:if test="${climbArea.approuved == false && (sessionScope.memberInSessionRole == 'Administrator' || climbArea.member.id == sessionScope.memberInSessionId)}">
+                                <c:if test="${climbArea.approuved == false && (sessionScope.memberInSessionRole == 'Administrator' || sessionScope.memberInSessionRole == 'Member')}">
                                     <div>
                                         <a href="<c:url value="/updateClimbingArea/${climbArea.id}"/>" class="btn btn-outline-primary"> Approuver le site </a>
                                     </div>
@@ -86,7 +86,7 @@
                                     <c:forEach items="${sectorList}" var="sector" >
                                         <tr>
                                             <td class="align-middle" style="text-align: center">${sector.name}</td>
-                                            <td class="align-middle" style="text-align: center">${sector.description}</td>
+                                            <td class="align-middle" style="text-align: justify">${sector.description}</td>
                                             <c:if test="${(!empty memberInSessionId && sessionScope.memberInSessionId == sector.climbingArea.member.id) || sessionScope.memberInSessionRole == 'Administrator'}">
                                                 <td class="align-middle" style="text-align: center">
                                                     <a href="<c:url value="/updateSector/${sector.id}"/>" class="btn btn-outline-primary">
@@ -141,8 +141,8 @@
                                                                     <tr>
                                                                         <td class="align-middle" style="text-align: center">${route.name}</td>
                                                                         <td class="align-middle" style="text-align: center">${route.cotation}</td>
-                                                                        <td class="align-middle" style="text-align: center">${route.height}</td>
-                                                                        <td class="align-middle" style="text-align: center">${route.description}</td>
+                                                                        <td class="align-middle" style="text-align: center">${route.height} m</td>
+                                                                        <td class="align-middle" style="text-align: justify">${route.description}</td>
                                                                         <c:if test="${(!empty memberInSessionId && sessionScope.memberInSessionId == sector.climbingArea.member.id) || sessionScope.memberInSessionRole == 'Administrator'}">
                                                                             <td class="align-middle" style="text-align: center">
                                                                                 <a href="<c:url value="/updateRoute/${r.id}"/> " class="btn btn-outline-primary">
