@@ -39,7 +39,8 @@
                     <form:errors  path="rockType" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <form:input path="maximumHeight" type="number" cssClass="form-control item" placeholder="Hauteur maximum" required="true" autofocus=""/>
+                    <form:label path="maximumHeight">Hauteur maximum</form:label>
+                    <form:input path="maximumHeight" type="number" cssClass="form-control item" required="true" autofocus=""/>
                     <form:errors  path="maximumHeight" cssClass="error"/>
                 </div>
                 <div class="form-group">
@@ -53,8 +54,8 @@
                     <form:button class="btn btn-primary btn-block" type="submit">Enregistrer</form:button>
                 </div>
                 <div class="form-group">
-                    <a href="<c:out value="javascript:history.go(-1)"/>">
-                        <button type="button" class="btn btn-outline-primary btn-block">Annuler</button>
+                    <a href="<c:out value="javascript:history.go(-1)"/>" class="btn btn-outline-primary btn-block">
+                        Annuler
                     </a>
                 </div>
             </form:form>

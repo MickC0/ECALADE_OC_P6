@@ -13,9 +13,7 @@
                     <div class="col">
                         <div class="card shadow mb-3">
                             <div class="card-header py-3">
-                                <button class="btn btn-outline-primary btn-block" type="button">
-                                    <a href="<c:url value="/editMember/${memberInSessionId}"/>">Modifier le profil</a>
-                                </button>
+                                <a href="<c:url value="/editMember/${memberInSessionId}"/>" class="btn btn-outline-primary btn-block">Modifier le profil</a>
                             </div>
                             <div class="card-body">
                                 <table class="table text-center my-0">
@@ -47,9 +45,7 @@
         <div class="container">
             <div class="block-heading">
                 <h2 class="text-info">Mes sites</h2>
-                <button class="btn btn-outline-primary btn-block" type="button">
-                    <a href="<c:url value="/showClimbingAreaForm"/>">Ajouter un site</a>
-                </button>
+                <a href="<c:url value="/showClimbingAreaForm"/>" class="btn btn-outline-primary btn-block">Ajouter un site</a>
             </div>
             <div class="row">
                 <c:forEach items="${climbingAreaList}" var="climbingArea" >
@@ -57,18 +53,12 @@
                         <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image5.jpg"/>">
                             <div class="card-body">
                                 <h4 class="card-title">${climbingArea.name}</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in.</p>
+                                <p class="card-text">${climbingArea.description}</p>
                             </div>
-                            <div>
-                                <button class="btn btn-outline-primary btn-sm btn-" type="button">
-                                    <a href="<c:url value="/climbingArea/${climbingArea.id}"/>">Voir</a>
-                                </button>
-                                <button class="btn btn-outline-primary btn-sm" type="button">
-                                    <a href="<c:url value="/editClimbingArea/${climbingArea.id}"/>"> Modifier </a>
-                                </button>
-                                <button class="btn btn-outline-primary btn-sm" type="button">
-                                    <a href="<c:url value="/deleteClimbingArea/${climbingArea.id}"/>"> Supprimer </a>
-                                </button>
+                            <div class="card-footer">
+                                <a href="<c:url value="/climbingArea/${climbingArea.id}"/>" class="btn btn-outline-primary btn-sm">Voir</a>
+                                <a href="<c:url value="/editClimbingArea/${climbingArea.id}"/>" class="btn btn-outline-primary btn-sm"> Modifier </a>
+                                <a href="<c:url value="/deleteClimbingArea/${climbingArea.id}"/>" class="btn btn-outline-primary btn-sm"> Supprimer </a>
                             </div>
                         </div>
                     </div>
@@ -80,9 +70,7 @@
         <div class="container">
             <div class="block-heading">
                 <h2 class="text-info">Mes Topos</h2>
-                <button class="btn btn-outline-primary btn-block" type="button">
-                    <a href="<c:url value="/showGuidebookForm"/>">Ajouter un Topo</a>
-                </button>
+                <a href="<c:url value="/showGuidebookForm"/>" class="btn btn-outline-primary btn-block">Ajouter un Topo</a>
             </div>
             <div class="row">
                 <c:forEach items="${guidebookList}" var="guidebook" >
@@ -90,18 +78,14 @@
                         <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image4.jpg"/>">
                             <div class="card-body">
                                 <h4 class="card-title">${guidebook.name}</h4>
-                                <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc quam urna, dignissim nec auctor in.</p>
+                                <div class="dropdown-item-text">
+                                    <p class="card-text">${guidebook.description}</p>
+                                </div>
                             </div>
                             <div>
-                                <button class="btn btn-outline-primary btn-sm" type="button">
-                                    <a href="<c:url value="/guidebook/${guidebook.id}"/>">Voir</a>
-                                </button>
-                                <button class="btn btn-outline-primary btn-sm" type="button">
-                                    <a href="<c:url value="/editGuidebook/${guidebook.id}"/>">Modifier</a>
-                                </button>
-                                <button class="btn btn-outline-primary btn-sm" type="button">
-                                    <a href="<c:url value="/deleteGuidebook/${guidebook.id}"/>">Supprimer</a>
-                                </button>
+                                <a href="<c:url value="/guidebook/${guidebook.id}"/>" class="btn btn-outline-primary btn-sm">Voir</a>
+                                <a href="<c:url value="/editGuidebook/${guidebook.id}"/>" class="btn btn-outline-primary btn-sm">Modifier</a>
+                                <a href="<c:url value="/deleteGuidebook/${guidebook.id}"/>" class="btn btn-outline-primary btn-sm">Supprimer</a>
                             </div>
                         </div>
                     </div>
@@ -131,8 +115,13 @@
                                 <tbody>
                                 <c:forEach items="${memberReservationRequestList}" var="resa">
                                     <tr>
-                                    <td>${resa.guidebook.name}</td>
-                                    <td>${resa.status}</td>
+                                        <td>${resa.guidebook.name}</td>
+                                        <td>${resa.status}</td>
+                                        <c:if test="${resa.status == 'En attente'}">
+                                            <td>
+                                                <a href="<c:url value="/cancelReservationRequest/${resa.id}"/>" class="btn btn-outline-danger btn-sm">ANNULER</a>
+                                            </td>
+                                        </c:if>
                                     </tr>
                                 </c:forEach>
                                 </tbody>
@@ -173,21 +162,15 @@
                                             <td>${request.status}</td>
                                             <c:if test="${request.status == 'En attente'}">
                                                 <td>
-                                                    <button class="btn btn-outline-success btn-sm" type="button">
-                                                        <a href="<c:url value="/acceptReservationRequest/${request.id}"/>">ACCEPTER</a>
-                                                    </button>
+                                                    <a href="<c:url value="/acceptReservationRequest/${request.id}"/>" class="btn btn-outline-success btn-sm">ACCEPTER</a>
                                                 </td>
                                                 <td>
-                                                    <button class="btn btn-outline-danger btn-sm" type="button">
-                                                        <a href="<c:url value="/refuseReservationRequest/${request.id}"/>">REFUSER</a>
-                                                    </button>
+                                                    <a href="<c:url value="/refuseReservationRequest/${request.id}"/>" class="btn btn-outline-danger btn-sm">REFUSER</a>
                                                 </td>
                                             </c:if>
                                             <c:if test="${request.status == 'Acceptée'}">
                                                 <td>
-                                                    <button class="btn btn-outline-info btn-sm" type="button">
-                                                        <a href="<c:url value="/closeReservationRequest/${request.id}"/>">RETOUR</a>
-                                                    </button>
+                                                    <a href="<c:url value="/closeReservationRequest/${request.id}"/>" class="btn btn-outline-info btn-sm">RETOUR</a>
                                                 </td>
                                             </c:if>
                                         </tr>

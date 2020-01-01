@@ -37,7 +37,7 @@
                                 <h3>Description</h3>
                                 <c:if test="${climbArea.approuved == false && (sessionScope.memberInSessionRole == 'Administrator' || climbArea.member.id == sessionScope.memberInSessionId)}">
                                     <div>
-                                        <a href="<c:url value="/updateClimbingArea/${climbArea.id}"/>" class="btn-outline-primary"> Approuver le site </a>
+                                        <a href="<c:url value="/updateClimbingArea/${climbArea.id}"/>" class="btn btn-outline-primary"> Approuver le site </a>
                                     </div>
                                 </c:if>
                                 <c:if test="${climbArea.approuved == true}">
@@ -198,7 +198,6 @@
                                         </div>
                                     </div>
                                 </c:forEach>
-
                             </div>
                         </div>
                     </div>
