@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.context.request.WebRequest;
 
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletResponse;
@@ -54,11 +56,9 @@ public class LoginController {
         if (loginCommand != null){
             Member memberInBdd = memberManager.findMemberByProperty("email", loginCommand.getEmail());
             boolean checkPassword = false;
-            System.out.println("etape 1");
 
             if (memberInBdd == null) {
                 httpSession.invalidate();
-                System.out.println("etape 2");
                 model.addAttribute("errorMessage", "Enter valid credentials");
                 return "login";
             }
@@ -67,7 +67,7 @@ public class LoginController {
                 Member loggedInMember = memberInBdd;
                 if (loggedInMember.getRole().equals(Role.ADMIN.getParam()) || loggedInMember.getRole().equals(Role.MEMBER.getParam()) || loggedInMember.getRole().equals(Role.USER.getParam())){
                     addMemberInSession(loggedInMember, httpSession);
-                    model.addAttribute("memberInSessionId", loggedInMember.getId());
+                    //model.addAttribute("memberInSessionId", loggedInMember.getId());
                     return "redirect:/showHome";
                 } else {
                     MemberBlockedException memberBlockedException = new MemberBlockedException("Invalid Member Role");
@@ -88,11 +88,18 @@ public class LoginController {
     }
 
     @GetMapping("/doLogout")
-    public String doLogout(HttpServletResponse httpServletResponse, HttpSession httpSession){
+    public String doLogout(HttpServletResponse httpServletResponse, HttpSession httpSession, WebRequest webRequest, SessionStatus sessionStatus){
         httpServletResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
         httpServletResponse.setHeader("Pragma","no-cache");
         httpServletResponse.setHeader("Expires","0");
         httpSession.invalidate();
+
+        sessionStatus.setComplete();
+        webRequest.removeAttribute("memberInSessionId", WebRequest.SCOPE_SESSION);
+        webRequest.removeAttribute("memberInSessionPseudo", WebRequest.SCOPE_SESSION);
+        webRequest.removeAttribute("memberInSessionEmail", WebRequest.SCOPE_SESSION);
+        webRequest.removeAttribute("memberInSessionRole", WebRequest.SCOPE_SESSION);
+
 
         return "redirect:/showHome";
     }
