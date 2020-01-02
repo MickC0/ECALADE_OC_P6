@@ -42,7 +42,6 @@
                         Annuler
                     </a>
                 </div>
-
             </form:form>
         </div>
     </section>
