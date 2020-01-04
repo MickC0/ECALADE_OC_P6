@@ -88,6 +88,10 @@ public class ClimbingAreaController {
         ClimbingArea climbingArea = climbingAreaManager.findClimbingArea(id);
         List<Sector> sectorList = sectorManager.findAllSectorByClimbingAreaId(id);
         List<Comment> commentList = commentManager.findAllCommentByClimbingArea(id);
+        List<Photo> photoList = photoManager.findAllPhotoByClimbingAreaId(id);
+        climbingArea.setPhotoList(photoList);
+        climbingArea.setSectorList(sectorList);
+        climbingArea.setCommentList(commentList);
 
         for (Sector sector : sectorList){
             List<Route> routeList = new ArrayList<>();
@@ -97,14 +101,18 @@ public class ClimbingAreaController {
             sector.setRouteList(routeList);
         }
         model.addAttribute("climbArea", climbingArea);
-        model.addAttribute("sectorList", sectorList);
+        /**model.addAttribute("sectorList", sectorList);
         model.addAttribute("commentList", commentList);
+        model.addAttribute("photoList", photoList);*/
         return "climbingArea";
     }
 
     @GetMapping("/climbingAreaList")
     public String showClimbingAreaList(Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
+        for (ClimbingArea climbingArea : climbingAreaList){
+            climbingArea.setPhotoList(photoManager.findAllPhotoByClimbingAreaId(climbingArea.getId()));
+        }
         model.addAttribute("climbingAreaList", climbingAreaList);
         return "climbingAreaListPage";
     }

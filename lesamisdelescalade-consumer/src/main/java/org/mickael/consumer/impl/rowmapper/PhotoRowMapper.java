@@ -17,7 +17,8 @@ public class PhotoRowMapper implements RowMapper<Photo> {
         photo.setUrl(resultSet.getString("url"));
 
         ClimbingAreaDaoImpl climbingAreaDao = new ClimbingAreaDaoImpl();
-        photo.setClimbingArea(climbingAreaDao.findClimbingArea(resultSet.getInt("climbingArea_id")));
+        photo.setClimbingArea(climbingAreaDao.findClimbingArea(resultSet.getInt("climbingarea_id")));
+
 
         return photo;
     }

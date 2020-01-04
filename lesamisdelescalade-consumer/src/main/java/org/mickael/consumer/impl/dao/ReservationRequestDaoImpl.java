@@ -46,7 +46,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
         String sql = "SELECT * FROM public.reservation_request WHERE guidebook_id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("guidebookId", id, Types.INTEGER);
+        parameterSource.addValue("id", id, Types.INTEGER);
         ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
         try{
             ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
@@ -62,7 +62,7 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
         String sql = "SELECT * FROM public.reservation_request WHERE member_id = :id";
         NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("memberId", id, Types.INTEGER);
+        parameterSource.addValue("id", id, Types.INTEGER);
         ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
         ReservationRequest reservationRequest = namedParameterJdbcTemplate.queryForObject(sql, parameterSource, reservationRequestRowMapper);
 

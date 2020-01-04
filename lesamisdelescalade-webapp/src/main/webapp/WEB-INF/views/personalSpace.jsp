@@ -51,12 +51,16 @@
                 <div class="row">
                     <c:forEach items="${climbingAreaList}" var="climbingArea" >
                         <div class="col-md-6 col-lg-4">
-                            <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image5.jpg"/>">
-                                <div class="card-body" style="overflow: hidden">
+                            <div class="card">
+                                <c:if test="${empty climbingArea.photoList}">
+                                    <img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/no-picture.jpg"/>" >
+                                </c:if>
+                                <c:if test="${!empty climbingArea.photoList}">
+                                    <img class="card-img-top w-100 d-block" src="<c:url value="${climbingArea.photoList.get(0).url}"/>">
+                                </c:if>
+                                <div class="card-body">
                                     <h4 class="card-title">${climbingArea.name}</h4>
-                                    <div style="max-height: 200px; word-wrap: break-word; overflow: auto">
-                                        <p class="card-text">${climbingArea.description}</p>
-                                    </div>
+                                    <p class="card-text" style="height: 50px">${climbingArea.region}</p>
                                 </div>
                                 <div class="card-footer">
                                     <a href="<c:url value="/climbingArea/${climbingArea.id}"/>" class="btn btn-outline-primary btn-sm">Voir</a>
@@ -80,7 +84,7 @@
                 <div class="row">
                     <c:forEach items="${guidebookList}" var="guidebook" >
                         <div class="col-md-6 col-lg-4">
-                            <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image4.jpg"/>">
+                            <div class="card">
                                 <div class="card-body" style="overflow: hidden">
                                     <h4 class="card-title">${guidebook.name}</h4>
                                     <div style="max-height: 200px; word-wrap: break-word; overflow: auto">

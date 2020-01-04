@@ -15,12 +15,7 @@
                         <div class="col-md-6">
                             <div class="gallery">
                                 <div class="sp-wrap">
-                                    <a href="<c:url value="/resources/img/image1.jpg"/>">
-                                        <img class="img-fluid d-block mx-auto" src="<c:url value="/resources/img/image4.jpg"/>">
-                                    </a>
-                                    <a href="<c:url value="/resources/img/image5.jpg"/>">
-                                        <img class="img-fluid d-block mx-auto" src="<c:url value="/resources/img/image6.jpg"/>">
-                                    </a>
+
                                 </div>
                             </div>
                         </div>

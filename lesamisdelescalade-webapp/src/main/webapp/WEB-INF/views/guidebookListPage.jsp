@@ -32,7 +32,7 @@
             <div class="row">
                 <c:forEach items="${guidebookList}" var="guidebook" >
                     <div class="col-md-6 col-lg-4">
-                        <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image5.jpg"/>">
+                        <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">${guidebook.name}</h4>
                             </div>

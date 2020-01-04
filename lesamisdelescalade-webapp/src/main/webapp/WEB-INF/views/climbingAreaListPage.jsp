@@ -32,7 +32,13 @@
             <div class="row">
                 <c:forEach items="${climbingAreaList}" var="climbingArea" >
                     <div class="col-md-6 col-lg-4">
-                        <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image5.jpg"/>">
+                        <div class="card">
+                            <c:if test="${empty climbingArea.photoList}">
+                                <img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/no-picture.jpg"/>" >
+                            </c:if>
+                            <c:if test="${!empty climbingArea.photoList}">
+                                <img class="card-img-top w-100 d-block" src="<c:url value="${climbingArea.photoList.get(0).url}"/>">
+                            </c:if>
                             <div class="card-body">
                                 <h4 class="card-title">${climbingArea.name}</h4>
                                 <p class="card-text">${climbingArea.region}</p>

@@ -20,15 +20,27 @@
                         <div class="col-md-6">
                             <div class="gallery">
                                 <div class="sp-wrap">
-                                    <a href="<c:url value="/resources/img/image4.jpg"/>">
-                                        <img class="img-fluid d-block mx-auto" src="<c:url value="/resources/img/image4.jpg"/>">
-                                    </a>
-                                    <a href="<c:url value="/resources/img/image5.jpg"/>">
-                                        <img class="img-fluid d-block mx-auto" src="<c:url value="/resources/img/image5.jpg"/>">
-                                    </a>
-                                    <a href="<c:url value="/resources/img/image6.jpg"/>">
-                                        <img class="img-fluid d-block mx-auto" src="<c:url value="/resources/img/image6.jpg"/>">
-                                    </a>
+                                    <c:if test="${empty climbArea.photoList}">
+                                        <a href="<c:url value="/resources/img/no-picture.jpg"/>">
+                                            <img class="img-fluid d-block mx-auto" src="<c:url value="/resources/img/no-picture.jpg"/>">
+                                        </a>
+                                    </c:if>
+                                    <c:forEach items="${climbArea.photoList}" var="photo">
+                                        <a href="<c:url value="${photo.url}"/>">
+                                            <img class="img-fluid d-block mx-auto" src="<c:url value="${photo.url}"/>">
+                                        </a>
+                                    </c:forEach>
+                                </div>
+                                <div>
+                                    <!--Ajout lien ajout photo-->
+                                    <c:if test="${sessionScope.memberInSessionId == climbArea.member.id || sessionScope.memberInSessionRole == 'Administrator'}">
+                                        <a href="<c:url value="/climbingArea/${climbArea.id}/showPhotoForm"/>" class="btn btn-outline-secondary">
+                                            Ajouter une photo
+                                        </a>
+                                        <a href="<c:url value="/climbingArea/${climbArea.id}/showUpdatePhotoList"/>" class="btn btn-outline-secondary">
+                                            Modifier les photos
+                                        </a>
+                                    </c:if>
                                 </div>
                             </div>
                         </div>
@@ -83,7 +95,7 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    <c:forEach items="${sectorList}" var="sector" >
+                                    <c:forEach items="${climbArea.sectorList}" var="sector" >
                                         <tr>
                                             <td class="align-middle" style="text-align: center">${sector.name}</td>
                                             <td class="align-middle" style="text-align: justify">${sector.description}</td>
@@ -111,7 +123,7 @@
                                 </table>
                             </div>
                             <div class="tab-pane fade show specifications" role="tabpanel" id="specifications">
-                                <c:forEach items="${sectorList}" var="sector" >
+                                <c:forEach items="${climbArea.sectorList}" var="sector" >
                                     <section class="clean-block clean-services dark">
                                         <div class="container">
                                             <div class="block-heading">
@@ -180,7 +192,7 @@
                                         Connectez-vous pour ajouter un commentaire.
                                     </p>
                                 </c:if>
-                                <c:forEach items="${commentList}" var="comment">
+                                <c:forEach items="${climbArea.commentList}" var="comment">
                                     <div class="reviews">
                                         <div class="review-item">
                                             <c:if test="${sessionScope.memberInSessionRole == 'Administrator' || sessionScope.memberInSessionRole == 'Member'}">

@@ -1,5 +1,5 @@
 package org.mickael.model.bean;
-import org.springframework.web.multipart.MultipartFile;
+
 public class Photo {
 
     //====  ATTRIBUTES  ====
@@ -7,7 +7,6 @@ public class Photo {
     private Integer id;
     private String name;
     private String url;
-    private MultipartFile file;
 
     private ClimbingArea climbingArea;
 
@@ -15,11 +14,10 @@ public class Photo {
 
     public Photo() {}
 
-    public Photo(Integer id, String name, String url, MultipartFile file, ClimbingArea climbingArea) {
+    public Photo(Integer id, String name, String url, ClimbingArea climbingArea) {
         this.id = id;
         this.name = name;
         this.url = url;
-        this.file = file;
         this.climbingArea = climbingArea;
     }
 
@@ -57,4 +55,5 @@ public class Photo {
     public void setClimbingArea(ClimbingArea climbingArea) {
         this.climbingArea = climbingArea;
     }
+
 }

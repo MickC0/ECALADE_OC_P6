@@ -2,6 +2,7 @@ package org.mickael.controllers;
 
 import org.mickael.business.contract.manager.GuidebookManager;
 import org.mickael.business.contract.manager.MemberManager;
+import org.mickael.business.contract.manager.PhotoManager;
 import org.mickael.business.contract.manager.UtilsManager;
 import org.mickael.model.bean.Guidebook;
 import org.springframework.stereotype.Controller;
@@ -24,6 +25,9 @@ public class GuidebookController {
 
     @Inject
     private UtilsManager utilsManager;
+
+    @Inject
+    private PhotoManager photoManager;
 
 
     @GetMapping("/showGuidebookForm")

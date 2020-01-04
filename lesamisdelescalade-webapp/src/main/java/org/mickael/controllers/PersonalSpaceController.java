@@ -35,6 +35,9 @@ public class PersonalSpaceController {
     @Inject
     private ReservationRequestManager reservationRequestManager;
 
+    @Inject
+    private PhotoManager photoManager;
+
     @GetMapping("/personalSpace/{memberInSessionId}")
     public String getPersonalSpace(@PathVariable@SessionAttribute("memberInSessionId")Integer memberInSessionId, Model model){
         if (memberInSessionId == null){
@@ -43,6 +46,9 @@ public class PersonalSpaceController {
 
         //show all the climbing area's owner
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findClimbingAreaByMemberId(memberInSessionId);
+        for (ClimbingArea climbingArea : climbingAreaList){
+            climbingArea.setPhotoList(photoManager.findAllPhotoByClimbingAreaId(climbingArea.getId()));
+        }
 
         //show all the guidebook's owner
         List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSessionId);

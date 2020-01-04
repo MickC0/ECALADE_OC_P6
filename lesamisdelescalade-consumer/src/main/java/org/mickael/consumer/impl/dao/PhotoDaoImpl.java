@@ -43,7 +43,7 @@ public class PhotoDaoImpl extends AbstractDataSource implements PhotoDao {
     @Override
     public void updatePhoto(Photo photo) {
         String sql = "UPDATE public.photo SET "
-                             + "climbingarea_id = :climbingAreaId, "
+                             + "climbingarea_id = :climbingareaId, "
                              + "name = :name, "
                              + "url = :url "
                              + "WHERE id = :id";
@@ -82,14 +82,12 @@ public class PhotoDaoImpl extends AbstractDataSource implements PhotoDao {
 
     @Override
     public List<Photo> findAllPhotoByClimbingAreaId(Integer id) {
-        String sql = "SELECT FROM public.photo WHERE climbingarea_id = :id";
-        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
-        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-
-        parameterSource.addValue("id", id, Types.INTEGER);
+        String sql = "SELECT * FROM public.photo WHERE climbingarea_id = " + id;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(getDataSource());
         PhotoRowMapper photoRowMapper = new PhotoRowMapper();
-        List<Photo> photoList = namedParameterJdbcTemplate.query(sql, parameterSource, photoRowMapper);
+        List<Photo> photoList = jdbcTemplate.query(sql, photoRowMapper);
 
         return photoList;
     }
+
 }
