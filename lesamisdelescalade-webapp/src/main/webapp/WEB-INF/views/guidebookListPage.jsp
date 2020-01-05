@@ -7,27 +7,7 @@
     <section class="clean-block clean-services dark">
         <div class="container">
             <div class="block-heading">
-                <h2 class="text-info">Chercher un Topo</h2>
-                <select class="mdb-select md-form colorful-select dropdown-primary" multiple searchable="Search here..">
-                    <option value="" disabled selected>Choose your country</option>
-                    <option value="1">USA</option>
-                    <option value="2">Germany</option>
-                    <option value="3">France</option>
-                    <option value="3">Poland</option>
-                    <option value="3">Japan</option>
-                </select>
-                <label class="mdb-main-label">Label example</label>
-
-                <select class="mdb-select" multiple searchable="Search here..">
-                    <optgroup label="team 1">
-                        <option value="1">Option 1</option>
-                        <option value="2">Option 2</option>
-                    </optgroup>
-                    <optgroup label="team 2">
-                        <option value="3">Option 3</option>
-                        <option value="4">Option 4</option>
-                    </optgroup>
-                </select>
+                <h2 class="text-info">Topos mis à disposition par les utilisateurs</h2>
             </div>
             <div class="row">
                 <c:forEach items="${guidebookList}" var="guidebook" >
@@ -35,11 +15,23 @@
                         <div class="card">
                             <div class="card-body">
                                 <h4 class="card-title">${guidebook.name}</h4>
+
                             </div>
                             <div class="card-body">
+
                                 <a href="<c:url value="/guidebook/${guidebook.id}"/>" class="btn btn-outline-secondary btn-sm">
                                     Voir
                                 </a>
+                            </div>
+                            <div class="card-footer">
+                                <c:choose>
+                                    <c:when test="${guidebook.loaned == false}">
+                                        <p class="bg-success text-white">DISPONIBLE</p>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <p class="bg-danger text-white">INDISPONIBLE</p>
+                                    </c:otherwise>
+                                </c:choose>
                             </div>
                         </div>
                     </div>

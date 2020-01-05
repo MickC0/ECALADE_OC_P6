@@ -3,6 +3,7 @@ package org.mickael.controllers;
 import org.mickael.business.contract.manager.MemberManager;
 import org.mickael.business.contract.manager.PasswordManager;
 import org.mickael.model.bean.Member;
+import org.mickael.model.enumeration.Role;
 import org.mickael.model.exceptions.MemberBlockedException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +50,7 @@ public class RegistrationController {
             //encoder
             String hashPassword = passwordManager.hashPassword(newMember.getPassword());
             newMember.setPassword(hashPassword);
-            newMember.setRole("User");
+            newMember.setRole(Role.USER.getParam());
             newMember.setEnabled(true);
             memberManager.createMember(newMember);
 

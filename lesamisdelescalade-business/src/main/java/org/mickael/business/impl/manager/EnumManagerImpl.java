@@ -4,6 +4,7 @@ import org.mickael.business.contract.manager.EnumManager;
 import org.mickael.business.impl.AbstractManager;
 import org.mickael.model.enumeration.Cotation;
 import org.mickael.model.enumeration.Region;
+import org.mickael.model.enumeration.Role;
 
 import javax.inject.Named;
 import java.util.ArrayList;
@@ -85,5 +86,21 @@ public class EnumManagerImpl extends AbstractManager implements EnumManager {
         }
 
         return  listRegionStringValues;
+    }
+
+    /**
+     * This method return a list of string with all abbreviation contained in enum
+     *
+     * @return a list of string
+     */
+    public List<String> getEnumRoleStringValues (){
+        Role[] listRole = Role.values();
+        List<String> listRoleStringValues = new ArrayList<>();
+
+        for (Role enumRole : listRole){
+            listRoleStringValues.add(enumRole.getParam());
+        }
+
+        return  listRoleStringValues;
     }
 }

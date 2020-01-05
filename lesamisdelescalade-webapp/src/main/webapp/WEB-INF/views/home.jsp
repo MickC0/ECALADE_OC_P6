@@ -3,49 +3,43 @@
 <%@include file="_include/head.jsp"%>
 
 
-<main class="page climbingAreaList-page">
-    <section class="clean-block clean-services dark">
+<main class="page landing-page">
+    <section class="clean-block clean-info dark">
         <div class="container">
             <div class="block-heading">
-                <a href="http://imgbox.com/MCHglFss" target="_blank">
-                    <img src="<c:url value="${photo1.url}"/>" alt="image host"/>
-                </a>
-                <a href="http://imgbox.com/IDSjRLlk" target="_blank">
-                    <img src="https://thumbs2.imgbox.com/57/c4/IDSjRLlk_t.jpg" alt="image host"/>
-                </a>
-                <a href="http://imgbox.com/ZZwJIcXA" target="_blank">
-                    <img src="https://thumbs2.imgbox.com/f3/ca/ZZwJIcXA_t.jpg" alt="image host"/>
-                </a>
-                <a href="http://imgbox.com/6dnbDc9A" target="_blank">
-                    <img src="https://thumbs2.imgbox.com/79/94/6dnbDc9A_t.jpg" alt="image host"/>
-                </a>
-
-
-
-                <h3 class="text-info"><c:out value="photo 1 : ${photo1.url}"/></h3>
-                <img style="width: 200px; height: auto" src="<c:url value="${photo1.url}"/> ">
-                <img style="width: 200px; height: auto" src="/img/image6.jpg">
+                <h2 class="text-info">Bienvenue sur le site de l'association</h2>
+                <h2 class="text-info">Les Amis de l'Escalade</h2>
+                <p>
+                    Les Amis de l'Escalade est une association de passionnés.
+                </p>
+                <p>
+                    Notre passion pour la grimpe nous a amené à développer
+                    cet outil communautaire, qui permet de dynamiser la circulation de l'information dans le monde de l'escalade :
+                </p>
+                <p>que ce soit pour des grimpeurs, des équipeurs,</p>
+                <p>mais aussi pour des salles d'escalade, etc.</p>
             </div>
-            <div class="block-heading">
-                <h3 class="text-info"><c:out value="photo 2 : ${photo2.url}"/></h3>
-                <img style="width: 200px; height: auto" src="<c:url value="${photo2.url}"/> ">
-            </div>
-            <div class="row">
-                <c:forEach items="${climbingAreaList}" var="climbingArea" >
-                    <div class="col-md-6 col-lg-4">
-                        <div class="card"><img class="card-img-top w-100 d-block" src="<c:url value="/resources/img/image5.jpg"/>">
-                            <div class="card-body">
-                                <h4 class="card-title">${climbingArea.name}</h4>
-                                <p class="card-text">${climbingArea.region}</p>
-                            </div>
-                            <div class="card-body">
-                                <a href="<c:url value="/climbingArea/${climbingArea.id}"/>" class="btn btn-outline-secondary btn-sm">
-                                    Voir
-                                </a>
-                            </div>
-                        </div>
+            <div class="row align-items-center">
+                <div class="col-md-6"><img class="img-thumbnail" src="<c:url value="/resources/img/image6.jpg"/>"/></div>
+                <div class="col-md-6">
+                    <h3 class="text-info">Consulter les sites de France</h3>
+                    <div class="getting-started-info">
+                        <p>
+                            Il est possible de consulter la liste des sites déjà enregistrer par les membres de l'association ou les utilisateurs inscrits.
+                        </p>
                     </div>
-                </c:forEach>
+                </div>
+            </div>
+            <div class="row align-items-center">
+                <div class="col-md-6">
+                    <h3 class="text-info">Consulter la liste des topos</h3>
+                    <div class="getting-started-info">
+                        <p>
+                            Il est possible de consulter la liste des topos mis à disposition par les membres de l'association ou les utilisateurs inscrits.
+                        </p>
+                    </div>
+                </div>
+                <div class="col-md-6"><img class="img-thumbnail" src="<c:url value="/resources/img/image1.jpg"/>"/></div>
             </div>
         </div>
     </section>

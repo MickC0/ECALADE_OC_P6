@@ -5,6 +5,7 @@ import org.mickael.model.bean.ClimbingArea;
 import org.mickael.model.bean.Guidebook;
 import org.mickael.model.bean.Member;
 import org.mickael.model.bean.ReservationRequest;
+import org.mickael.model.enumeration.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -44,6 +45,11 @@ public class PersonalSpaceController {
             return "redirect:/showHome";
         }
 
+        Member memberInBdd = memberManager.findMember(memberInSessionId);
+        if (memberInBdd.getRole() == Role.ADMIN.getParam()){
+            List<Member> memberList = memberManager.findAllMember();
+            model.addAttribute("memberList", memberList);
+        }
         //show all the climbing area's owner
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findClimbingAreaByMemberId(memberInSessionId);
         for (ClimbingArea climbingArea : climbingAreaList){

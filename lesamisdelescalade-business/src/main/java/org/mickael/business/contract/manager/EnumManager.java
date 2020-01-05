@@ -8,4 +8,5 @@ public interface EnumManager {
     int getEnumLevelFromCotationValue (String cotationValue);
     int getLevelOfCotationValue(String cotationValue);
     List<String> getEnumRegionStringValues ();
+    List<String> getEnumRoleStringValues ();
 }

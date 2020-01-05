@@ -99,7 +99,7 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("/acceptReservationRequest/{id}")
+    @PostMapping("/acceptReservationRequest/{id}")
     public String acceptReservationRequest(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestById(id);
@@ -118,7 +118,7 @@ public class ReservationController {
         }
     }
 
-    @GetMapping("/refuseReservationRequest/{id}")
+    @PostMapping("/refuseReservationRequest/{id}")
     public String refuseReservationRequest(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestById(id);
@@ -135,7 +135,7 @@ public class ReservationController {
             return "redirect:/doLogin";
         }
     }
-    @GetMapping("/closeReservationRequest/{id}")
+    @PostMapping("/closeReservationRequest/{id}")
     public String closeReservationRequest(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestById(id);
