@@ -61,7 +61,6 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
         } catch (EmptyResultDataAccessException ex) {
             return null;
         }
-
     }
 
     @Override
@@ -146,6 +145,23 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("id", id, Types.INTEGER);
         namedParameterJdbcTemplate.update(sql, parameterSource);
+    }
+
+    @Override
+    public List<ClimbingArea> findAllClimbingAreaSearchRequest(String name, String region, String cotation, Integer numberSector) {
+        String sql = "SELECT distinct climbingarea. * FROM public.climbingarea " +
+                             "JOIN public.sector ON sector.climbingarea_id = climbingarea.id " +
+                             "JOIN public.route ON route.sector_id = sector.id " +
+                             "WHERE climbingarea.name = :name OR climbingarea.region = :region OR route.cotation = :cotation OR (SELECT COUNT(sector.id) FROM sector WHERE sector.climbingarea_id = climbingarea.id) >= :numberSector";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("name", name, Types.VARCHAR);
+        parameterSource.addValue("region", region, Types.VARCHAR);
+        parameterSource.addValue("cotation", cotation, Types.VARCHAR);
+        ClimbingAreaRowMapper climbingAreaRowMapper = new ClimbingAreaRowMapper();
+        List<ClimbingArea> climbingAreaList = namedParameterJdbcTemplate.query(sql, parameterSource, climbingAreaRowMapper);
+
+        return climbingAreaList;
     }
 
 

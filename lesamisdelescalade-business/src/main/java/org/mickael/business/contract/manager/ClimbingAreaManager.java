@@ -12,6 +12,7 @@ public interface ClimbingAreaManager {
     void deleteClimbingArea(Integer id);
     List<ClimbingArea> findAllClimbingArea ();
     List<ClimbingArea> findClimbingAreaByMemberId(Integer id);
+    List<ClimbingArea> findAllClimbingAreaSearchRequest(String name, String region, String cotation, Integer numberSector);
     void deleteTag(Integer id);
     void addTag(Integer id);
 }

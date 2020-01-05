@@ -14,4 +14,5 @@ public interface ClimbingAreaDao {
     List<ClimbingArea> findAllClimbingArea ();
     void deleteTag(Integer id);
     void addTag(Integer id);
+    List<ClimbingArea> findAllClimbingAreaSearchRequest(String name, String region, String cotation, Integer numberSector);
 }

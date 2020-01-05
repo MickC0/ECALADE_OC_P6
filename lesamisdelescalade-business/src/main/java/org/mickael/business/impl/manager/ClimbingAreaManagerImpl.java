@@ -101,6 +101,18 @@ public class ClimbingAreaManagerImpl extends AbstractManager implements Climbing
     }
 
     @Override
+    public List<ClimbingArea> findAllClimbingAreaSearchRequest(String name, String region, String cotation, Integer numberSector) {
+        TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
+        List<ClimbingArea> climbingAreaList = transactionTemplate.execute(transactionStatus -> {
+            List<ClimbingArea> climbingAreaListTransaction = new ArrayList<>();
+            climbingAreaListTransaction = getDaoFactory().getClimbingAreaDao().findAllClimbingAreaSearchRequest(name, region, cotation, numberSector);
+            return  climbingAreaListTransaction;
+        });
+
+        return climbingAreaList;
+    }
+
+    @Override
     public void deleteTag(Integer id) {
         TransactionTemplate transactionTemplate = new TransactionTemplate(getTransactionManager());
         transactionTemplate.execute(new TransactionCallbackWithoutResult() {
