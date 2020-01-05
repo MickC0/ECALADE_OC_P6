@@ -1,6 +1,6 @@
 package org.mickael.business.impl.manager;
 
-import org.mickael.business.contract.manager.UtilsManager;
+import org.mickael.business.contract.manager.EnumManager;
 import org.mickael.business.impl.AbstractManager;
 import org.mickael.model.enumeration.Cotation;
 import org.mickael.model.enumeration.Region;
@@ -11,10 +11,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Named("util")
-public class UtilsManagerImpl extends AbstractManager implements UtilsManager {
+@Named("enumManager")
+public class EnumManagerImpl extends AbstractManager implements EnumManager {
 
-    public UtilsManagerImpl() {
+    public EnumManagerImpl() {
     }
 
     /**

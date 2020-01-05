@@ -158,6 +158,7 @@ public class ClimbingAreaDaoImpl extends AbstractDataSource implements ClimbingA
         parameterSource.addValue("name", name, Types.VARCHAR);
         parameterSource.addValue("region", region, Types.VARCHAR);
         parameterSource.addValue("cotation", cotation, Types.VARCHAR);
+        parameterSource.addValue("numberSector", numberSector, Types.INTEGER);
         ClimbingAreaRowMapper climbingAreaRowMapper = new ClimbingAreaRowMapper();
         List<ClimbingArea> climbingAreaList = namedParameterJdbcTemplate.query(sql, parameterSource, climbingAreaRowMapper);
 

@@ -19,7 +19,7 @@ import java.util.List;
 public class RouteController {
 
     @Inject
-    private UtilsManager utilsManager;
+    private EnumManager enumManager;
 
     @Inject
     private ClimbingAreaManager climbingAreaManager;
@@ -46,7 +46,7 @@ public class RouteController {
         if (memberInSessionId != null){
             Route route = new Route();
             route.setSector(sectorManager.findSector(sectorId));
-            List<String> plop = utilsManager.getEnumCotationStringValues();
+            List<String> plop = enumManager.getEnumCotationStringValues();
             model.addAttribute("listCotation", plop);
             model.addAttribute("route", route);
             model.addAttribute("sectorId", sectorId);
@@ -83,7 +83,7 @@ public class RouteController {
     public String updateRoute(Model model, @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
         if (memberInSessionId != null){
             Route routeToUpdate = routeManager.findRoute(id);
-            List<String> plop = utilsManager.getEnumCotationStringValues();
+            List<String> plop = enumManager.getEnumCotationStringValues();
             model.addAttribute("listCotation", plop);
             model.addAttribute("memberInSessionId", memberInSessionId);
             model.addAttribute("routeToUpdate", routeToUpdate);

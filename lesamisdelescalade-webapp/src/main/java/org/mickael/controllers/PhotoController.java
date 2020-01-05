@@ -36,7 +36,7 @@ public class PhotoController {
     private RouteManager routeManager;
 
     @Inject
-    private UtilsManager utilsManager;
+    private EnumManager enumManager;
 
     @Inject
     private GuidebookManager guidebookManager;

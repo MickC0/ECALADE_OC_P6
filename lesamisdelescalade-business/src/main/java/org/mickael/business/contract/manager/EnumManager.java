@@ -2,7 +2,7 @@ package org.mickael.business.contract.manager;
 
 import java.util.List;
 
-public interface UtilsManager {
+public interface EnumManager {
 
     List<String> getEnumCotationStringValues ();
     int getEnumLevelFromCotationValue (String cotationValue);

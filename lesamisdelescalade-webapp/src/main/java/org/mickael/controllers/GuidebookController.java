@@ -1,9 +1,9 @@
 package org.mickael.controllers;
 
+import org.mickael.business.contract.manager.EnumManager;
 import org.mickael.business.contract.manager.GuidebookManager;
 import org.mickael.business.contract.manager.MemberManager;
 import org.mickael.business.contract.manager.PhotoManager;
-import org.mickael.business.contract.manager.UtilsManager;
 import org.mickael.model.bean.Guidebook;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,7 +24,7 @@ public class GuidebookController {
     private MemberManager memberManager;
 
     @Inject
-    private UtilsManager utilsManager;
+    private EnumManager enumManager;
 
     @Inject
     private PhotoManager photoManager;
@@ -33,7 +33,7 @@ public class GuidebookController {
     @GetMapping("/showGuidebookForm")
     public String showGuidebookForm(@SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, Model model){
         if (memberInSessionId != null){
-            List<String> regionList = utilsManager.getEnumRegionStringValues();
+            List<String> regionList = enumManager.getEnumRegionStringValues();
             model.addAttribute("regionList", regionList);
             model.addAttribute("guidebook", new Guidebook());
             return "guidebookForm";
@@ -85,7 +85,7 @@ public class GuidebookController {
         Guidebook guidebookInBdd = guidebookManager.findGuidebook(id);
 
         if (memberInSessionId != null && memberInSessionId == guidebookInBdd.getMember().getId()){
-            List<String> regionList = utilsManager.getEnumRegionStringValues();
+            List<String> regionList = enumManager.getEnumRegionStringValues();
             model.addAttribute("regionList", regionList);
             model.addAttribute("guidebookToUpdate", guidebookInBdd);
             model.addAttribute("memberInSessionId", memberInSessionId);

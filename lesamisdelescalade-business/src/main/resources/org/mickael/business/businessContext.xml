@@ -42,7 +42,8 @@
     </bean>
 
     <!-- Utils -->
-    <bean id="util" class="org.mickael.business.impl.manager.UtilsManagerImpl"></bean>
+    <bean id="enumManager" class="org.mickael.business.impl.manager.EnumManagerImpl"></bean>
+    <bean id="searchFilter" class="org.mickael.business.impl.SearchFilter"></bean>
 
 
 </beans>

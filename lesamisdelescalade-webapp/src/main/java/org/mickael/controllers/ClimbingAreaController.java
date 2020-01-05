@@ -1,6 +1,7 @@
 package org.mickael.controllers;
 
 import org.mickael.business.contract.manager.*;
+import org.mickael.business.impl.SearchFilter;
 import org.mickael.model.bean.*;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -36,7 +37,7 @@ public class ClimbingAreaController {
     private RouteManager routeManager;
 
     @Inject
-    private UtilsManager utilsManager;
+    private EnumManager enumManager;
 
 
 
@@ -49,7 +50,7 @@ public class ClimbingAreaController {
     @GetMapping("/showClimbingAreaForm")
     public String showClimbingAreaForm(Model model, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
         if (memberInSessionId != null){
-            List<String> regionList = utilsManager.getEnumRegionStringValues();
+            List<String> regionList = enumManager.getEnumRegionStringValues();
             model.addAttribute("regionList", regionList);
             model.addAttribute("climbingArea", new ClimbingArea());
             return "climbingAreaForm";
@@ -110,9 +111,26 @@ public class ClimbingAreaController {
     @GetMapping("/climbingAreaList")
     public String showClimbingAreaList(Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
+        List<String> regionList = enumManager.getEnumRegionStringValues();
+        List<String> cotationList = enumManager.getEnumCotationStringValues();
+        List<String> nameList = new ArrayList<>();
+        List<Integer> numberSectorList = new ArrayList<>();
+
         for (ClimbingArea climbingArea : climbingAreaList){
             climbingArea.setPhotoList(photoManager.findAllPhotoByClimbingAreaId(climbingArea.getId()));
         }
+        for (ClimbingArea climbingArea : climbingAreaList){
+            nameList.add(climbingArea.getName());
+        }
+
+        for (int i = 0; i < 101; i++){
+            numberSectorList.add(i);
+        }
+        model.addAttribute("regionList", regionList);
+        model.addAttribute("cotationList", cotationList);
+        model.addAttribute("nameList", nameList);
+        model.addAttribute("numberSectorList", numberSectorList);
+        model.addAttribute("searchFilter", new SearchFilter());
         model.addAttribute("climbingAreaList", climbingAreaList);
         return "climbingAreaListPage";
     }
@@ -123,7 +141,7 @@ public class ClimbingAreaController {
                                              @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ClimbingArea climbingAreaToUpdate = climbingAreaManager.findClimbingArea(id);
-            List<String> regionList = utilsManager.getEnumRegionStringValues();
+            List<String> regionList = enumManager.getEnumRegionStringValues();
             model.addAttribute("regionList", regionList);
             model.addAttribute("climbingAreaToUpdate", climbingAreaToUpdate);
             return "updateClimbingAreaForm";
