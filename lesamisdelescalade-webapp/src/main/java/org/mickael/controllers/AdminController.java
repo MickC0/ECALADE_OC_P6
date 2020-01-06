@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -30,10 +31,11 @@ public class AdminController {
     @GetMapping("/showMemberList")
     public String showMemberList(@SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId, Model model){
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
-        if (memberInBddAdmin.getRole() == Role.ADMIN.getParam()){
-            List<Member> memberList = memberManager.findAllMember();
-            model.addAttribute("memberList", memberList);
+        List<Member> memberList = new ArrayList<>();
+        if (memberInBddAdmin.getRole().equals(Role.ADMIN.getParam())){
+            memberList = memberManager.findAllMember();
         }
+        model.addAttribute("memberList", memberList);
         return "memberListPage";
     }
 
@@ -53,7 +55,7 @@ public class AdminController {
     @GetMapping("/editMemberAdmin/{id}")
     public String showMemberUpdateForm(@PathVariable("id") Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
-        if (memberInBddAdmin.getRole() != Role.ADMIN.getParam()){
+        if (!memberInBddAdmin.getRole().equals(Role.ADMIN.getParam())){
             return "redirect:/showHome";
         }
 
@@ -67,7 +69,7 @@ public class AdminController {
     public String updateMember(@Valid Member member, @PathVariable("id") Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId,
                                BindingResult bindingResult){
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
-        if (memberInBddAdmin.getRole() != Role.ADMIN.getParam()){
+        if (!memberInBddAdmin.getRole().equals(Role.ADMIN.getParam())){
             return "redirect:/showHome";
         }
         if (bindingResult.hasErrors()){

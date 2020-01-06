@@ -31,14 +31,14 @@
                                         <tr>
                                             <c:choose>
                                                 <c:when test="${member.enabled == true}">
-                                                    <td><button class="btn btn-success btn-sm">ACTIF</button> </td>
+                                                    <td><p class="bg-success text-white" style="text-align: center">ACTIF</p> </td>
                                                 </c:when>
                                                 <c:otherwise>
-                                                    <td><button class="btn btn-danger btn-sm">DESACTIVE</button> </td>
+                                                    <td><p class="bg-danger text-white" style="text-align: center">DESACTIVE</p> </td>
                                                 </c:otherwise>
                                             </c:choose>
-                                            <td>${member.firstName}</td>
                                             <td>${member.lastName}</td>
+                                            <td>${member.firstName}</td>
                                             <td>${member.pseudo}</td>
                                             <td>${member.email}</td>
                                             <td>${member.role}</td>
