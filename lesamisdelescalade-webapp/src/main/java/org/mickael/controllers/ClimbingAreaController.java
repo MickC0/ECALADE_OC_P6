@@ -168,7 +168,52 @@ public class ClimbingAreaController {
                 return "updateClimbingAreaForm";
             } else {
                 climbingAreaManager.updateClimbingArea(climbingArea);
-                return "redirect:/climbingAreaList";
+                model.addAttribute("id", id);
+                return "redirect:/climbingArea/{id}";
+            }
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @GetMapping("/tagClimbingArea/{id}")
+    public String showTagClimbingAreaForm(Model model, @PathVariable Integer id,
+                                             @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+        if (memberInSessionId != null){
+            ClimbingArea climbingAreaToUpdate = climbingAreaManager.findClimbingArea(id);
+            List<String> regionList = enumManager.getEnumRegionStringValues();
+            model.addAttribute("regionList", regionList);
+            model.addAttribute("climbingAreaToUpdate", climbingAreaToUpdate);
+            return "tagClimbingAreaForm";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @PostMapping("/tagClimbingArea/tagClimbingAreaProcess/{id}")
+    public String updateTagClimbingArea(@Valid ClimbingArea climbingArea, BindingResult bindingResult, Model model,
+                                     @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
+        if (memberInSessionId != null){
+            ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingArea(id);
+            climbingArea.setMember(climbingAreaInBdd.getMember());
+
+            if (bindingResult.hasErrors()){
+                List<FieldError> errors = bindingResult.getFieldErrors();
+                for (FieldError error : errors ) {
+                    System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+                }
+                String str = "Une erreur est survenue. Vérifiez les champs.";
+                model.addAttribute("climbingAreaToUpdate", climbingArea);
+                model.addAttribute("errorMessage", str);
+                return "tagClimbingAreaForm";
+            } else {
+                if (climbingArea.isApprouved() == true){
+                    climbingAreaManager.addTag(id);
+                } else {
+                    climbingAreaManager.deleteTag(id);
+                }
+                model.addAttribute("id", id);
+                return "redirect:/climbingArea/{id}";
             }
         } else {
             return "redirect:/doLogin";

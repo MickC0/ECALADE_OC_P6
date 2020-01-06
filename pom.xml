@@ -44,7 +44,6 @@
     <!-- Modules -->
     <!-- =============================================================== -->
     <modules>
-        <module>lesamisdelescalade-batch</module>
         <module>lesamisdelescalade-business</module>
         <module>lesamisdelescalade-consumer</module>
         <module>lesamisdelescalade-model</module>

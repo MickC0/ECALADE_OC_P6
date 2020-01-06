@@ -89,18 +89,15 @@ public class LoginController {
 
     @GetMapping("/doLogout")
     public String doLogout(HttpServletResponse httpServletResponse, HttpSession httpSession, WebRequest webRequest, SessionStatus sessionStatus){
-        httpServletResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
-        httpServletResponse.setHeader("Pragma","no-cache");
-        httpServletResponse.setHeader("Expires","0");
-        httpSession.invalidate();
-
         sessionStatus.setComplete();
         webRequest.removeAttribute("memberInSessionId", WebRequest.SCOPE_SESSION);
         webRequest.removeAttribute("memberInSessionPseudo", WebRequest.SCOPE_SESSION);
         webRequest.removeAttribute("memberInSessionEmail", WebRequest.SCOPE_SESSION);
         webRequest.removeAttribute("memberInSessionRole", WebRequest.SCOPE_SESSION);
-
-
+        httpServletResponse.setHeader("Cache-Control","no-cache, no-store, must-revalidate");
+        httpServletResponse.setHeader("Pragma","no-cache");
+        httpServletResponse.setHeader("Expires","0");
+        httpSession.invalidate();
         return "redirect:/showHome";
     }
 

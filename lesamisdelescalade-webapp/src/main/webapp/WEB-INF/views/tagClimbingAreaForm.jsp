@@ -2,30 +2,28 @@
 
 <%@include file="_include/head.jsp"%>
 
-
-<main class="page updateMemberFormAdmin-page">
+<main class="page updateClimbingAreaForm-page">
     <section class="clean-block clean-form dark">
         <div class="container">
             <div class="block-heading">
-                <h2 class="text-login">ADMINISTRATEUR : Mise à jour des droits utilisateur</h2>
+                <h2 class="text-login">Modification du site ${climbingAreaToUpdate.name}</h2>
                 <p>
                     <c:if test="${!empty errorMessage}">
                         <c:out value="${errorMessage}"/>
                     </c:if>
                 </p>
             </div>
-            <form:form method="post" action="updateMemberAdminProcess/${memberToUpdate.id}" modelAttribute="memberToUpdate">
+            <form:form method="post" action="tagClimbingAreaProcess/${climbingAreaToUpdate.id}" modelAttribute="climbingAreaToUpdate">
                 <div class="form-group">
-                    <form:label path="enabled" cssClass="form-check-label mb-2 mr-sm-2">Compte actif : </form:label>
-                    <form:checkbox path="enabled" cssClass="form-check-inline mb-2 mr-sm-2" value="${memberToUpdate.enabled}"/>
-                    <form:errors path="enabled" cssClass="errors"/>
+                    <form:hidden path="id" value="${climbingAreaToUpdate.id}"/>
+                    <form:errors  path="id" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <form:select path="role" cssClass="form-control">
-                        <form:option value="">Role</form:option>
-                        <form:options items="${roleList}"/>
-                    </form:select>
-                    <form:errors path="role" cssClass="error"/>
+                    <c:if test="${sessionScope.memberInSessionRole == 'Administrator' || sessionScope.memberInSessionRole == 'Member'}">
+                        <form:label path="approuved">Officiel Les Amis de l'Escalade</form:label>
+                        <form:checkbox path="approuved" value="${climbingAreaToUpdate.approuved}" cssClass="form-check-inline"/>
+                        <form:errors  path="approuved" cssClass="error"/>
+                    </c:if>
                 </div>
                 <div class="form-group">
                     <form:button class="btn btn-primary btn-block" type="submit">Enregistrer</form:button>
@@ -40,4 +38,7 @@
     </section>
 </main>
 
+
+
 <%@include file="_include/footer.jsp"%>
+

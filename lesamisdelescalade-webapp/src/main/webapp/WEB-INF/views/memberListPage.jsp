@@ -13,6 +13,7 @@
                     <div class="col">
                         <div class="card shadow mb-3">
                             <div class="card-header py-3">
+                                <a href="<c:url value="/personalSpace/${memberInSessionId}"/>" class="btn btn-outline-primary btn-block">Retour au dashboard</a>
                             </div>
                             <div class="card-body">
                                 <table class="table text-justify my-0">
