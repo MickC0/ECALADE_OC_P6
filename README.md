@@ -15,7 +15,8 @@
 
 ## Les fonctions :
 
-	- F1 : Un utilisateur doit pouvoir consulter les informations des sites	d’escalades (secteurs, voies, longueurs, etc.).
+	- F1 : Un utilisateur doit pouvoir consulter les informations des sites	d’escalades
+	(secteurs, voies, longueurs, etc.).
 
 	- F2 : Un utilisateur doit pouvoir faire une recherche à l’aide de plusieurs critères 
 	pour trouver un site de grimpe et consulter le résultat de cette recherche. 
