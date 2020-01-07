@@ -61,7 +61,36 @@
 	- Vocabulaire de l'escalade utilisé.
 	- Le site est responsive.
 	- le site est sécurisé. (aucun mot de passe est stocké en clair dans la BDD)
+	
+## Développement et déploiement
+	
+	## Développement
 
+	Cette application a été développé avec :
+	- Intellij IDEA 2019.3
+	- Java 8 (version 1.8u231)
+	- Tomcat 9
+	- PostgreSql 11 (version 11.5.2)
+	- le framework Spring (version 5.2.1) : Spring JDBC, Spring TX, Spring IOC, Spring Security
+	
+	## Déploiement
+	
+	Pour la base de données, vous trouverez ce qu'il vous faut dans le dossier "lesamisdelescalade-files/DB_lesamisdelescalade/":
+		* D'abord lancer le script create_user.sql pour créer le propriétaire de la bdd.
+		* Ensuite lancer le script create_bdd.sql pour créer la bdd.
+		* Enfin lancer le restore avec data.backup pour insérer les données.
+
+	Si vous passez par pgAdmin, il faut :
+		* créer un nouveau rôle, le nommer "admin_lesamisdelescalade", mettre en password "azerty", 
+		et lui donner tous les privilèges.
+		* créer une nouvelle database, la nommer "db_OC_lesamisdelescalade" et mettre "admin_lesamisdelescalade" 
+		en tant que propriétaire.
+		* faire un restore avec le fichier data.backup.
+
+
+
+	Dans le dossier "lesamisdelescalade-files/", vous trouverez aussi le fichier "lesamisdelescalade-webapp.war".
+	Il faut copier/coller ce fichier dans le dossier "webapp" du server Tomcat.
 
 
 ## Auteur
