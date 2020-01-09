@@ -86,6 +86,11 @@
 	Dans le dossier "lesamisdelescalade-files/", vous trouverez aussi le fichier "lesamisdelescalade-webapp.war".
 	Il faut copier/coller ce fichier dans le dossier "webapp" du server Tomcat.
 
+    ## Lancement de l'application
+    
+    Lancer le serveur tomcat en ouvrant le fichier "startup.bat" situé dans le dossier "bin".
+    Dans le navigateur, entrer l'adresse suivante :
+    http://localhost:8080/lesamisdelescalade-webapp/
 
 ## Auteur
 

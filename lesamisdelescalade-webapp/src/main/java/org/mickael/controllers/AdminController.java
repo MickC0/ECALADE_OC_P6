@@ -33,10 +33,11 @@ public class AdminController {
 
 
     @GetMapping("/showMemberList")
-    public String showMemberList(@SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId, Model model){
+    public String showMemberList(@SessionAttribute(value = "memberInSessionId" , required = false) Integer memberInSessionId, Model model){
         logger.debug("AdminController showMemberList");
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
-        if (memberInBddAdmin.getRole() != Role.ADMIN.getParam()){
+        if (!memberInBddAdmin.getRole().equals(Role.ADMIN.getParam())){
+            logger.debug("role : " + memberInBddAdmin.getRole());
             return "redirect:/showHome";
         }
         List<Member> memberList = new ArrayList<>();
@@ -49,11 +50,11 @@ public class AdminController {
 
 
     @GetMapping("/deleteMember/{id}")
-    public String deleteMember(@PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId, Model model){
+    public String deleteMember(@PathVariable Integer id, @SessionAttribute(value = "memberInSessionId" , required = false) Integer memberInSessionId, Model model){
         logger.debug("AdminController deleteMember");
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
-        if (memberInBddAdmin.getRole() != Role.ADMIN.getParam()){
-            logger.error("No memberInSessionId");
+        if (!memberInBddAdmin.getRole().equals(Role.ADMIN.getParam())){
+            logger.debug("Bad role or no Id");
             return "redirect:/showHome";
         }
         memberManager.deleteMember(id);
@@ -63,11 +64,11 @@ public class AdminController {
 
 
     @GetMapping("/editMemberAdmin/{id}")
-    public String showMemberUpdateForm(@PathVariable("id") Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+    public String showMemberUpdateForm(@PathVariable("id") Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
 
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
         if (!memberInBddAdmin.getRole().equals(Role.ADMIN.getParam())){
-            logger.error("No memberInSessionId");
+            logger.debug("Bad role or no Id");
             return "redirect:/showHome";
         }
 
@@ -78,11 +79,12 @@ public class AdminController {
     }
 
     @PostMapping("/editMemberAdmin/updateMemberAdminProcess/{id}")
-    public String updateMember(@Valid Member member, @PathVariable("id") Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId,
+    public String updateMember(@Valid Member member, @PathVariable("id") Integer id, Model model, @SessionAttribute(value = "memberInSessionId" , required = false) Integer memberInSessionId,
                                BindingResult bindingResult){
         logger.debug("AdminController updateMemberAdminProcess");
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
         if (!memberInBddAdmin.getRole().equals(Role.ADMIN.getParam())){
+            logger.debug("Bad role or no Id");
             return "redirect:/showHome";
         }
         if (bindingResult.hasErrors()){

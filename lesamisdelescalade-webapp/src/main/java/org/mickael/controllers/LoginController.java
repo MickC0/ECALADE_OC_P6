@@ -43,7 +43,6 @@ public class LoginController {
 
     @GetMapping("/doLogin")
     public String showLoginForm(Model model){
-        //test session
         model.addAttribute("loginCommand", new LoginCommand());
         return "login";
     }
@@ -87,7 +86,7 @@ public class LoginController {
         return "redirect:/showHome";
     }
 
-    @PostMapping("/doLogout")
+    @GetMapping("/doLogout")
     public String doLogout(HttpServletResponse httpServletResponse, HttpSession httpSession, WebRequest webRequest, SessionStatus sessionStatus){
         sessionStatus.setComplete();
         webRequest.removeAttribute("memberInSessionId", WebRequest.SCOPE_SESSION);

@@ -46,7 +46,7 @@ public class ClimbingAreaController {
 
 
     @GetMapping("/showClimbingAreaForm")
-    public String showClimbingAreaForm(Model model, @SessionAttribute(value = "memberInSessionId", required = true)Integer memberInSessionId){
+    public String showClimbingAreaForm(Model model, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
         if (memberInSessionId == null) {
             return "redirect:/doLogin";
         }
@@ -129,7 +129,7 @@ public class ClimbingAreaController {
 
     @GetMapping("/updateClimbingArea/{id}")
     public String showUpdateClimbingAreaForm(Model model, @PathVariable Integer id,
-                                             @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId){
+                                             @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId == null) {
             return "redirect:/doLogin";
         }
@@ -142,7 +142,7 @@ public class ClimbingAreaController {
 
     @PostMapping("/updateClimbingArea/updateClimbingAreaProcess/{id}")
     public String updateClimbingArea(@Valid ClimbingArea climbingArea, BindingResult bindingResult, Model model,
-                                         @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId){
+                                         @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId == null) {
             return "redirect:/doLogin";
         }
@@ -167,7 +167,7 @@ public class ClimbingAreaController {
 
     @GetMapping("/tagClimbingArea/{id}")
     public String showTagClimbingAreaForm(Model model, @PathVariable Integer id,
-                                             @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId){
+                                             @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId == null) {
             return "redirect:/doLogin";
         }
@@ -180,7 +180,7 @@ public class ClimbingAreaController {
 
     @PostMapping("/tagClimbingArea/tagClimbingAreaProcess/{id}")
     public String updateTagClimbingArea(@Valid ClimbingArea climbingArea, BindingResult bindingResult, Model model,
-                                     @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId){
+                                     @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId == null) {
             return "redirect:/doLogin";
         }

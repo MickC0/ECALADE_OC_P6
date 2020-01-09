@@ -62,7 +62,7 @@ public class GuidebookController {
                     newGuidebook.setLoaned(false);
                     guidebookManager.createGuidebook(newGuidebook);
                     model.addAttribute("memberInSessionId", memberInSessionId);
-                    return "redirect:/personalSpace/{memberInSessionId}"; //voir la redirection avec {id} ?
+                    return "redirect:/personalSpace/{memberInSessionId}";
                 }
             }
         } else {

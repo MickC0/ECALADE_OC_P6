@@ -33,32 +33,30 @@
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navcol-1">
-            <ul class="nav navbar-nav ml-auto">
-                <li class="nav-item" role="presentation"><a class="nav-link" href="<c:url value="/climbingAreaList"/>">Sites d'escalade</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="<c:url value="/guidebookList"/>">Topos d'escalade</a></li>
-            </ul>
             <c:choose>
                 <c:when test="${!empty memberInSessionId}">
-                    <ul class="nav navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="<c:url value="/climbingAreaList"/>">Sites d'escalade</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="<c:url value="/guidebookList"/>">Topos d'escalade</a></li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="<c:url value="/personalSpace/${memberInSessionId}"/>"> Mon dashboard </a>
+                            <a class="nav-link" href="<c:url value="/personalSpace/${memberInSessionId}"/>">Mon dashboard</a>
                         </li>
-                        <li class="nav-item" role="presentation">
-                            <form:form  method="post" action="doLogout">
-                                <button class="btn btn-link nav-link" role="link" type="submit">Se déconnecter</button>
-                            </form:form>
-                        </li>
-                    </ul>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" href="<c:url value="/doLogout"/>">Se déconnecter</a>
+                    </li>
+                </ul>
                 </c:when>
                 <c:otherwise>
-                    <ul class="nav navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="<c:url value="/climbingAreaList"/>">Sites d'escalade</a></li>
+                    <li class="nav-item" role="presentation"><a class="nav-link" href="<c:url value="/guidebookList"/>">Topos d'escalade</a></li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" href="<c:url value="/doRegister"/>"><span class="fas fa-user"></span> S'enregistrer</a>
                         </li>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" href="<c:url value="/doLogin"/>"><span class="fas fa-sign-in-alt"></span> Connexion</a>
                         </li>
-                    </ul>
+                </ul>
                 </c:otherwise>
             </c:choose>
         </div>

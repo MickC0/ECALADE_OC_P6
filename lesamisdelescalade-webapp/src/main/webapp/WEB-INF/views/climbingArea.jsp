@@ -56,9 +56,11 @@
                                     <div class="text-info">
                                         <p>Site officiel : <img src="<c:url value="/resources/img/icon-above-font.png"/>" style="width: 120px; height:auto">
                                         </p>
-                                        <p>
-                                            <a href="<c:url value="/tagClimbingArea/${climbArea.id}"/>" class="btn btn-outline-secondary btn-sm"> Détaguer </a>
-                                        </p>
+                                        <c:if test="${climbArea.approuved == true && (sessionScope.memberInSessionRole == 'Administrator' || sessionScope.memberInSessionRole == 'Member')}">
+                                            <p>
+                                                <a href="<c:url value="/tagClimbingArea/${climbArea.id}"/>" class="btn btn-outline-secondary btn-sm"> Détaguer </a>
+                                            </p>
+                                        </c:if>
                                     </div>
                                 </c:if>
                                 <div class="summary">
