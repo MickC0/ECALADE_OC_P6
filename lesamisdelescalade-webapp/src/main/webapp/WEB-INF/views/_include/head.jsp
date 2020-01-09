@@ -2,6 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form" %>
+<%@ taglib prefix="input" uri="http://www.springframework.org/tags/form" %>
 <html lang="fr">
 <head>
     <title>Les amis de l'escalade</title>
@@ -35,24 +36,17 @@
             <ul class="nav navbar-nav ml-auto">
                 <li class="nav-item" role="presentation"><a class="nav-link" href="<c:url value="/climbingAreaList"/>">Sites d'escalade</a></li>
                 <li class="nav-item" role="presentation"><a class="nav-link" href="<c:url value="/guidebookList"/>">Topos d'escalade</a></li>
-                <%--<li class="nav-item" role="presentation"><a class="nav-link" href="product-page.html">Product</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="contact-us.html">Contact Us</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="login.html">Login</a></li>
-                <li class="nav-item" role="presentation"><a class="nav-link" href="registration.html">Register</a></li>--%>
             </ul>
             <c:choose>
                 <c:when test="${!empty memberInSessionId}">
                     <ul class="nav navbar-nav ml-auto">
-                            <%--<c:if test="${sessionScope.memberInSessionRole == 'Administrator'}">
-                                <li class="nav-item"data-toggle="collapse" data-target=".navbar-collapse.show">
-                                    <a class="nav-link" href="<c:url value="/"/>"> Administration </a>
-                                </li>
-                            </c:if>--%>
                         <li class="nav-item" role="presentation">
                             <a class="nav-link" href="<c:url value="/personalSpace/${memberInSessionId}"/>"> Mon dashboard </a>
                         </li>
                         <li class="nav-item" role="presentation">
-                            <a class="nav-link" href="<c:url value="/doLogout"/>"> Se déconnecter</a>
+                            <form:form  method="post" action="doLogout">
+                                <button class="btn btn-link nav-link" role="link" type="submit">Se déconnecter</button>
+                            </form:form>
                         </li>
                     </ul>
                 </c:when>

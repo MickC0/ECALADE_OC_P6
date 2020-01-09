@@ -1,5 +1,7 @@
 package org.mickael.business.impl.manager;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mickael.business.contract.manager.ClimbingAreaManager;
 import org.mickael.business.impl.AbstractManager;
 import org.mickael.model.bean.ClimbingArea;
@@ -11,6 +13,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ClimbingAreaManagerImpl extends AbstractManager implements ClimbingAreaManager {
+
+    private static final Logger logger = LogManager.getLogger(ClimbingAreaManagerImpl.class);
+
     @Override
     public void createClimbingArea(ClimbingArea climbingArea) {
 
@@ -57,7 +62,7 @@ public class ClimbingAreaManagerImpl extends AbstractManager implements Climbing
                 try{
                     getDaoFactory().getClimbingAreaDao().updateClimbingArea(climbingArea);
                 } catch (Exception e){
-                    e.printStackTrace();
+                    logger.debug(e.getMessage());
                 }
             }
         });

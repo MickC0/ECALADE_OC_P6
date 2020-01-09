@@ -45,42 +45,36 @@ public class ClimbingAreaController {
     /** ======== Climbing Area ======== */
 
 
-
-
     @GetMapping("/showClimbingAreaForm")
-    public String showClimbingAreaForm(Model model, @SessionAttribute(value = "memberInSessionId", required = false)Integer memberInSessionId){
-        if (memberInSessionId != null){
-            List<String> regionList = enumManager.getEnumRegionStringValues();
-            model.addAttribute("regionList", regionList);
-            model.addAttribute("climbingArea", new ClimbingArea());
-            return "climbingAreaForm";
-        } else {
+    public String showClimbingAreaForm(Model model, @SessionAttribute(value = "memberInSessionId", required = true)Integer memberInSessionId){
+        if (memberInSessionId == null) {
             return "redirect:/doLogin";
         }
-
+        List<String> regionList = enumManager.getEnumRegionStringValues();
+        model.addAttribute("regionList", regionList);
+        model.addAttribute("climbingArea", new ClimbingArea());
+        return "climbingAreaForm";
     }
 
     @PostMapping("/saveClimbingAreaProcess")
-    public String saveClimbingArea(@Valid @ModelAttribute("climbingArea") ClimbingArea newClimbingArea, BindingResult bindingResult, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
-        if (memberInSessionId != null){
-            System.out.println(newClimbingArea.getName());
-            ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingAreaByProperty("name", newClimbingArea.getName());
-            if (climbingAreaInBdd != null){
-                model.addAttribute("errorMessage", "Désolé ce site existe déjà");
+    public String saveClimbingArea(@Valid @ModelAttribute("climbingArea") ClimbingArea newClimbingArea, BindingResult bindingResult, Model model, @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId){
+        if (memberInSessionId == null) {
+            return "redirect:/doLogin";
+        }
+        ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingAreaByProperty("name", newClimbingArea.getName());
+        if (climbingAreaInBdd != null){
+            model.addAttribute("errorMessage", "Désolé ce site existe déjà");
+            return "redirect:/showClimbingAreaForm";
+        } else {
+            if (bindingResult.hasErrors()){
+                model.addAttribute("errorMessage", "Une erreur est survenue. Vérifiez les champs.");
                 return "redirect:/showClimbingAreaForm";
             } else {
-                if (bindingResult.hasErrors()){
-                    model.addAttribute("errorMessage", "Une erreur est survenue. Vérifiez les champs.");
-                    return "redirect:/showClimbingAreaForm";
-                } else {
-                    newClimbingArea.setMember(memberManager.findMember(memberInSessionId));
-                    newClimbingArea.setApprouved(false);
-                    climbingAreaManager.createClimbingArea(newClimbingArea);
-                    return "redirect:/climbingAreaList";
-                }
+                newClimbingArea.setMember(memberManager.findMember(memberInSessionId));
+                newClimbingArea.setApprouved(false);
+                climbingAreaManager.createClimbingArea(newClimbingArea);
+                return "redirect:/climbingAreaList";
             }
-        } else {
-            return "redirect:/doLogin";
         }
     }
 
@@ -102,9 +96,6 @@ public class ClimbingAreaController {
             sector.setRouteList(routeList);
         }
         model.addAttribute("climbArea", climbingArea);
-        /**model.addAttribute("sectorList", sectorList);
-        model.addAttribute("commentList", commentList);
-        model.addAttribute("photoList", photoList);*/
         return "climbingArea";
     }
 
@@ -138,119 +129,113 @@ public class ClimbingAreaController {
 
     @GetMapping("/updateClimbingArea/{id}")
     public String showUpdateClimbingAreaForm(Model model, @PathVariable Integer id,
-                                             @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
-        if (memberInSessionId != null){
-            ClimbingArea climbingAreaToUpdate = climbingAreaManager.findClimbingArea(id);
-            List<String> regionList = enumManager.getEnumRegionStringValues();
-            model.addAttribute("regionList", regionList);
-            model.addAttribute("climbingAreaToUpdate", climbingAreaToUpdate);
-            return "updateClimbingAreaForm";
-        } else {
+                                             @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId){
+        if (memberInSessionId == null) {
             return "redirect:/doLogin";
         }
+        ClimbingArea climbingAreaToUpdate = climbingAreaManager.findClimbingArea(id);
+        List<String> regionList = enumManager.getEnumRegionStringValues();
+        model.addAttribute("regionList", regionList);
+        model.addAttribute("climbingAreaToUpdate", climbingAreaToUpdate);
+        return "updateClimbingAreaForm";
     }
 
     @PostMapping("/updateClimbingArea/updateClimbingAreaProcess/{id}")
     public String updateClimbingArea(@Valid ClimbingArea climbingArea, BindingResult bindingResult, Model model,
-                                         @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
-        if (memberInSessionId != null){
-            ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingArea(id);
-            climbingArea.setMember(climbingAreaInBdd.getMember());
-
-            if (bindingResult.hasErrors()){
-                List<FieldError> errors = bindingResult.getFieldErrors();
-                for (FieldError error : errors ) {
-                    System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
-                }
-                String str = "Une erreur est survenue. Vérifiez les champs.";
-                model.addAttribute("climbingAreaToUpdate", climbingArea);
-                model.addAttribute("errorMessage", str);
-                return "updateClimbingAreaForm";
-            } else {
-                climbingAreaManager.updateClimbingArea(climbingArea);
-                model.addAttribute("id", id);
-                return "redirect:/climbingArea/{id}";
-            }
-        } else {
+                                         @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId){
+        if (memberInSessionId == null) {
             return "redirect:/doLogin";
+        }
+        ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingArea(id);
+        climbingArea.setMember(climbingAreaInBdd.getMember());
+
+        if (bindingResult.hasErrors()){
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors ) {
+                System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+            }
+            String str = "Une erreur est survenue. Vérifiez les champs.";
+            model.addAttribute("climbingAreaToUpdate", climbingArea);
+            model.addAttribute("errorMessage", str);
+            return "updateClimbingAreaForm";
+        } else {
+            climbingAreaManager.updateClimbingArea(climbingArea);
+            model.addAttribute("id", id);
+            return "redirect:/climbingArea/{id}";
         }
     }
 
     @GetMapping("/tagClimbingArea/{id}")
     public String showTagClimbingAreaForm(Model model, @PathVariable Integer id,
-                                             @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
-        if (memberInSessionId != null){
-            ClimbingArea climbingAreaToUpdate = climbingAreaManager.findClimbingArea(id);
-            List<String> regionList = enumManager.getEnumRegionStringValues();
-            model.addAttribute("regionList", regionList);
-            model.addAttribute("climbingAreaToUpdate", climbingAreaToUpdate);
-            return "tagClimbingAreaForm";
-        } else {
+                                             @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId){
+        if (memberInSessionId == null) {
             return "redirect:/doLogin";
         }
+        ClimbingArea climbingAreaToUpdate = climbingAreaManager.findClimbingArea(id);
+        List<String> regionList = enumManager.getEnumRegionStringValues();
+        model.addAttribute("regionList", regionList);
+        model.addAttribute("climbingAreaToUpdate", climbingAreaToUpdate);
+        return "tagClimbingAreaForm";
     }
 
     @PostMapping("/tagClimbingArea/tagClimbingAreaProcess/{id}")
     public String updateTagClimbingArea(@Valid ClimbingArea climbingArea, BindingResult bindingResult, Model model,
-                                     @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
-        if (memberInSessionId != null){
-            ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingArea(id);
-            climbingArea.setMember(climbingAreaInBdd.getMember());
-
-            if (bindingResult.hasErrors()){
-                List<FieldError> errors = bindingResult.getFieldErrors();
-                for (FieldError error : errors ) {
-                    System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
-                }
-                String str = "Une erreur est survenue. Vérifiez les champs.";
-                model.addAttribute("climbingAreaToUpdate", climbingArea);
-                model.addAttribute("errorMessage", str);
-                return "tagClimbingAreaForm";
-            } else {
-                if (climbingArea.isApprouved() == true){
-                    climbingAreaManager.addTag(id);
-                } else {
-                    climbingAreaManager.deleteTag(id);
-                }
-                model.addAttribute("id", id);
-                return "redirect:/climbingArea/{id}";
-            }
-        } else {
+                                     @PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId){
+        if (memberInSessionId == null) {
             return "redirect:/doLogin";
+        }
+        ClimbingArea climbingAreaInBdd = climbingAreaManager.findClimbingArea(id);
+        climbingArea.setMember(climbingAreaInBdd.getMember());
+
+        if (bindingResult.hasErrors()){
+            List<FieldError> errors = bindingResult.getFieldErrors();
+            for (FieldError error : errors ) {
+                System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+            }
+            String str = "Une erreur est survenue. Vérifiez les champs.";
+            model.addAttribute("climbingAreaToUpdate", climbingArea);
+            model.addAttribute("errorMessage", str);
+            return "tagClimbingAreaForm";
+        } else {
+            if (climbingArea.isApprouved() == true){
+                climbingAreaManager.addTag(id);
+            } else {
+                climbingAreaManager.deleteTag(id);
+            }
+            model.addAttribute("id", id);
+            return "redirect:/climbingArea/{id}";
         }
     }
 
 
     @GetMapping("/deleteClimbingArea/{id}")
     public String deleteClimbingArea(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
-        if (memberInSessionId != null){
-            //delete sector
-            List<Sector> sectorList = sectorManager.findAllSectorByClimbingAreaId(id);
-            for (Sector sector : sectorList){
-                //delete route
-                List<Route> routeList = routeManager.findAllRouteBySectorId(sector.getId());
-                for (Route route : routeList){
-                    routeManager.deleteRoute(route.getId());
-                }
-                sectorManager.deleteSector(sector.getId());
-            }
-            //delete comment
-            List<Comment> commentList = commentManager.findAllCommentByClimbingArea(id);
-            for (Comment comment : commentList){
-                commentManager.deleteComment(comment.getId());
-            }
-            //delete photo
-            List<Photo> photoList = photoManager.findAllPhotoByClimbingAreaId(id);
-            for (Photo photo : photoList){
-                photoManager.deletePhoto(photo.getId());
-            }
-
-            //delete climbing area
-            climbingAreaManager.deleteClimbingArea(id);
-            return "redirect:/climbingAreaList";
-        } else {
+        if (memberInSessionId == null) {
             return "redirect:/doLogin";
         }
+        //delete sector
+        List<Sector> sectorList = sectorManager.findAllSectorByClimbingAreaId(id);
+        for (Sector sector : sectorList){
+            //delete route
+            List<Route> routeList = routeManager.findAllRouteBySectorId(sector.getId());
+            for (Route route : routeList){
+                routeManager.deleteRoute(route.getId());
+            }
+            sectorManager.deleteSector(sector.getId());
+        }
+        //delete comment
+        List<Comment> commentList = commentManager.findAllCommentByClimbingArea(id);
+        for (Comment comment : commentList){
+            commentManager.deleteComment(comment.getId());
+        }
+        //delete photo
+        List<Photo> photoList = photoManager.findAllPhotoByClimbingAreaId(id);
+        for (Photo photo : photoList){
+            photoManager.deletePhoto(photo.getId());
+        }
+        //delete climbing area
+        climbingAreaManager.deleteClimbingArea(id);
+        return "redirect:/climbingAreaList";
     }
 
 

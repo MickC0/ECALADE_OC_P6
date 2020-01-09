@@ -161,7 +161,7 @@
             <dependency>
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
-                <version>6.0.17.Final</version>
+                <version>6.1.0.Final</version>
             </dependency>
 
             <!-- == Logs dependencies == -->
@@ -191,23 +191,13 @@
                 <version>1.2</version>
             </dependency>
 
-            <!-- == Upload == -->
-            <dependency>
-                <groupId>commons-fileupload</groupId>
-                <artifactId>commons-fileupload</artifactId>
-                <version>1.4</version>
-            </dependency>
-            <dependency>
-                <groupId>commons-io</groupId>
-                <artifactId>commons-io</artifactId>
-                <version>2.6</version>
-            </dependency>
+
 
             <!-- == POSTEGRESQL dependencies == -->
             <dependency>
                 <groupId>org.postgresql</groupId>
                 <artifactId>postgresql</artifactId>
-                <version>42.2.9</version>
+                <version>42.2.5</version>
                 <scope>runtime</scope>
             </dependency>
 

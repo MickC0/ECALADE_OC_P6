@@ -87,7 +87,7 @@ public class LoginController {
         return "redirect:/showHome";
     }
 
-    @GetMapping("/doLogout")
+    @PostMapping("/doLogout")
     public String doLogout(HttpServletResponse httpServletResponse, HttpSession httpSession, WebRequest webRequest, SessionStatus sessionStatus){
         sessionStatus.setComplete();
         webRequest.removeAttribute("memberInSessionId", WebRequest.SCOPE_SESSION);

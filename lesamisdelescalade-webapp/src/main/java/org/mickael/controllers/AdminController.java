@@ -1,5 +1,7 @@
 package org.mickael.controllers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mickael.business.contract.manager.EnumManager;
 import org.mickael.business.contract.manager.MemberManager;
 import org.mickael.model.bean.Member;
@@ -21,6 +23,8 @@ import java.util.List;
 @Controller
 public class AdminController {
 
+    private static final Logger logger = LogManager.getLogger(AdminController.class);
+
     @Inject
     private MemberManager memberManager;
 
@@ -30,7 +34,11 @@ public class AdminController {
 
     @GetMapping("/showMemberList")
     public String showMemberList(@SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId, Model model){
+        logger.debug("AdminController showMemberList");
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
+        if (memberInBddAdmin.getRole() != Role.ADMIN.getParam()){
+            return "redirect:/showHome";
+        }
         List<Member> memberList = new ArrayList<>();
         if (memberInBddAdmin.getRole().equals(Role.ADMIN.getParam())){
             memberList = memberManager.findAllMember();
@@ -42,8 +50,10 @@ public class AdminController {
 
     @GetMapping("/deleteMember/{id}")
     public String deleteMember(@PathVariable Integer id, @SessionAttribute(value = "memberInSessionId", required = true) Integer memberInSessionId, Model model){
+        logger.debug("AdminController deleteMember");
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
         if (memberInBddAdmin.getRole() != Role.ADMIN.getParam()){
+            logger.error("No memberInSessionId");
             return "redirect:/showHome";
         }
         memberManager.deleteMember(id);
@@ -54,8 +64,10 @@ public class AdminController {
 
     @GetMapping("/editMemberAdmin/{id}")
     public String showMemberUpdateForm(@PathVariable("id") Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
         if (!memberInBddAdmin.getRole().equals(Role.ADMIN.getParam())){
+            logger.error("No memberInSessionId");
             return "redirect:/showHome";
         }
 
@@ -68,6 +80,7 @@ public class AdminController {
     @PostMapping("/editMemberAdmin/updateMemberAdminProcess/{id}")
     public String updateMember(@Valid Member member, @PathVariable("id") Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId,
                                BindingResult bindingResult){
+        logger.debug("AdminController updateMemberAdminProcess");
         Member memberInBddAdmin = memberManager.findMember(memberInSessionId);
         if (!memberInBddAdmin.getRole().equals(Role.ADMIN.getParam())){
             return "redirect:/showHome";
@@ -97,13 +110,4 @@ public class AdminController {
             return "redirect:/showMemberList";
         }
     }
-
-
-
-
-
-
-
-
-
 }

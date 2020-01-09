@@ -6,8 +6,10 @@ import org.mickael.model.bean.ClimbingArea;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.SessionAttribute;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
@@ -21,14 +23,14 @@ public class HomeController {
 
 
     @GetMapping("/showHome")
-    public String displayHomePage(Model model /**, @SessionAttribute(value = "memberInSession", required = false) Member memberInSession*/){
+    public String displayHomePage(Model model , @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId, HttpSession httpSession){
         //Display all the climbing Area on the homepage
         List<ClimbingArea> climbingAreaList = climbingAreaManager.findAllClimbingArea();
         model.addAttribute("climbingAreaList", climbingAreaList);
         //Test if the member is logged
-        /**if(memberInSession != null){
-            model.addAttribute("memberInSession", memberInSession);
-        }*/
+        if(memberInSessionId == null){
+            httpSession.invalidate();
+        }
         return "home";
     }
 }

@@ -70,16 +70,16 @@
 	
 	Pour la base de données :
 	Vous trouverez ce qu'il vous faut dans le dossier "lesamisdelescalade-files/DB_lesamisdelescalade/":
-		* D'abord lancer le script create_user.sql pour créer le propriétaire de la bdd.
-		* Ensuite lancer le script create_bdd.sql pour créer la bdd.
+		* D'abord lancer le script create_role.sql pour créer le propriétaire de la bdd.
+		* Ensuite lancer le script create_db.sql pour créer la bdd.
 		* Enfin lancer le restore avec data.backup pour insérer les données.
 
 	Si vous passez par pgAdmin, il faut :
-		* créer un nouveau rôle, le nommer "admin_lesamisdelescalade", mettre en password "azerty", 
+		* créer un nouveau rôle, le nommer "admin_lesamisdelescalade", mettre en password "lesamisdelescalade", 
 		et lui donner tous les privilèges.
 		* créer une nouvelle database, la nommer "db_OC_lesamisdelescalade" et mettre "admin_lesamisdelescalade" 
 		en tant que propriétaire.
-		* faire un restore avec le fichier data.backup.
+		* faire un restore avec le fichier db_oc_lesamisdelescalade.backup.
 
 
 
