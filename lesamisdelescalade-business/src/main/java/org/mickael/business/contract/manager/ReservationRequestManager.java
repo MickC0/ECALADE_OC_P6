@@ -16,4 +16,5 @@ public interface ReservationRequestManager {
     List<ReservationRequest> findAllReservationRequest ();
     List<ReservationRequest> findAllReservationRequestByMemberId (Integer id);
     List<ReservationRequest> findAllReservationRequestByGuidebookId (Integer id);
+    List<ReservationRequest> findAllReservationRequestByOwnerId (Integer id);
 }

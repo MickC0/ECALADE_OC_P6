@@ -158,4 +158,17 @@ public class ReservationRequestDaoImpl extends AbstractDataSource implements Res
 
         return reservationRequestList;
     }
+
+    @Override
+    public List<ReservationRequest> findAllReservationRequestByOwnerId(Integer id) {
+        String sql = "SELECT reservation_request. * FROM public.reservation_request " +
+                             "JOIN public.guidebook ON guidebook.id = reservation_request.guidebook_id " +
+                             "WHERE guidebook.member_id = :id";
+        NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(getDataSource());
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("id", id);
+        ReservationRequestRowMapper reservationRequestRowMapper = new ReservationRequestRowMapper();
+        List<ReservationRequest> reservationRequestList = namedParameterJdbcTemplate.query(sql, parameterSource, reservationRequestRowMapper);
+        return reservationRequestList;
+    }
 }

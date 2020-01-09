@@ -38,7 +38,7 @@
                                     <p>
                                         <c:out value="${guidebook.description}"/>
                                     </p>
-                                    <c:if test="${!empty memberInSessionId}">
+                                    <c:if test="${!empty memberInSessionId && memberInSessionId != guidebook.member.id}">
                                         <c:if test="${guidebook.loaned == false}">
                                             <div>
                                                 <a href="<c:url value="/showReservationForm/${guidebook.id}"/>" class="btn btn-outline-info btn-block">

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -60,10 +59,9 @@ public class PersonalSpaceController {
         List<Guidebook> guidebookList = guidebookManager.findAllGuidebookByMemberId(memberInSessionId);
 
         //show all renting demands for guidebooks owner
-        List<ReservationRequest> guideReservationRequestList = new ArrayList<>();
-        for (Guidebook guidebook : guidebookList){
-            guideReservationRequestList.add(reservationRequestManager.findReservationRequestByGuidebookId(guidebook.getId()));
-        }
+        List<ReservationRequest> guideReservationRequestList = reservationRequestManager.findAllReservationRequestByOwnerId(memberInSessionId);
+
+
         //show all the reservation request's owner
         List<ReservationRequest> memberReservationRequestList = reservationRequestManager.findAllReservationRequestByMemberId(memberInSessionId);
         Member memberInSession = memberManager.findMember(memberInSessionId);

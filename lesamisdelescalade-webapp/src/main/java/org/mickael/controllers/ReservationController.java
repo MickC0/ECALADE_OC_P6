@@ -1,5 +1,7 @@
 package org.mickael.controllers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mickael.business.contract.manager.GuidebookManager;
 import org.mickael.business.contract.manager.MemberManager;
 import org.mickael.business.contract.manager.ReservationRequestManager;
@@ -17,6 +19,7 @@ import javax.validation.Valid;
 
 @Controller
 public class ReservationController {
+    private static final Logger logger = LogManager.getLogger(ReservationController.class);
 
     @Inject
     private GuidebookManager guidebookManager;
@@ -36,14 +39,16 @@ public class ReservationController {
         String reservationInBddStatus = new String();
         if (reservationRequestInBdd != null){
             reservationInBddStatus = reservationRequestInBdd.getStatus();
-
+            model.addAttribute("reservationInBddStatus", reservationInBddStatus);
+            model.addAttribute("memberInSessionId", memberInSessionId);
+            model.addAttribute("guidebookId", id);
+            return "reservationRequestError";
         } else {
             reservationInBddStatus = "null";
         }
-
+        logger.debug(reservationInBddStatus);
         model.addAttribute("reservationInBddStatus", reservationInBddStatus);
         model.addAttribute("guidebookId", id);
-        model.addAttribute("memberInSessionId", memberInSessionId);
         model.addAttribute("reservationRequest", new ReservationRequest());
         return "reservationRequestForm";
     }
@@ -99,7 +104,7 @@ public class ReservationController {
         }
     }
 
-    @PostMapping("/acceptReservationRequest/{id}")
+    @GetMapping("/acceptReservationRequest/{id}")
     public String acceptReservationRequest(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestById(id);
@@ -118,7 +123,7 @@ public class ReservationController {
         }
     }
 
-    @PostMapping("/refuseReservationRequest/{id}")
+    @GetMapping("/refuseReservationRequest/{id}")
     public String refuseReservationRequest(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestById(id);
@@ -135,7 +140,7 @@ public class ReservationController {
             return "redirect:/doLogin";
         }
     }
-    @PostMapping("/closeReservationRequest/{id}")
+    @GetMapping("/closeReservationRequest/{id}")
     public String closeReservationRequest(@PathVariable Integer id, Model model, @SessionAttribute(value = "memberInSessionId", required = false) Integer memberInSessionId){
         if (memberInSessionId != null){
             ReservationRequest reservationRequestInBdd = reservationRequestManager.findReservationRequestById(id);
