@@ -91,7 +91,6 @@ public class PersonalSpaceController {
                                BindingResult bindingResult){
         if(memberInSessionId != null && memberInSessionId == id){
             if (bindingResult.hasErrors()){
-                System.out.println("erreur binding");
                 List<FieldError> errors = bindingResult.getFieldErrors();
                 for (FieldError error : errors ) {
                     System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
@@ -101,6 +100,50 @@ public class PersonalSpaceController {
                 model.addAttribute("errorMessage", str);
                 return "updateMemberForm";
             } else {
+                Member memberInBdd = memberManager.findMember(memberInSessionId);
+                member.setRole(memberInBdd.getRole());
+                member.setPassword(memberInBdd.getPassword());
+                memberManager.updateMember(member);
+                model.addAttribute("memberInSessionId", memberInSessionId);
+                return "redirect:/personalSpace/{memberInSessionId}";
+            }
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @GetMapping("/editMemberMdp/{id}")
+    public String showMdpUpdateForm(@PathVariable("id") Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId){
+        if(memberInSessionId != null && memberInSessionId == id){
+            Member memberInBdd = memberManager.findMember(id);
+            model.addAttribute("memberEdit", memberInBdd);
+            return "updateMdpForm";
+        } else {
+            return "redirect:/doLogin";
+        }
+    }
+
+    @PostMapping("/editMemberMdp/updateMdpProcess/{id}")
+    public String updateMdp(@Valid Member member, @PathVariable("id") Integer id, Model model, @SessionAttribute("memberInSessionId") Integer memberInSessionId,
+                               BindingResult bindingResult){
+        if(memberInSessionId != null && memberInSessionId == id){
+            if (bindingResult.hasErrors()){
+                List<FieldError> errors = bindingResult.getFieldErrors();
+                for (FieldError error : errors ) {
+                    System.out.println (error.getObjectName() + " - " + error.getDefaultMessage());
+                }
+                String str = "Une erreur est survenue. Vérifiez les champs.";
+                model.addAttribute("memberToEdit", member);
+                model.addAttribute("errorMessage", str);
+                return "updateMdpForm";
+            } else {
+                Member memberInBdd = memberManager.findMember(memberInSessionId);
+                member.setGender(memberInBdd.getGender());
+                member.setEmail(memberInBdd.getEmail());
+                member.setPseudo(memberInBdd.getPseudo());
+                member.setLastName(memberInBdd.getLastName());
+                member.setFirstName(memberInBdd.getFirstName());
+                member.setRole(memberInBdd.getRole());
                 String hashPassword = passwordManager.hashPassword(member.getPassword());
                 member.setPassword(hashPassword);
                 memberManager.updateMember(member);

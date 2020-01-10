@@ -63,10 +63,6 @@
                     <form:errors  path="email" cssClass="error"/>
                 </div>
                 <div class="form-group">
-                    <form:password path="password" cssClass="form-control item" placeholder="Mot de passe" required="true"/>
-                    <form:errors  path="password" cssClass="error"/>
-                </div>
-                <div class="form-group">
                     <form:button class="btn btn-primary btn-block" type="submit">Enregistrer</form:button>
                 </div>
                 <div class="form-group">

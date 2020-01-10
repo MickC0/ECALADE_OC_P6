@@ -34,6 +34,9 @@
                                         <td>${memberInSession.lastName}</td>
                                         <td>${memberInSession.pseudo}</td>
                                         <td>${memberInSession.email}</td>
+                                        <td>
+                                            <a href="<c:url value="/editMemberMdp/${memberInSession.id}"/>" class="btn btn-outline-secondary btn-sm">Modifier le mot de passe</a>
+                                        </td>
                                     </tr>
                                     </tbody>
                                 </table>
