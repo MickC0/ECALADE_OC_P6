@@ -39,7 +39,9 @@
                         <form:errors  path="email" cssClass="error"/>
                     </div>
                     <div class="form-group">
-                        <form:password path="password" cssClass="form-control item" placeholder="Mot de passe" required="true"/>
+                        <form:password path="password" cssClass="form-control item" placeholder="Mot de passe"
+                                       minlenght="8" pattern="^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$"
+                                       title="Le mot de passe doit contenir au moins 8 caractères avec au moins 1 majuscule, 1 nombre et 1 caractère spécial" required="true"/>
                         <form:errors  path="password" cssClass="error"/>
                     </div>
                     <div class="form-group">

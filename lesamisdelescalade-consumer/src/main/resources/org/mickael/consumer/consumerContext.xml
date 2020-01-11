@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xsi:schemaLocation="
-        http://www.springframework.org/schema/beans
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
 
 
-    <!-- Datasource statement -->
+    <!-- Datasource statement
     <bean id="abstractDataSource" abstract="true">
         <property name="dataSource" ref="dataSource"/>
-    </bean>
+    </bean>-->
 
     <!-- DAO statement -->
-    <bean id="climbingAreaDao" class="org.mickael.consumer.impl.dao.ClimbingAreaDaoImpl" parent="abstractDataSource"/>
-    <bean id="commentDao" class="org.mickael.consumer.impl.dao.CommentDaoImpl" parent="abstractDataSource"/>
-    <bean id="guidebookDao" class="org.mickael.consumer.impl.dao.GuidebookDaoImpl" parent="abstractDataSource"/>
-    <bean id="photoDao" class="org.mickael.consumer.impl.dao.PhotoDaoImpl" parent="abstractDataSource"/>
-    <bean id="reservationRequestDao" class="org.mickael.consumer.impl.dao.ReservationRequestDaoImpl" parent="abstractDataSource"/>
-    <bean id="routeDao" class="org.mickael.consumer.impl.dao.RouteDaoImpl" parent="abstractDataSource"/>
-    <bean id="sectorDao" class="org.mickael.consumer.impl.dao.SectorDaoImpl" parent="abstractDataSource"/>
-    <bean id="memberDao" class="org.mickael.consumer.impl.dao.MemberDaoImpl" parent="abstractDataSource"/>
+    <bean id="climbingAreaDao" class="org.mickael.consumer.impl.dao.ClimbingAreaDaoImpl" />
+    <bean id="commentDao" class="org.mickael.consumer.impl.dao.CommentDaoImpl" />
+    <bean id="guidebookDao" class="org.mickael.consumer.impl.dao.GuidebookDaoImpl" />
+    <bean id="photoDao" class="org.mickael.consumer.impl.dao.PhotoDaoImpl" />
+    <bean id="reservationRequestDao" class="org.mickael.consumer.impl.dao.ReservationRequestDaoImpl" />
+    <bean id="routeDao" class="org.mickael.consumer.impl.dao.RouteDaoImpl" />
+    <bean id="sectorDao" class="org.mickael.consumer.impl.dao.SectorDaoImpl" />
+    <bean id="memberDao" class="org.mickael.consumer.impl.dao.MemberDaoImpl" />
 
 
     <!-- DAO Factory -->
@@ -35,6 +34,11 @@
         <property name="MemberDao" ref="memberDao"/>
     </bean>
 
+    <!--=== initialisation dataSource  =====
+    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/db_oc_lesamisdelescalade" expected-type="javax.sql.DataSource"/>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>-->
     <!-- ==== AbstractDao ===== -->
     <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
         <property name="targetClass" value="org.mickael.consumer.impl.AbstractDataSource"/>

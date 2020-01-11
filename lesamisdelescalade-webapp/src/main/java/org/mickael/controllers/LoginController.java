@@ -1,5 +1,7 @@
 package org.mickael.controllers;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.mickael.business.contract.manager.ClimbingAreaManager;
 import org.mickael.business.contract.manager.MemberManager;
 import org.mickael.business.contract.manager.PasswordManager;
@@ -41,6 +43,8 @@ public class LoginController {
         httpSession.setAttribute("memberInSessionRole", member.getRole());
     }
 
+    private static final Logger logger = LogManager.getLogger(LoginController.class);
+
     @GetMapping("/doLogin")
     public String showLoginForm(Model model){
         model.addAttribute("loginCommand", new LoginCommand());
@@ -50,33 +54,33 @@ public class LoginController {
     @PostMapping("/loginProcess")
     public String doLogin(@ModelAttribute("loginCommand") LoginCommand loginCommand, HttpSession httpSession, Model model) throws MemberBlockedException {
 
-
+        logger.debug(loginCommand.toString());
        //test session
         if (loginCommand != null){
             Member memberInBdd = memberManager.findMemberByProperty("email", loginCommand.getEmail());
+            logger.debug(memberInBdd.toString());
             boolean checkPassword = false;
 
             if (memberInBdd == null) {
                 httpSession.invalidate();
-                model.addAttribute("errorMessage", "Enter valid credentials");
+                model.addAttribute("errorMessage", "Email ou mot de passe invalide");
                 return "login";
             }
             checkPassword = passwordManager.matches(loginCommand.getPassword(), memberInBdd.getPassword());
+            logger.debug(checkPassword);
             if (checkPassword == true) {
                 Member loggedInMember = memberInBdd;
                 if (loggedInMember.getRole().equals(Role.ADMIN.getParam()) || loggedInMember.getRole().equals(Role.MEMBER.getParam()) || loggedInMember.getRole().equals(Role.USER.getParam())){
                     addMemberInSession(loggedInMember, httpSession);
-                    //model.addAttribute("memberInSessionId", loggedInMember.getId());
                     return "redirect:/showHome";
                 } else {
-                    MemberBlockedException memberBlockedException = new MemberBlockedException("Invalid Member Role");
+                    MemberBlockedException memberBlockedException = new MemberBlockedException("Role invalide ou compte désactivé");
                     model.addAttribute("errorMessage", memberBlockedException);
-                    System.out.println("etape 3");
                     return "login";
                 }
             } else {
                 httpSession.invalidate();
-                model.addAttribute("errorMessage", "Enter valid credentials");
+                model.addAttribute("errorMessage", "Email ou mot de passe invalide");
                 return "login";
             }
         }

@@ -21,7 +21,10 @@
                 </div>
                 <div class="form-group">
                     <form:label path="password">Mot de passe</form:label>
-                    <form:input  path="password" cssClass="form-control" type="password" id="password" required="true"/>
+                    <form:input  path="password" cssClass="form-control" type="password" id="password"
+                                 minlenght="8" pattern="^(?=.{8,}$)(?=.*?[a-z])(?=.*?[A-Z])(?=.*?[0-9])(?=.*?\W).*$"
+                                 title="Le mot de passe doit contenir au moins 8 caractères avec au moins 1 majuscule, 1 nombre et 1 caractère spécial"
+                                 required="true"/>
                     <form:errors  path="password" cssClass="error"/>
                 </div>
                 <div class="form-group">

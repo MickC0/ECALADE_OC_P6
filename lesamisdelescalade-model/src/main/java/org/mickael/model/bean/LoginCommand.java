@@ -2,19 +2,10 @@ package org.mickael.model.bean;
 
 public class LoginCommand {
 
-    private String pseudo;
     private String email;
     private String password;
 
     public LoginCommand() {
-    }
-
-    public String getPseudo() {
-        return pseudo;
-    }
-
-    public void setPseudo(String pseudo) {
-        this.pseudo = pseudo;
     }
 
     public String getEmail() {
@@ -31,5 +22,13 @@ public class LoginCommand {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    @Override
+    public String toString() {
+        return "LoginCommand{" +
+                       "email='" + email + '\'' +
+                       ", password='" + password + '\'' +
+                       '}';
     }
 }
