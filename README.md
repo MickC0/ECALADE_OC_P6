@@ -64,7 +64,7 @@
 	- Java 8 (version 1.8u231)
 	- Tomcat 9
 	- PostgreSql 11 (version 11.5.2)
-	- le framework Spring (version 5.2.1) : Spring JDBC, Spring TX, Spring IOC, Spring Security
+	- le framework Spring (version 5.2.1)
 	
 	## Déploiement
 	
