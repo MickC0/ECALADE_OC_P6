@@ -55,7 +55,7 @@
                         </p>
                     </div>
                     <div class="form-group">
-                        <a href="<c:out value="javascript:history.go(-1)"/>" class="btn btn-outline-primary btn-block">
+                        <a href="<c:url value="/showHome"/>" class="btn btn-outline-primary btn-block">
                             Annuler
                         </a>
                     </div>
