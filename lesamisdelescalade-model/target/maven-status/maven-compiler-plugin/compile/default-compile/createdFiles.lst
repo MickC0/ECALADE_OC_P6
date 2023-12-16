@@ -1,0 +1,14 @@
+org\mickael\model\enumeration\Role.class
+org\mickael\model\bean\Guidebook.class
+org\mickael\model\bean\ReservationRequest.class
+org\mickael\model\bean\Route.class
+org\mickael\model\enumeration\ReservationState.class
+org\mickael\model\bean\ClimbingArea.class
+org\mickael\model\enumeration\Cotation.class
+org\mickael\model\enumeration\Region.class
+org\mickael\model\bean\LoginCommand.class
+org\mickael\model\bean\Photo.class
+org\mickael\model\bean\Member.class
+org\mickael\model\exceptions\MemberBlockedException.class
+org\mickael\model\bean\Comment.class
+org\mickael\model\bean\Sector.class

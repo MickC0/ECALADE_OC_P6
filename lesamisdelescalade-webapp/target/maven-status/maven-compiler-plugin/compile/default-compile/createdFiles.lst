@@ -1,0 +1,13 @@
+org\mickael\controllers\HomeController.class
+org\mickael\controllers\SectorController.class
+org\mickael\controllers\AdminController.class
+org\mickael\controllers\PhotoController.class
+org\mickael\controllers\CommentController.class
+org\mickael\controllers\GuidebookController.class
+org\mickael\controllers\LoginController.class
+org\mickael\controllers\ClimbingAreaController.class
+org\mickael\controllers\SearchController.class
+org\mickael\controllers\PersonalSpaceController.class
+org\mickael\controllers\RegistrationController.class
+org\mickael\controllers\ReservationController.class
+org\mickael\controllers\RouteController.class

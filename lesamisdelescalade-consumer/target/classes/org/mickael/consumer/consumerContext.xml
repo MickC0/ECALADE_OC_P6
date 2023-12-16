@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd">
+
+
+
+    <!-- Datasource statement
+    <bean id="abstractDataSource" abstract="true">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>-->
+
+    <!-- DAO statement -->
+    <bean id="climbingAreaDao" class="org.mickael.consumer.impl.dao.ClimbingAreaDaoImpl" />
+    <bean id="commentDao" class="org.mickael.consumer.impl.dao.CommentDaoImpl" />
+    <bean id="guidebookDao" class="org.mickael.consumer.impl.dao.GuidebookDaoImpl" />
+    <bean id="photoDao" class="org.mickael.consumer.impl.dao.PhotoDaoImpl" />
+    <bean id="reservationRequestDao" class="org.mickael.consumer.impl.dao.ReservationRequestDaoImpl" />
+    <bean id="routeDao" class="org.mickael.consumer.impl.dao.RouteDaoImpl" />
+    <bean id="sectorDao" class="org.mickael.consumer.impl.dao.SectorDaoImpl" />
+    <bean id="memberDao" class="org.mickael.consumer.impl.dao.MemberDaoImpl" />
+
+
+    <!-- DAO Factory -->
+    <bean id="daoFactory" class="org.mickael.consumer.impl.DaoFactoryImpl">
+        <property name="ClimbingAreaDao" ref="climbingAreaDao"/>
+        <property name="CommentDao" ref="commentDao"/>
+        <property name="GuidebookDao" ref="guidebookDao"/>
+        <property name="PhotoDao" ref="photoDao"/>
+        <property name="ReservationRequestDao" ref="reservationRequestDao"/>
+        <property name="RouteDao" ref="routeDao"/>
+        <property name="SectorDao" ref="sectorDao"/>
+        <property name="MemberDao" ref="memberDao"/>
+    </bean>
+
+    <!--=== initialisation dataSource  =====
+    <jee:jndi-lookup id="dataSource" jndi-name="jdbc/db_oc_lesamisdelescalade" expected-type="javax.sql.DataSource"/>
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
+    </bean>-->
+    <!-- ==== AbstractDao ===== -->
+    <bean class="org.springframework.beans.factory.config.MethodInvokingFactoryBean">
+        <property name="targetClass" value="org.mickael.consumer.impl.AbstractDataSource"/>
+        <property name="targetMethod" value="setDataSource"/>
+        <property name="arguments" ref="dataSource"/>
+    </bean>
+</beans>
